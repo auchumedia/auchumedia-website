@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Nav from '../components/Nav';
@@ -141,31 +142,8 @@ export default function Home() {
           </div>
         </div>
  
-        {/* Stats bar */}
-        <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, display: 'flex', zIndex: 2, opacity: heroVisible ? 1 : 0, transition: 'opacity 1s ease 1s', borderTop: '0.5px solid rgba(255,255,255,0.08)' }}>
-          {[
-            { num: '50M+', label: fr ? 'Vues générées' : 'Views generated' },
-            { num: '6 ANS', label: fr ? "D'expérience" : 'Of experience' },
-            { num: '20+', label: fr ? 'Clients' : 'Clients' },
-          ].map((s, i) => (
-            <div key={i} style={{ flex: 1, padding: '14px 24px', borderRight: i < 2 ? '0.5px solid rgba(255,255,255,0.08)' : 'none', backdropFilter: 'blur(10px)', background: 'rgba(8,8,8,0.7)' }}>
-              <div style={{ fontFamily: "'Bebas Neue'", fontSize: '22px', color: '#fff', letterSpacing: '0.05em' }}>{s.num}</div>
-              <div style={{ fontSize: '9px', color: 'rgba(255,255,255,0.4)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>{s.label}</div>
-            </div>
-          ))}
-        </div>
       </section>
  
-      {/* ===== TICKER ===== */}
-      <div style={{ position: 'relative', overflow: 'hidden', borderBottom: '0.5px solid rgba(255,255,255,0.07)', padding: '18px 0', background: '#080808' }}>
-        <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: '100px', background: 'linear-gradient(to right, #080808, transparent)', zIndex: 1 }} />
-        <div style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: '100px', background: 'linear-gradient(to left, #080808, transparent)', zIndex: 1 }} />
-        <div style={{ display: 'flex', width: 'max-content', animation: 'marquee 30s linear infinite' }}>
-          {[...LOGOS, ...LOGOS].map((logo, i) => (
-            <img key={i} src={logo.src} alt={logo.alt} style={{ height: '30px', width: 'auto', maxWidth: '110px', objectFit: 'contain', margin: '0 44px', opacity: 0.3, filter: 'brightness(0) invert(1)' }} />
-          ))}
-        </div>
-      </div>
  
       {/* ===== SECTION ATHLÈTES ===== */}
       <section style={{ padding: '120px 60px', background: '#080808', borderBottom: '0.5px solid rgba(255,255,255,0.07)' }}>
@@ -343,3 +321,4 @@ export default function Home() {
     </div>
   );
 }
+ 
