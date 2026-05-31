@@ -1,0 +1,23 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #080808;
+  color: #fff;
+  font-family: 'DM Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #080808; }
+::-webkit-scrollbar-thumb { background: #003DA5; border-radius: 2px; }
+
+a { text-decoration: none; color: inherit; }
