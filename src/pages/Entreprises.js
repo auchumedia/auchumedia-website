@@ -1,36 +1,79 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useRef, useEffect } from 'react';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 
 const BLUE = '#003DA5';
 
+function useInView(threshold = 0.15) {
+  const ref = useRef(null);
+  const [inView, setInView] = useState(false);
+  useEffect(() => {
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setInView(true); }, { threshold });
+    if (ref.current) obs.observe(ref.current);
+    return () => obs.disconnect();
+  }, [threshold]);
+  return [ref, inView];
+}
+
+function FadeIn({ children, delay = 0, direction = 'up' }) {
+  const [ref, inView] = useInView();
+  const t = { up: 'translateY(30px)', left: 'translateX(-30px)', right: 'translateX(30px)', none: 'none' };
+  return <div ref={ref} style={{ opacity: inView ? 1 : 0, transform: inView ? 'none' : t[direction], transition: `opacity 0.6s ease ${delay}s, transform 0.6s ease ${delay}s` }}>{children}</div>;
+}
+
+function ImgPlaceholder({ label, aspect = '16/9' }) {
+  return (
+    <div style={{ width: '100%', aspectRatio: aspect, background: 'linear-gradient(135deg, #0d0d0d, #111)', border: '0.5px solid rgba(255,255,255,0.07)', borderRadius: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '10px', position: 'relative', overflow: 'hidden' }}>
+      {['tl','tr','bl','br'].map(c => <div key={c} style={{ position: 'absolute', top: c.includes('t') ? '10px' : 'auto', bottom: c.includes('b') ? '10px' : 'auto', left: c.includes('l') ? '10px' : 'auto', right: c.includes('r') ? '10px' : 'auto', width: '12px', height: '12px', borderTop: c.includes('t') ? '1px solid rgba(0,61,165,0.25)' : 'none', borderBottom: c.includes('b') ? '1px solid rgba(0,61,165,0.25)' : 'none', borderLeft: c.includes('l') ? '1px solid rgba(0,61,165,0.25)' : 'none', borderRight: c.includes('r') ? '1px solid rgba(0,61,165,0.25)' : 'none' }} />)}
+      <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px)', backgroundSize: '32px 32px' }} />
+      <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'rgba(0,61,165,0.08)', border: '0.5px solid rgba(0,61,165,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(0,61,165,0.6)" strokeWidth="1.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      </div>
+      {label && <span style={{ fontSize: '9px', color: 'rgba(255,255,255,0.18)', letterSpacing: '0.12em', textTransform: 'uppercase', position: 'relative' }}>{label}</span>}
+    </div>
+  );
+}
+
+const SectionLabel = ({ children }) => (
+  <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
+    <div style={{ width: '20px', height: '1px', background: BLUE }} />
+    <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE }}>{children}</span>
+  </div>
+);
+
 export default function Entreprises() {
   const [lang, setLang] = useState('fr');
+  const [openFaq, setOpenFaq] = useState(null);
   const fr = lang === 'fr';
 
-  const services = fr ? [
-    { num: '01', title: 'MÉDIAS SOCIAUX / ALWAYS-ON', desc: "Les marques qui performent créent du contenu comme des créateurs. On gère votre présence en continu en publiant une histoire à suivre — épisode après épisode, on raconte votre réalité et votre expertise de façon humaine et divertissante.", tags: ['Instagram', 'TikTok', 'LinkedIn', 'Stratégie éditoriale'] },
-    { num: '02', title: 'META ADS · ACQUISITION CLIENT', desc: "On conçoit, lance et optimise des campagnes Meta Ads axées sur la performance. Chaque campagne est testée, analysée et ajustée en continu. L'objectif : attirer des leads qualifiés, réduire votre coût par lead et scaler ce qui fonctionne.", tags: ['Facebook Ads', 'Instagram Ads', 'A/B Testing', 'Performance'] },
-    { num: '03', title: 'CRM & PIPELINE', desc: "On intègre et configure un CRM complet, parfaitement adapté à vos opérations, afin de centraliser vos leads, structurer votre pipeline et automatiser vos suivis. Résultat : moins de pertes, plus de conversions.", tags: ['Automatisation', 'Pipeline', 'Conversion'] },
+  const faqs = fr ? [
+    { q: "Combien de temps avant de voir des résultats ?", a: "La plupart de nos clients voient une augmentation mesurable de leur engagement dans les 30 premiers jours. Les leads qualifiés arrivent généralement dans les 60-90 premiers jours selon l'industrie." },
+    { q: "Est-ce que vous gérez tout le contenu ?", a: "Oui. On prend en charge la stratégie, la création de contenu, la production vidéo, la gestion des réseaux sociaux et les campagnes publicitaires. Votre seul travail est d'approuver." },
+    { q: "Comment fonctionne la tarification ?", a: "Notre forfait de base commence à 3 500$/mois. Il inclut 8 vidéos courts formats, la gestion des médias sociaux, la stratégie éditoriale et les rapports mensuels. Des forfaits personnalisés sont disponibles." },
+    { q: "Est-ce que vous travaillez avec toutes les industries ?", a: "On se spécialise dans les entreprises B2C high ticket — services premium, immobilier, construction et autres services de valeur élevée. Si vous êtes dans une autre industrie, contactez-nous pour discuter." },
+    { q: "Qu'est-ce qui est inclus dans le forfait de base ?", a: "8 vidéos courts formats par mois, gestion des réseaux sociaux (Instagram, TikTok, LinkedIn), stratégie éditoriale mensuelle, rapport de performance et réunion mensuelle avec votre gestionnaire." },
+    { q: "Est-ce que les campagnes Meta Ads sont incluses ?", a: "Non — la gestion des Meta Ads est un service distinct. On peut cependant créer un forfait combiné médias sociaux + publicités pour maximiser vos résultats." },
   ] : [
-    { num: '01', title: 'SOCIAL MEDIA / ALWAYS-ON', desc: "Brands that perform create content like creators. We manage your presence continuously by publishing a story to follow — episode by episode, we tell your reality and expertise in a human and entertaining way.", tags: ['Instagram', 'TikTok', 'LinkedIn', 'Editorial strategy'] },
-    { num: '02', title: 'META ADS · CLIENT ACQUISITION', desc: "We design, launch and optimize Meta Ads campaigns focused on performance. Each campaign is continuously tested, analyzed and adjusted. The goal: attract qualified leads, reduce your cost per lead and scale what works.", tags: ['Facebook Ads', 'Instagram Ads', 'A/B Testing', 'Performance'] },
-    { num: '03', title: 'CRM & PIPELINE', desc: "We integrate and configure a comprehensive CRM, perfectly adapted to your operations, to centralize your leads, structure your pipeline and automate your follow-ups. Result: fewer losses, more conversions.", tags: ['Automation', 'Pipeline', 'Conversion'] },
+    { q: "How long before seeing results?", a: "Most of our clients see a measurable increase in engagement within the first 30 days. Qualified leads typically arrive within the first 60-90 days depending on the industry." },
+    { q: "Do you manage all the content?", a: "Yes. We handle the strategy, content creation, video production, social media management and ad campaigns. Your only job is to approve." },
+    { q: "How does pricing work?", a: "Our base plan starts at $3,500/month. It includes 8 short-form videos, social media management, editorial strategy and monthly reports. Custom plans are available." },
+    { q: "Do you work with all industries?", a: "We specialize in B2C high ticket businesses — premium services, real estate, construction and other high-value services. If you're in another industry, contact us to discuss." },
+    { q: "What's included in the base plan?", a: "8 short-form videos per month, social media management (Instagram, TikTok, LinkedIn), monthly editorial strategy, performance report and monthly meeting with your manager." },
+    { q: "Are Meta Ads campaigns included?", a: "No — Meta Ads management is a separate service. We can however create a combined social media + ads plan to maximize your results." },
   ];
 
   const steps = fr ? [
-    { num: '01', title: 'OFFRE & POSITIONNEMENT', desc: "Avant d'investir en publicité, on s'assure que votre offre résonne avec votre marché cible.", tags: ['Stratégie', 'Audit'] },
-    { num: '02', title: 'CONTENU ORGANIQUE', desc: "Publication hebdomadaire cohérente — on raconte votre expertise comme une série qui bâtit la confiance.", tags: ['Always-On', 'Autorité'] },
-    { num: '03', title: 'CAMPAGNES META ADS', desc: "On lance des campagnes ciblées, testées et optimisées en continu. Chaque dollar investi travaille pour vous.", tags: ['Meta Ads', 'Acquisition'] },
-    { num: '04', title: 'CRM & SUIVI DES LEADS', desc: "Chaque lead est capturé, qualifié et assigné à un pipeline structuré avec des suivis automatisés.", tags: ['CRM', 'Automatisation'] },
-    { num: '05', title: 'OPTIMISATION & SCALING', desc: "Rapports mensuels, analyse des données, scaling des campagnes performantes — une machine de croissance durable.", tags: ['Scale', 'ROI', 'Croissance'] },
+    { num: '01', title: 'Appel découverte', desc: "On analyse votre business, vos objectifs et votre marché cible. Gratuit et sans engagement." },
+    { num: '02', title: 'Stratégie & onboarding', desc: "On construit votre stratégie éditoriale et on configure tous les outils en 2 semaines." },
+    { num: '03', title: 'Production de contenu', desc: "Notre équipe produit 8 vidéos courts formats par mois adaptés à votre marque et votre audience." },
+    { num: '04', title: 'Publication & optimisation', desc: "Publication cohérente sur tous vos réseaux avec analyse des performances en temps réel." },
+    { num: '05', title: 'Rapport & scaling', desc: "Rapport mensuel complet et réunion stratégique pour ajuster et scaler ce qui fonctionne." },
   ] : [
-    { num: '01', title: 'OFFER & POSITIONING', desc: "Before investing in advertising, we ensure your offer resonates with your target market.", tags: ['Strategy', 'Audit'] },
-    { num: '02', title: 'ORGANIC CONTENT', desc: "Consistent weekly publishing — we tell your expertise like a series that builds trust.", tags: ['Always-On', 'Authority'] },
-    { num: '03', title: 'META ADS CAMPAIGNS', desc: "We launch targeted campaigns, continuously tested and optimized. Every dollar invested works for you.", tags: ['Meta Ads', 'Acquisition'] },
-    { num: '04', title: 'CRM & LEAD TRACKING', desc: "Every lead is captured, qualified and assigned to a structured pipeline with automated follow-ups.", tags: ['CRM', 'Automation'] },
-    { num: '05', title: 'OPTIMIZATION & SCALING', desc: "Monthly reports, data analysis, scaling of performing campaigns — a sustainable growth machine.", tags: ['Scale', 'ROI', 'Growth'] },
+    { num: '01', title: 'Discovery call', desc: "We analyze your business, your goals and your target market. Free and no commitment." },
+    { num: '02', title: 'Strategy & onboarding', desc: "We build your editorial strategy and configure all tools in 2 weeks." },
+    { num: '03', title: 'Content production', desc: "Our team produces 8 short-form videos per month tailored to your brand and audience." },
+    { num: '04', title: 'Publishing & optimization', desc: "Consistent publishing on all your channels with real-time performance analysis." },
+    { num: '05', title: 'Report & scaling', desc: "Complete monthly report and strategic meeting to adjust and scale what works." },
   ];
 
   return (
@@ -38,139 +81,286 @@ export default function Entreprises() {
       <Nav lang={lang} onLangChange={setLang} />
 
       {/* HERO */}
-      <section style={{ position: 'relative', overflow: 'hidden', padding: '148px 60px 72px', borderBottom: '0.5px solid rgba(255,255,255,0.12)' }}>
-        <div style={{ position: 'absolute', top: '-96px', right: '-96px', width: '600px', height: '600px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(0,61,165,0.1) 0%, transparent 70%)', pointerEvents: 'none' }} />
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '24px' }}>
-          <div style={{ width: '26px', height: '1px', background: BLUE }} />
-          <span style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: BLUE }}>{fr ? 'Pour les entreprises' : 'For businesses'}</span>
-        </div>
-        <h1 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(60px, 8vw, 104px)', lineHeight: 0.9, color: '#fff', marginBottom: '18px' }}>
+      <section style={{ minHeight: '85vh', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '0 60px 80px', position: 'relative', overflow: 'hidden', paddingTop: '68px' }}>
+        <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at 80% 60%, rgba(0,61,165,0.08) 0%, transparent 60%)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px)', backgroundSize: '60px 60px', pointerEvents: 'none' }} />
+        <SectionLabel>{fr ? 'Pour les entreprises' : 'For businesses'}</SectionLabel>
+        <h1 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(64px, 9vw, 120px)', lineHeight: 0.88, color: '#fff', marginBottom: '24px' }}>
           {fr ? <>PROPULSONS<br />VOTRE<br />CROISSANCE.</> : <>LET'S SCALE<br />YOUR<br />BUSINESS.</>}
         </h1>
-        <p style={{ fontFamily: "'Cormorant Garamond'", fontSize: 'clamp(20px, 2.8vw, 32px)', fontWeight: 300, fontStyle: 'italic', color: 'rgba(255,255,255,0.8)', letterSpacing: '0.05em', marginBottom: '36px' }}>
+        <p style={{ fontFamily: "'Cormorant Garamond'", fontSize: 'clamp(20px, 2.5vw, 30px)', fontStyle: 'italic', fontWeight: 300, color: 'rgba(255,255,255,0.5)', marginBottom: '36px', maxWidth: '600px' }}>
           {fr ? "Du contenu qui convertit. Des leads qui closent." : "Content that converts. Leads that close."}
         </p>
-        <Link to="#form" style={{ fontSize: '11px', fontWeight: 700, color: '#fff', background: BLUE, padding: '14px 32px', borderRadius: '5px', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
-          {fr ? 'Obtenir ma soumission →' : 'Get my quote →'}
-        </Link>
+        <div style={{ display: 'flex', gap: '12px' }}>
+          <a href="#contact" style={{ fontSize: '11px', fontWeight: 700, color: '#fff', background: BLUE, padding: '14px 32px', borderRadius: '4px', letterSpacing: '0.1em', textTransform: 'uppercase', boxShadow: '0 0 30px rgba(0,61,165,0.3)' }}>
+            {fr ? 'Voir les tarifs →' : 'See pricing →'}
+          </a>
+          <a href="#etudes-de-cas" style={{ fontSize: '11px', fontWeight: 500, color: 'rgba(255,255,255,0.5)', border: '0.5px solid rgba(255,255,255,0.2)', padding: '14px 32px', borderRadius: '4px', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+            {fr ? 'Voir les résultats' : 'See results'}
+          </a>
+        </div>
       </section>
 
-      {/* QUI */}
-      <div style={{ padding: '48px 60px', borderBottom: '0.5px solid rgba(255,255,255,0.12)', background: '#0d0d0d' }}>
-        <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.6)', marginBottom: '20px' }}>{fr ? 'On travaille avec' : 'We work with'}</div>
-        <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-          {[fr ? 'Entreprises B2C high ticket' : 'B2C high ticket businesses', fr ? 'Immobilier & construction' : 'Real estate & construction', fr ? 'Autres services premium' : 'Other premium services'].map(s => (
-            <div key={s} style={{ display: 'flex', alignItems: 'center', gap: '8px', background: '#141414', border: '0.5px solid rgba(255,255,255,0.08)', padding: '10px 18px', borderRadius: '6px' }}>
-              <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: BLUE }} />
-              <span style={{ fontSize: '12px', fontWeight: 700, color: 'rgba(255,255,255,0.7)' }}>{s}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* SERVICES */}
-      <section style={{ padding: '64px 60px' }}>
-        <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.6)', marginBottom: '16px' }}>{fr ? 'Nos services · En détail' : 'Our services · In detail'}</div>
-        <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(32px, 4vw, 52px)', letterSpacing: '0.03em', lineHeight: 1, marginBottom: '40px', color: '#fff' }}>
-          {fr ? <>TROIS SERVICES.<br />UNE SEULE <span style={{ color: BLUE }}>MISSION.</span></> : <>THREE SERVICES.<br />ONE <span style={{ color: BLUE }}>MISSION.</span></>}
-        </h2>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1px', background: 'rgba(255,255,255,0.12)' }}>
-          {services.map(svc => (
-            <div key={svc.num} style={{ background: '#080808', padding: '36px 40px', display: 'grid', gridTemplateColumns: '48px 1fr', gap: '24px' }}>
-              <div style={{ fontFamily: "'Bebas Neue'", fontSize: '36px', color: 'rgba(0,61,165,0.3)', lineHeight: 1 }}>{svc.num}</div>
-              <div>
-                <div style={{ fontFamily: "'Bebas Neue'", fontSize: '24px', color: '#fff', marginBottom: '12px', letterSpacing: '0.04em' }}>{svc.title}</div>
-                <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.8)', lineHeight: 1.85, fontWeight: 300, maxWidth: '560px', marginBottom: '14px' }}>{svc.desc}</p>
-                <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
-                  {svc.tags.map(tag => (
-                    <span key={tag} style={{ fontSize: '9px', padding: '3px 10px', borderRadius: '20px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.07em', background: 'rgba(0,61,165,0.08)', color: BLUE, border: '0.5px solid rgba(0,61,165,0.2)' }}>{tag}</span>
-                  ))}
+      {/* ÉTUDES DE CAS */}
+      <section id="etudes-de-cas" style={{ padding: '100px 60px', background: '#0a0a0a', borderTop: '0.5px solid rgba(255,255,255,0.07)' }}>
+        <FadeIn>
+          <SectionLabel>{fr ? 'Études de cas · Résultats' : 'Case studies · Results'}</SectionLabel>
+          <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(32px, 4vw, 52px)', color: '#fff', marginBottom: '48px', letterSpacing: '0.02em' }}>
+            {fr ? <>ILS NOUS ONT <span style={{ color: BLUE }}>FAIT CONFIANCE.</span></> : <>THEY <span style={{ color: BLUE }}>TRUSTED US.</span></>}
+          </h2>
+        </FadeIn>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px' }}>
+          {[
+            { name: 'SexxxPlus', cat: 'Always-On · Contenu', result: '+20M', label: fr ? 'vues générées' : 'views generated', desc: fr ? "Stratégie de contenu organique et gestion des réseaux sociaux générant plus de 20M de vues." : "Organic content strategy and social media management generating 20M+ views." },
+            { name: 'Pizza Salvatoré', cat: fr ? 'Production · Collaboration' : 'Production · Collaboration', result: 'VIRAL', label: fr ? 'vidéo pub' : 'video ad', desc: fr ? "Collaboration créative avec TipsyGuy pour une pub vidéo qui a explosé sur les réseaux." : "Creative collaboration with TipsyGuy for a video ad that went viral on social media." },
+            { name: 'Transport Tardif', cat: fr ? 'Production vidéo' : 'Video production', result: fr ? 'LIVRÉ' : 'DELIVERED', label: fr ? 'contenu de marque' : 'brand content', desc: fr ? "Production de contenu de marque renforçant l'image professionnelle de Transport Tardif." : "Brand content production reinforcing Transport Tardif's professional image." },
+          ].map((c, i) => (
+            <FadeIn key={i} delay={i * 0.1}>
+              <div style={{ background: '#111', border: '0.5px solid rgba(255,255,255,0.07)', borderRadius: '12px', overflow: 'hidden' }}>
+                <ImgPlaceholder label={c.name} aspect="4/3" />
+                <div style={{ padding: '20px' }}>
+                  <div style={{ fontSize: '9px', color: BLUE, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: '8px' }}>{c.cat}</div>
+                  <div style={{ fontSize: '16px', fontWeight: 700, color: '#fff', marginBottom: '8px' }}>{c.name}</div>
+                  <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)', lineHeight: 1.6, marginBottom: '14px', fontWeight: 300 }}>{c.desc}</p>
+                  <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px' }}>
+                    <span style={{ fontFamily: "'Bebas Neue'", fontSize: '28px', color: BLUE, letterSpacing: '0.05em' }}>{c.result}</span>
+                    <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.4)' }}>{c.label}</span>
+                  </div>
                 </div>
               </div>
-            </div>
+            </FadeIn>
           ))}
         </div>
       </section>
 
-      {/* FUNNEL */}
-      <section style={{ padding: '64px 60px', background: '#0d0d0d', borderTop: '0.5px solid rgba(255,255,255,0.12)' }}>
-        <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.6)', marginBottom: '16px' }}>{fr ? 'Notre approche · Le funnel complet' : 'Our approach · The complete funnel'}</div>
-        <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(32px, 4vw, 52px)', letterSpacing: '0.03em', lineHeight: 1, marginBottom: '32px', color: '#fff' }}>
-          {fr ? <>CINQ ÉTAPES.<br />UNE SEULE <span style={{ color: BLUE }}>DIRECTION.</span></> : <>FIVE STEPS.<br />ONE <span style={{ color: BLUE }}>DIRECTION.</span></>}
-        </h2>
+      {/* POURQUOI */}
+      <section style={{ padding: '100px 60px', background: '#080808', borderTop: '0.5px solid rgba(255,255,255,0.07)' }}>
+        <FadeIn>
+          <SectionLabel>{fr ? 'Pourquoi AuchuMedia' : 'Why AuchuMedia'}</SectionLabel>
+          <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(32px, 4vw, 52px)', color: '#fff', marginBottom: '48px', letterSpacing: '0.02em' }}>
+            {fr ? <>CE QUI NOUS <span style={{ color: BLUE }}>DISTINGUE.</span></> : <>WHAT SETS US <span style={{ color: BLUE }}>APART.</span></>}
+          </h2>
+        </FadeIn>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '12px' }}>
+          {(fr ? [
+            { icon: '🎬', title: "Contenu comme un créateur", desc: "On crée du contenu authentique et engageant — pas de la pub déguisée que personne ne regarde." },
+            { icon: '📊', title: "Basé sur la performance", desc: "Chaque décision est basée sur les données. On scale ce qui fonctionne, on arrête ce qui ne fonctionne pas." },
+            { icon: '⚡', title: "Résultats rapides", desc: "Onboarding en 2 semaines. Premier contenu publié dans les 14 premiers jours. Résultats visibles en 30 jours." },
+            { icon: '🎯', title: "Spécialisés B2C high ticket", desc: "On ne travaille pas avec tout le monde. On se spécialise pour vous donner les meilleurs résultats." },
+            { icon: '👥', title: "Équipe dédiée", desc: "Un gestionnaire de compte, un spécialiste contenu, un vidéaste et un expert pub — tout pour vous." },
+            { icon: '📈', title: "Croissance organique durable", desc: "On bâtit une audience qui vous appartient — pas juste des chiffres éphémères liés à un budget pub." },
+          ] : [
+            { icon: '🎬', title: "Content like a creator", desc: "We create authentic and engaging content — not disguised advertising that nobody watches." },
+            { icon: '📊', title: "Performance-based", desc: "Every decision is data-driven. We scale what works, we stop what doesn't." },
+            { icon: '⚡', title: "Fast results", desc: "Onboarding in 2 weeks. First content published within 14 days. Visible results in 30 days." },
+            { icon: '🎯', title: "B2C high ticket specialists", desc: "We don't work with everyone. We specialize to give you the best results." },
+            { icon: '👥', title: "Dedicated team", desc: "An account manager, a content specialist, a videographer and an ads expert — all for you." },
+            { icon: '📈', title: "Sustainable organic growth", desc: "We build an audience that belongs to you — not just ephemeral numbers tied to an ad budget." },
+          ]).map((item, i) => (
+            <FadeIn key={i} delay={i * 0.08}>
+              <div style={{ background: '#0d0d0d', border: '0.5px solid rgba(255,255,255,0.07)', borderRadius: '10px', padding: '28px 24px' }}>
+                <div style={{ fontSize: '28px', marginBottom: '14px' }}>{item.icon}</div>
+                <div style={{ fontSize: '14px', fontWeight: 700, color: '#fff', marginBottom: '8px' }}>{item.title}</div>
+                <div style={{ fontSize: '13px', color: 'rgba(255,255,255,0.5)', lineHeight: 1.65, fontWeight: 300 }}>{item.desc}</div>
+              </div>
+            </FadeIn>
+          ))}
+        </div>
+      </section>
+
+      {/* DÉROULEMENT */}
+      <section style={{ padding: '100px 60px', background: '#0a0a0a', borderTop: '0.5px solid rgba(255,255,255,0.07)' }}>
+        <FadeIn>
+          <SectionLabel>{fr ? 'Déroulement personnalisé' : 'Our process'}</SectionLabel>
+          <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(32px, 4vw, 52px)', color: '#fff', marginBottom: '56px', letterSpacing: '0.02em' }}>
+            {fr ? <>COMMENT ON <span style={{ color: BLUE }}>TRAVAILLE.</span></> : <>HOW WE <span style={{ color: BLUE }}>WORK.</span></>}
+          </h2>
+        </FadeIn>
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           {steps.map((step, i) => (
-            <div key={step.num} style={{ display: 'grid', gridTemplateColumns: '56px 1fr', position: 'relative' }}>
-              {i < steps.length - 1 && <div style={{ position: 'absolute', left: '27px', top: '44px', bottom: 0, width: '0.5px', background: 'rgba(255,255,255,0.07)' }} />}
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', paddingTop: '4px' }}>
-                <div style={{ width: '38px', height: '38px', borderRadius: '50%', background: 'rgba(0,61,165,0.08)', border: '0.5px solid rgba(0,61,165,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '11px', fontWeight: 800, color: BLUE, flexShrink: 0 }}>{step.num}</div>
-              </div>
-              <div style={{ paddingBottom: '36px', paddingLeft: '20px' }}>
-                <div style={{ fontFamily: "'Bebas Neue'", fontSize: '22px', color: '#fff', marginBottom: '8px', letterSpacing: '0.04em' }}>{step.title}</div>
-                <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.8)', lineHeight: 1.75, marginBottom: '12px', fontWeight: 300 }}>{step.desc}</p>
-                <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
-                  {step.tags.map(tag => (
-                    <span key={tag} style={{ fontSize: '9px', padding: '3px 10px', borderRadius: '20px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.07em', background: 'rgba(0,61,165,0.08)', color: BLUE, border: '0.5px solid rgba(0,61,165,0.2)' }}>{tag}</span>
-                  ))}
+            <FadeIn key={i} delay={i * 0.1}>
+              <div style={{ display: 'grid', gridTemplateColumns: '56px 1fr', position: 'relative' }}>
+                {i < steps.length - 1 && <div style={{ position: 'absolute', left: '27px', top: '44px', bottom: 0, width: '0.5px', background: 'rgba(255,255,255,0.06)' }} />}
+                <div style={{ paddingTop: '4px', display: 'flex', justifyContent: 'center' }}>
+                  <div style={{ width: '38px', height: '38px', borderRadius: '50%', background: 'rgba(0,61,165,0.08)', border: '0.5px solid rgba(0,61,165,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '11px', fontWeight: 800, color: BLUE, flexShrink: 0 }}>{step.num}</div>
+                </div>
+                <div style={{ paddingBottom: '40px', paddingLeft: '20px' }}>
+                  <div style={{ fontFamily: "'Bebas Neue'", fontSize: '22px', color: '#fff', marginBottom: '6px', letterSpacing: '0.04em' }}>{step.title}</div>
+                  <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.5)', lineHeight: 1.7, fontWeight: 300 }}>{step.desc}</p>
                 </div>
               </div>
-            </div>
+            </FadeIn>
           ))}
         </div>
       </section>
 
-      {/* FORM */}
-      <section id="form" style={{ padding: '64px 60px', background: '#0d0d0d', borderTop: '0.5px solid rgba(255,255,255,0.12)' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '48px', alignItems: 'start' }}>
-          <div>
-            <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.6)', marginBottom: '16px' }}>{fr ? 'Prendre contact' : 'Get in touch'}</div>
-            <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(32px, 4vw, 52px)', letterSpacing: '0.03em', lineHeight: 1, marginBottom: '16px', color: '#fff' }}>
+      {/* TARIFICATION */}
+      <section style={{ padding: '100px 60px', background: '#080808', borderTop: '0.5px solid rgba(255,255,255,0.07)' }}>
+        <FadeIn>
+          <SectionLabel>{fr ? 'Tarification' : 'Pricing'}</SectionLabel>
+          <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(32px, 4vw, 52px)', color: '#fff', marginBottom: '48px', letterSpacing: '0.02em' }}>
+            {fr ? <>UNE OFFRE <span style={{ color: BLUE }}>TRANSPARENTE.</span></> : <>TRANSPARENT <span style={{ color: BLUE }}>PRICING.</span></>}
+          </h2>
+        </FadeIn>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', maxWidth: '900px' }}>
+          {/* Plan de base */}
+          <FadeIn delay={0.1}>
+            <div style={{ background: '#0d0d0d', border: `1px solid rgba(0,61,165,0.3)`, borderRadius: '16px', padding: '40px', position: 'relative', overflow: 'hidden' }}>
+              <div style={{ position: 'absolute', top: '-30px', right: '-30px', width: '160px', height: '160px', borderRadius: '50%', background: 'rgba(0,61,165,0.06)', filter: 'blur(30px)' }} />
+              <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE, marginBottom: '16px' }}>{fr ? 'Forfait de base' : 'Base plan'}</div>
+              <div style={{ fontFamily: "'Bebas Neue'", fontSize: '52px', color: '#fff', letterSpacing: '0.02em', lineHeight: 1, marginBottom: '4px' }}>3 500$</div>
+              <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', marginBottom: '24px' }}>{fr ? '/ mois' : '/ month'}</div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '32px' }}>
+                {(fr ? [
+                  '8 vidéos courts formats / mois',
+                  'Gestion Instagram, TikTok & LinkedIn',
+                  'Stratégie éditoriale mensuelle',
+                  'Rapport de performance',
+                  'Réunion mensuelle dédiée',
+                  'Gestionnaire de compte attitré',
+                ] : [
+                  '8 short-form videos / month',
+                  'Instagram, TikTok & LinkedIn management',
+                  'Monthly editorial strategy',
+                  'Performance report',
+                  'Monthly dedicated meeting',
+                  'Dedicated account manager',
+                ]).map((item, i) => (
+                  <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: BLUE, flexShrink: 0 }} />
+                    <span style={{ fontSize: '13px', color: 'rgba(255,255,255,0.7)' }}>{item}</span>
+                  </div>
+                ))}
+              </div>
+              <a href="#contact" style={{ display: 'block', textAlign: 'center', fontSize: '11px', fontWeight: 700, color: '#fff', background: BLUE, padding: '14px', borderRadius: '4px', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
+                {fr ? 'Démarrer →' : 'Get started →'}
+              </a>
+            </div>
+          </FadeIn>
+
+          {/* Forfait sur mesure */}
+          <FadeIn delay={0.2}>
+            <div style={{ background: '#0d0d0d', border: '0.5px solid rgba(255,255,255,0.08)', borderRadius: '16px', padding: '40px' }}>
+              <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginBottom: '16px' }}>{fr ? 'Forfait sur mesure' : 'Custom plan'}</div>
+              <div style={{ fontFamily: "'Bebas Neue'", fontSize: '52px', color: '#fff', letterSpacing: '0.02em', lineHeight: 1, marginBottom: '4px' }}>{fr ? 'SUR MESURE' : 'CUSTOM'}</div>
+              <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', marginBottom: '24px' }}>{fr ? 'Selon vos besoins' : 'Based on your needs'}</div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '32px' }}>
+                {(fr ? [
+                  'Tout le forfait de base',
+                  'Gestion Meta Ads & Google Ads',
+                  'Intégration CRM complète',
+                  'Production vidéo longue durée',
+                  'Équipe de vente dédiée',
+                  'Stratégie multi-plateforme',
+                ] : [
+                  'Everything in base plan',
+                  'Meta Ads & Google Ads management',
+                  'Full CRM integration',
+                  'Long-form video production',
+                  'Dedicated sales team',
+                  'Multi-platform strategy',
+                ]).map((item, i) => (
+                  <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: 'rgba(255,255,255,0.2)', flexShrink: 0 }} />
+                    <span style={{ fontSize: '13px', color: 'rgba(255,255,255,0.5)' }}>{item}</span>
+                  </div>
+                ))}
+              </div>
+              <a href="#contact" style={{ display: 'block', textAlign: 'center', fontSize: '11px', fontWeight: 700, color: 'rgba(255,255,255,0.7)', border: '0.5px solid rgba(255,255,255,0.2)', padding: '14px', borderRadius: '4px', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
+                {fr ? 'Nous contacter →' : 'Contact us →'}
+              </a>
+            </div>
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section style={{ padding: '100px 60px', background: '#0a0a0a', borderTop: '0.5px solid rgba(255,255,255,0.07)' }}>
+        <FadeIn>
+          <SectionLabel>FAQ</SectionLabel>
+          <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(32px, 4vw, 52px)', color: '#fff', marginBottom: '48px', letterSpacing: '0.02em' }}>
+            {fr ? <>QUESTIONS <span style={{ color: BLUE }}>FRÉQUENTES.</span></> : <>FREQUENTLY ASKED <span style={{ color: BLUE }}>QUESTIONS.</span></>}
+          </h2>
+        </FadeIn>
+        <div style={{ maxWidth: '720px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+          {faqs.map((faq, i) => (
+            <FadeIn key={i} delay={i * 0.05}>
+              <div style={{ background: openFaq === i ? '#111' : '#0d0d0d', border: '0.5px solid rgba(255,255,255,0.07)', borderRadius: '8px', overflow: 'hidden', transition: 'background 0.2s', marginBottom: '4px' }}>
+                <button onClick={() => setOpenFaq(openFaq === i ? null : i)} style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '20px 24px', background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left' }}>
+                  <span style={{ fontSize: '14px', fontWeight: 600, color: '#fff', lineHeight: 1.4 }}>{faq.q}</span>
+                  <div style={{ width: '24px', height: '24px', borderRadius: '50%', border: '0.5px solid rgba(255,255,255,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginLeft: '16px', transform: openFaq === i ? 'rotate(45deg)' : 'none', transition: 'transform 0.25s', background: openFaq === i ? BLUE : 'transparent' }}>
+                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                      <line x1="5" y1="1" x2="5" y2="9" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
+                      <line x1="1" y1="5" x2="9" y2="5" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
+                    </svg>
+                  </div>
+                </button>
+                <div style={{ maxHeight: openFaq === i ? '200px' : '0', overflow: 'hidden', transition: 'max-height 0.35s ease' }}>
+                  <div style={{ padding: '0 24px 20px', fontSize: '13px', color: 'rgba(255,255,255,0.55)', lineHeight: 1.75, fontWeight: 300 }}>{faq.a}</div>
+                </div>
+              </div>
+            </FadeIn>
+          ))}
+        </div>
+      </section>
+
+      {/* CONTACT */}
+      <section id="contact" style={{ padding: '100px 60px', background: '#080808', borderTop: '0.5px solid rgba(255,255,255,0.07)' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '80px', alignItems: 'start' }}>
+          <FadeIn direction="left">
+            <SectionLabel>{fr ? 'Prendre contact' : 'Get in touch'}</SectionLabel>
+            <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(36px, 4.5vw, 60px)', color: '#fff', marginBottom: '16px', letterSpacing: '0.02em', lineHeight: 0.95 }}>
               {fr ? <>PARLONS DE<br />VOTRE <span style={{ color: BLUE }}>CROISSANCE.</span></> : <>LET'S TALK<br />ABOUT YOUR <span style={{ color: BLUE }}>GROWTH.</span></>}
             </h2>
-            <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.8)', lineHeight: 1.85, fontWeight: 300 }}>
-              {fr ? "Remplissez le formulaire et notre équipe vous reviendra dans les 48h." : "Fill out the form and our team will get back to you within 48h."}
+            <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.5)', lineHeight: 1.8, fontWeight: 300 }}>
+              {fr ? "Notre équipe vous reviendra dans les 48h." : "Our team will get back to you within 48h."}
             </p>
-          </div>
-          <div style={{ background: '#111', border: '0.5px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '36px 32px' }}>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px', marginBottom: '14px' }}>
-              {[fr ? 'Prénom' : 'First name', fr ? 'Nom' : 'Last name'].map(label => (
-                <div key={label}>
-                  <label style={{ display: 'block', fontSize: '10px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.65)', marginBottom: '7px' }}>{label}</label>
-                  <input type="text" style={{ width: '100%', background: '#0d0d0d', border: '0.5px solid rgba(255,255,255,0.12)', borderRadius: '6px', padding: '12px 16px', color: '#fff', fontSize: '13px', outline: 'none', fontFamily: "'DM Sans'" }} />
+          </FadeIn>
+          <FadeIn direction="right">
+            <div style={{ background: '#0d0d0d', border: '0.5px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '36px 32px' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px', marginBottom: '14px' }}>
+                {[fr ? 'Prénom' : 'First name', fr ? 'Nom' : 'Last name'].map(l => (
+                  <div key={l}>
+                    <label style={{ display: 'block', fontSize: '10px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', marginBottom: '7px' }}>{l}</label>
+                    <input type="text" style={{ width: '100%', background: '#111', border: '0.5px solid rgba(255,255,255,0.1)', borderRadius: '6px', padding: '11px 14px', color: '#fff', fontSize: '13px', outline: 'none', fontFamily: "'DM Sans'" }} />
+                  </div>
+                ))}
+              </div>
+              {[{ label: 'Email', type: 'email' }, { label: fr ? "Nom de l'entreprise" : 'Company name', type: 'text' }].map(f => (
+                <div key={f.label} style={{ marginBottom: '14px' }}>
+                  <label style={{ display: 'block', fontSize: '10px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', marginBottom: '7px' }}>{f.label}</label>
+                  <input type={f.type} style={{ width: '100%', background: '#111', border: '0.5px solid rgba(255,255,255,0.1)', borderRadius: '6px', padding: '11px 14px', color: '#fff', fontSize: '13px', outline: 'none', fontFamily: "'DM Sans'" }} />
                 </div>
               ))}
-            </div>
-            {[
-              { label: 'Email', type: 'email' },
-              { label: fr ? "Nom de l'entreprise" : 'Company name', type: 'text' },
-            ].map(f => (
-              <div key={f.label} style={{ marginBottom: '14px' }}>
-                <label style={{ display: 'block', fontSize: '10px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.65)', marginBottom: '7px' }}>{f.label}</label>
-                <input type={f.type} style={{ width: '100%', background: '#0d0d0d', border: '0.5px solid rgba(255,255,255,0.12)', borderRadius: '6px', padding: '12px 16px', color: '#fff', fontSize: '13px', outline: 'none', fontFamily: "'DM Sans'" }} />
+              <div style={{ marginBottom: '14px' }}>
+                <label style={{ display: 'block', fontSize: '10px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', marginBottom: '7px' }}>{fr ? "Chiffre d'affaires annuel" : 'Annual revenue'}</label>
+                <select style={{ width: '100%', background: '#111', border: '0.5px solid rgba(255,255,255,0.1)', borderRadius: '6px', padding: '11px 14px', color: '#fff', fontSize: '13px', outline: 'none', fontFamily: "'DM Sans'", appearance: 'none', cursor: 'pointer' }}>
+                  <option value="">{fr ? 'Sélectionne une tranche' : 'Select a range'}</option>
+                  {(fr ? ['Moins de 100K$/an', '100K$ – 500K$/an', '500K$ – 1M$/an', '1M$ et plus'] : ['Less than $100K/yr', '$100K – $500K/yr', '$500K – $1M/yr', '$1M and more']).map(o => <option key={o}>{o}</option>)}
+                </select>
               </div>
-            ))}
-            <div style={{ marginBottom: '14px' }}>
-              <label style={{ display: 'block', fontSize: '10px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.65)', marginBottom: '7px' }}>{fr ? "Chiffre d'affaires annuel" : 'Annual revenue'}</label>
-              <select style={{ width: '100%', background: '#0d0d0d', border: '0.5px solid rgba(255,255,255,0.12)', borderRadius: '6px', padding: '12px 16px', color: '#fff', fontSize: '13px', outline: 'none', fontFamily: "'DM Sans'", appearance: 'none', cursor: 'pointer' }}>
-                <option value="">{fr ? 'Sélectionne une tranche' : 'Select a range'}</option>
-                {(fr ? ['Moins de 100K$/an', '100K$ – 500K$/an', '500K$ – 1M$/an', '1M$ et plus'] : ['Less than $100K/yr', '$100K – $500K/yr', '$500K – $1M/yr', '$1M and more']).map(o => <option key={o}>{o}</option>)}
-              </select>
+              <div style={{ marginBottom: '14px' }}>
+                <label style={{ display: 'block', fontSize: '10px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', marginBottom: '7px' }}>{fr ? 'Votre projet' : 'Your project'}</label>
+                <textarea required placeholder={fr ? 'Dites-nous en plus...' : 'Tell us more...'} style={{ width: '100%', background: '#111', border: '0.5px solid rgba(255,255,255,0.1)', borderRadius: '6px', padding: '11px 14px', color: '#fff', fontSize: '13px', outline: 'none', fontFamily: "'DM Sans'", resize: 'vertical', minHeight: '90px' }} />
+              </div>
+              <button style={{ width: '100%', fontSize: '11px', fontWeight: 700, color: '#fff', background: BLUE, padding: '14px', borderRadius: '5px', letterSpacing: '0.08em', textTransform: 'uppercase', cursor: 'pointer', border: 'none', fontFamily: "'DM Sans'" }}>
+                {fr ? 'Envoyer ma demande →' : 'Send my request →'}
+              </button>
             </div>
-            <div style={{ marginBottom: '14px' }}>
-              <label style={{ display: 'block', fontSize: '10px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.65)', marginBottom: '7px' }}>{fr ? 'Votre projet' : 'Your project'}</label>
-              <textarea required placeholder={fr ? 'Dites-nous en plus sur vos objectifs...' : 'Tell us more about your goals...'} style={{ width: '100%', background: '#0d0d0d', border: '0.5px solid rgba(255,255,255,0.12)', borderRadius: '6px', padding: '12px 16px', color: '#fff', fontSize: '13px', outline: 'none', fontFamily: "'DM Sans'", resize: 'vertical', minHeight: '90px' }} />
-            </div>
-            <button style={{ width: '100%', fontSize: '11px', fontWeight: 700, color: '#fff', background: BLUE, padding: '15px 32px', borderRadius: '5px', letterSpacing: '0.08em', textTransform: 'uppercase', cursor: 'pointer', border: 'none', fontFamily: "'DM Sans'" }}>
-              {fr ? 'Envoyer ma demande →' : 'Send my request →'}
-            </button>
-            <p style={{ fontSize: '10px', color: 'rgba(255,255,255,0.4)', textAlign: 'center', marginTop: '12px' }}>
-              {fr ? 'Vos informations restent confidentielles.' : 'Your information remains confidential.'}
-            </p>
-          </div>
+          </FadeIn>
         </div>
       </section>
 
       <Footer />
+
+      <style>{`
+        @media (max-width: 768px) {
+          section { padding-left: 20px !important; padding-right: 20px !important; padding-top: 60px !important; padding-bottom: 60px !important; }
+          div[style*="grid-template-columns: repeat(2"] { grid-template-columns: 1fr !important; }
+          div[style*="grid-template-columns: repeat(3"] { grid-template-columns: 1fr !important; }
+          div[style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
     </div>
   );
 }
