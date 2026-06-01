@@ -102,6 +102,10 @@ export default function Nav({ lang, onLangChange }) {
           <Link to="/projets" style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.38)', padding: '8px 14px', borderRadius: '5px' }}>
             {fr ? 'Projets' : 'Projects'}
           </Link>
+          <div style={{ width: '0.5px', height: '16px', background: 'rgba(255,255,255,0.12)', margin: '0 4px' }} />
+          <Link to="/a-propos" style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.38)', padding: '8px 14px', borderRadius: '5px' }}>
+            {fr ? 'À propos' : 'About'}
+          </Link>
         </div>
  
         {/* Right */}
@@ -156,6 +160,9 @@ export default function Nav({ lang, onLangChange }) {
           <Link to="/projets" onClick={() => setMobileOpen(false)} style={{ fontSize: '13px', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.5)', padding: '12px 0', borderBottom: '0.5px solid rgba(255,255,255,0.06)' }}>
             {fr ? 'Projets' : 'Projects'}
           </Link>
+          <Link to="/a-propos" onClick={() => setMobileOpen(false)} style={{ fontSize: '13px', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.5)', padding: '12px 0', borderBottom: '0.5px solid rgba(255,255,255,0.06)' }}>
+            {fr ? 'À propos' : 'About'}
+          </Link>
           <div style={{ display: 'flex', gap: '8px', padding: '12px 0' }}>
             {['fr', 'en'].map(l => (
               <button key={l} onClick={() => onLangChange(l)} style={{ fontSize: '10px', fontWeight: 700, color: lang === l ? '#fff' : 'rgba(255,255,255,0.35)', border: '0.5px solid rgba(255,255,255,0.15)', padding: '5px 12px', borderRadius: '4px', cursor: 'pointer', background: lang === l ? 'rgba(255,255,255,0.1)' : 'none', fontFamily: "'DM Sans'" }}>
@@ -178,4 +185,3 @@ export default function Nav({ lang, onLangChange }) {
     </>
   );
 }
- 
