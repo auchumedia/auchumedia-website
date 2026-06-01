@@ -199,8 +199,10 @@ export default function Entreprises() {
         position: 'sticky', top: '68px', zIndex: 400,
         background: 'rgba(8,8,8,0.95)', backdropFilter: 'blur(10px)',
         borderBottom: '0.5px solid rgba(255,255,255,0.08)',
-        display: 'flex', alignItems: 'center', justifyContent: 'center',
-        padding: '0 60px', gap: '4px', height: '52px'
+        display: 'flex', alignItems: 'center',
+        padding: '0 16px', gap: '2px', height: '48px',
+        overflowX: 'auto', scrollbarWidth: 'none',
+        justifyContent: 'flex-start',
       }}>
         {navLinks.map(link => (
           <button key={link.id} onClick={() => scrollTo(link.id)} style={{
@@ -260,7 +262,7 @@ export default function Entreprises() {
                   </div>
                 </div>
                 {/* Metrics */}
-                <div style={{ display: 'flex', gap: '40px', flexWrap: 'wrap' }}>
+                <div style={{ display: 'flex', gap: '32px', flexWrap: 'wrap' }}>
                   {[
                     { num: '6M', label: fr ? 'vues' : 'views' },
                     { num: '50K', label: fr ? 'engagements' : 'engagements' },
@@ -297,7 +299,7 @@ export default function Entreprises() {
                     {fr ? 'Boutique érotique · Médias sociaux' : 'Erotic boutique · Social media'}
                   </div>
                 </div>
-                <div style={{ display: 'flex', gap: '40px', flexWrap: 'wrap' }}>
+                <div style={{ display: 'flex', gap: '32px', flexWrap: 'wrap' }}>
                   {[
                     { num: '22M', label: fr ? 'vues' : 'views' },
                     { num: '1M', label: fr ? 'engagements' : 'engagements' },
@@ -332,7 +334,7 @@ export default function Entreprises() {
                     {fr ? 'Immobilier · RE/MAX · Médias sociaux' : 'Real estate · RE/MAX · Social media'}
                   </div>
                 </div>
-                <div style={{ display: 'flex', gap: '40px', flexWrap: 'wrap' }}>
+                <div style={{ display: 'flex', gap: '32px', flexWrap: 'wrap' }}>
                   {[
                     { num: '640K', label: fr ? 'vues' : 'views' },
                     { num: '14K', label: fr ? 'engagements' : 'engagements' },
@@ -542,10 +544,11 @@ export default function Entreprises() {
  
       <style>{`
         @media (max-width: 768px) {
-          section { padding-left: 20px !important; padding-right: 20px !important; }
+          section { padding-left: 20px !important; padding-right: 20px !important; padding-top: 60px !important; padding-bottom: 60px !important; }
           div[style*="grid-template-columns: repeat(3"] { grid-template-columns: 1fr !important; }
           div[style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
           div[style*="grid-template-columns: repeat(2"] { grid-template-columns: 1fr !important; }
+          div[style*="scrollbarWidth: 'none'"]::-webkit-scrollbar { display: none; }
         }
         div[ref] { scrollbar-width: none; }
         div::-webkit-scrollbar { display: none; }
