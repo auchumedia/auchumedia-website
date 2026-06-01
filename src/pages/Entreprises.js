@@ -251,7 +251,7 @@ export default function Entreprises() {
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '24px' }}>
                 <div>
                   <div style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.5)', marginBottom: '12px' }}>
-                    {fr ? 'Étude de cas 1/1' : 'Case study 1/1'}
+                    {fr ? 'Étude de cas 1/3' : 'Case study 1/3'}
                   </div>
                   {/* NorCan logo text */}
                   <div style={{ fontFamily: "'Bebas Neue'", fontSize: '52px', color: '#fff', letterSpacing: '0.1em', lineHeight: 1 }}>NOR-CAN</div>
@@ -290,7 +290,7 @@ export default function Entreprises() {
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '24px' }}>
                 <div>
                   <div style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.5)', marginBottom: '12px' }}>
-                    {fr ? 'Étude de cas 2/2' : 'Case study 2/2'}
+                    {fr ? 'Étude de cas 2/3' : 'Case study 2/3'}
                   </div>
                   <div style={{ fontFamily: "'Bebas Neue'", fontSize: '52px', color: '#fff', letterSpacing: '0.1em', lineHeight: 1 }}>SEXXXPLUS</div>
                   <div style={{ fontSize: '13px', color: 'rgba(255,255,255,0.5)', marginTop: '6px' }}>
