@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-
+ 
 const BLUE = '#003DA5';
-
+ 
 export default function Nav({ lang, onLangChange }) {
   const [ddOpen, setDdOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-
+ 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', onScroll);
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
-
+ 
   const fr = lang === 'fr';
-
+ 
   return (
     <>
       <nav style={{
@@ -31,7 +31,7 @@ export default function Nav({ lang, onLangChange }) {
         <Link to="/" style={{ fontFamily: "'Bebas Neue'", fontSize: '20px', letterSpacing: '0.2em', color: '#fff' }}>
           AUCHUMEDIA
         </Link>
-
+ 
         {/* Desktop center */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '2px' }} className="nav-desktop">
           {/* Dropdown */}
@@ -53,7 +53,7 @@ export default function Nav({ lang, onLangChange }) {
                 <polyline points="1 1 5 5 9 1" stroke="rgba(255,255,255,0.3)" strokeWidth="2.5" strokeLinecap="round"/>
               </svg>
             </button>
-
+ 
             {ddOpen && (
               <div style={{
                 position: 'absolute', top: 'calc(100% + 10px)', left: 0, width: '360px',
@@ -97,13 +97,13 @@ export default function Nav({ lang, onLangChange }) {
               </div>
             )}
           </div>
-
+ 
           <div style={{ width: '0.5px', height: '16px', background: 'rgba(255,255,255,0.12)', margin: '0 4px' }} />
           <Link to="/projets" style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.38)', padding: '8px 14px', borderRadius: '5px' }}>
             {fr ? 'Projets' : 'Projects'}
           </Link>
         </div>
-
+ 
         {/* Right */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <div style={{ display: 'flex', border: '0.5px solid rgba(255,255,255,0.15)', borderRadius: '4px', overflow: 'hidden' }}>
@@ -134,7 +134,7 @@ export default function Nav({ lang, onLangChange }) {
           </button>
         </div>
       </nav>
-
+ 
       {/* Mobile menu */}
       <div style={{
         position: 'fixed', top: '68px', left: 0, right: 0, zIndex: 400,
@@ -168,7 +168,7 @@ export default function Nav({ lang, onLangChange }) {
           </Link>
         </div>
       </div>
-
+ 
       <style>{`
         @media (max-width: 768px) {
           .nav-desktop { display: none !important; }
@@ -178,3 +178,4 @@ export default function Nav({ lang, onLangChange }) {
     </>
   );
 }
+ 
