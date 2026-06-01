@@ -5,6 +5,20 @@ import Footer from '../components/Footer';
 const BLUE = '#003DA5';
 const NORCAN_GREEN = '#1a3a2a';
 const SEXXXPLUS_COLOR = '#1a0a0a';
+const MAHER_COLOR = '#003580';
+ 
+const MAHER_VIDEOS = [
+  'https://www.tiktok.com/@famillemaher/video/7600921134854360327',
+  'https://www.tiktok.com/@famillemaher/video/7602054271172906248',
+  'https://www.tiktok.com/@famillemaher/video/7605014622764141831',
+  'https://www.tiktok.com/@famillemaher/video/7618350590027975956',
+  'https://www.tiktok.com/@famillemaher/video/7620967888328969493',
+  'https://www.tiktok.com/@famillemaher/video/7626147213588122898',
+  'https://www.tiktok.com/@famillemaher/video/7633221318900518151',
+  'https://www.tiktok.com/@famillemaher/video/7640230731494460680',
+  'https://www.tiktok.com/@famillemaher/video/7645079778852261138',
+  'https://www.tiktok.com/@famillemaher/video/7623544372428147976',
+];
  
 const SEXXXPLUS_VIDEOS = [
   'https://www.tiktok.com/@boutiqueerotiquesp/video/7463247824583412997',
@@ -301,6 +315,41 @@ export default function Entreprises() {
           </div>
           <div style={{ padding: '0 20px' }}>
             <TikTokCarousel videos={SEXXXPLUS_VIDEOS} bgColor={SEXXXPLUS_COLOR} />
+          </div>
+        </div>
+ 
+        {/* Maher case study */}
+        <div style={{ background: MAHER_COLOR, padding: '80px 0 60px', borderTop: '0.5px solid rgba(255,255,255,0.07)' }}>
+          <div style={{ padding: '0 60px', marginBottom: '48px' }}>
+            <FadeIn>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '24px' }}>
+                <div>
+                  <div style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.5)', marginBottom: '12px' }}>
+                    {fr ? 'Étude de cas 3/3' : 'Case study 3/3'}
+                  </div>
+                  <div style={{ fontFamily: "'Bebas Neue'", fontSize: '52px', color: '#fff', letterSpacing: '0.1em', lineHeight: 1 }}>RAF & STEVE MAHER</div>
+                  <div style={{ fontSize: '13px', color: 'rgba(255,255,255,0.5)', marginTop: '6px' }}>
+                    {fr ? 'Immobilier · RE/MAX · Médias sociaux' : 'Real estate · RE/MAX · Social media'}
+                  </div>
+                </div>
+                <div style={{ display: 'flex', gap: '40px', flexWrap: 'wrap' }}>
+                  {[
+                    { num: '640K', label: fr ? 'vues' : 'views' },
+                    { num: '14K', label: fr ? 'engagements' : 'engagements' },
+                    { num: '24', label: fr ? 'vidéos' : 'videos' },
+                    { num: '+2K', label: fr ? 'abonnés' : 'followers' },
+                  ].map((m, i) => (
+                    <div key={i} style={{ textAlign: 'center' }}>
+                      <div style={{ fontFamily: "'Bebas Neue'", fontSize: '44px', color: '#fff', letterSpacing: '0.05em', lineHeight: 1 }}>{m.num}</div>
+                      <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.5)', letterSpacing: '0.1em', textTransform: 'uppercase', marginTop: '4px' }}>{m.label}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </FadeIn>
+          </div>
+          <div style={{ padding: '0 20px' }}>
+            <TikTokCarousel videos={MAHER_VIDEOS} bgColor={MAHER_COLOR} />
           </div>
         </div>
       </section>
