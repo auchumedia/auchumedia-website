@@ -84,3 +84,13 @@ a { text-decoration: none; color: inherit; }
     padding: 48px 24px !important;
   }
 }
+ 
+/* Full bleed sections (case studies) */
+#etudes-de-cas > div {
+  width: 100vw !important;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw !important;
+  margin-right: -50vw !important;
+}
