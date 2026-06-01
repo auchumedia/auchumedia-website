@@ -244,10 +244,10 @@ export default function Entreprises() {
       </section>
  
       {/* ===== ÉTUDES DE CAS ===== */}
-      <section id="etudes-de-cas" style={{ borderTop: '0.5px solid rgba(255,255,255,0.07)', scrollMarginTop: '120px' }}>
+      <section id="etudes-de-cas" style={{ borderTop: '0.5px solid rgba(255,255,255,0.07)', scrollMarginTop: '120px', overflow: 'hidden' }}>
  
         {/* NorCan case study */}
-        <div style={{ background: NORCAN_GREEN, padding: '80px 0 60px' }}>
+        <div style={{ background: NORCAN_GREEN, padding: '80px 0 60px', margin: '0 -1px', width: 'calc(100% + 2px)' }}>
           <div style={{ padding: '0 60px', marginBottom: '48px' }}>
             <FadeIn>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '24px' }}>
@@ -286,7 +286,7 @@ export default function Entreprises() {
         </div>
  
         {/* SexxxPlus case study */}
-        <div style={{ background: SEXXXPLUS_COLOR, padding: '80px 0 60px', borderTop: '0.5px solid rgba(255,255,255,0.07)' }}>
+        <div style={{ background: SEXXXPLUS_COLOR, padding: '80px 0 60px', borderTop: '0.5px solid rgba(255,255,255,0.07)', margin: '0 -1px', width: 'calc(100% + 2px)' }}>
           <div style={{ padding: '0 60px', marginBottom: '48px' }}>
             <FadeIn>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '24px' }}>
@@ -321,7 +321,7 @@ export default function Entreprises() {
         </div>
  
         {/* Maher case study */}
-        <div style={{ background: MAHER_COLOR, padding: '80px 0 60px', borderTop: '0.5px solid rgba(255,255,255,0.07)' }}>
+        <div style={{ background: MAHER_COLOR, padding: '80px 0 60px', borderTop: '0.5px solid rgba(255,255,255,0.07)', margin: '0 -1px', width: 'calc(100% + 2px)' }}>
           <div style={{ padding: '0 60px', marginBottom: '48px' }}>
             <FadeIn>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '24px' }}>
