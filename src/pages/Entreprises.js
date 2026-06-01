@@ -1,10 +1,21 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
  
 const BLUE = '#003DA5';
 const NORCAN_GREEN = '#1a3a2a';
+const SEXXXPLUS_COLOR = '#1a0a0a';
+ 
+const SEXXXPLUS_VIDEOS = [
+  'https://www.tiktok.com/@boutiqueerotiquesp/video/7463247824583412997',
+  'https://www.tiktok.com/@boutiqueerotiquesp/video/7538563446787362066',
+  'https://www.tiktok.com/@boutiqueerotiquesp/video/7537822973126872326',
+  'https://www.tiktok.com/@boutiqueerotiquesp/video/7530033837246582022',
+  'https://www.tiktok.com/@boutiqueerotiquesp/video/7520008462882098437',
+  'https://www.tiktok.com/@boutiqueerotiquesp/video/7482901136060517637',
+  'https://www.tiktok.com/@boutiqueerotiquesp/video/7454332830550674694',
+  'https://www.tiktok.com/@boutiqueerotiquesp/video/7550438938322717973',
+];
  
 function useInView(threshold = 0.15) {
   const ref = useRef(null);
@@ -31,7 +42,7 @@ const SectionLabel = ({ children }) => (
 );
  
 // TikTok embed carousel
-function TikTokCarousel({ videos }) {
+function TikTokCarousel({ videos, bgColor = NORCAN_GREEN }) {
   const scrollRef = useRef(null);
   const scroll = (dir) => {
     if (scrollRef.current) {
@@ -54,8 +65,8 @@ function TikTokCarousel({ videos }) {
         </button>
       ))}
       {/* Fade edges */}
-      <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: '60px', background: `linear-gradient(to right, ${NORCAN_GREEN}, transparent)`, zIndex: 2, pointerEvents: 'none' }} />
-      <div style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: '60px', background: `linear-gradient(to left, ${NORCAN_GREEN}, transparent)`, zIndex: 2, pointerEvents: 'none' }} />
+      <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: '60px', background: `linear-gradient(to right, ${bgColor}, transparent)`, zIndex: 2, pointerEvents: 'none' }} />
+      <div style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: '60px', background: `linear-gradient(to left, ${bgColor}, transparent)`, zIndex: 2, pointerEvents: 'none' }} />
       {/* Scroll container */}
       <div ref={scrollRef} style={{
         display: 'flex', gap: '16px', overflowX: 'auto', scrollbarWidth: 'none',
@@ -255,6 +266,41 @@ export default function Entreprises() {
           {/* TikTok carousel */}
           <div style={{ padding: '0 20px' }}>
             <TikTokCarousel videos={NORCAN_VIDEOS} />
+          </div>
+        </div>
+ 
+        {/* SexxxPlus case study */}
+        <div style={{ background: SEXXXPLUS_COLOR, padding: '80px 0 60px', borderTop: '0.5px solid rgba(255,255,255,0.07)' }}>
+          <div style={{ padding: '0 60px', marginBottom: '48px' }}>
+            <FadeIn>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '24px' }}>
+                <div>
+                  <div style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.5)', marginBottom: '12px' }}>
+                    {fr ? 'Étude de cas 2/2' : 'Case study 2/2'}
+                  </div>
+                  <div style={{ fontFamily: "'Bebas Neue'", fontSize: '52px', color: '#fff', letterSpacing: '0.1em', lineHeight: 1 }}>SEXXXPLUS</div>
+                  <div style={{ fontSize: '13px', color: 'rgba(255,255,255,0.5)', marginTop: '6px' }}>
+                    {fr ? 'Boutique érotique · Médias sociaux' : 'Erotic boutique · Social media'}
+                  </div>
+                </div>
+                <div style={{ display: 'flex', gap: '40px', flexWrap: 'wrap' }}>
+                  {[
+                    { num: '22M', label: fr ? 'vues' : 'views' },
+                    { num: '1M', label: fr ? 'engagements' : 'engagements' },
+                    { num: '120', label: fr ? 'vidéos' : 'videos' },
+                    { num: '+35K', label: fr ? 'abonnés' : 'followers' },
+                  ].map((m, i) => (
+                    <div key={i} style={{ textAlign: 'center' }}>
+                      <div style={{ fontFamily: "'Bebas Neue'", fontSize: '44px', color: '#fff', letterSpacing: '0.05em', lineHeight: 1 }}>{m.num}</div>
+                      <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.5)', letterSpacing: '0.1em', textTransform: 'uppercase', marginTop: '4px' }}>{m.label}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </FadeIn>
+          </div>
+          <div style={{ padding: '0 20px' }}>
+            <TikTokCarousel videos={SEXXXPLUS_VIDEOS} bgColor={SEXXXPLUS_COLOR} />
           </div>
         </div>
       </section>
