@@ -458,31 +458,45 @@ export default function Entreprises() {
           <div style={{ height: '40px' }} />
         </div>
 
-        {/* Mobile timeline */}
-        <div className="mobile-timeline" style={{ flexDirection: 'column', gap: '0', padding: '0 20px', display: 'none' }}>
+        {/* Mobile — Benjy style cards */}
+        <div className="mobile-timeline" style={{ flexDirection: 'column', gap: '16px', padding: '0 16px', display: 'none' }}>
           {steps.map((step, i) => (
-            <div key={i} style={{ display: 'flex', gap: '20px', paddingBottom: '40px', position: 'relative' }}>
-              {/* Line */}
-              {i < steps.length - 1 && <div style={{ position: 'absolute', left: '19px', top: '44px', bottom: 0, width: '1px', background: 'rgba(0,61,165,0.2)' }} />}
-              {/* Circle */}
-              <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'rgba(0,61,165,0.1)', border: `1px solid ${BLUE}`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                <span style={{ fontFamily: "'Bebas Neue'", fontSize: '14px', color: BLUE }}>{step.num}</span>
-              </div>
-              {/* Content */}
-              <div style={{ flex: 1, paddingTop: '4px' }}>
-                <div style={{ display: 'inline-flex', alignItems: 'center', background: 'rgba(0,61,165,0.1)', border: '0.5px solid rgba(0,61,165,0.25)', borderRadius: '20px', padding: '3px 10px', marginBottom: '10px' }}>
+            <div key={i} style={{
+              borderRadius: '20px',
+              background: i % 2 === 0 ? '#0d0d0d' : '#111',
+              border: '0.5px solid rgba(255,255,255,0.08)',
+              overflow: 'hidden',
+              boxShadow: '0 4px 24px rgba(0,0,0,0.3)',
+            }}>
+              {/* Text section */}
+              <div style={{ padding: '28px 24px' }}>
+                <div style={{ fontFamily: "'Bebas Neue'", fontSize: '48px', color: 'rgba(0,61,165,0.15)', lineHeight: 1, marginBottom: '8px' }}>{step.num}</div>
+                <div style={{ display: 'inline-flex', alignItems: 'center', background: 'rgba(0,61,165,0.1)', border: '0.5px solid rgba(0,61,165,0.25)', borderRadius: '20px', padding: '4px 12px', marginBottom: '12px' }}>
                   <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: BLUE }}>{step.days}</span>
                 </div>
-                <div style={{ fontFamily: "'Bebas Neue'", fontSize: '22px', color: '#fff', marginBottom: '8px', letterSpacing: '0.03em', lineHeight: 1.1 }}>{step.title}</div>
-                <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.55)', lineHeight: 1.7, fontWeight: 300, marginBottom: '14px' }}>{step.desc}</p>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '7px' }}>
+                <div style={{ fontFamily: "'Bebas Neue'", fontSize: '26px', color: '#fff', marginBottom: '10px', letterSpacing: '0.02em', lineHeight: 1.1 }}>{step.title}</div>
+                <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.6)', lineHeight: 1.75, fontWeight: 300, marginBottom: '18px' }}>{step.desc}</p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '20px' }}>
                   {step.points.map((pt, j) => (
-                    <div key={j} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                      <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: BLUE, flexShrink: 0 }} />
-                      <span style={{ fontSize: '12px', color: 'rgba(255,255,255,0.7)' }}>{pt}</span>
+                    <div key={j} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                      <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: BLUE, border: '2px solid rgba(0,61,165,0.3)', flexShrink: 0 }} />
+                      <span style={{ fontSize: '13px', color: 'rgba(255,255,255,0.75)' }}>{pt}</span>
                     </div>
                   ))}
                 </div>
+                <button onClick={() => scrollTo('contact')} style={{ fontSize: '11px', fontWeight: 700, color: '#fff', background: BLUE, padding: '12px 24px', borderRadius: '8px', border: 'none', cursor: 'pointer', letterSpacing: '0.07em', textTransform: 'uppercase', fontFamily: "'DM Sans'" }}>
+                  {fr ? 'Planifier un appel' : 'Book a call'}
+                </button>
+              </div>
+              {/* Visual section */}
+              <div style={{ height: '200px', background: `linear-gradient(135deg, ${i % 2 === 0 ? '#080f1c, #0d1428' : '#0d0d18, #161628'})`, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}>
+                <div style={{ position: 'absolute', fontFamily: "'Bebas Neue'", fontSize: '160px', color: 'rgba(255,255,255,0.03)', lineHeight: 1 }}>{String(i+1)}</div>
+                <div style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
+                  <div style={{ fontFamily: "'Bebas Neue'", fontSize: '52px', color: BLUE, letterSpacing: '0.05em', lineHeight: 1 }}>{step.days}</div>
+                  <div style={{ fontSize: '10px', color: 'rgba(255,255,255,0.3)', letterSpacing: '0.12em', textTransform: 'uppercase', marginTop: '6px' }}>{fr ? 'jalons' : 'milestone'}</div>
+                </div>
+                {/* Blue glow */}
+                <div style={{ position: 'absolute', bottom: '-30px', left: '50%', transform: 'translateX(-50%)', width: '120px', height: '120px', borderRadius: '50%', background: 'rgba(0,61,165,0.15)', filter: 'blur(30px)' }} />
               </div>
             </div>
           ))}
