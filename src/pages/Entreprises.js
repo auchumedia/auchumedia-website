@@ -522,10 +522,10 @@ export default function Entreprises() {
       <style>{`
         #etudes-de-cas > div { width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; }
         .hamburger-btn { display: flex !important; }
-        .logos-mobile { display: none !important; }
+        .logos-mobile { display: none; }
         @media (max-width: 768px) {
           .logos-desktop { display: none !important; }
-          .logos-mobile { display: grid !important; }
+          .logos-mobile { display: grid !important; width: 100% !important; }
           nav div[style*="padding: 0 60px"] { padding: 0 20px !important; }
           nav > div:nth-child(2) { display: none !important; }
           nav > div:last-child > *:not(.hamburger-btn) { display: none !important; }
