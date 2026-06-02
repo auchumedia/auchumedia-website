@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useEffect } from 'react';
 import Footer from '../components/Footer';
  
@@ -133,37 +134,22 @@ export default function Entreprises() {
         background: scrolled ? 'rgba(8,8,8,0.96)' : '#080808',
         backdropFilter: scrolled ? 'blur(12px)' : 'none',
         borderBottom: '0.5px solid rgba(255,255,255,0.08)',
-        transition: 'all 0.3s'
+        transition: 'all 0.3s',
+        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        padding: '0 60px', height: '64px', gap: '16px'
       }}>
-        {/* Top bar */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 60px', height: '60px' }}>
-          <div style={{ fontFamily: "'Bebas Neue'", fontSize: '20px', letterSpacing: '0.2em', color: '#fff' }}>AUCHUMEDIA</div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <div style={{ display: 'flex', border: '0.5px solid rgba(255,255,255,0.15)', borderRadius: '4px', overflow: 'hidden' }}>
-              {['fr','en'].map(l => (
-                <button key={l} onClick={() => setLang(l)} style={{ fontSize: '9px', fontWeight: 700, padding: '5px 10px', cursor: 'pointer', border: 'none', background: lang === l ? 'rgba(255,255,255,0.1)' : 'transparent', color: lang === l ? '#fff' : 'rgba(255,255,255,0.3)', fontFamily: "'DM Sans'" }}>
-                  {l.toUpperCase()}
-                </button>
-              ))}
-            </div>
-            <a href="/athletes" style={{ fontSize: '10px', fontWeight: 600, color: 'rgba(255,255,255,0.45)', padding: '7px 14px', borderRadius: '4px', border: '0.5px solid rgba(255,255,255,0.12)', textDecoration: 'none', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
-              {fr ? 'Athlètes' : 'Athletes'}
-            </a>
-            <button onClick={() => scrollTo('contact')} style={{ fontSize: '10px', fontWeight: 700, color: '#fff', background: BLUE, padding: '8px 18px', borderRadius: '4px', border: 'none', cursor: 'pointer', letterSpacing: '0.07em', textTransform: 'uppercase', fontFamily: "'DM Sans'" }}>
-              {fr ? 'Planifier un appel' : 'Book a call'}
-            </button>
-          </div>
-        </div>
+        {/* Logo */}
+        <div style={{ fontFamily: "'Bebas Neue'", fontSize: '20px', letterSpacing: '0.2em', color: '#fff', flexShrink: 0 }}>AUCHUMEDIA</div>
  
-        {/* Section nav */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 60px', height: '44px', borderTop: '0.5px solid rgba(255,255,255,0.06)', gap: '4px', overflowX: 'auto', scrollbarWidth: 'none' }}>
+        {/* Section links — center */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '2px', overflowX: 'auto', scrollbarWidth: 'none' }} className="nav-links">
           {navLinks.map(link => (
             <button key={link.id} onClick={() => scrollTo(link.id)} style={{
               fontSize: '11px', fontWeight: 600,
-              color: activeSection === link.id ? '#fff' : 'rgba(255,255,255,0.4)',
+              color: activeSection === link.id ? '#fff' : 'rgba(255,255,255,0.45)',
               background: 'transparent', border: 'none',
               borderBottom: activeSection === link.id ? `2px solid ${BLUE}` : '2px solid transparent',
-              padding: '10px 16px', cursor: 'pointer',
+              padding: '22px 14px', cursor: 'pointer',
               letterSpacing: '0.06em', textTransform: 'uppercase',
               fontFamily: "'DM Sans'", whiteSpace: 'nowrap',
               transition: 'all 0.2s'
@@ -171,14 +157,28 @@ export default function Entreprises() {
               {fr ? link.labelFr : link.labelEn}
             </button>
           ))}
-          <button onClick={() => scrollTo('contact')} style={{ fontSize: '11px', fontWeight: 700, color: '#fff', background: BLUE, border: 'none', padding: '8px 18px', borderRadius: '4px', cursor: 'pointer', letterSpacing: '0.06em', textTransform: 'uppercase', fontFamily: "'DM Sans'", whiteSpace: 'nowrap', marginLeft: '8px' }}>
+        </div>
+ 
+        {/* Right — lang + CTA */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexShrink: 0 }}>
+          <div style={{ display: 'flex', border: '0.5px solid rgba(255,255,255,0.15)', borderRadius: '4px', overflow: 'hidden' }}>
+            {['fr','en'].map(l => (
+              <button key={l} onClick={() => setLang(l)} style={{ fontSize: '9px', fontWeight: 700, padding: '5px 10px', cursor: 'pointer', border: 'none', background: lang === l ? 'rgba(255,255,255,0.1)' : 'transparent', color: lang === l ? '#fff' : 'rgba(255,255,255,0.3)', fontFamily: "'DM Sans'" }}>
+                {l.toUpperCase()}
+              </button>
+            ))}
+          </div>
+          <a href="/athletes" style={{ fontSize: '10px', fontWeight: 600, color: 'rgba(255,255,255,0.45)', padding: '7px 14px', borderRadius: '4px', border: '0.5px solid rgba(255,255,255,0.12)', textDecoration: 'none', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
+            {fr ? 'Athlètes' : 'Athletes'}
+          </a>
+          <button onClick={() => scrollTo('contact')} style={{ fontSize: '10px', fontWeight: 700, color: '#fff', background: BLUE, padding: '9px 20px', borderRadius: '4px', border: 'none', cursor: 'pointer', letterSpacing: '0.07em', textTransform: 'uppercase', fontFamily: "'DM Sans'", whiteSpace: 'nowrap' }}>
             {fr ? 'Planifier un appel' : 'Book a call'}
           </button>
         </div>
       </nav>
  
       {/* ===== HERO ===== */}
-      <section style={{ minHeight: '90vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '160px 60px 80px', position: 'relative', overflow: 'hidden', textAlign: 'center' }}>
+      <section style={{ minHeight: '90vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '120px 60px 80px', position: 'relative', overflow: 'hidden', textAlign: 'center' }}>
         <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at 50% 60%, rgba(0,61,165,0.08) 0%, transparent 65%)', pointerEvents: 'none' }} />
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px)', backgroundSize: '60px 60px', pointerEvents: 'none' }} />
         <div style={{ position: 'relative', zIndex: 1, maxWidth: '860px' }}>
@@ -218,7 +218,7 @@ export default function Entreprises() {
       </section>
  
       {/* ===== ÉTUDES DE CAS ===== */}
-      <section id="etudes-de-cas" style={{ borderTop: '0.5px solid rgba(255,255,255,0.07)', scrollMarginTop: '104px', overflow: 'hidden' }}>
+      <section id="etudes-de-cas" style={{ borderTop: '0.5px solid rgba(255,255,255,0.07)', scrollMarginTop: '64px', overflow: 'hidden' }}>
         {/* NorCan */}
         <div style={{ background: NORCAN_GREEN, padding: '80px 0 60px' }}>
           <div style={{ padding: '0 60px', marginBottom: '48px' }}>
@@ -309,7 +309,7 @@ export default function Entreprises() {
       </div>
  
       {/* ===== POURQUOI ===== */}
-      <section id="pourquoi" style={{ padding: '100px 60px', background: '#080808', borderTop: '0.5px solid rgba(255,255,255,0.07)', scrollMarginTop: '104px' }}>
+      <section id="pourquoi" style={{ padding: '100px 60px', background: '#080808', borderTop: '0.5px solid rgba(255,255,255,0.07)', scrollMarginTop: '64px' }}>
         <FadeIn>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
             <div style={{ width: '20px', height: '1px', background: BLUE }} />
@@ -347,7 +347,7 @@ export default function Entreprises() {
       </section>
  
       {/* ===== DÉROULEMENT ===== */}
-      <section id="deroulement" style={{ padding: '100px 60px', background: '#0a0a0a', borderTop: '0.5px solid rgba(255,255,255,0.07)', scrollMarginTop: '104px' }}>
+      <section id="deroulement" style={{ padding: '100px 60px', background: '#0a0a0a', borderTop: '0.5px solid rgba(255,255,255,0.07)', scrollMarginTop: '64px' }}>
         <FadeIn>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
             <div style={{ width: '20px', height: '1px', background: BLUE }} />
@@ -376,7 +376,7 @@ export default function Entreprises() {
       </section>
  
       {/* ===== TARIFICATION ===== */}
-      <section id="tarification" style={{ padding: '100px 60px', background: '#080808', borderTop: '0.5px solid rgba(255,255,255,0.07)', scrollMarginTop: '104px' }}>
+      <section id="tarification" style={{ padding: '100px 60px', background: '#080808', borderTop: '0.5px solid rgba(255,255,255,0.07)', scrollMarginTop: '64px' }}>
         <FadeIn>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
             <div style={{ width: '20px', height: '1px', background: BLUE }} />
@@ -428,7 +428,7 @@ export default function Entreprises() {
       </section>
  
       {/* ===== FAQ ===== */}
-      <section id="faq" style={{ padding: '100px 60px', background: '#0a0a0a', borderTop: '0.5px solid rgba(255,255,255,0.07)', scrollMarginTop: '104px' }}>
+      <section id="faq" style={{ padding: '100px 60px', background: '#0a0a0a', borderTop: '0.5px solid rgba(255,255,255,0.07)', scrollMarginTop: '64px' }}>
         <FadeIn>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
             <div style={{ width: '20px', height: '1px', background: BLUE }} />
@@ -458,7 +458,7 @@ export default function Entreprises() {
       </section>
  
       {/* ===== CONTACT ===== */}
-      <section id="contact" style={{ padding: '100px 60px', background: '#080808', borderTop: '0.5px solid rgba(255,255,255,0.07)', scrollMarginTop: '104px' }}>
+      <section id="contact" style={{ padding: '100px 60px', background: '#080808', borderTop: '0.5px solid rgba(255,255,255,0.07)', scrollMarginTop: '64px' }}>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '80px', alignItems: 'start' }}>
           <FadeIn direction="left">
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
