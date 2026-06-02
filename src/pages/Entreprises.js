@@ -410,18 +410,20 @@ export default function Entreprises() {
         </FadeIn>
 
         {/* Sticky scroll cards */}
-        <div style={{ position: 'relative' }}>
+        <div style={{ position: 'relative', paddingBottom: '200px' }}>
           {steps.map((step, i) => (
             <div key={i} style={{
               position: 'sticky',
               top: `${64 + i * 12}px`,
               zIndex: i + 1,
-              margin: '0 40px 16px',
+              margin: '0 40px 0',
+              marginBottom: i < steps.length - 1 ? '0' : '0',
               borderRadius: '16px',
               background: i % 2 === 0 ? '#0d0d0d' : '#111',
               border: '0.5px solid rgba(255,255,255,0.08)',
               overflow: 'hidden',
-              boxShadow: '0 8px 40px rgba(0,0,0,0.4)',
+              boxShadow: '0 8px 40px rgba(0,0,0,0.6)',
+              minHeight: '280px',
             }}>
               <div className="step-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', minHeight: '280px' }}>
                 {/* Left — text */}
