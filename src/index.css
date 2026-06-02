@@ -156,9 +156,7 @@ a { text-decoration: none; color: inherit; }
 
 /* ===== DÉROULEMENT MOBILE ===== */
 @media (max-width: 768px) {
-  /* Hide sticky cards on mobile */
   #deroulement .sticky-cards { display: none !important; }
-  /* Show simple timeline on mobile */
   #deroulement .mobile-timeline { display: flex !important; }
 }
 @media (min-width: 769px) {
