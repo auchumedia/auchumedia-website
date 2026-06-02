@@ -1,11 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Footer from '../components/Footer';
-
+ 
 const BLUE = '#003DA5';
 const NORCAN_GREEN = '#1a3a2a';
 const SEXXXPLUS_COLOR = '#1a0a0a';
 const MAHER_COLOR = '#003580';
-
+ 
 function useInView(threshold = 0.15) {
   const ref = useRef(null);
   const [inView, setInView] = useState(false);
@@ -16,13 +16,13 @@ function useInView(threshold = 0.15) {
   }, [threshold]);
   return [ref, inView];
 }
-
+ 
 function FadeIn({ children, delay = 0, direction = 'up' }) {
   const [ref, inView] = useInView();
   const t = { up: 'translateY(30px)', left: 'translateX(-30px)', right: 'translateX(30px)', none: 'none' };
   return <div ref={ref} style={{ opacity: inView ? 1 : 0, transform: inView ? 'none' : t[direction], transition: `opacity 0.6s ease ${delay}s, transform 0.6s ease ${delay}s` }}>{children}</div>;
 }
-
+ 
 function TikTokCarousel({ videos, bgColor }) {
   const scrollRef = useRef(null);
   const scroll = (dir) => { if (scrollRef.current) scrollRef.current.scrollBy({ left: dir * 340, behavior: 'smooth' }); };
@@ -48,11 +48,11 @@ function TikTokCarousel({ videos, bgColor }) {
     </div>
   );
 }
-
+ 
 const NORCAN_VIDEOS = ['https://www.tiktok.com/@norcan.57/video/7556376175652670721','https://www.tiktok.com/@norcan.57/video/7574205401663655188','https://www.tiktok.com/@norcan.57/video/7576799967818403092','https://www.tiktok.com/@norcan.57/video/7584593295960034567','https://www.tiktok.com/@norcan.57/video/7599808484774776082','https://www.tiktok.com/@norcan.57/video/7623541839110360328','https://www.tiktok.com/@norcan.57/video/7628721678876413191','https://www.tiktok.com/@norcan.57/video/7640229332241222920','https://www.tiktok.com/@norcan.57/video/7636529264438906130'];
 const SEXXXPLUS_VIDEOS = ['https://www.tiktok.com/@boutiqueerotiquesp/video/7463247824583412997','https://www.tiktok.com/@boutiqueerotiquesp/video/7538563446787362066','https://www.tiktok.com/@boutiqueerotiquesp/video/7537822973126872326','https://www.tiktok.com/@boutiqueerotiquesp/video/7530033837246582022','https://www.tiktok.com/@boutiqueerotiquesp/video/7520008462882098437','https://www.tiktok.com/@boutiqueerotiquesp/video/7482901136060517637','https://www.tiktok.com/@boutiqueerotiquesp/video/7454332830550674694','https://www.tiktok.com/@boutiqueerotiquesp/video/7550438938322717973'];
 const MAHER_VIDEOS = ['https://www.tiktok.com/@famillemaher/video/7600921134854360327','https://www.tiktok.com/@famillemaher/video/7602054271172906248','https://www.tiktok.com/@famillemaher/video/7605014622764141831','https://www.tiktok.com/@famillemaher/video/7618350590027975956','https://www.tiktok.com/@famillemaher/video/7620967888328969493','https://www.tiktok.com/@famillemaher/video/7626147213588122898','https://www.tiktok.com/@famillemaher/video/7633221318900518151','https://www.tiktok.com/@famillemaher/video/7640230731494460680','https://www.tiktok.com/@famillemaher/video/7645079778852261138','https://www.tiktok.com/@famillemaher/video/7623544372428147976'];
-
+ 
 const LOGOS = [
   { src: 'https://images.squarespace-cdn.com/content/v1/664d3763786881229ae36f6c/0ebd1382-7429-42e1-b0cb-84b3c511ec6d/logo+bataillon.jpeg', alt: 'Le Bataillon' },
   { src: 'https://images.squarespace-cdn.com/content/v1/664d3763786881229ae36f6c/bd1f77e7-6c58-4732-a965-fb95a7dc782f/Salvatore+Logo.png', alt: 'Pizza Salvatoré' },
@@ -63,15 +63,15 @@ const LOGOS = [
   { src: 'https://images.squarespace-cdn.com/content/v1/664d3763786881229ae36f6c/702ed450-2dcb-4e94-aa58-5a71a2337586/Recao+logo.png', alt: 'Recao' },
   { src: 'https://images.squarespace-cdn.com/content/v1/664d3763786881229ae36f6c/6516ce2d-543f-43ff-9dbf-3e518282e4d5/Goconsigne+Logo.png', alt: 'GoConsigne' },
 ];
-
+ 
 const navLinks = [
-  { id: 'etudes-de-cas', labelFr: 'Études de cas', labelEn: 'Case studies' },
   { id: 'pourquoi', labelFr: 'Pourquoi AuchuMedia', labelEn: 'Why AuchuMedia' },
+  { id: 'etudes-de-cas', labelFr: 'Études de cas', labelEn: 'Case studies' },
   { id: 'deroulement', labelFr: 'Déroulement', labelEn: 'Process' },
   { id: 'faq', labelFr: 'FAQ', labelEn: 'FAQ' },
   { id: 'tarification', labelFr: 'Tarification', labelEn: 'Pricing' },
 ];
-
+ 
 export default function Entreprises() {
   const [lang, setLang] = useState('fr');
   const [openFaq, setOpenFaq] = useState(null);
@@ -79,9 +79,9 @@ export default function Entreprises() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const fr = lang === 'fr';
-
+ 
   const scrollTo = (id) => { const el = document.getElementById(id); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); };
-
+ 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
@@ -94,7 +94,7 @@ export default function Entreprises() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
+ 
   const faqs = fr ? [
     { q: "Combien de temps avant de voir des résultats ?", a: "La plupart de nos clients voient une augmentation mesurable de leur engagement dans les 30 premiers jours. Les leads qualifiés arrivent généralement dans les 60-90 premiers jours." },
     { q: "Est-ce que vous gérez tout le contenu ?", a: "Oui. On prend en charge la stratégie, la création de contenu, la production vidéo et la gestion des réseaux sociaux. Votre seul travail est d'approuver." },
@@ -110,7 +110,7 @@ export default function Entreprises() {
     { q: "What's included in the base plan?", a: "8 short-form videos per month, social media management (Instagram, TikTok, LinkedIn), monthly editorial strategy, performance report and monthly meeting." },
     { q: "Are Meta Ads campaigns included?", a: "No — Meta Ads management is a separate service. We can create a combined social media + ads plan to maximize your results." },
   ];
-
+ 
   const steps = fr ? [
     { num: '01', title: 'Appel découverte', desc: "On analyse votre business, vos objectifs et votre marché cible. Gratuit et sans engagement." },
     { num: '02', title: 'Stratégie & onboarding', desc: "On construit votre stratégie éditoriale et on configure tous les outils en 2 semaines." },
@@ -124,10 +124,10 @@ export default function Entreprises() {
     { num: '04', title: 'Publishing & optimization', desc: "Consistent publishing on all your channels with real-time performance analysis." },
     { num: '05', title: 'Report & scaling', desc: "Complete monthly report and strategic meeting to adjust and scale what works." },
   ];
-
+ 
   return (
     <div style={{ background: '#080808', minHeight: '100vh' }}>
-
+ 
       {/* ===== MAIN NAV ===== */}
       <nav style={{
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 500,
@@ -140,7 +140,7 @@ export default function Entreprises() {
       }}>
         {/* Logo */}
         <a href="/" style={{ flexShrink: 0 }}><img src="/Copie de AUCHU.png.png" alt="AuchuMedia" style={{ height: '36px', width: 'auto' }} /></a>
-
+ 
         {/* Section links — center */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '2px', overflowX: 'auto', scrollbarWidth: 'none' }} className="nav-links">
           {navLinks.map(link => (
@@ -158,7 +158,7 @@ export default function Entreprises() {
             </button>
           ))}
         </div>
-
+ 
         {/* Right — athletes + CTA + lang */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0 }}>
           <a href="/athletes" style={{ fontSize: '10px', fontWeight: 700, color: '#fff', background: 'transparent', padding: '8px 16px', borderRadius: '4px', border: '1px solid rgba(255,255,255,0.3)', textDecoration: 'none', letterSpacing: '0.07em', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>
@@ -182,7 +182,7 @@ export default function Entreprises() {
           </button>
         </div>
       </nav>
-
+ 
       {/* Mobile menu */}
       {mobileOpen && (
         <div style={{ position: 'fixed', top: '64px', left: 0, right: 0, bottom: 0, zIndex: 490, background: 'rgba(8,8,8,0.98)', backdropFilter: 'blur(12px)', display: 'flex', flexDirection: 'column', padding: '24px 24px', gap: '4px', overflowY: 'auto' }}>
@@ -201,13 +201,13 @@ export default function Entreprises() {
           </div>
         </div>
       )}
-
+ 
       {/* ===== HERO ===== */}
       <section style={{ minHeight: '90vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '120px 60px 80px', position: 'relative', overflow: 'hidden', textAlign: 'center' }}>
         <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at 50% 60%, rgba(0,61,165,0.08) 0%, transparent 65%)', pointerEvents: 'none' }} />
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px)', backgroundSize: '60px 60px', pointerEvents: 'none' }} />
         <div style={{ position: 'relative', zIndex: 1, maxWidth: '860px' }}>
-
+ 
           <h1 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(52px, 7.5vw, 100px)', lineHeight: 0.93, color: '#fff', marginBottom: '28px', letterSpacing: '0.01em' }}>
             {fr ? 'DEVENEZ LA RÉFÉRENCE\nDANS VOTRE DOMAINE' : 'BECOME THE REFERENCE\nIN YOUR INDUSTRY'}
           </h1>
@@ -222,7 +222,7 @@ export default function Entreprises() {
               {fr ? 'Planifier un appel' : 'Book a call'}
             </button>
           </div>
-
+ 
           {/* Static logos */}
           <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.2)', marginBottom: '24px' }}>
             {fr ? 'Des marques nous font confiance' : 'Brands that trust us'}
@@ -234,19 +234,19 @@ export default function Entreprises() {
           </div>
         </div>
       </section>
-
-
-      {/* ===== SERVICES CLÉ EN MAIN ===== */}
-      <section style={{ padding: '80px 60px', background: '#0a0a0a', borderTop: '0.5px solid rgba(255,255,255,0.07)' }}>
+ 
+ 
+      {/* ===== POURQUOI ===== */}
+      <section id="pourquoi" style={{ padding: '80px 60px', background: '#0a0a0a', borderTop: '0.5px solid rgba(255,255,255,0.07)' }}>
         <FadeIn>
           <div style={{ textAlign: 'center', marginBottom: '48px' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', marginBottom: '12px' }}>
               <div style={{ width: '20px', height: '1px', background: BLUE }} />
-              <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE }}>{fr ? 'Notre offre' : 'Our offer'}</span>
+              <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE }}>{fr ? 'Pourquoi AuchuMedia' : 'Why AuchuMedia'}</span>
               <div style={{ width: '20px', height: '1px', background: BLUE }} />
             </div>
             <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(28px, 3.5vw, 44px)', color: '#fff', letterSpacing: '0.02em' }}>
-              {fr ? <>UN SERVICE <span style={{ color: BLUE }}>CLÉ EN MAIN.</span></> : <>A <span style={{ color: BLUE }}>TURNKEY SERVICE.</span></>}
+              {fr ? <>POURQUOI <span style={{ color: BLUE }}>AUCHUMEDIA.</span></> : <>WHY <span style={{ color: BLUE }}>AUCHUMEDIA.</span></>}
             </h2>
           </div>
         </FadeIn>
@@ -279,7 +279,7 @@ export default function Entreprises() {
           ))}
         </div>
       </section>
-
+ 
       {/* ===== ÉTUDES DE CAS ===== */}
       <section id="etudes-de-cas" style={{ borderTop: '0.5px solid rgba(255,255,255,0.07)', scrollMarginTop: '64px', overflow: 'hidden' }}>
         {/* NorCan */}
@@ -305,7 +305,7 @@ export default function Entreprises() {
           </div>
           <div style={{ padding: '0 20px' }}><TikTokCarousel videos={NORCAN_VIDEOS} bgColor={NORCAN_GREEN} /></div>
         </div>
-
+ 
         {/* SexxxPlus */}
         <div style={{ background: SEXXXPLUS_COLOR, padding: '80px 0 60px', borderTop: '0.5px solid rgba(255,255,255,0.07)' }}>
           <div style={{ padding: '0 60px', marginBottom: '48px' }}>
@@ -329,7 +329,7 @@ export default function Entreprises() {
           </div>
           <div style={{ padding: '0 20px' }}><TikTokCarousel videos={SEXXXPLUS_VIDEOS} bgColor={SEXXXPLUS_COLOR} /></div>
         </div>
-
+ 
         {/* Maher */}
         <div style={{ background: MAHER_COLOR, padding: '80px 0 60px', borderTop: '0.5px solid rgba(255,255,255,0.07)' }}>
           <div style={{ padding: '0 60px', marginBottom: '48px' }}>
@@ -354,47 +354,10 @@ export default function Entreprises() {
           <div style={{ padding: '0 20px' }}><TikTokCarousel videos={MAHER_VIDEOS} bgColor={MAHER_COLOR} /></div>
         </div>
       </section>
-
-
-
-      {/* ===== POURQUOI ===== */}
-      <section id="pourquoi" style={{ padding: '100px 60px', background: '#080808', borderTop: '0.5px solid rgba(255,255,255,0.07)', scrollMarginTop: '64px' }}>
-        <FadeIn>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
-            <div style={{ width: '20px', height: '1px', background: BLUE }} />
-            <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE }}>{fr ? 'Pourquoi AuchuMedia' : 'Why AuchuMedia'}</span>
-          </div>
-          <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(32px, 4vw, 52px)', color: '#fff', marginBottom: '48px', letterSpacing: '0.02em' }}>
-            {fr ? <>CE QUI NOUS <span style={{ color: BLUE }}>DISTINGUE.</span></> : <>WHAT SETS US <span style={{ color: BLUE }}>APART.</span></>}
-          </h2>
-        </FadeIn>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '12px' }}>
-          {(fr ? [
-            { icon: '🎬', title: "Contenu comme un créateur", desc: "On crée du contenu authentique et engageant — pas de la pub déguisée que personne ne regarde." },
-            { icon: '📊', title: "Basé sur la performance", desc: "Chaque décision est basée sur les données. On scale ce qui fonctionne, on arrête ce qui ne fonctionne pas." },
-            { icon: '⚡', title: "Résultats rapides", desc: "Onboarding en 2 semaines. Premier contenu publié dans les 14 premiers jours. Résultats visibles en 30 jours." },
-            { icon: '🎯', title: "Spécialisés B2C high ticket", desc: "On ne travaille pas avec tout le monde. On se spécialise pour vous donner les meilleurs résultats." },
-            { icon: '👥', title: "Équipe dédiée", desc: "Un gestionnaire de compte, un spécialiste contenu, un vidéaste et un expert pub — tout pour vous." },
-            { icon: '📈', title: "Croissance organique durable", desc: "On bâtit une audience qui vous appartient — pas juste des chiffres éphémères liés à un budget pub." },
-          ] : [
-            { icon: '🎬', title: "Content like a creator", desc: "We create authentic and engaging content — not disguised advertising that nobody watches." },
-            { icon: '📊', title: "Performance-based", desc: "Every decision is data-driven. We scale what works, we stop what doesn't." },
-            { icon: '⚡', title: "Fast results", desc: "Onboarding in 2 weeks. First content published within 14 days. Visible results in 30 days." },
-            { icon: '🎯', title: "B2C high ticket specialists", desc: "We don't work with everyone. We specialize to give you the best results." },
-            { icon: '👥', title: "Dedicated team", desc: "An account manager, a content specialist, a videographer and an ads expert — all for you." },
-            { icon: '📈', title: "Sustainable organic growth", desc: "We build an audience that belongs to you — not just ephemeral numbers tied to an ad budget." },
-          ]).map((item, i) => (
-            <FadeIn key={i} delay={i * 0.08}>
-              <div style={{ background: '#0d0d0d', border: '0.5px solid rgba(255,255,255,0.07)', borderRadius: '10px', padding: '28px 24px' }}>
-                <div style={{ fontSize: '28px', marginBottom: '14px' }}>{item.icon}</div>
-                <div style={{ fontSize: '14px', fontWeight: 700, color: '#fff', marginBottom: '8px' }}>{item.title}</div>
-                <div style={{ fontSize: '13px', color: 'rgba(255,255,255,0.5)', lineHeight: 1.65, fontWeight: 300 }}>{item.desc}</div>
-              </div>
-            </FadeIn>
-          ))}
-        </div>
-      </section>
-
+ 
+ 
+ 
+ 
       {/* ===== DÉROULEMENT ===== */}
       <section id="deroulement" style={{ padding: '100px 60px', background: '#0a0a0a', borderTop: '0.5px solid rgba(255,255,255,0.07)', scrollMarginTop: '64px' }}>
         <FadeIn>
@@ -423,7 +386,7 @@ export default function Entreprises() {
           ))}
         </div>
       </section>
-
+ 
       {/* ===== TARIFICATION ===== */}
       <section id="tarification" style={{ padding: '100px 60px', background: '#080808', borderTop: '0.5px solid rgba(255,255,255,0.07)', scrollMarginTop: '64px' }}>
         <FadeIn>
@@ -475,7 +438,7 @@ export default function Entreprises() {
           </FadeIn>
         </div>
       </section>
-
+ 
       {/* ===== FAQ ===== */}
       <section id="faq" style={{ padding: '100px 60px', background: '#0a0a0a', borderTop: '0.5px solid rgba(255,255,255,0.07)', scrollMarginTop: '64px' }}>
         <FadeIn>
@@ -505,7 +468,7 @@ export default function Entreprises() {
           ))}
         </div>
       </section>
-
+ 
       {/* ===== CONTACT ===== */}
       <section id="contact" style={{ padding: '100px 60px', background: '#080808', borderTop: '0.5px solid rgba(255,255,255,0.07)', scrollMarginTop: '64px' }}>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '80px', alignItems: 'start' }}>
@@ -555,9 +518,9 @@ export default function Entreprises() {
           </FadeIn>
         </div>
       </section>
-
+ 
       <Footer />
-
+ 
       <style>{`
         #etudes-de-cas > div { width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; }
         .hamburger-btn { display: flex !important; }
