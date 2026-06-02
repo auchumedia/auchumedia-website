@@ -35,7 +35,7 @@ export default function Home() {
 
       {/* Mini top bar */}
       <div style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 500, background: 'rgba(8,8,8,0.9)', backdropFilter: 'blur(10px)', borderBottom: '0.5px solid rgba(255,255,255,0.07)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 32px', height: '52px' }}>
-        <div><img src="/Copie_de_AUCHU_png.png" alt="AuchuMedia" style={{ height: '28px', width: 'auto' }} /></div>
+        <div><img src="/Copie de AUCHU.png.png" alt="AuchuMedia" style={{ height: '28px', width: 'auto' }} /></div>
         <div style={{ display: 'flex', border: '0.5px solid rgba(255,255,255,0.15)', borderRadius: '4px', overflow: 'hidden' }}>
           {['fr', 'en'].map(l => (
             <button key={l} onClick={() => setLang(l)} style={{ fontSize: '9px', fontWeight: 700, padding: '5px 10px', cursor: 'pointer', border: 'none', background: lang === l ? 'rgba(255,255,255,0.1)' : 'transparent', color: lang === l ? '#fff' : 'rgba(255,255,255,0.3)', fontFamily: "'DM Sans'" }}>
