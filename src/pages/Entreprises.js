@@ -111,17 +111,57 @@ export default function Entreprises() {
   ];
 
   const steps = fr ? [
-    { num: '01', title: 'Appel découverte', desc: "On analyse votre business, vos objectifs et votre marché cible. Gratuit et sans engagement." },
-    { num: '02', title: 'Stratégie & onboarding', desc: "On construit votre stratégie éditoriale et on configure tous les outils en 2 semaines." },
-    { num: '03', title: 'Production de contenu', desc: "Notre équipe produit 8 vidéos courts formats par mois adaptés à votre marque et votre audience." },
-    { num: '04', title: 'Publication & optimisation', desc: "Publication cohérente sur tous vos réseaux avec analyse des performances en temps réel." },
-    { num: '05', title: 'Rapport & scaling', desc: "Rapport mensuel complet et réunion stratégique pour ajuster et scaler ce qui fonctionne." },
+    {
+      num: '01', days: 'Jour 1–30', title: 'STRATÉGIE & ONBOARDING',
+      desc: "On plonge dans votre business. Audit complet, définition de votre audience cible, et construction de votre stratégie de contenu sur mesure.",
+      points: ["Audit de votre présence actuelle", "Définition de l'identité de marque", "Calendrier éditorial du premier mois", "Configuration des outils & accès"]
+    },
+    {
+      num: '02', days: 'Jour 30–60', title: 'PREMIERS CONTENUS & AJUSTEMENTS',
+      desc: "On lance, on teste, on apprend. Les premières vidéos sont publiées et on analyse ce qui résonne avec votre audience.",
+      points: ["Publication des 8 premières vidéos", "Analyse des premières performances", "Ajustement du format et du ton", "Début de la croissance organique"]
+    },
+    {
+      num: '03', days: 'Jour 60–90', title: 'OPTIMISATION & TRACTION',
+      desc: "On identifie ce qui fonctionne et on double la mise. Les algorithmes commencent à vous favoriser.",
+      points: ["Scale des formats performants", "Optimisation des horaires de publication", "Rapport de performance détaillé", "Première réunion stratégique mensuelle"]
+    },
+    {
+      num: '04', days: 'Jour 90–180', title: 'CROISSANCE ACCÉLÉRÉE',
+      desc: "Votre audience est engagée, votre marque est reconnue. On active les Meta Ads pour amplifier votre portée et générer des leads.",
+      points: ["Lancement des campagnes Meta Ads", "Intégration CRM & pipeline de leads", "Croissance audience significative", "Premiers leads qualifiés"]
+    },
+    {
+      num: '05', days: 'Jour 180–365', title: 'RÉFÉRENCE & SCALING',
+      desc: "Vous êtes maintenant LA référence dans votre domaine. On scale ce qui fonctionne et on bâtit sur vos succès.",
+      points: ["Position dominante dans votre niche", "Machine à leads bien huilée", "Scaling des campagnes performantes", "Stratégie long terme & partenariats"]
+    },
   ] : [
-    { num: '01', title: 'Discovery call', desc: "We analyze your business, your goals and your target market. Free and no commitment." },
-    { num: '02', title: 'Strategy & onboarding', desc: "We build your editorial strategy and configure all tools in 2 weeks." },
-    { num: '03', title: 'Content production', desc: "Our team produces 8 short-form videos per month tailored to your brand and audience." },
-    { num: '04', title: 'Publishing & optimization', desc: "Consistent publishing on all your channels with real-time performance analysis." },
-    { num: '05', title: 'Report & scaling', desc: "Complete monthly report and strategic meeting to adjust and scale what works." },
+    {
+      num: '01', days: 'Day 1–30', title: 'STRATEGY & ONBOARDING',
+      desc: "We dive deep into your business. Complete audit, target audience definition, and custom content strategy building.",
+      points: ["Audit of your current presence", "Brand identity definition", "First month editorial calendar", "Tools & access configuration"]
+    },
+    {
+      num: '02', days: 'Day 30–60', title: 'FIRST CONTENT & ADJUSTMENTS',
+      desc: "We launch, test, and learn. First videos are published and we analyze what resonates with your audience.",
+      points: ["Publication of the first 8 videos", "First performance analysis", "Format and tone adjustment", "Start of organic growth"]
+    },
+    {
+      num: '03', days: 'Day 60–90', title: 'OPTIMIZATION & TRACTION',
+      desc: "We identify what works and double down. Algorithms start favoring you.",
+      points: ["Scale performing formats", "Publishing schedule optimization", "Detailed performance report", "First monthly strategic meeting"]
+    },
+    {
+      num: '04', days: 'Day 90–180', title: 'ACCELERATED GROWTH',
+      desc: "Your audience is engaged, your brand is recognized. We activate Meta Ads to amplify your reach and generate leads.",
+      points: ["Meta Ads campaign launch", "CRM & lead pipeline integration", "Significant audience growth", "First qualified leads"]
+    },
+    {
+      num: '05', days: 'Day 180–365', title: 'REFERENCE & SCALING',
+      desc: "You are now THE reference in your industry. We scale what works and build on your successes.",
+      points: ["Dominant position in your niche", "Well-oiled lead machine", "Scaling of performing campaigns", "Long-term strategy & partnerships"]
+    },
   ];
 
   return (
@@ -358,31 +398,64 @@ export default function Entreprises() {
 
 
       {/* ===== DÉROULEMENT ===== */}
-      <section id="deroulement" style={{ padding: '100px 60px', background: '#0a0a0a', borderTop: '0.5px solid rgba(255,255,255,0.07)', scrollMarginTop: '64px' }}>
+      <section id="deroulement" style={{ padding: '100px 0', background: '#080808', borderTop: '0.5px solid rgba(255,255,255,0.07)', scrollMarginTop: '64px' }}>
         <FadeIn>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
-            <div style={{ width: '20px', height: '1px', background: BLUE }} />
-            <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE }}>{fr ? 'Déroulement personnalisé' : 'Our process'}</span>
+          <div style={{ padding: '0 60px', marginBottom: '64px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
+              <div style={{ width: '20px', height: '1px', background: BLUE }} />
+              <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE }}>{fr ? 'Déroulement personnalisé' : 'Our process'}</span>
+            </div>
+            <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(32px, 4vw, 52px)', color: '#fff', letterSpacing: '0.02em' }}>
+              {fr ? <>COMMENT ON <span style={{ color: BLUE }}>TRAVAILLE.</span></> : <>HOW WE <span style={{ color: BLUE }}>WORK.</span></>}
+            </h2>
           </div>
-          <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(32px, 4vw, 52px)', color: '#fff', marginBottom: '56px', letterSpacing: '0.02em' }}>
-            {fr ? <>COMMENT ON <span style={{ color: BLUE }}>TRAVAILLE.</span></> : <>HOW WE <span style={{ color: BLUE }}>WORK.</span></>}
-          </h2>
         </FadeIn>
-        <div style={{ display: 'flex', flexDirection: 'column', maxWidth: '700px' }}>
+
+        {/* Sticky scroll cards */}
+        <div style={{ position: 'relative' }}>
           {steps.map((step, i) => (
-            <FadeIn key={i} delay={i * 0.1}>
-              <div style={{ display: 'grid', gridTemplateColumns: '56px 1fr', position: 'relative' }}>
-                {i < steps.length - 1 && <div style={{ position: 'absolute', left: '27px', top: '44px', bottom: 0, width: '0.5px', background: 'rgba(255,255,255,0.06)' }} />}
-                <div style={{ paddingTop: '4px', display: 'flex', justifyContent: 'center' }}>
-                  <div style={{ width: '38px', height: '38px', borderRadius: '50%', background: 'rgba(0,61,165,0.08)', border: '0.5px solid rgba(0,61,165,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '11px', fontWeight: 800, color: BLUE }}>{step.num}</div>
+            <div key={i} style={{
+              position: 'sticky',
+              top: `${64 + i * 12}px`,
+              zIndex: i + 1,
+              margin: '0 40px 16px',
+              borderRadius: '16px',
+              background: i % 2 === 0 ? '#0d0d0d' : '#111',
+              border: '0.5px solid rgba(255,255,255,0.08)',
+              overflow: 'hidden',
+              boxShadow: '0 8px 40px rgba(0,0,0,0.4)',
+            }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', minHeight: '280px' }}>
+                {/* Left — text */}
+                <div style={{ padding: '48px 40px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                  <div style={{ fontFamily: "'Bebas Neue'", fontSize: '72px', color: 'rgba(0,61,165,0.15)', lineHeight: 1, marginBottom: '16px', letterSpacing: '-0.02em' }}>{step.num}</div>
+                  <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(0,61,165,0.1)', border: '0.5px solid rgba(0,61,165,0.25)', borderRadius: '20px', padding: '4px 12px', marginBottom: '16px', width: 'fit-content' }}>
+                    <span style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: BLUE }}>{step.days}</span>
+                  </div>
+                  <div style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(24px, 3vw, 36px)', color: '#fff', marginBottom: '16px', letterSpacing: '0.02em', lineHeight: 1.1 }}>{step.title}</div>
+                  <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.55)', lineHeight: 1.75, fontWeight: 300, marginBottom: '20px' }}>{step.desc}</p>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                    {step.points.map((pt, j) => (
+                      <div key={j} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                        <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: BLUE, flexShrink: 0 }} />
+                        <span style={{ fontSize: '13px', color: 'rgba(255,255,255,0.7)' }}>{pt}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <div style={{ paddingBottom: '40px', paddingLeft: '20px' }}>
-                  <div style={{ fontFamily: "'Bebas Neue'", fontSize: '22px', color: '#fff', marginBottom: '6px', letterSpacing: '0.04em' }}>{step.title}</div>
-                  <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.5)', lineHeight: 1.7, fontWeight: 300 }}>{step.desc}</p>
+                {/* Right — visual */}
+                <div style={{ background: i % 2 === 0 ? 'linear-gradient(135deg, #080f1c, #0d1428)' : 'linear-gradient(135deg, #0d0d0d, #161616)', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}>
+                  <div style={{ position: 'absolute', fontFamily: "'Bebas Neue'", fontSize: '200px', color: 'rgba(255,255,255,0.03)', lineHeight: 1, userSelect: 'none' }}>{String(i+1)}</div>
+                  <div style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
+                    <div style={{ fontFamily: "'Bebas Neue'", fontSize: '48px', color: BLUE, letterSpacing: '0.05em' }}>{step.days}</div>
+                    <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.3)', letterSpacing: '0.1em', textTransform: 'uppercase', marginTop: '4px' }}>{fr ? 'jalons' : 'milestone'}</div>
+                  </div>
                 </div>
               </div>
-            </FadeIn>
+            </div>
           ))}
+          {/* Spacer so last card unsticks */}
+          <div style={{ height: '40px' }} />
         </div>
       </section>
 
