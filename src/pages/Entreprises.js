@@ -255,16 +255,16 @@ export default function Entreprises() {
             { icon: '🚀', title: 'Stratégie de contenu', desc: "On définit votre stratégie de contenu centrée sur l'audience en fonction de vos objectifs d'affaires." },
             { icon: '🎬', title: 'Création de contenu', desc: "On prend en charge l'idéation, la préproduction, la production et la postproduction." },
             { icon: '📱', title: 'Publication de contenu', desc: "On gère votre calendrier de contenu et publions sur l'ensemble des plateformes." },
-            { icon: '😍', title: 'Gestion de communauté', desc: "On répond aux commentaires et aux messages privés, tout en interagissant de façon proactive." },
             { icon: '🎯', title: 'Meta Ads', desc: "On conçoit, lance et optimise vos campagnes Meta Ads axées sur la performance et l'acquisition." },
             { icon: '🔗', title: 'CRM & Pipeline', desc: "On intègre et configure votre CRM pour centraliser vos leads, structurer votre pipeline et automatiser vos suivis." },
+            { icon: '📈', title: 'Rapports', desc: "On livre un rapport mensuel avec des constats, puis on applique tout ce qu'on a appris à la prochaine série de contenus." },
           ] : [
             { icon: '🚀', title: 'Content strategy', desc: "We define your audience-focused content strategy based on your business objectives." },
             { icon: '🎬', title: 'Content creation', desc: "We handle ideation, pre-production, production and post-production." },
             { icon: '📱', title: 'Content publishing', desc: "We manage your content calendar and publish across all platforms." },
-            { icon: '😍', title: 'Community management', desc: "We respond to comments and DMs while proactively engaging with relevant accounts." },
             { icon: '🎯', title: 'Meta Ads', desc: "We design, launch and optimize your Meta Ads campaigns focused on performance and acquisition." },
             { icon: '🔗', title: 'CRM & Pipeline', desc: "We integrate and configure your CRM to centralize leads, structure your pipeline and automate follow-ups." },
+            { icon: '📈', title: 'Reports', desc: "We deliver a monthly report with insights, then apply everything learned to the next content series." },
           ]).map((item, i) => (
             <FadeIn key={i} delay={i * 0.07}>
               <div style={{ background: '#111', border: '0.5px solid rgba(255,255,255,0.07)', borderRadius: '12px', padding: '28px 24px', transition: 'border-color 0.2s', height: '100%' }}
