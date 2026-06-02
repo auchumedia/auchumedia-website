@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useEffect } from 'react';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
@@ -192,11 +193,32 @@ export default function Entreprises() {
  
   return (
     <div style={{ background: '#080808', minHeight: '100vh' }}>
-      <Nav lang={lang} onLangChange={setLang} />
+      {/* Mini top bar */}
+      <div style={{
+        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 500,
+        background: 'rgba(8,8,8,0.95)', backdropFilter: 'blur(10px)',
+        borderBottom: '0.5px solid rgba(255,255,255,0.08)',
+        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        padding: '0 24px', height: '52px'
+      }}>
+        <a href="/" style={{ fontFamily: "'Bebas Neue'", fontSize: '18px', letterSpacing: '0.2em', color: '#fff', textDecoration: 'none' }}>AUCHUMEDIA</a>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <div style={{ display: 'flex', border: '0.5px solid rgba(255,255,255,0.15)', borderRadius: '4px', overflow: 'hidden' }}>
+            {['fr', 'en'].map(l => (
+              <button key={l} onClick={() => setLang(l)} style={{ fontSize: '9px', fontWeight: 700, padding: '5px 10px', cursor: 'pointer', border: 'none', background: lang === l ? 'rgba(255,255,255,0.1)' : 'transparent', color: lang === l ? '#fff' : 'rgba(255,255,255,0.3)', fontFamily: "'DM Sans'" }}>
+                {l.toUpperCase()}
+              </button>
+            ))}
+          </div>
+          <button onClick={() => scrollTo('contact')} style={{ fontSize: '10px', fontWeight: 700, color: '#fff', background: '#003DA5', padding: '7px 14px', borderRadius: '4px', border: 'none', cursor: 'pointer', letterSpacing: '0.07em', textTransform: 'uppercase', fontFamily: "'DM Sans'", whiteSpace: 'nowrap' }}>
+            {fr ? 'Prendre RDV' : 'Book a call'}
+          </button>
+        </div>
+      </div>
  
       {/* ===== STICKY SECTION NAV ===== */}
       <div style={{
-        position: 'sticky', top: '68px', zIndex: 400,
+        position: 'sticky', top: '52px', zIndex: 400,
         background: 'rgba(8,8,8,0.95)', backdropFilter: 'blur(10px)',
         borderBottom: '0.5px solid rgba(255,255,255,0.08)',
         display: 'flex', alignItems: 'center',
@@ -223,7 +245,7 @@ export default function Entreprises() {
       </div>
  
       {/* ===== HERO ===== */}
-      <section style={{ minHeight: '80vh', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '0 60px 80px', position: 'relative', overflow: 'hidden', paddingTop: '68px' }}>
+      <section style={{ minHeight: '80vh', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '0 60px 80px', position: 'relative', overflow: 'hidden', paddingTop: '104px' }}>
         <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at 80% 60%, rgba(0,61,165,0.08) 0%, transparent 60%)', pointerEvents: 'none' }} />
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px)', backgroundSize: '60px 60px', pointerEvents: 'none' }} />
         <SectionLabel>{fr ? 'Pour les entreprises' : 'For businesses'}</SectionLabel>
