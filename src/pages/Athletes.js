@@ -21,8 +21,8 @@ function FadeIn({ children, delay = 0, direction = 'up' }) {
 }
 
 const navLinks = [
-  { id: 'etudes-de-cas', labelFr: 'Études de cas', labelEn: 'Case studies' },
   { id: 'pourquoi', labelFr: 'Pourquoi AuchuMedia', labelEn: 'Why AuchuMedia' },
+  { id: 'etudes-de-cas', labelFr: 'Études de cas', labelEn: 'Case studies' },
   { id: 'deroulement', labelFr: 'Déroulement', labelEn: 'Process' },
   { id: 'faq', labelFr: 'FAQ', labelEn: 'FAQ' },
   { id: 'tarification', labelFr: 'Tarification', labelEn: 'Pricing' },
@@ -179,17 +179,17 @@ export default function Athletes() {
       </section>
 
 
-      {/* ===== SERVICES CLÉ EN MAIN ===== */}
-      <section style={{ padding: '80px 60px', background: '#0a0a0a', borderTop: '0.5px solid rgba(255,255,255,0.07)' }}>
+      {/* ===== POURQUOI ===== */}
+      <section id="pourquoi" style={{ padding: '80px 60px', background: '#0a0a0a', borderTop: '0.5px solid rgba(255,255,255,0.07)' }}>
         <FadeIn>
           <div style={{ textAlign: 'center', marginBottom: '48px' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', marginBottom: '12px' }}>
               <div style={{ width: '20px', height: '1px', background: BLUE }} />
-              <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE }}>{fr ? 'Notre offre' : 'Our offer'}</span>
+              <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE }}>{fr ? 'Pourquoi AuchuMedia' : 'Why AuchuMedia'}</span>
               <div style={{ width: '20px', height: '1px', background: BLUE }} />
             </div>
             <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(28px, 3.5vw, 44px)', color: '#fff', letterSpacing: '0.02em' }}>
-              {fr ? <>UN SERVICE <span style={{ color: BLUE }}>CLÉ EN MAIN.</span></> : <>A <span style={{ color: BLUE }}>TURNKEY SERVICE.</span></>}
+              {fr ? <>POURQUOI <span style={{ color: BLUE }}>AUCHUMEDIA.</span></> : <>WHY <span style={{ color: BLUE }}>AUCHUMEDIA.</span></>}
             </h2>
           </div>
         </FadeIn>
@@ -262,43 +262,6 @@ export default function Athletes() {
         </div>
       </section>
 
-      {/* ===== POURQUOI ===== */}
-      <section id="pourquoi" style={{ padding: '100px 60px', background: '#080808', borderTop: '0.5px solid rgba(255,255,255,0.07)', scrollMarginTop: '64px' }}>
-        <FadeIn>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
-            <div style={{ width: '20px', height: '1px', background: BLUE }} />
-            <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE }}>{fr ? 'Pourquoi AuchuMedia' : 'Why AuchuMedia'}</span>
-          </div>
-          <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(32px, 4vw, 52px)', color: '#fff', marginBottom: '48px', letterSpacing: '0.02em' }}>
-            {fr ? <>CE QUI NOUS <span style={{ color: BLUE }}>DISTINGUE.</span></> : <>WHAT SETS US <span style={{ color: BLUE }}>APART.</span></>}
-          </h2>
-        </FadeIn>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '12px' }}>
-          {(fr ? [
-            { icon: '🏒', title: "Fondé par un athlète", desc: "Raphaël a joué au hockey de haut niveau. On comprend le sport de l'intérieur — pas juste en théorie." },
-            { icon: '🎯', title: "Stratégie sur mesure", desc: "Pas de template générique. Chaque stratégie est construite autour de ton identité et tes objectifs." },
-            { icon: '🎬', title: "Production premium", desc: "On produit du contenu cinématographique qui se démarque — pas des vidéos iPhone avec un filtre." },
-            { icon: '📈', title: "Résultats mesurables", desc: "50M+ vues générées. On ne travaille pas pour les likes — on travaille pour ta croissance réelle." },
-            { icon: '🤝', title: "Accès aux marques", desc: "Notre réseau de marques et partenaires te donne accès à des deals que tu n'aurais pas seul." },
-            { icon: '⚡', title: "Équipe dédiée", desc: "Un gestionnaire attitré, une équipe de production, un spécialiste des partenariats — tout pour toi." },
-          ] : [
-            { icon: '🏒', title: "Founded by an athlete", desc: "Raphaël played high-level hockey. We understand sports from the inside — not just in theory." },
-            { icon: '🎯', title: "Custom strategy", desc: "No generic templates. Every strategy is built around your identity and your goals." },
-            { icon: '🎬', title: "Premium production", desc: "We produce cinematic content that stands out — not iPhone videos with a filter." },
-            { icon: '📈', title: "Measurable results", desc: "50M+ views generated. We don't work for likes — we work for your real growth." },
-            { icon: '🤝', title: "Brand access", desc: "Our network of brands and partners gives you access to deals you wouldn't get alone." },
-            { icon: '⚡', title: "Dedicated team", desc: "A dedicated manager, a production team, a partnership specialist — everything for you." },
-          ]).map((item, i) => (
-            <FadeIn key={i} delay={i * 0.08}>
-              <div style={{ background: '#0d0d0d', border: '0.5px solid rgba(255,255,255,0.07)', borderRadius: '10px', padding: '28px 24px' }}>
-                <div style={{ fontSize: '28px', marginBottom: '14px' }}>{item.icon}</div>
-                <div style={{ fontSize: '14px', fontWeight: 700, color: '#fff', marginBottom: '8px' }}>{item.title}</div>
-                <div style={{ fontSize: '13px', color: 'rgba(255,255,255,0.5)', lineHeight: 1.65, fontWeight: 300 }}>{item.desc}</div>
-              </div>
-            </FadeIn>
-          ))}
-        </div>
-      </section>
 
       {/* ===== DÉROULEMENT ===== */}
       <section id="deroulement" style={{ padding: '100px 60px', background: '#0a0a0a', borderTop: '0.5px solid rgba(255,255,255,0.07)', scrollMarginTop: '64px' }}>
