@@ -156,19 +156,11 @@ a { text-decoration: none; color: inherit; }
 
 /* ===== DÉROULEMENT MOBILE ===== */
 @media (max-width: 768px) {
-  .step-grid {
-    grid-template-columns: 1fr !important;
-    min-height: 260px !important;
-  }
-  .step-grid > div:last-child {
-    display: none !important;
-  }
-  #deroulement > div > div {
-    margin-left: 12px !important;
-    margin-right: 12px !important;
-    min-height: 260px !important;
-  }
-  #deroulement > div {
-    padding-bottom: 300px !important;
-  }
+  /* Hide sticky cards on mobile */
+  #deroulement .sticky-cards { display: none !important; }
+  /* Show simple timeline on mobile */
+  #deroulement .mobile-timeline { display: flex !important; }
+}
+@media (min-width: 769px) {
+  #deroulement .mobile-timeline { display: none !important; }
 }
