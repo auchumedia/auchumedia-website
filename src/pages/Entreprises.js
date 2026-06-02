@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import Footer from '../components/Footer';
  
@@ -159,8 +158,17 @@ export default function Entreprises() {
           ))}
         </div>
  
-        {/* Right — lang + CTA */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexShrink: 0 }}>
+        {/* Right — tarification + CTA + athletes + lang */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0 }}>
+          <button onClick={() => scrollTo('tarification')} style={{ fontSize: '10px', fontWeight: 700, color: '#fff', background: 'transparent', padding: '8px 16px', borderRadius: '4px', border: '1px solid rgba(255,255,255,0.3)', cursor: 'pointer', letterSpacing: '0.07em', textTransform: 'uppercase', fontFamily: "'DM Sans'", whiteSpace: 'nowrap' }}>
+            {fr ? 'Tarification' : 'Pricing'}
+          </button>
+          <button onClick={() => scrollTo('contact')} style={{ fontSize: '10px', fontWeight: 700, color: '#fff', background: BLUE, padding: '9px 18px', borderRadius: '4px', border: 'none', cursor: 'pointer', letterSpacing: '0.07em', textTransform: 'uppercase', fontFamily: "'DM Sans'", whiteSpace: 'nowrap' }}>
+            {fr ? 'Planifier un appel' : 'Book a call'}
+          </button>
+          <a href="/athletes" style={{ fontSize: '10px', fontWeight: 600, color: 'rgba(255,255,255,0.45)', padding: '7px 14px', borderRadius: '4px', border: '0.5px solid rgba(255,255,255,0.12)', textDecoration: 'none', letterSpacing: '0.06em', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>
+            {fr ? 'Athlètes' : 'Athletes'}
+          </a>
           <div style={{ display: 'flex', border: '0.5px solid rgba(255,255,255,0.15)', borderRadius: '4px', overflow: 'hidden' }}>
             {['fr','en'].map(l => (
               <button key={l} onClick={() => setLang(l)} style={{ fontSize: '9px', fontWeight: 700, padding: '5px 10px', cursor: 'pointer', border: 'none', background: lang === l ? 'rgba(255,255,255,0.1)' : 'transparent', color: lang === l ? '#fff' : 'rgba(255,255,255,0.3)', fontFamily: "'DM Sans'" }}>
@@ -168,12 +176,6 @@ export default function Entreprises() {
               </button>
             ))}
           </div>
-          <a href="/athletes" style={{ fontSize: '10px', fontWeight: 600, color: 'rgba(255,255,255,0.45)', padding: '7px 14px', borderRadius: '4px', border: '0.5px solid rgba(255,255,255,0.12)', textDecoration: 'none', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
-            {fr ? 'Athlètes' : 'Athletes'}
-          </a>
-          <button onClick={() => scrollTo('contact')} style={{ fontSize: '10px', fontWeight: 700, color: '#fff', background: BLUE, padding: '9px 20px', borderRadius: '4px', border: 'none', cursor: 'pointer', letterSpacing: '0.07em', textTransform: 'uppercase', fontFamily: "'DM Sans'", whiteSpace: 'nowrap' }}>
-            {fr ? 'Planifier un appel' : 'Book a call'}
-          </button>
         </div>
       </nav>
  
