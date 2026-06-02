@@ -1,9 +1,10 @@
+
 import React, { useState, useRef, useEffect } from 'react';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
-
+ 
 const BLUE = '#003DA5';
-
+ 
 function useInView(threshold = 0.15) {
   const ref = useRef(null);
   const [inView, setInView] = useState(false);
@@ -14,13 +15,13 @@ function useInView(threshold = 0.15) {
   }, [threshold]);
   return [ref, inView];
 }
-
+ 
 function FadeIn({ children, delay = 0, direction = 'up' }) {
   const [ref, inView] = useInView();
   const t = { up: 'translateY(30px)', left: 'translateX(-30px)', right: 'translateX(30px)', none: 'none' };
   return <div ref={ref} style={{ opacity: inView ? 1 : 0, transform: inView ? 'none' : t[direction], transition: `opacity 0.6s ease ${delay}s, transform 0.6s ease ${delay}s` }}>{children}</div>;
 }
-
+ 
 function AvatarPlaceholder({ initials, size = 120 }) {
   return (
     <div style={{ width: size, height: size, borderRadius: '50%', background: 'linear-gradient(135deg, #0d0d0d, #141414)', border: `1px solid rgba(0,61,165,0.2)`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, position: 'relative' }}>
@@ -29,18 +30,18 @@ function AvatarPlaceholder({ initials, size = 120 }) {
     </div>
   );
 }
-
+ 
 const SectionLabel = ({ children }) => (
   <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
     <div style={{ width: '20px', height: '1px', background: BLUE }} />
     <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE }}>{children}</span>
   </div>
 );
-
+ 
 export default function APropos() {
   const [lang, setLang] = useState('fr');
   const fr = lang === 'fr';
-
+ 
   const team = [
     {
       initials: 'RA',
@@ -74,11 +75,11 @@ export default function APropos() {
       desc: fr ? "Créatif et rapide, Sami apporte un regard frais sur le contenu court format. Spécialisé dans les Reels, TikToks et YouTube Shorts." : "Creative and fast, Sami brings a fresh perspective to short-form content. Specialized in Reels, TikToks and YouTube Shorts.",
     },
   ];
-
+ 
   return (
     <div style={{ background: '#080808', minHeight: '100vh' }}>
       <Nav lang={lang} onLangChange={setLang} />
-
+ 
       {/* HERO */}
       <section style={{ minHeight: '60vh', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '0 60px 80px', position: 'relative', overflow: 'hidden', paddingTop: '68px' }}>
         <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at 50% 80%, rgba(0,61,165,0.07) 0%, transparent 60%)', pointerEvents: 'none' }} />
@@ -88,7 +89,7 @@ export default function APropos() {
           {fr ? <>L'AGENCE<br />DERRIÈRE<br /><span style={{ color: BLUE }}>L'IMAGE.</span></> : <>THE AGENCY<br />BEHIND<br /><span style={{ color: BLUE }}>THE IMAGE.</span></>}
         </h1>
       </section>
-
+ 
       {/* MISSION */}
       <section style={{ padding: '100px 60px', background: '#0a0a0a', borderTop: '0.5px solid rgba(255,255,255,0.07)' }}>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '80px', alignItems: 'center' }}>
@@ -121,7 +122,7 @@ export default function APropos() {
           </FadeIn>
         </div>
       </section>
-
+ 
       {/* ÉQUIPE */}
       <section style={{ padding: '100px 60px', background: '#080808', borderTop: '0.5px solid rgba(255,255,255,0.07)' }}>
         <FadeIn>
@@ -130,7 +131,7 @@ export default function APropos() {
             {fr ? <>LES GENS <span style={{ color: BLUE }}>DERRIÈRE.</span></> : <>THE PEOPLE <span style={{ color: BLUE }}>BEHIND.</span></>}
           </h2>
         </FadeIn>
-
+ 
         {/* Raphaël — featured */}
         <FadeIn>
           <div style={{ display: 'grid', gridTemplateColumns: '200px 1fr', gap: '40px', alignItems: 'center', background: '#0d0d0d', border: `1px solid rgba(0,61,165,0.2)`, borderRadius: '16px', padding: '40px', marginBottom: '16px', position: 'relative', overflow: 'hidden' }}>
@@ -146,7 +147,7 @@ export default function APropos() {
             </div>
           </div>
         </FadeIn>
-
+ 
         {/* Reste de l'équipe */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '12px' }}>
           {team.slice(1).map((member, i) => (
@@ -163,7 +164,7 @@ export default function APropos() {
           ))}
         </div>
       </section>
-
+ 
       {/* VALEURS */}
       <section style={{ padding: '100px 60px', background: '#0a0a0a', borderTop: '0.5px solid rgba(255,255,255,0.07)' }}>
         <FadeIn>
@@ -192,7 +193,7 @@ export default function APropos() {
           ))}
         </div>
       </section>
-
+ 
       {/* CTA */}
       <section style={{ padding: '100px 60px', background: '#080808', borderTop: '0.5px solid rgba(255,255,255,0.07)', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '600px', height: '600px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(0,61,165,0.06) 0%, transparent 70%)', pointerEvents: 'none' }} />
@@ -207,9 +208,9 @@ export default function APropos() {
           </div>
         </FadeIn>
       </section>
-
+ 
       <Footer />
-
+ 
       <style>{`
         @media (max-width: 768px) {
           section { padding-left: 20px !important; padding-right: 20px !important; padding-top: 60px !important; padding-bottom: 60px !important; }
