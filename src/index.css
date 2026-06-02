@@ -158,12 +158,17 @@ a { text-decoration: none; color: inherit; }
 @media (max-width: 768px) {
   .step-grid {
     grid-template-columns: 1fr !important;
-    min-height: auto !important;
+    min-height: 260px !important;
   }
   .step-grid > div:last-child {
     display: none !important;
   }
   #deroulement > div > div {
-    margin: 0 8px 12px !important;
+    margin-left: 12px !important;
+    margin-right: 12px !important;
+    min-height: 260px !important;
+  }
+  #deroulement > div {
+    padding-bottom: 300px !important;
   }
 }
