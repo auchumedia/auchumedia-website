@@ -138,7 +138,7 @@ export default function Entreprises() {
         padding: '0 60px', height: '64px', gap: '16px'
       }}>
         {/* Logo */}
-        <div style={{ fontFamily: "'Bebas Neue'", fontSize: '20px', letterSpacing: '0.2em', color: '#fff', flexShrink: 0 }}>AUCHUMEDIA</div>
+        <a href="/" style={{ fontFamily: "'Bebas Neue'", fontSize: '20px', letterSpacing: '0.2em', color: '#fff', flexShrink: 0, textDecoration: 'none' }}>AUCHUMEDIA</a>
  
         {/* Section links — center */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '2px', overflowX: 'auto', scrollbarWidth: 'none' }} className="nav-links">
