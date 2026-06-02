@@ -409,8 +409,8 @@ export default function Entreprises() {
           </div>
         </FadeIn>
 
-        {/* Sticky scroll cards */}
-        <div style={{ position: 'relative', paddingBottom: '200px' }}>
+        {/* Sticky scroll cards — desktop only */}
+        <div className="sticky-cards" style={{ position: 'relative', paddingBottom: '200px' }}>
           {steps.map((step, i) => (
             <div key={i} style={{
               position: 'sticky',
@@ -456,6 +456,36 @@ export default function Entreprises() {
           ))}
           {/* Spacer so last card unsticks */}
           <div style={{ height: '40px' }} />
+        </div>
+
+        {/* Mobile timeline */}
+        <div className="mobile-timeline" style={{ flexDirection: 'column', gap: '0', padding: '0 20px', display: 'none' }}>
+          {steps.map((step, i) => (
+            <div key={i} style={{ display: 'flex', gap: '20px', paddingBottom: '40px', position: 'relative' }}>
+              {/* Line */}
+              {i < steps.length - 1 && <div style={{ position: 'absolute', left: '19px', top: '44px', bottom: 0, width: '1px', background: 'rgba(0,61,165,0.2)' }} />}
+              {/* Circle */}
+              <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'rgba(0,61,165,0.1)', border: `1px solid ${BLUE}`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                <span style={{ fontFamily: "'Bebas Neue'", fontSize: '14px', color: BLUE }}>{step.num}</span>
+              </div>
+              {/* Content */}
+              <div style={{ flex: 1, paddingTop: '4px' }}>
+                <div style={{ display: 'inline-flex', alignItems: 'center', background: 'rgba(0,61,165,0.1)', border: '0.5px solid rgba(0,61,165,0.25)', borderRadius: '20px', padding: '3px 10px', marginBottom: '10px' }}>
+                  <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: BLUE }}>{step.days}</span>
+                </div>
+                <div style={{ fontFamily: "'Bebas Neue'", fontSize: '22px', color: '#fff', marginBottom: '8px', letterSpacing: '0.03em', lineHeight: 1.1 }}>{step.title}</div>
+                <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.55)', lineHeight: 1.7, fontWeight: 300, marginBottom: '14px' }}>{step.desc}</p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '7px' }}>
+                  {step.points.map((pt, j) => (
+                    <div key={j} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: BLUE, flexShrink: 0 }} />
+                      <span style={{ fontSize: '12px', color: 'rgba(255,255,255,0.7)' }}>{pt}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
