@@ -484,9 +484,7 @@ export default function Entreprises() {
                     </div>
                   ))}
                 </div>
-                <button onClick={() => scrollTo('contact')} style={{ fontSize: '11px', fontWeight: 700, color: '#fff', background: BLUE, padding: '12px 24px', borderRadius: '8px', border: 'none', cursor: 'pointer', letterSpacing: '0.07em', textTransform: 'uppercase', fontFamily: "'DM Sans'" }}>
-                  {fr ? 'Planifier un appel' : 'Book a call'}
-                </button>
+
               </div>
               {/* Visual section */}
               <div style={{ height: '200px', background: `linear-gradient(135deg, ${i % 2 === 0 ? '#080f1c, #0d1428' : '#0d0d18, #161628'})`, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}>
