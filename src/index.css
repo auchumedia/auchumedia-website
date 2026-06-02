@@ -101,3 +101,22 @@ a { text-decoration: none; color: inherit; }
     width: 100% !important;
   }
 }
+
+/* ===== LOGOS GRID ===== */
+.logos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 32px 24px;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px 0 40px;
+}
+
+@media (min-width: 769px) {
+  .logos-grid {
+    grid-template-columns: repeat(6, 1fr) !important;
+    max-width: 100%;
+    gap: 0 48px;
+  }
+}
