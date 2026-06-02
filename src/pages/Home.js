@@ -1,18 +1,19 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
-
+ 
 const BLUE = '#003DA5';
-
+ 
 export default function Home() {
   const [lang, setLang] = useState('fr');
   const [heroVisible, setHeroVisible] = useState(false);
   const [hovered, setHovered] = useState(null);
   const fr = lang === 'fr';
-
+ 
   useEffect(() => { setTimeout(() => setHeroVisible(true), 100); }, []);
-
+ 
   const cards = [
     {
       key: 'athletes',
@@ -37,13 +38,29 @@ export default function Home() {
       iconCircle: null,
     },
   ];
-
+ 
   return (
     <div style={{ background: '#080808', minHeight: '100vh', overflow: 'hidden' }}>
-      <Nav lang={lang} onLangChange={setLang} />
-
+      {/* Mini top bar */}
+      <div style={{
+        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 500,
+        background: 'rgba(8,8,8,0.9)', backdropFilter: 'blur(10px)',
+        borderBottom: '0.5px solid rgba(255,255,255,0.07)',
+        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        padding: '0 32px', height: '52px'
+      }}>
+        <div style={{ fontFamily: "'Bebas Neue'", fontSize: '18px', letterSpacing: '0.2em', color: '#fff' }}>AUCHUMEDIA</div>
+        <div style={{ display: 'flex', border: '0.5px solid rgba(255,255,255,0.15)', borderRadius: '4px', overflow: 'hidden' }}>
+          {['fr', 'en'].map(l => (
+            <button key={l} onClick={() => setLang(l)} style={{ fontSize: '9px', fontWeight: 700, padding: '5px 10px', cursor: 'pointer', border: 'none', background: lang === l ? 'rgba(255,255,255,0.1)' : 'transparent', color: lang === l ? '#fff' : 'rgba(255,255,255,0.3)', fontFamily: "'DM Sans'" }}>
+              {l.toUpperCase()}
+            </button>
+          ))}
+        </div>
+      </div>
+ 
       {/* HERO — full screen split */}
-      <div style={{ display: 'flex', height: '100vh', paddingTop: '68px' }}>
+      <div style={{ display: 'flex', height: '100vh', paddingTop: '52px' }}>
         {cards.map((card, i) => (
           <Link
             key={card.key}
@@ -68,7 +85,7 @@ export default function Home() {
             }} />
             {/* Grid texture */}
             <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px)', backgroundSize: '60px 60px', pointerEvents: 'none' }} />
-
+ 
             {/* Content */}
             <div style={{ position: 'relative', zIndex: 1, opacity: heroVisible ? 1 : 0, transform: heroVisible ? 'none' : 'translateY(30px)', transition: `opacity 0.8s ease ${0.3 + i * 0.2}s, transform 0.8s ease ${0.3 + i * 0.2}s` }}>
               {/* Eyebrow */}
@@ -76,15 +93,15 @@ export default function Home() {
                 <div style={{ width: '20px', height: '1px', background: BLUE }} />
                 <span style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: BLUE }}>{card.eyebrow}</span>
               </div>
-
+ 
               {/* Title */}
               <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(44px, 5.5vw, 80px)', lineHeight: 0.9, color: '#fff', marginBottom: '20px', letterSpacing: '0.01em' }}>
                 {card.title.map((line, j) => <span key={j}>{line}<br /></span>)}
               </h2>
-
+ 
               {/* Desc */}
               <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.5)', lineHeight: 1.75, marginBottom: '28px', maxWidth: '340px', fontWeight: 300, opacity: hovered === card.key ? 1 : 0.6, transition: 'opacity 0.3s' }}>{card.desc}</p>
-
+ 
               {/* CTA */}
               <div style={{
                 display: 'inline-flex', alignItems: 'center', gap: '8px',
@@ -98,7 +115,7 @@ export default function Home() {
                 {card.cta}
               </div>
             </div>
-
+ 
             {/* Big number */}
             <div style={{ position: 'absolute', top: '50%', right: '-20px', transform: 'translateY(-50%)', fontFamily: "'Bebas Neue'", fontSize: '280px', color: 'rgba(255,255,255,0.02)', lineHeight: 1, userSelect: 'none', pointerEvents: 'none', letterSpacing: '-0.05em' }}>
               {i + 1}
@@ -106,9 +123,9 @@ export default function Home() {
           </Link>
         ))}
       </div>
-
+ 
       <Footer />
-
+ 
       <style>{`
         @media (max-width: 768px) {
           div[style*="display: flex; height: 100vh"] { flex-direction: column !important; height: auto !important; }
