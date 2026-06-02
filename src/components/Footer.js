@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
  
@@ -10,7 +11,7 @@ export default function Footer() {
       <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: '48px', padding: '64px 60px 48px' }}>
         {/* Brand */}
         <div>
-          <div style={{ fontFamily: "'Bebas Neue'", fontSize: '28px', letterSpacing: '0.2em', color: '#fff', marginBottom: '16px' }}>AUCHUMEDIA</div>
+          <div style={{ marginBottom: '16px' }}><img src="/Copie_de_AUCHU_png.png" alt="AuchuMedia" style={{ height: '24px', width: 'auto' }} /></div>
           <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.4)', lineHeight: 1.75, fontWeight: 300, maxWidth: '280px' }}>
             L'agence de référence pour les athlètes et les entreprises ambitieuses. Sport · Marketing · Croissance.
           </p>
