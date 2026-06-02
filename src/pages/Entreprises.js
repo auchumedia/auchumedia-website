@@ -54,14 +54,12 @@ const SEXXXPLUS_VIDEOS = ['https://www.tiktok.com/@boutiqueerotiquesp/video/7463
 const MAHER_VIDEOS = ['https://www.tiktok.com/@famillemaher/video/7600921134854360327','https://www.tiktok.com/@famillemaher/video/7602054271172906248','https://www.tiktok.com/@famillemaher/video/7605014622764141831','https://www.tiktok.com/@famillemaher/video/7618350590027975956','https://www.tiktok.com/@famillemaher/video/7620967888328969493','https://www.tiktok.com/@famillemaher/video/7626147213588122898','https://www.tiktok.com/@famillemaher/video/7633221318900518151','https://www.tiktok.com/@famillemaher/video/7640230731494460680','https://www.tiktok.com/@famillemaher/video/7645079778852261138','https://www.tiktok.com/@famillemaher/video/7623544372428147976'];
 
 const LOGOS = [
-  { src: 'https://images.squarespace-cdn.com/content/v1/664d3763786881229ae36f6c/0ebd1382-7429-42e1-b0cb-84b3c511ec6d/logo+bataillon.jpeg', alt: 'Le Bataillon' },
-  { src: 'https://images.squarespace-cdn.com/content/v1/664d3763786881229ae36f6c/bd1f77e7-6c58-4732-a965-fb95a7dc782f/Salvatore+Logo.png', alt: 'Pizza Salvatoré' },
-  { src: 'https://images.squarespace-cdn.com/content/v1/664d3763786881229ae36f6c/cbc0ce7d-e1cd-491f-8898-f4496d54e254/Fruitz+Logo+%281%29.png', alt: 'Fruitz' },
-  { src: 'https://images.squarespace-cdn.com/content/v1/664d3763786881229ae36f6c/b2937259-9a96-4131-997f-a8ef527e6403/SexxxPlus+Logo+%281%29.png', alt: 'SexxxPlus' },
-  { src: 'https://images.squarespace-cdn.com/content/v1/664d3763786881229ae36f6c/fc21f0a0-8010-4445-abfe-f97ae6ca1c4f/National+Logo.png', alt: 'National' },
-  { src: 'https://images.squarespace-cdn.com/content/v1/664d3763786881229ae36f6c/cf6e8e1b-77b6-4378-81a1-95004704e70c/Nor-Can+Logo.png', alt: 'Nor-Can' },
-  { src: 'https://images.squarespace-cdn.com/content/v1/664d3763786881229ae36f6c/702ed450-2dcb-4e94-aa58-5a71a2337586/Recao+logo.png', alt: 'Recao' },
-  { src: 'https://images.squarespace-cdn.com/content/v1/664d3763786881229ae36f6c/6516ce2d-543f-43ff-9dbf-3e518282e4d5/Goconsigne+Logo.png', alt: 'GoConsigne' },
+  { src: '/norcan.png', alt: 'Nor-Can' },
+  { src: '/salvatore-logo.png', alt: 'Salvatoré' },
+  { src: '/nsexxxplus.png', alt: 'SexxxPlus' },
+  { src: '/lefevbre.png', alt: 'R. Lefebvre' },
+  { src: '/trabsport.png', alt: 'Transport Tardif' },
+  { src: '/duroy.png', alt: 'Duroy Motosport' },
 ];
 
 const navLinks = [
