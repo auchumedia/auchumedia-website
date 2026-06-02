@@ -246,7 +246,7 @@ export default function Entreprises() {
               <div style={{ width: '20px', height: '1px', background: BLUE }} />
             </div>
             <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(28px, 3.5vw, 44px)', color: '#fff', letterSpacing: '0.02em' }}>
-              {fr ? <>POURQUOI <span style={{ color: BLUE }}>AUCHUMEDIA.</span></> : <>WHY <span style={{ color: BLUE }}>AUCHUMEDIA.</span></>}
+              {fr ? <>UN SERVICE <span style={{ color: BLUE }}>CLÉ EN MAIN.</span></> : <>A <span style={{ color: BLUE }}>TURNKEY SERVICE.</span></>}
             </h2>
           </div>
         </FadeIn>
