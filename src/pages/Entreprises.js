@@ -60,6 +60,7 @@ const LOGOS = [
   { src: '/lefevbre.png', alt: 'R. Lefebvre' },
   { src: '/trabsport.png', alt: 'Transport Tardif' },
   { src: '/duroy.png', alt: 'Duroy Motosport' },
+  { src: '/goconsigne.png', alt: 'GoConsigne' },
 ];
 
 const navLinks = [
