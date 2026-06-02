@@ -291,21 +291,7 @@ export default function Entreprises() {
         </div>
       </section>
  
-      {/* ===== BLOC ATHLÈTES ===== */}
-      <div style={{ background: '#0d0d0d', borderTop: '0.5px solid rgba(255,255,255,0.07)', borderBottom: '0.5px solid rgba(255,255,255,0.07)', padding: '28px 60px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '20px', flexWrap: 'wrap' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-          <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'rgba(0,61,165,0.08)', border: '0.5px solid rgba(0,61,165,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={BLUE} strokeWidth="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          </div>
-          <div>
-            <div style={{ fontSize: '13px', fontWeight: 700, color: '#fff', marginBottom: '3px' }}>{fr ? 'Vous êtes un athlète ?' : 'Are you an athlete?'}</div>
-            <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.45)', fontWeight: 300 }}>{fr ? 'On offre aussi des services de personal branding et partnerships pour les athlètes de haut niveau.' : 'We also offer personal branding and partnership services for elite athletes.'}</div>
-          </div>
-        </div>
-        <a href="/athletes" style={{ fontSize: '10px', fontWeight: 700, color: BLUE, border: `0.5px solid rgba(0,61,165,0.3)`, padding: '9px 18px', borderRadius: '4px', whiteSpace: 'nowrap', letterSpacing: '0.07em', textTransform: 'uppercase', textDecoration: 'none' }}>
-          {fr ? 'Pour les athlètes →' : 'For athletes →'}
-        </a>
-      </div>
+ 
  
       {/* ===== POURQUOI ===== */}
       <section id="pourquoi" style={{ padding: '100px 60px', background: '#080808', borderTop: '0.5px solid rgba(255,255,255,0.07)', scrollMarginTop: '64px' }}>
