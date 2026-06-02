@@ -55,12 +55,10 @@ const MAHER_VIDEOS = ['https://www.tiktok.com/@famillemaher/video/76009211348543
 
 const LOGOS = [
   { src: '/norcan.png', alt: 'Nor-Can' },
-  { src: '/salvatore-logo.png', alt: 'Salvatoré' },
   { src: '/nsexxxplus.png', alt: 'SexxxPlus' },
   { src: '/lefevbre.png', alt: 'R. Lefebvre' },
   { src: '/trabsport.png', alt: 'Transport Tardif' },
-  { src: '/duroy.png', alt: 'Duroy Motosport' },
-  { src: '/goconsigne.png', alt: 'GoConsigne' },
+  { src: '/cardinal.png', alt: 'Cardinal Asphalte' },
 ];
 
 const navLinks = [
