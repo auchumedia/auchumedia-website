@@ -2,9 +2,9 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
-
+ 
 const BLUE = '#003DA5';
-
+ 
 function useInView(threshold = 0.15) {
   const ref = useRef(null);
   const [inView, setInView] = useState(false);
@@ -15,13 +15,13 @@ function useInView(threshold = 0.15) {
   }, [threshold]);
   return [ref, inView];
 }
-
+ 
 function FadeIn({ children, delay = 0, direction = 'up' }) {
   const [ref, inView] = useInView();
   const t = { up: 'translateY(30px)', left: 'translateX(-30px)', right: 'translateX(30px)', none: 'none' };
   return <div ref={ref} style={{ opacity: inView ? 1 : 0, transform: inView ? 'none' : t[direction], transition: `opacity 0.6s ease ${delay}s, transform 0.6s ease ${delay}s` }}>{children}</div>;
 }
-
+ 
 function ImgPlaceholder({ label, aspect = '16/9' }) {
   return (
     <div style={{ width: '100%', aspectRatio: aspect, background: 'linear-gradient(135deg, #0d0d0d, #111)', border: '0.5px solid rgba(255,255,255,0.07)', borderRadius: '10px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '10px', position: 'relative', overflow: 'hidden' }}>
@@ -34,19 +34,19 @@ function ImgPlaceholder({ label, aspect = '16/9' }) {
     </div>
   );
 }
-
+ 
 const SectionLabel = ({ children }) => (
   <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
     <div style={{ width: '20px', height: '1px', background: BLUE }} />
     <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE }}>{children}</span>
   </div>
 );
-
+ 
 export default function Athletes() {
   const [lang, setLang] = useState('fr');
   const [openFaq, setOpenFaq] = useState(null);
   const fr = lang === 'fr';
-
+ 
   const faqs = fr ? [
     { q: "Combien de temps avant de voir des résultats ?", a: "La plupart de nos clients voient une augmentation significative de leur engagement et de leur visibilité dans les 60 premiers jours. Les résultats en termes de partenariats arrivent généralement dans les 3-6 premiers mois." },
     { q: "Est-ce que vous gérez tout le contenu ?", a: "Oui. On s'occupe de la stratégie, de la création de contenu, de la production vidéo et de la gestion des réseaux sociaux. Tu as juste à être toi-même." },
@@ -60,7 +60,7 @@ export default function Athletes() {
     { q: "How does day-to-day collaboration work?", a: "You have access to a dedicated account manager. We meet regularly to plan content, and you approve everything before publication." },
     { q: "Do you guarantee sponsorship deals?", a: "We can't guarantee specific deals, but our strategic approach maximizes your chances of attracting the right brands. Several of our clients have landed their first deals within 6 months." },
   ];
-
+ 
   const steps = fr ? [
     { num: '01', title: 'Appel découverte', desc: "On apprend à te connaître — ton histoire, tes objectifs, ta personnalité. Gratuit et sans engagement." },
     { num: '02', title: 'Audit & stratégie', desc: "On analyse ta présence actuelle et on construit une stratégie sur mesure alignée avec tes objectifs." },
@@ -74,13 +74,66 @@ export default function Athletes() {
     { num: '04', title: 'Publishing & growth', desc: "We publish consistently and optimize continuously to maximize your reach and engagement." },
     { num: '05', title: 'Partnerships', desc: "Once your image is solid, we identify and approach brands that match your identity." },
   ];
-
+ 
   return (
     <div style={{ background: '#080808', minHeight: '100vh' }}>
-      <Nav lang={lang} onLangChange={setLang} />
-
+      {/* Mini top bar */}
+      <div style={{
+        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 500,
+        background: 'rgba(8,8,8,0.95)', backdropFilter: 'blur(10px)',
+        borderBottom: '0.5px solid rgba(255,255,255,0.08)',
+        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        padding: '0 24px', height: '52px'
+      }}>
+        <a href="/" style={{ fontFamily: "'Bebas Neue'", fontSize: '18px', letterSpacing: '0.2em', color: '#fff', textDecoration: 'none' }}>AUCHUMEDIA</a>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <div style={{ display: 'flex', border: '0.5px solid rgba(255,255,255,0.15)', borderRadius: '4px', overflow: 'hidden' }}>
+            {['fr', 'en'].map(l => (
+              <button key={l} onClick={() => setLang(l)} style={{ fontSize: '9px', fontWeight: 700, padding: '5px 10px', cursor: 'pointer', border: 'none', background: lang === l ? 'rgba(255,255,255,0.1)' : 'transparent', color: lang === l ? '#fff' : 'rgba(255,255,255,0.3)', fontFamily: "'DM Sans'" }}>
+                {l.toUpperCase()}
+              </button>
+            ))}
+          </div>
+          <button onClick={() => { const el = document.getElementById('contact'); if(el) el.scrollIntoView({behavior:'smooth'}); }} style={{ fontSize: '10px', fontWeight: 700, color: '#fff', background: '#003DA5', padding: '7px 14px', borderRadius: '4px', border: 'none', cursor: 'pointer', letterSpacing: '0.07em', textTransform: 'uppercase', fontFamily: "'DM Sans'", whiteSpace: 'nowrap' }}>
+            {fr ? 'Prendre RDV' : 'Book a call'}
+          </button>
+        </div>
+      </div>
+ 
+      {/* Sticky section nav */}
+      <div style={{
+        position: 'sticky', top: '52px', zIndex: 400,
+        background: 'rgba(8,8,8,0.95)', backdropFilter: 'blur(10px)',
+        borderBottom: '0.5px solid rgba(255,255,255,0.08)',
+        display: 'flex', alignItems: 'center',
+        padding: '0 16px', gap: '2px', height: '48px',
+        overflowX: 'auto', scrollbarWidth: 'none',
+      }}>
+        {[
+          { id: 'etudes-de-cas', label: fr ? 'Études de cas' : 'Case studies' },
+          { id: 'pourquoi', label: fr ? 'Pourquoi AuchuMedia' : 'Why AuchuMedia' },
+          { id: 'deroulement', label: fr ? 'Déroulement' : 'Process' },
+          { id: 'tarification', label: fr ? 'Tarification' : 'Pricing' },
+          { id: 'faq', label: 'FAQ' },
+          { id: 'contact', label: fr ? 'Prendre RDV' : 'Book a call', cta: true },
+        ].map(link => (
+          <button key={link.id} onClick={() => { const el = document.getElementById(link.id); if(el) el.scrollIntoView({behavior:'smooth', block:'start'}); }} style={{
+            fontSize: '11px', fontWeight: link.cta ? 700 : 600,
+            color: link.cta ? '#fff' : 'rgba(255,255,255,0.5)',
+            background: link.cta ? '#003DA5' : 'transparent',
+            border: 'none', padding: link.cta ? '8px 18px' : '8px 14px',
+            borderRadius: link.cta ? '4px' : '0',
+            cursor: 'pointer', letterSpacing: '0.06em', textTransform: 'uppercase',
+            fontFamily: "'DM Sans'", whiteSpace: 'nowrap',
+            flexShrink: 0
+          }}>
+            {link.label}
+          </button>
+        ))}
+      </div>
+ 
       {/* HERO */}
-      <section style={{ minHeight: '85vh', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '0 60px 80px', position: 'relative', overflow: 'hidden', paddingTop: '68px' }}>
+      <section style={{ minHeight: '85vh', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '0 60px 80px', position: 'relative', overflow: 'hidden', paddingTop: '100px' }}>
         <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at 20% 60%, rgba(0,61,165,0.08) 0%, transparent 60%)', pointerEvents: 'none' }} />
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px)', backgroundSize: '60px 60px', pointerEvents: 'none' }} />
         <SectionLabel>{fr ? 'Pour les athlètes' : 'For athletes'}</SectionLabel>
@@ -99,9 +152,9 @@ export default function Athletes() {
           </a>
         </div>
       </section>
-
+ 
       {/* ÉTUDES DE CAS */}
-      <section id="etudes-de-cas" style={{ padding: '100px 60px', background: '#0a0a0a', borderTop: '0.5px solid rgba(255,255,255,0.07)' }}>
+      <section id="etudes-de-cas" id="etudes-de-cas" style={{ padding: '100px 60px', background: '#0a0a0a', borderTop: '0.5px solid rgba(255,255,255,0.07)' }}>
         <FadeIn>
           <SectionLabel>{fr ? 'Études de cas · Résultats' : 'Case studies · Results'}</SectionLabel>
           <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(32px, 4vw, 52px)', color: '#fff', marginBottom: '48px', letterSpacing: '0.02em' }}>
@@ -130,9 +183,9 @@ export default function Athletes() {
           ))}
         </div>
       </section>
-
+ 
       {/* POURQUOI AUCHUMEDIA */}
-      <section style={{ padding: '100px 60px', background: '#080808', borderTop: '0.5px solid rgba(255,255,255,0.07)' }}>
+      <section id="pourquoi" style={{ padding: '100px 60px', background: '#080808', borderTop: '0.5px solid rgba(255,255,255,0.07)' }}>
         <FadeIn>
           <SectionLabel>{fr ? 'Pourquoi AuchuMedia' : 'Why AuchuMedia'}</SectionLabel>
           <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(32px, 4vw, 52px)', color: '#fff', marginBottom: '48px', letterSpacing: '0.02em' }}>
@@ -165,9 +218,9 @@ export default function Athletes() {
           ))}
         </div>
       </section>
-
+ 
       {/* DÉROULEMENT */}
-      <section style={{ padding: '100px 60px', background: '#0a0a0a', borderTop: '0.5px solid rgba(255,255,255,0.07)' }}>
+      <section id="deroulement" style={{ padding: '100px 60px', background: '#0a0a0a', borderTop: '0.5px solid rgba(255,255,255,0.07)' }}>
         <FadeIn>
           <SectionLabel>{fr ? 'Déroulement personnalisé' : 'Our process'}</SectionLabel>
           <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(32px, 4vw, 52px)', color: '#fff', marginBottom: '56px', letterSpacing: '0.02em' }}>
@@ -191,9 +244,9 @@ export default function Athletes() {
           ))}
         </div>
       </section>
-
+ 
       {/* TARIFICATION */}
-      <section style={{ padding: '100px 60px', background: '#080808', borderTop: '0.5px solid rgba(255,255,255,0.07)' }}>
+      <section id="tarification" style={{ padding: '100px 60px', background: '#080808', borderTop: '0.5px solid rgba(255,255,255,0.07)' }}>
         <FadeIn>
           <SectionLabel>{fr ? 'Tarification' : 'Pricing'}</SectionLabel>
           <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(32px, 4vw, 52px)', color: '#fff', marginBottom: '48px', letterSpacing: '0.02em' }}>
@@ -222,9 +275,9 @@ export default function Athletes() {
           </div>
         </FadeIn>
       </section>
-
+ 
       {/* FAQ */}
-      <section style={{ padding: '100px 60px', background: '#0a0a0a', borderTop: '0.5px solid rgba(255,255,255,0.07)' }}>
+      <section id="faq" style={{ padding: '100px 60px', background: '#0a0a0a', borderTop: '0.5px solid rgba(255,255,255,0.07)' }}>
         <FadeIn>
           <SectionLabel>FAQ</SectionLabel>
           <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(32px, 4vw, 52px)', color: '#fff', marginBottom: '48px', letterSpacing: '0.02em' }}>
@@ -252,7 +305,7 @@ export default function Athletes() {
           ))}
         </div>
       </section>
-
+ 
       {/* CONTACT */}
       <section id="contact" style={{ padding: '100px 60px', background: '#080808', borderTop: '0.5px solid rgba(255,255,255,0.07)' }}>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '80px', alignItems: 'start' }}>
@@ -307,9 +360,9 @@ export default function Athletes() {
           </FadeIn>
         </div>
       </section>
-
+ 
       <Footer />
-
+ 
       <style>{`
         @media (max-width: 768px) {
           section { padding-left: 20px !important; padding-right: 20px !important; padding-top: 60px !important; padding-bottom: 60px !important; }
