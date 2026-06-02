@@ -93,17 +93,17 @@ export default function Entreprises() {
   }, []);
 
   const faqs = fr ? [
-    { q: "Combien de temps avant de recevoir des leads de construction ?", a: "La plupart de nos clients en construction voient leurs premières demandes de soumission via les réseaux sociaux dans les 60-90 premiers jours. L'autorité de marque se bâtit sur 3-6 mois." },
+    { q: "Combien de temps avant de recevoir des leads qualifiés ?", a: "La plupart de nos clients voient leurs premières demandes de soumission via les réseaux sociaux dans les 60-90 premiers jours. L'autorité de marque se bâtit sur 3-6 mois." },
     { q: "Est-ce que vous gérez tout le contenu ?", a: "Oui. On prend en charge la stratégie, la création de contenu, la production vidéo et la gestion des réseaux sociaux. Votre seul travail est d'approuver." },
-    { q: "Quel type de contenu créez-vous pour la construction ?", a: "Time-lapses de chantiers, avant/après de projets, tournages sur le terrain, témoignages clients, présentations de projets terminés — du contenu qui démontre votre expertise et votre qualité de travail." },
-    { q: "Avec quels types d'entreprises de construction travaillez-vous ?", a: "On travaille avec des entrepreneurs généraux, des spécialistes (toiture, fondation, rénovation, asphaltage), des promoteurs immobiliers et des entreprises de services résidentiels et commerciaux." },
+    { q: "Quel type de contenu créez-vous ?", a: "Tournages chez vos clients, avant/après de projets, témoignages clients, démonstrations de votre expertise — du contenu qui inspire confiance et donne envie de vous appeler." },
+    { q: "Avec quels types d'entreprises travaillez-vous ?", a: "On se spécialise avec des entreprises B2C high ticket dont le service coûte 2 000$ et plus — climatisation & chauffage, portes & fenêtres, aménagement paysager, rénovation, toiture, piscines, cuisine & salle de bain, et tout autre service résidentiel premium." },
     { q: "Qu'est-ce qui est inclus dans le forfait de base ?", a: "8 vidéos courts formats par mois (chantiers, projets, équipe), gestion Instagram, TikTok & LinkedIn, stratégie éditoriale mensuelle, rapport de performance et réunion mensuelle dédiée." },
     { q: "Est-ce que vous pouvez cibler des zones géographiques spécifiques ?", a: "Oui — on peut cibler précisément votre zone de service (ville, région, rayon) pour que vos publicités Meta Ads atteignent uniquement les clients potentiels dans votre secteur." },
   ] : [
-    { q: "How long before receiving construction leads?", a: "Most of our construction clients see their first quote requests via social media within the first 60-90 days. Brand authority builds over 3-6 months." },
+    { q: "How long before receiving qualified leads?", a: "Most of our clients see their first quote requests via social media within the first 60-90 days. Brand authority builds over 3-6 months." },
     { q: "Do you manage all the content?", a: "Yes. We handle strategy, content creation, video production and social media management. Your only job is to approve." },
-    { q: "What type of content do you create for construction?", a: "Job site time-lapses, before/after projects, field shoots, client testimonials, finished project showcases — content that demonstrates your expertise and quality of work." },
-    { q: "What types of construction companies do you work with?", a: "We work with general contractors, specialists (roofing, foundation, renovation, asphalt), real estate developers and residential & commercial service companies." },
+    { q: "What type of content do you create?", a: "Client shoots, before/after projects, client testimonials, expertise demonstrations — content that builds trust and makes people want to call you." },
+    { q: "What types of businesses do you work with?", a: "We specialize with B2C high ticket businesses whose service costs $2,000 and up — heating & cooling, doors & windows, landscaping, renovation, roofing, pools, kitchen & bathroom, and any other premium residential service." },
     { q: "What's included in the base plan?", a: "8 short-form videos per month (job sites, projects, team), Instagram, TikTok & LinkedIn management, monthly editorial strategy, performance report and dedicated monthly meeting." },
     { q: "Can you target specific geographic areas?", a: "Yes — we can precisely target your service area (city, region, radius) so your Meta Ads campaigns only reach potential clients in your sector." },
   ];
@@ -249,7 +249,7 @@ export default function Entreprises() {
             {fr ? 'DEVENEZ LA RÉFÉRENCE\nDANS VOTRE DOMAINE' : 'BECOME THE REFERENCE\nIN YOUR INDUSTRY'}
           </h1>
           <p style={{ fontSize: 'clamp(15px, 1.8vw, 18px)', color: 'rgba(255,255,255,0.55)', lineHeight: 1.8, marginBottom: '40px', maxWidth: '580px', margin: '0 auto 40px', fontWeight: 300 }}>
-            {fr ? "On aide les entreprises de construction à devenir la référence dans leur marché grâce à une présence en ligne qui génère des leads qualifiés et bâtit une autorité durable." : "We help construction companies become the reference in their market through an online presence that generates qualified leads and builds lasting authority."}
+            {fr ? "On aide les entreprises B2C high ticket à devenir la référence dans leur marché grâce à une présence en ligne qui génère des leads qualifiés et bâtit une autorité durable." : "We help B2C high ticket businesses become the reference in their market through an online presence that generates qualified leads and builds lasting authority."}
           </p>
           <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '72px' }}>
             <button onClick={() => scrollTo('tarification')} style={{ fontSize: '11px', fontWeight: 700, color: '#fff', background: BLUE, padding: '14px 32px', borderRadius: '4px', letterSpacing: '0.1em', textTransform: 'uppercase', border: 'none', cursor: 'pointer', boxShadow: '0 0 30px rgba(0,61,165,0.3)', fontFamily: "'DM Sans'" }}>
@@ -289,18 +289,18 @@ export default function Entreprises() {
         </FadeIn>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 320px)', gap: '12px', justifyContent: 'center' }}>
           {(fr ? [
-            { icon: '🏗️', title: 'Stratégie de contenu', desc: "On définit votre stratégie de contenu autour de vos projets de construction — avant, pendant et après chantier." },
-            { icon: '🎬', title: 'Création de contenu', desc: "Tournages sur chantier, time-lapse de projets, témoignages clients — du contenu qui impressionne et convertit." },
+            { icon: '🏗️', title: 'Stratégie de contenu', desc: "On définit votre stratégie de contenu autour de votre expertise — avant, pendant et après chaque projet client." },
+            { icon: '🎬', title: 'Création de contenu', desc: "Tournages chez vos clients, avant/après de projets, témoignages — du contenu qui démontre votre expertise et convertit." },
             { icon: '📱', title: 'Publication de contenu', desc: "Publication régulière sur Instagram, TikTok et LinkedIn pour rester top-of-mind auprès de vos clients potentiels." },
-            { icon: '🎯', title: 'Meta Ads', desc: "Campagnes ciblées vers les propriétaires et promoteurs dans votre zone de service pour générer des leads qualifiés." },
-            { icon: '🔗', title: 'CRM & Pipeline', desc: "Système de suivi des leads de construction — de la première demande de soumission jusqu'à la signature du contrat." },
+            { icon: '🎯', title: 'Meta Ads', desc: "Campagnes ciblées vers les propriétaires dans votre zone de service prêts à investir dans vos services premium." },
+            { icon: '🔗', title: 'CRM & Pipeline', desc: "Système de suivi des leads — de la première demande de soumission jusqu'à la signature du contrat." },
             { icon: '📈', title: 'Rapports', desc: "Rapport mensuel : portée, leads générés, coût par lead — vous savez exactement ce que vous rapporte chaque dollar investi." },
           ] : [
-            { icon: '🏗️', title: 'Content strategy', desc: "We define your content strategy around your construction projects — before, during and after job sites." },
-            { icon: '🎬', title: 'Content creation', desc: "Job site shoots, project time-lapses, client testimonials — content that impresses and converts." },
+            { icon: '🏗️', title: 'Content strategy', desc: "We define your content strategy around your expertise — before, during and after each client project." },
+            { icon: '🎬', title: 'Content creation', desc: "Client shoots, project before/afters, testimonials — content that demonstrates your expertise and converts." },
             { icon: '📱', title: 'Content publishing', desc: "Regular publishing on Instagram, TikTok and LinkedIn to stay top-of-mind with potential clients." },
-            { icon: '🎯', title: 'Meta Ads', desc: "Targeted campaigns toward homeowners and developers in your service area to generate qualified leads." },
-            { icon: '🔗', title: 'CRM & Pipeline', desc: "Construction lead tracking system — from the first quote request to contract signing." },
+            { icon: '🎯', title: 'Meta Ads', desc: "Targeted campaigns toward homeowners in your service area ready to invest in your premium services." },
+            { icon: '🔗', title: 'CRM & Pipeline', desc: "Lead tracking system — from the first quote request to contract signing." },
             { icon: '📈', title: 'Reports', desc: "Monthly report: reach, leads generated, cost per lead — you know exactly what every dollar invested brings back." },
           ]).map((item, i) => (
             <FadeIn key={i} delay={i * 0.07}>
