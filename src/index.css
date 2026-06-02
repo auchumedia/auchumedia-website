@@ -153,3 +153,19 @@ a { text-decoration: none; color: inherit; }
     padding-right: 20px !important;
   }
 }
+
+/* ===== DÉROULEMENT MOBILE ===== */
+@media (max-width: 768px) {
+  .step-grid {
+    grid-template-columns: 1fr !important;
+    min-height: auto !important;
+  }
+  .step-grid > div:last-child {
+    display: none !important;
+  }
+  #deroulement > div > div {
+    margin: 0 12px 12px !important;
+    position: relative !important;
+    top: auto !important;
+  }
+}
