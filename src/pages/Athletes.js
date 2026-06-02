@@ -107,7 +107,7 @@ export default function Athletes() {
         borderBottom: '0.5px solid rgba(255,255,255,0.08)',
         display: 'flex', alignItems: 'center',
         padding: '0 16px', gap: '2px', height: '48px',
-        overflowX: 'auto', scrollbarWidth: 'none',
+        overflowX: 'auto', scrollbarWidth: 'none', justifyContent: 'center',
       }}>
         {[
           { id: 'etudes-de-cas', label: fr ? 'Études de cas' : 'Case studies' },
