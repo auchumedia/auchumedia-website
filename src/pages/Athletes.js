@@ -1,9 +1,8 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import Footer from '../components/Footer';
- 
+
 const BLUE = '#003DA5';
- 
+
 function useInView(threshold = 0.15) {
   const ref = useRef(null);
   const [inView, setInView] = useState(false);
@@ -14,13 +13,13 @@ function useInView(threshold = 0.15) {
   }, [threshold]);
   return [ref, inView];
 }
- 
+
 function FadeIn({ children, delay = 0, direction = 'up' }) {
   const [ref, inView] = useInView();
   const t = { up: 'translateY(30px)', left: 'translateX(-30px)', right: 'translateX(30px)', none: 'none' };
   return <div ref={ref} style={{ opacity: inView ? 1 : 0, transform: inView ? 'none' : t[direction], transition: `opacity 0.6s ease ${delay}s, transform 0.6s ease ${delay}s` }}>{children}</div>;
 }
- 
+
 const navLinks = [
   { id: 'etudes-de-cas', labelFr: 'Études de cas', labelEn: 'Case studies' },
   { id: 'pourquoi', labelFr: 'Pourquoi AuchuMedia', labelEn: 'Why AuchuMedia' },
@@ -28,7 +27,7 @@ const navLinks = [
   { id: 'faq', labelFr: 'FAQ', labelEn: 'FAQ' },
   { id: 'tarification', labelFr: 'Tarification', labelEn: 'Pricing' },
 ];
- 
+
 export default function Athletes() {
   const [lang, setLang] = useState('fr');
   const [openFaq, setOpenFaq] = useState(null);
@@ -36,9 +35,9 @@ export default function Athletes() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const fr = lang === 'fr';
- 
+
   const scrollTo = (id) => { const el = document.getElementById(id); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); };
- 
+
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
@@ -51,7 +50,7 @@ export default function Athletes() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
- 
+
   const faqs = fr ? [
     { q: "Combien de temps avant de voir des résultats ?", a: "La plupart de nos clients voient une augmentation significative de leur engagement dans les 60 premiers jours. Les résultats en termes de partenariats arrivent généralement dans les 3-6 premiers mois." },
     { q: "Est-ce que vous gérez tout le contenu ?", a: "Oui. On s'occupe de la stratégie, de la création de contenu, de la production vidéo et de la gestion des réseaux sociaux. Tu as juste à être toi-même." },
@@ -65,7 +64,7 @@ export default function Athletes() {
     { q: "How does day-to-day collaboration work?", a: "You have access to a dedicated account manager. We meet regularly to plan content, and you approve everything before publication." },
     { q: "Do you guarantee sponsorship deals?", a: "We can't guarantee specific deals, but our strategic approach maximizes your chances of attracting the right brands. Several of our clients have landed their first deals within 6 months." },
   ];
- 
+
   const steps = fr ? [
     { num: '01', title: 'Appel découverte', desc: "On apprend à te connaître — ton histoire, tes objectifs, ta personnalité. Gratuit et sans engagement." },
     { num: '02', title: 'Audit & stratégie', desc: "On analyse ta présence actuelle et on construit une stratégie sur mesure alignée avec tes objectifs." },
@@ -79,10 +78,10 @@ export default function Athletes() {
     { num: '04', title: 'Publishing & growth', desc: "We publish consistently and optimize continuously to maximize your reach and engagement." },
     { num: '05', title: 'Partnerships', desc: "Once your image is solid, we identify and approach brands that match your identity." },
   ];
- 
+
   return (
     <div style={{ background: '#080808', minHeight: '100vh' }}>
- 
+
       {/* ===== MAIN NAV ===== */}
       <nav style={{
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 500,
@@ -93,8 +92,8 @@ export default function Athletes() {
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         padding: '0 60px', height: '64px', gap: '16px'
       }}>
-        <a href="/" style={{ fontFamily: "'Bebas Neue'", fontSize: '20px', letterSpacing: '0.2em', color: '#fff', textDecoration: 'none', flexShrink: 0 }}>AUCHUMEDIA</a>
- 
+        <a href="/" style={{ flexShrink: 0 }}><img src="/Copie_de_AUCHU_png.png" alt="AuchuMedia" style={{ height: '28px', width: 'auto' }} /></a>
+
         {/* Section links center */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '2px', overflowX: 'auto', scrollbarWidth: 'none' }}>
           {navLinks.map(link => (
@@ -112,7 +111,7 @@ export default function Athletes() {
             </button>
           ))}
         </div>
- 
+
         {/* Right — entreprises + CTA + lang */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0 }}>
           <a href="/entreprises" style={{ fontSize: '10px', fontWeight: 700, color: '#fff', background: 'transparent', padding: '8px 16px', borderRadius: '4px', border: '1px solid rgba(255,255,255,0.3)', textDecoration: 'none', letterSpacing: '0.07em', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>
@@ -136,7 +135,7 @@ export default function Athletes() {
           </button>
         </div>
       </nav>
- 
+
       {/* Mobile menu */}
       {mobileOpen && (
         <div style={{ position: 'fixed', top: '64px', left: 0, right: 0, bottom: 0, zIndex: 490, background: 'rgba(8,8,8,0.98)', backdropFilter: 'blur(12px)', display: 'flex', flexDirection: 'column', padding: '24px 24px', gap: '4px', overflowY: 'auto' }}>
@@ -155,13 +154,13 @@ export default function Athletes() {
           </div>
         </div>
       )}
- 
+
       {/* ===== HERO ===== */}
       <section style={{ minHeight: '90vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '120px 60px 80px', position: 'relative', overflow: 'hidden', textAlign: 'center' }}>
         <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at 50% 60%, rgba(0,61,165,0.08) 0%, transparent 65%)', pointerEvents: 'none' }} />
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px)', backgroundSize: '60px 60px', pointerEvents: 'none' }} />
         <div style={{ position: 'relative', zIndex: 1, maxWidth: '860px' }}>
- 
+
           <h1 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(52px, 7.5vw, 100px)', lineHeight: 0.93, color: '#fff', marginBottom: '28px', letterSpacing: '0.01em' }}>
             {fr ? 'RAYONNE AU-DELÀ\nDE TON SPORT.' : 'RISE ABOVE\nYOUR SPORT.'}
           </h1>
@@ -178,8 +177,8 @@ export default function Athletes() {
           </div>
         </div>
       </section>
- 
- 
+
+
       {/* ===== SERVICES CLÉ EN MAIN ===== */}
       <section style={{ padding: '80px 60px', background: '#0a0a0a', borderTop: '0.5px solid rgba(255,255,255,0.07)' }}>
         <FadeIn>
@@ -223,7 +222,7 @@ export default function Athletes() {
           ))}
         </div>
       </section>
- 
+
       {/* ===== ÉTUDES DE CAS ===== */}
       <section id="etudes-de-cas" style={{ padding: '100px 60px', background: '#0a0a0a', borderTop: '0.5px solid rgba(255,255,255,0.07)', scrollMarginTop: '64px' }}>
         <FadeIn>
@@ -262,7 +261,7 @@ export default function Athletes() {
           ))}
         </div>
       </section>
- 
+
       {/* ===== POURQUOI ===== */}
       <section id="pourquoi" style={{ padding: '100px 60px', background: '#080808', borderTop: '0.5px solid rgba(255,255,255,0.07)', scrollMarginTop: '64px' }}>
         <FadeIn>
@@ -300,7 +299,7 @@ export default function Athletes() {
           ))}
         </div>
       </section>
- 
+
       {/* ===== DÉROULEMENT ===== */}
       <section id="deroulement" style={{ padding: '100px 60px', background: '#0a0a0a', borderTop: '0.5px solid rgba(255,255,255,0.07)', scrollMarginTop: '64px' }}>
         <FadeIn>
@@ -329,7 +328,7 @@ export default function Athletes() {
           ))}
         </div>
       </section>
- 
+
       {/* ===== TARIFICATION ===== */}
       <section id="tarification" style={{ padding: '100px 60px', background: '#080808', borderTop: '0.5px solid rgba(255,255,255,0.07)', scrollMarginTop: '64px' }}>
         <FadeIn>
@@ -363,7 +362,7 @@ export default function Athletes() {
           </div>
         </FadeIn>
       </section>
- 
+
       {/* ===== FAQ ===== */}
       <section id="faq" style={{ padding: '100px 60px', background: '#0a0a0a', borderTop: '0.5px solid rgba(255,255,255,0.07)', scrollMarginTop: '64px' }}>
         <FadeIn>
@@ -393,7 +392,7 @@ export default function Athletes() {
           ))}
         </div>
       </section>
- 
+
       {/* ===== CONTACT ===== */}
       <section id="contact" style={{ padding: '100px 60px', background: '#080808', borderTop: '0.5px solid rgba(255,255,255,0.07)', scrollMarginTop: '64px' }}>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '80px', alignItems: 'start' }}>
@@ -451,9 +450,9 @@ export default function Athletes() {
           </FadeIn>
         </div>
       </section>
- 
+
       <Footer />
- 
+
       <style>{`
         .hamburger-btn { display: flex !important; }
         @media (max-width: 768px) {
