@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
@@ -224,7 +223,7 @@ export default function Entreprises() {
         display: 'flex', alignItems: 'center',
         padding: '0 16px', gap: '2px', height: '48px',
         overflowX: 'auto', scrollbarWidth: 'none',
-        justifyContent: 'flex-start',
+        justifyContent: 'center',
       }}>
         {navLinks.map(link => (
           <button key={link.id} onClick={() => scrollTo(link.id)} style={{
