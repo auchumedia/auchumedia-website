@@ -102,21 +102,32 @@ a { text-decoration: none; color: inherit; }
   }
 }
 
+
 /* ===== LOGOS GRID ===== */
 .logos-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr) !important;
-  gap: 32px 24px;
+  display: grid !important;
+  grid-template-columns: repeat(6, 1fr) !important;
+  gap: 0 48px;
   width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
   padding: 20px 0 40px;
+  align-items: center;
 }
 
-@media (min-width: 769px) {
+@media (max-width: 768px) {
   .logos-grid {
-    grid-template-columns: repeat(6, 1fr) !important;
-    max-width: 100%;
-    gap: 0 48px;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 28px 20px !important;
+    max-width: 340px;
+    margin: 0 auto;
+  }
+}
+
+/* Hero mobile centering */
+@media (max-width: 768px) {
+  section[style*="minHeight: '90vh'"],
+  section[style*="min-height: 90vh"] {
+    padding-top: 120px !important;
+    padding-bottom: 80px !important;
+    justify-content: center !important;
   }
 }
