@@ -207,10 +207,7 @@ export default function Entreprises() {
         <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at 50% 60%, rgba(0,61,165,0.08) 0%, transparent 65%)', pointerEvents: 'none' }} />
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px)', backgroundSize: '60px 60px', pointerEvents: 'none' }} />
         <div style={{ position: 'relative', zIndex: 1, maxWidth: '860px' }}>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(0,61,165,0.1)', border: '0.5px solid rgba(0,61,165,0.25)', borderRadius: '20px', padding: '6px 16px', marginBottom: '28px' }}>
-            <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: BLUE }} />
-            <span style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: BLUE }}>{fr ? 'Agence de médias sociaux · Montréal' : 'Social media agency · Montreal'}</span>
-          </div>
+ 
           <h1 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(52px, 7.5vw, 100px)', lineHeight: 0.93, color: '#fff', marginBottom: '28px', letterSpacing: '0.01em' }}>
             {fr ? 'DEVENEZ LA RÉFÉRENCE\nDANS VOTRE DOMAINE' : 'BECOME THE REFERENCE\nIN YOUR INDUSTRY'}
           </h1>
@@ -226,19 +223,60 @@ export default function Entreprises() {
             </button>
           </div>
  
-          {/* Logos */}
-          <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.2)', marginBottom: '20px' }}>
+          {/* Static logos */}
+          <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.2)', marginBottom: '24px' }}>
             {fr ? 'Des marques nous font confiance' : 'Brands that trust us'}
           </div>
-          <div style={{ position: 'relative', overflow: 'hidden', width: '100vw', marginLeft: 'calc(-50vw + 50%)' }}>
-            <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: '80px', background: 'linear-gradient(to right, #080808, transparent)', zIndex: 1 }} />
-            <div style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: '80px', background: 'linear-gradient(to left, #080808, transparent)', zIndex: 1 }} />
-            <div style={{ display: 'flex', width: 'max-content', animation: 'marquee 28s linear infinite', alignItems: 'center' }}>
-              {[...LOGOS, ...LOGOS].map((logo, i) => (
-                <img key={i} src={logo.src} alt={logo.alt} style={{ height: '28px', width: 'auto', maxWidth: '100px', objectFit: 'contain', margin: '0 36px', opacity: 0.3, filter: 'brightness(0) invert(1)' }} />
-              ))}
-            </div>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', justifyContent: 'center', alignItems: 'center' }}>
+            {LOGOS.map((logo, i) => (
+              <img key={i} src={logo.src} alt={logo.alt} style={{ height: '28px', width: 'auto', maxWidth: '100px', objectFit: 'contain', opacity: 0.3, filter: 'brightness(0) invert(1)' }} />
+            ))}
           </div>
+        </div>
+      </section>
+ 
+ 
+      {/* ===== SERVICES CLÉ EN MAIN ===== */}
+      <section style={{ padding: '80px 60px', background: '#0a0a0a', borderTop: '0.5px solid rgba(255,255,255,0.07)' }}>
+        <FadeIn>
+          <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', marginBottom: '12px' }}>
+              <div style={{ width: '20px', height: '1px', background: BLUE }} />
+              <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE }}>{fr ? 'Notre offre' : 'Our offer'}</span>
+              <div style={{ width: '20px', height: '1px', background: BLUE }} />
+            </div>
+            <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(28px, 3.5vw, 44px)', color: '#fff', letterSpacing: '0.02em' }}>
+              {fr ? <>UN SERVICE <span style={{ color: BLUE }}>CLÉ EN MAIN.</span></> : <>A <span style={{ color: BLUE }}>TURNKEY SERVICE.</span></>}
+            </h2>
+          </div>
+        </FadeIn>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '12px' }}>
+          {(fr ? [
+            { icon: '🚀', title: 'Stratégie de contenu', desc: "On définit votre stratégie de contenu centrée sur l'audience en fonction de vos objectifs d'affaires." },
+            { icon: '🎬', title: 'Création de contenu', desc: "On prend en charge l'idéation, la préproduction, la production et la postproduction." },
+            { icon: '📱', title: 'Publication de contenu', desc: "On gère votre calendrier de contenu et publions sur l'ensemble des plateformes." },
+            { icon: '📊', title: 'Amplification de contenu', desc: "On gère l'amplification du contenu afin de maximiser la portée et l'engagement." },
+            { icon: '😍', title: 'Gestion de communauté', desc: "On répond aux commentaires et aux messages privés, tout en interagissant de façon proactive." },
+            { icon: '📈', title: 'Rapports', desc: "On livre un rapport mensuel avec des constats, puis on applique tout ce qu'on a appris à la prochaine série de contenus." },
+          ] : [
+            { icon: '🚀', title: 'Content strategy', desc: "We define your audience-focused content strategy based on your business objectives." },
+            { icon: '🎬', title: 'Content creation', desc: "We handle ideation, pre-production, production and post-production." },
+            { icon: '📱', title: 'Content publishing', desc: "We manage your content calendar and publish across all platforms." },
+            { icon: '📊', title: 'Content amplification', desc: "We manage content amplification to maximize reach and engagement." },
+            { icon: '😍', title: 'Community management', desc: "We respond to comments and DMs while proactively engaging with relevant accounts." },
+            { icon: '📈', title: 'Reports', desc: "We deliver a monthly report with insights, then apply everything learned to the next content series." },
+          ]).map((item, i) => (
+            <FadeIn key={i} delay={i * 0.07}>
+              <div style={{ background: '#111', border: '0.5px solid rgba(255,255,255,0.07)', borderRadius: '12px', padding: '28px 24px', transition: 'border-color 0.2s' }}
+                onMouseEnter={e => e.currentTarget.style.borderColor = 'rgba(0,61,165,0.3)'}
+                onMouseLeave={e => e.currentTarget.style.borderColor = 'rgba(255,255,255,0.07)'}
+              >
+                <div style={{ fontSize: '28px', marginBottom: '14px' }}>{item.icon}</div>
+                <div style={{ fontSize: '13px', fontWeight: 700, color: '#fff', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{item.title}</div>
+                <div style={{ fontSize: '13px', color: 'rgba(255,255,255,0.5)', lineHeight: 1.65, fontWeight: 300 }}>{item.desc}</div>
+              </div>
+            </FadeIn>
+          ))}
         </div>
       </section>
  
@@ -521,7 +559,6 @@ export default function Entreprises() {
       <Footer />
  
       <style>{`
-        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
         #etudes-de-cas > div { width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; }
         .hamburger-btn { display: flex !important; }
         @media (max-width: 768px) {
