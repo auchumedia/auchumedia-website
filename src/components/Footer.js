@@ -1,9 +1,8 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
- 
+
 const BLUE = '#003DA5';
- 
+
 export default function Footer() {
   return (
     <footer style={{ background: '#060606', borderTop: '0.5px solid rgba(255,255,255,0.08)' }}>
@@ -11,12 +10,12 @@ export default function Footer() {
       <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: '48px', padding: '64px 60px 48px' }}>
         {/* Brand */}
         <div>
-          <div style={{ marginBottom: '16px' }}><img src="/Copie_de_AUCHU_png.png" alt="AuchuMedia" style={{ height: '24px', width: 'auto' }} /></div>
+          <div style={{ marginBottom: '16px' }}><img src="/Copie de AUCHU.png.png" alt="AuchuMedia" style={{ height: '24px', width: 'auto' }} /></div>
           <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.4)', lineHeight: 1.75, fontWeight: 300, maxWidth: '280px' }}>
             L'agence de référence pour les athlètes et les entreprises ambitieuses. Sport · Marketing · Croissance.
           </p>
         </div>
- 
+
         {/* Services */}
         <div>
           <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', marginBottom: '20px' }}>Services</div>
@@ -33,7 +32,7 @@ export default function Footer() {
             ))}
           </div>
         </div>
- 
+
         {/* Compagnie */}
         <div>
           <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', marginBottom: '20px' }}>Compagnie</div>
@@ -49,7 +48,7 @@ export default function Footer() {
             ))}
           </div>
         </div>
- 
+
         {/* Contact */}
         <div>
           <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', marginBottom: '20px' }}>Contact</div>
@@ -62,7 +61,7 @@ export default function Footer() {
           </Link>
         </div>
       </div>
- 
+
       {/* Bottom bar */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '20px 60px', borderTop: '0.5px solid rgba(255,255,255,0.06)' }}>
         <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.2)' }}>
@@ -81,7 +80,7 @@ export default function Footer() {
           ))}
         </div>
       </div>
- 
+
       <style>{`
         @media (max-width: 768px) {
           footer div[style*="grid-template-columns"] { grid-template-columns: 1fr 1fr !important; gap: 32px !important; padding: 40px 20px 32px !important; }
