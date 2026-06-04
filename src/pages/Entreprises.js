@@ -672,14 +672,15 @@ export default function Entreprises() {
             {fr ? <>UNE OFFRE <span style={{ color: BLUE }}>TRANSPARENTE.</span></> : <>TRANSPARENT <span style={{ color: BLUE }}>PRICING.</span></>}
           </h2>
         </FadeIn>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', maxWidth: '900px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px', maxWidth: '1100px' }}>
+          {/* Forfait 1 — 3500$ */}
           <FadeIn delay={0.1}>
-            <div style={{ background: '#0d0d0d', border: `1px solid rgba(0,61,165,0.3)`, borderRadius: '16px', padding: '40px', position: 'relative', overflow: 'hidden' }}>
+            <div style={{ background: '#0d0d0d', border: `1px solid rgba(0,61,165,0.3)`, borderRadius: '16px', padding: '36px', position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
               <div style={{ position: 'absolute', top: '-30px', right: '-30px', width: '160px', height: '160px', borderRadius: '50%', background: 'rgba(0,61,165,0.06)', filter: 'blur(30px)' }} />
-              <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE, marginBottom: '16px' }}>{fr ? 'Forfait de base' : 'Base plan'}</div>
-              <div style={{ fontFamily: "'Bebas Neue'", fontSize: '52px', color: '#fff', lineHeight: 1, marginBottom: '4px' }}>3 500$</div>
+              <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE, marginBottom: '16px' }}>{fr ? 'Forfait Essentiel' : 'Essential Plan'}</div>
+              <div style={{ fontFamily: "'Bebas Neue'", fontSize: '48px', color: '#fff', lineHeight: 1, marginBottom: '4px' }}>3 500$</div>
               <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', marginBottom: '24px' }}>{fr ? '/ mois' : '/ month'}</div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '32px' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '32px', flex: 1 }}>
                 {(fr ? ['8 vidéos courts formats / mois','Gestion Instagram, TikTok & LinkedIn','Stratégie éditoriale mensuelle','Rapport de performance','Réunion mensuelle dédiée','Gestionnaire de compte attitré'] : ['8 short-form videos / month','Instagram, TikTok & LinkedIn management','Monthly editorial strategy','Performance report','Monthly dedicated meeting','Dedicated account manager']).map((item, i) => (
                   <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                     <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: BLUE, flexShrink: 0 }} />
@@ -692,19 +693,60 @@ export default function Entreprises() {
               </button>
             </div>
           </FadeIn>
+
+          {/* Forfait 2 — 4500$ */}
+          <FadeIn delay={0.15}>
+            <div style={{ background: '#0d0d0d', border: `2px solid ${BLUE}`, borderRadius: '16px', padding: '36px', position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+              <div style={{ position: 'absolute', top: '0', right: '0', background: BLUE, fontSize: '9px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#fff', padding: '6px 14px', borderBottomLeftRadius: '8px' }}>
+                {fr ? 'POPULAIRE' : 'POPULAR'}
+              </div>
+              <div style={{ position: 'absolute', top: '-30px', right: '-30px', width: '160px', height: '160px', borderRadius: '50%', background: 'rgba(0,61,165,0.1)', filter: 'blur(30px)' }} />
+              <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE, marginBottom: '16px' }}>{fr ? 'Forfait Croissance' : 'Growth Plan'}</div>
+              <div style={{ fontFamily: "'Bebas Neue'", fontSize: '48px', color: '#fff', lineHeight: 1, marginBottom: '4px' }}>4 500$</div>
+              <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', marginBottom: '24px' }}>{fr ? '/ mois' : '/ month'}</div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '32px', flex: 1 }}>
+                {(fr ? ['12 vidéos courts formats / mois','Gestion Instagram, TikTok & LinkedIn','Stratégie éditoriale mensuelle','Rapport de performance','Réunion mensuelle dédiée','Gestionnaire de compte attitré'] : ['12 short-form videos / month','Instagram, TikTok & LinkedIn management','Monthly editorial strategy','Performance report','Monthly dedicated meeting','Dedicated account manager']).map((item, i) => (
+                  <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: BLUE, flexShrink: 0 }} />
+                    <span style={{ fontSize: '13px', color: 'rgba(255,255,255,0.7)' }}>{item}</span>
+                  </div>
+                ))}
+              </div>
+              <button onClick={() => scrollTo('contact')} style={{ width: '100%', fontSize: '11px', fontWeight: 700, color: '#fff', background: BLUE, padding: '14px', borderRadius: '4px', letterSpacing: '0.08em', textTransform: 'uppercase', border: 'none', cursor: 'pointer', fontFamily: "'DM Sans'", boxShadow: '0 0 20px rgba(0,61,165,0.3)' }}>
+                {fr ? 'Démarrer →' : 'Get started →'}
+              </button>
+            </div>
+          </FadeIn>
+
+          {/* Forfait 3 — +3000$ */}
           <FadeIn delay={0.2}>
-            <div style={{ background: '#0d0d0d', border: '0.5px solid rgba(255,255,255,0.08)', borderRadius: '16px', padding: '40px' }}>
-              <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginBottom: '16px' }}>{fr ? 'Forfait sur mesure' : 'Custom plan'}</div>
-              <div style={{ fontFamily: "'Bebas Neue'", fontSize: '52px', color: '#fff', lineHeight: 1, marginBottom: '4px' }}>{fr ? 'SUR MESURE' : 'CUSTOM'}</div>
-              <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', marginBottom: '24px' }}>{fr ? 'Selon vos besoins' : 'Based on your needs'}</div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '32px' }}>
-                {(fr ? ['Tout le forfait de base','Gestion Meta Ads & Google Ads','Intégration CRM complète','Production vidéo longue durée','Stratégie multi-plateforme'] : ['Everything in base plan','Meta Ads & Google Ads management','Full CRM integration','Long-form video production','Multi-platform strategy']).map((item, i) => (
+            <div style={{ background: '#0d0d0d', border: '0.5px solid rgba(255,255,255,0.08)', borderRadius: '16px', padding: '36px', display: 'flex', flexDirection: 'column' }}>
+              <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginBottom: '16px' }}>{fr ? 'Add-on · Meta Ads & CRM' : 'Add-on · Meta Ads & CRM'}</div>
+              <div style={{ fontFamily: "'Bebas Neue'", fontSize: '48px', color: '#fff', lineHeight: 1, marginBottom: '4px' }}>+3 000$</div>
+              <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', marginBottom: '24px' }}>{fr ? '/ mois · à ajouter à votre forfait' : '/ month · add to your plan'}</div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '16px', flex: 1 }}>
+                {(fr ? [
+                  'Gestion complète Meta Ads',
+                  'Intégration & configuration CRM',
+                  'Pipeline de leads automatisé',
+                  'Rapports publicitaires mensuels',
+                  'Optimisation continue des campagnes',
+                ] : [
+                  'Full Meta Ads management',
+                  'CRM integration & configuration',
+                  'Automated lead pipeline',
+                  'Monthly advertising reports',
+                  'Continuous campaign optimization',
+                ]).map((item, i) => (
                   <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                     <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: 'rgba(255,255,255,0.2)', flexShrink: 0 }} />
                     <span style={{ fontSize: '13px', color: 'rgba(255,255,255,0.5)' }}>{item}</span>
                   </div>
                 ))}
               </div>
+              <p style={{ fontSize: '11px', color: 'rgba(255,255,255,0.3)', lineHeight: 1.5, marginBottom: '20px', fontStyle: 'italic' }}>
+                * {fr ? 'Budget publicitaire minimum de 1 000$/mois requis (non inclus dans le forfait).' : 'Minimum advertising budget of $1,000/month required (not included in the plan).'}
+              </p>
               <button onClick={() => scrollTo('contact')} style={{ width: '100%', fontSize: '11px', fontWeight: 700, color: 'rgba(255,255,255,0.7)', border: '0.5px solid rgba(255,255,255,0.2)', padding: '14px', borderRadius: '4px', letterSpacing: '0.08em', textTransform: 'uppercase', background: 'transparent', cursor: 'pointer', fontFamily: "'DM Sans'" }}>
                 {fr ? 'Nous contacter →' : 'Contact us →'}
               </button>
