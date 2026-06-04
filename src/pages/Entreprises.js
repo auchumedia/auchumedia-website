@@ -162,7 +162,7 @@ function MultiStepForm({ fr, scrollTo, BLUE }) {
           <label style={labelStyle}>{fr ? 'Êtes-vous le décideur final ? *' : 'Are you the final decision maker? *'}</label>
           <select value={form.role} onChange={e => set('role', e.target.value)} style={selectStyle}>
             <option value="">{fr ? 'Sélectionner' : 'Select'}</option>
-            {(fr ? ["Oui, c'est moi", 'Je consulte un associé', 'Je dois faire approuver'] : ['Yes, that's me', 'I consult a partner', 'I need approval']).map(o => <option key={o} value={o}>{o}</option>)}
+            {(fr ? ["Oui, c'est moi", 'Je consulte un associé', 'Je dois faire approuver'] : ["Yes, that's me", 'I consult a partner', 'I need approval']).map(o => <option key={o} value={o}>{o}</option>)}
           </select>
           <label style={labelStyle}>{fr ? 'Taille de votre équipe marketing *' : 'Marketing team size *'}</label>
           <select value={form.equipe} onChange={e => set('equipe', e.target.value)} style={selectStyle}>
