@@ -65,8 +65,8 @@ const navLinks = [
   { id: 'pourquoi', labelFr: 'Pourquoi AuchuMedia', labelEn: 'Why AuchuMedia' },
   { id: 'etudes-de-cas', labelFr: 'Études de cas', labelEn: 'Case studies' },
   { id: 'deroulement', labelFr: 'Déroulement', labelEn: 'Process' },
-  { id: 'faq', labelFr: 'FAQ', labelEn: 'FAQ' },
   { id: 'tarification', labelFr: 'Tarification', labelEn: 'Pricing' },
+  { id: 'faq', labelFr: 'FAQ', labelEn: 'FAQ' },
 ];
 
 
