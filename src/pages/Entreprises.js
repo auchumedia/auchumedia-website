@@ -445,11 +445,17 @@ export default function Entreprises() {
                 </div>
                 {/* Right — visual */}
                 <div style={{ background: i % 2 === 0 ? 'linear-gradient(135deg, #080f1c, #0d1428)' : 'linear-gradient(135deg, #0d0d0d, #161616)', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}>
-                  <div style={{ position: 'absolute', fontFamily: "'Bebas Neue'", fontSize: '200px', color: 'rgba(255,255,255,0.03)', lineHeight: 1, userSelect: 'none' }}>{String(i+1)}</div>
-                  <div style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
-                    <div style={{ fontFamily: "'Bebas Neue'", fontSize: '48px', color: BLUE, letterSpacing: '0.05em' }}>{step.days}</div>
-                    <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.3)', letterSpacing: '0.1em', textTransform: 'uppercase', marginTop: '4px' }}>{fr ? 'jalons' : 'milestone'}</div>
-                  </div>
+                  {i === 1 ? (
+                    <img src="/deroulement-2.jpg" alt="Tournage" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }} />
+                  ) : (
+                    <>
+                      <div style={{ position: 'absolute', fontFamily: "'Bebas Neue'", fontSize: '200px', color: 'rgba(255,255,255,0.03)', lineHeight: 1, userSelect: 'none' }}>{String(i+1)}</div>
+                      <div style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
+                        <div style={{ fontFamily: "'Bebas Neue'", fontSize: '48px', color: BLUE, letterSpacing: '0.05em' }}>{step.days}</div>
+                        <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.3)', letterSpacing: '0.1em', textTransform: 'uppercase', marginTop: '4px' }}>{fr ? 'jalons' : 'milestone'}</div>
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
@@ -488,13 +494,18 @@ export default function Entreprises() {
               </div>
               {/* Visual section */}
               <div style={{ height: '200px', background: `linear-gradient(135deg, ${i % 2 === 0 ? '#080f1c, #0d1428' : '#0d0d18, #161628'})`, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}>
-                <div style={{ position: 'absolute', fontFamily: "'Bebas Neue'", fontSize: '160px', color: 'rgba(255,255,255,0.03)', lineHeight: 1 }}>{String(i+1)}</div>
-                <div style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
-                  <div style={{ fontFamily: "'Bebas Neue'", fontSize: '52px', color: BLUE, letterSpacing: '0.05em', lineHeight: 1 }}>{step.days}</div>
-                  <div style={{ fontSize: '10px', color: 'rgba(255,255,255,0.3)', letterSpacing: '0.12em', textTransform: 'uppercase', marginTop: '6px' }}>{fr ? 'jalons' : 'milestone'}</div>
-                </div>
-                {/* Blue glow */}
-                <div style={{ position: 'absolute', bottom: '-30px', left: '50%', transform: 'translateX(-50%)', width: '120px', height: '120px', borderRadius: '50%', background: 'rgba(0,61,165,0.15)', filter: 'blur(30px)' }} />
+                {i === 1 ? (
+                  <img src="/deroulement-2.jpg" alt="Tournage" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top' }} />
+                ) : (
+                  <>
+                    <div style={{ position: 'absolute', fontFamily: "'Bebas Neue'", fontSize: '160px', color: 'rgba(255,255,255,0.03)', lineHeight: 1 }}>{String(i+1)}</div>
+                    <div style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
+                      <div style={{ fontFamily: "'Bebas Neue'", fontSize: '52px', color: BLUE, letterSpacing: '0.05em', lineHeight: 1 }}>{step.days}</div>
+                      <div style={{ fontSize: '10px', color: 'rgba(255,255,255,0.3)', letterSpacing: '0.12em', textTransform: 'uppercase', marginTop: '6px' }}>{fr ? 'jalons' : 'milestone'}</div>
+                    </div>
+                    <div style={{ position: 'absolute', bottom: '-30px', left: '50%', transform: 'translateX(-50%)', width: '120px', height: '120px', borderRadius: '50%', background: 'rgba(0,61,165,0.15)', filter: 'blur(30px)' }} />
+                  </>
+                )}
               </div>
             </div>
           ))}
