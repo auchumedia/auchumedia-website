@@ -446,7 +446,10 @@ export default function Entreprises() {
                 {/* Right — visual */}
                 <div style={{ background: i % 2 === 0 ? 'linear-gradient(135deg, #080f1c, #0d1428)' : 'linear-gradient(135deg, #0d0d0d, #161616)', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}>
                   {i === 1 ? (
-                    <img src="/deroulement-2.jpg" alt="Tournage" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }} />
+                    <div style={{ position: 'absolute', inset: 0 }}>
+                      <img src="/deroulement-2.jpg" alt="Tournage" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top' }} />
+                      <div style={{ position: 'absolute', inset: 0, background: 'rgba(8,8,8,0.35)' }} />
+                    </div>
                   ) : (
                     <>
                       <div style={{ position: 'absolute', fontFamily: "'Bebas Neue'", fontSize: '200px', color: 'rgba(255,255,255,0.03)', lineHeight: 1, userSelect: 'none' }}>{String(i+1)}</div>
@@ -495,7 +498,10 @@ export default function Entreprises() {
               {/* Visual section */}
               <div style={{ height: '200px', background: `linear-gradient(135deg, ${i % 2 === 0 ? '#080f1c, #0d1428' : '#0d0d18, #161628'})`, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}>
                 {i === 1 ? (
-                  <img src="/deroulement-2.jpg" alt="Tournage" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top' }} />
+                  <div style={{ position: 'absolute', inset: 0 }}>
+                    <img src="/deroulement-2.jpg" alt="Tournage" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top' }} />
+                    <div style={{ position: 'absolute', inset: 0, background: 'rgba(8,8,8,0.35)' }} />
+                  </div>
                 ) : (
                   <>
                     <div style={{ position: 'absolute', fontFamily: "'Bebas Neue'", fontSize: '160px', color: 'rgba(255,255,255,0.03)', lineHeight: 1 }}>{String(i+1)}</div>
