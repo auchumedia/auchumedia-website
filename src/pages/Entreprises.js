@@ -759,36 +759,7 @@ export default function Entreprises() {
             </p>
           </FadeIn>
           <FadeIn direction="right">
-            <div style={{ background: '#0d0d0d', border: '0.5px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '36px 32px' }}>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px', marginBottom: '14px' }}>
-                {[fr ? 'Prénom' : 'First name', fr ? 'Nom' : 'Last name'].map(l => (
-                  <div key={l}>
-                    <label style={{ display: 'block', fontSize: '10px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', marginBottom: '7px' }}>{l}</label>
-                    <input type="text" style={{ width: '100%', background: '#111', border: '0.5px solid rgba(255,255,255,0.1)', borderRadius: '6px', padding: '11px 14px', color: '#fff', fontSize: '13px', outline: 'none', fontFamily: "'DM Sans'" }} />
-                  </div>
-                ))}
-              </div>
-              {[{ label: 'Email', type: 'email' }, { label: fr ? "Nom de l'entreprise" : 'Company name', type: 'text' }].map(f => (
-                <div key={f.label} style={{ marginBottom: '14px' }}>
-                  <label style={{ display: 'block', fontSize: '10px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', marginBottom: '7px' }}>{f.label}</label>
-                  <input type={f.type} style={{ width: '100%', background: '#111', border: '0.5px solid rgba(255,255,255,0.1)', borderRadius: '6px', padding: '11px 14px', color: '#fff', fontSize: '13px', outline: 'none', fontFamily: "'DM Sans'" }} />
-                </div>
-              ))}
-              <div style={{ marginBottom: '14px' }}>
-                <label style={{ display: 'block', fontSize: '10px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', marginBottom: '7px' }}>{fr ? "Chiffre d'affaires annuel" : 'Annual revenue'}</label>
-                <select style={{ width: '100%', background: '#111', border: '0.5px solid rgba(255,255,255,0.1)', borderRadius: '6px', padding: '11px 14px', color: '#fff', fontSize: '13px', outline: 'none', fontFamily: "'DM Sans'", appearance: 'none', cursor: 'pointer' }}>
-                  <option value="">{fr ? 'Sélectionne une tranche' : 'Select a range'}</option>
-                  {(fr ? ['Moins de 100K$/an','100K$ – 500K$/an','500K$ – 1M$/an','1M$ et plus'] : ['Less than $100K/yr','$100K – $500K/yr','$500K – $1M/yr','$1M and more']).map(o => <option key={o}>{o}</option>)}
-                </select>
-              </div>
-              <div style={{ marginBottom: '14px' }}>
-                <label style={{ display: 'block', fontSize: '10px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', marginBottom: '7px' }}>{fr ? 'Votre projet' : 'Your project'}</label>
-                <textarea required placeholder={fr ? 'Dites-nous en plus...' : 'Tell us more...'} style={{ width: '100%', background: '#111', border: '0.5px solid rgba(255,255,255,0.1)', borderRadius: '6px', padding: '11px 14px', color: '#fff', fontSize: '13px', outline: 'none', fontFamily: "'DM Sans'", resize: 'vertical', minHeight: '90px' }} />
-              </div>
-              <button style={{ width: '100%', fontSize: '11px', fontWeight: 700, color: '#fff', background: BLUE, padding: '14px', borderRadius: '5px', letterSpacing: '0.08em', textTransform: 'uppercase', cursor: 'pointer', border: 'none', fontFamily: "'DM Sans'" }}>
-                {fr ? 'Envoyer ma demande →' : 'Send my request →'}
-              </button>
-            </div>
+            <MultiStepForm fr={fr} scrollTo={scrollTo} BLUE={BLUE} />
           </FadeIn>
         </div>
       </section>
