@@ -181,7 +181,7 @@ function MultiStepForm({ fr, scrollTo, BLUE }) {
           <label style={labelStyle}>{fr ? 'Budget mensuel prévu *' : 'Monthly budget *'}</label>
           <select value={form.budget} onChange={e => set('budget', e.target.value)} style={selectStyle}>
             <option value="">{fr ? 'Sélectionner' : 'Select'}</option>
-            {['0$ – 3 500$/mois', '3 500$ – 5 000$/mois', '5 000$ – 10 000$/mois', '10 000$+/mois'].map(o => <option key={o} value={o}>{o}</option>)}
+            {['0$ – 5 000$/mois', '5 000$ – 10 000$/mois', '10 000$+/mois'].map(o => <option key={o} value={o}>{o}</option>)}
           </select>
           <label style={labelStyle}>{fr ? 'Quand souhaitez-vous commencer ? *' : 'When do you want to start? *'}</label>
           <select value={form.quand} onChange={e => set('quand', e.target.value)} style={selectStyle}>
