@@ -69,6 +69,149 @@ const navLinks = [
   { id: 'tarification', labelFr: 'Tarification', labelEn: 'Pricing' },
 ];
 
+
+function MultiStepForm({ fr, scrollTo, BLUE }) {
+  const [step, setStep] = React.useState(1);
+  const [form, setForm] = React.useState({
+    prenom: '', nom: '', email: '', telephone: '',
+    entreprise: '', site: '', ca: '',
+    marketing: '', equipe: '', role: '',
+    besoin: '', budget: '', quand: ''
+  });
+  const [submitted, setSubmitted] = React.useState(false);
+
+  const total = 4;
+  const set = (k, v) => setForm(f => ({ ...f, [k]: v }));
+  const inputStyle = { width: '100%', background: '#111', border: '0.5px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '12px 16px', color: '#fff', fontSize: '14px', outline: 'none', fontFamily: "'DM Sans'", marginBottom: '14px' };
+  const selectStyle = { ...inputStyle, appearance: 'none', cursor: 'pointer' };
+  const labelStyle = { display: 'block', fontSize: '13px', fontWeight: 600, color: 'rgba(255,255,255,0.7)', marginBottom: '8px' };
+
+  const steps = fr ? [
+    'Vos informations', 'Votre entreprise', 'Votre structure marketing', 'Votre besoin'
+  ] : [
+    'Your information', 'Your business', 'Your marketing structure', 'Your needs'
+  ];
+
+  if (submitted) return (
+    <div style={{ background: '#0d0d0d', border: `1px solid rgba(0,61,165,0.3)`, borderRadius: '16px', padding: '48px 32px', textAlign: 'center' }}>
+      <div style={{ fontSize: '48px', marginBottom: '16px' }}>✅</div>
+      <div style={{ fontFamily: "'Bebas Neue'", fontSize: '28px', color: '#fff', marginBottom: '12px' }}>{fr ? 'DEMANDE REÇUE !' : 'REQUEST RECEIVED!'}</div>
+      <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.5)', lineHeight: 1.7 }}>{fr ? 'Notre équipe vous contactera dans les 48h.' : 'Our team will contact you within 48h.'}</p>
+    </div>
+  );
+
+  return (
+    <div style={{ background: '#0d0d0d', border: '0.5px solid rgba(255,255,255,0.08)', borderRadius: '16px', padding: '36px 32px' }}>
+      {/* Progress bar */}
+      <div style={{ marginBottom: '28px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+          <span style={{ fontSize: '11px', fontWeight: 700, color: BLUE, letterSpacing: '0.1em', textTransform: 'uppercase' }}>{steps[step - 1]}</span>
+          <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.3)' }}>{step}/{total}</span>
+        </div>
+        <div style={{ height: '3px', background: 'rgba(255,255,255,0.08)', borderRadius: '2px', overflow: 'hidden' }}>
+          <div style={{ height: '100%', width: `${(step / total) * 100}%`, background: BLUE, borderRadius: '2px', transition: 'width 0.4s ease' }} />
+        </div>
+      </div>
+
+      {/* Step 1 — Infos personnelles */}
+      {step === 1 && (
+        <div>
+          <div style={{ fontFamily: "'Bebas Neue'", fontSize: '24px', color: '#fff', marginBottom: '24px', letterSpacing: '0.04em' }}>{fr ? 'VOS INFORMATIONS' : 'YOUR INFORMATION'}</div>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0 14px' }}>
+            <div>
+              <label style={labelStyle}>{fr ? 'Prénom *' : 'First name *'}</label>
+              <input type="text" value={form.prenom} onChange={e => set('prenom', e.target.value)} placeholder="Jean" style={inputStyle} />
+            </div>
+            <div>
+              <label style={labelStyle}>{fr ? 'Nom *' : 'Last name *'}</label>
+              <input type="text" value={form.nom} onChange={e => set('nom', e.target.value)} placeholder="Dupont" style={inputStyle} />
+            </div>
+          </div>
+          <label style={labelStyle}>Email *</label>
+          <input type="email" value={form.email} onChange={e => set('email', e.target.value)} placeholder="jean@entreprise.com" style={inputStyle} />
+          <label style={labelStyle}>{fr ? 'Téléphone *' : 'Phone *'}</label>
+          <input type="tel" value={form.telephone} onChange={e => set('telephone', e.target.value)} placeholder="+1 (514) 000-0000" style={inputStyle} />
+        </div>
+      )}
+
+      {/* Step 2 — Entreprise */}
+      {step === 2 && (
+        <div>
+          <div style={{ fontFamily: "'Bebas Neue'", fontSize: '24px', color: '#fff', marginBottom: '24px', letterSpacing: '0.04em' }}>{fr ? 'VOTRE ENTREPRISE' : 'YOUR BUSINESS'}</div>
+          <label style={labelStyle}>{fr ? "Nom de l'entreprise *" : 'Company name *'}</label>
+          <input type="text" value={form.entreprise} onChange={e => set('entreprise', e.target.value)} placeholder="Nom inc." style={inputStyle} />
+          <label style={labelStyle}>{fr ? 'Site web' : 'Website'}</label>
+          <input type="text" value={form.site} onChange={e => set('site', e.target.value)} placeholder="monentreprise.com" style={inputStyle} />
+          <label style={labelStyle}>{fr ? "Chiffre d'affaires annuel *" : 'Annual revenue *'}</label>
+          <select value={form.ca} onChange={e => set('ca', e.target.value)} style={selectStyle}>
+            <option value="">{fr ? 'Sélectionner' : 'Select'}</option>
+            {(fr ? ['Moins de 500K$/an', '500K$ – 1M$/an', '1M$ – 5M$/an', '5M$ et plus'] : ['Less than $500K/yr', '$500K – $1M/yr', '$1M – $5M/yr', '$5M and more']).map(o => <option key={o} value={o}>{o}</option>)}
+          </select>
+        </div>
+      )}
+
+      {/* Step 3 — Structure marketing */}
+      {step === 3 && (
+        <div>
+          <div style={{ fontFamily: "'Bebas Neue'", fontSize: '24px', color: '#fff', marginBottom: '24px', letterSpacing: '0.04em' }}>{fr ? 'VOTRE STRUCTURE MARKETING' : 'YOUR MARKETING STRUCTURE'}</div>
+          <label style={labelStyle}>{fr ? 'Qui gère vos réseaux sociaux actuellement ? *' : 'Who currently manages your social media? *'}</label>
+          <select value={form.marketing} onChange={e => set('marketing', e.target.value)} style={selectStyle}>
+            <option value="">{fr ? 'Sélectionner' : 'Select'}</option>
+            {(fr ? ["Personne pour l'instant", 'Moi-même', 'Un employé interne', 'Une autre agence', 'Un freelance'] : ['Nobody for now', 'Myself', 'An internal employee', 'Another agency', 'A freelancer']).map(o => <option key={o} value={o}>{o}</option>)}
+          </select>
+          <label style={labelStyle}>{fr ? 'Êtes-vous le décideur final ? *' : 'Are you the final decision maker? *'}</label>
+          <select value={form.role} onChange={e => set('role', e.target.value)} style={selectStyle}>
+            <option value="">{fr ? 'Sélectionner' : 'Select'}</option>
+            {(fr ? ["Oui, c'est moi", 'Je consulte un associé', 'Je dois faire approuver'] : ['Yes, that's me', 'I consult a partner', 'I need approval']).map(o => <option key={o} value={o}>{o}</option>)}
+          </select>
+          <label style={labelStyle}>{fr ? 'Taille de votre équipe marketing *' : 'Marketing team size *'}</label>
+          <select value={form.equipe} onChange={e => set('equipe', e.target.value)} style={selectStyle}>
+            <option value="">{fr ? 'Sélectionner' : 'Select'}</option>
+            {(fr ? ['Aucune équipe', '1 personne', '2-3 personnes', '4+ personnes'] : ['No team', '1 person', '2-3 people', '4+ people']).map(o => <option key={o} value={o}>{o}</option>)}
+          </select>
+        </div>
+      )}
+
+      {/* Step 4 — Besoin */}
+      {step === 4 && (
+        <div>
+          <div style={{ fontFamily: "'Bebas Neue'", fontSize: '24px', color: '#fff', marginBottom: '24px', letterSpacing: '0.04em' }}>{fr ? 'VOTRE BESOIN' : 'YOUR NEEDS'}</div>
+          <label style={labelStyle}>{fr ? 'Pourquoi envisagez-vous de travailler avec AuchuMedia ? *' : 'Why are you considering working with AuchuMedia? *'}</label>
+          <textarea value={form.besoin} onChange={e => set('besoin', e.target.value)} placeholder={fr ? 'Partagez le plus de contexte possible...' : 'Share as much context as possible...'} style={{ ...inputStyle, resize: 'vertical', minHeight: '100px' }} />
+          <label style={labelStyle}>{fr ? 'Budget mensuel prévu *' : 'Monthly budget *'}</label>
+          <select value={form.budget} onChange={e => set('budget', e.target.value)} style={selectStyle}>
+            <option value="">{fr ? 'Sélectionner' : 'Select'}</option>
+            {['0$ – 3 500$/mois', '3 500$ – 5 000$/mois', '5 000$ – 10 000$/mois', '10 000$+/mois'].map(o => <option key={o} value={o}>{o}</option>)}
+          </select>
+          <label style={labelStyle}>{fr ? 'Quand souhaitez-vous commencer ? *' : 'When do you want to start? *'}</label>
+          <select value={form.quand} onChange={e => set('quand', e.target.value)} style={selectStyle}>
+            <option value="">{fr ? 'Sélectionner' : 'Select'}</option>
+            {(fr ? ['Immédiatement', 'Dans 1 à 3 mois', 'Dans 3 à 6 mois', 'Je explore seulement'] : ['Immediately', 'In 1 to 3 months', 'In 3 to 6 months', 'Just exploring']).map(o => <option key={o} value={o}>{o}</option>)}
+          </select>
+        </div>
+      )}
+
+      {/* Navigation buttons */}
+      <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '8px', gap: '12px' }}>
+        {step > 1 ? (
+          <button onClick={() => setStep(s => s - 1)} style={{ fontSize: '11px', fontWeight: 700, color: 'rgba(255,255,255,0.6)', background: 'transparent', border: '0.5px solid rgba(255,255,255,0.2)', padding: '12px 24px', borderRadius: '6px', cursor: 'pointer', fontFamily: "'DM Sans'", letterSpacing: '0.07em', textTransform: 'uppercase' }}>
+            ← {fr ? 'Précédent' : 'Previous'}
+          </button>
+        ) : <div />}
+        {step < total ? (
+          <button onClick={() => setStep(s => s + 1)} style={{ fontSize: '11px', fontWeight: 700, color: '#fff', background: BLUE, border: 'none', padding: '12px 28px', borderRadius: '6px', cursor: 'pointer', fontFamily: "'DM Sans'", letterSpacing: '0.07em', textTransform: 'uppercase' }}>
+            {fr ? 'Suivant' : 'Next'} →
+          </button>
+        ) : (
+          <button onClick={() => setSubmitted(true)} style={{ fontSize: '11px', fontWeight: 700, color: '#fff', background: BLUE, border: 'none', padding: '12px 28px', borderRadius: '6px', cursor: 'pointer', fontFamily: "'DM Sans'", letterSpacing: '0.07em', textTransform: 'uppercase' }}>
+            {fr ? 'Soumettre' : 'Submit'} →
+          </button>
+        )}
+      </div>
+    </div>
+  );
+}
+
 export default function Entreprises() {
   const [lang, setLang] = useState('fr');
   const [openFaq, setOpenFaq] = useState(null);
