@@ -176,7 +176,7 @@ export default function Entreprises() {
         padding: '0 60px', height: '64px', gap: '16px'
       }}>
         {/* Logo */}
-        <a href="/" style={{ flexShrink: 0 }}><img src="/Copie de AUCHU.png.png" alt="AuchuMedia" style={{ height: '36px', width: 'auto' }} /></a>
+        <a href="/" style={{ flexShrink: 0 }}><img src="/Copie de AUCHU.png.png" alt="AuchuMedia" style={{ height: '22px', width: 'auto' }} /></a>
 
         {/* Section links — center */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '2px', overflowX: 'auto', scrollbarWidth: 'none', flex: 1, justifyContent: 'center' }} className="nav-links">
