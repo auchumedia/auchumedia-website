@@ -432,19 +432,19 @@ export default function Entreprises() {
         </FadeIn>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 320px)', gap: '12px', justifyContent: 'center' }}>
           {(fr ? [
-            { icon: '🏗️', title: 'Stratégie de contenu', desc: "On définit votre stratégie de contenu autour de votre expertise — avant, pendant et après chaque projet client." },
-            { icon: '🎬', title: 'Création de contenu', desc: "Tournages chez vos clients, avant/après de projets, témoignages — du contenu qui démontre votre expertise et convertit." },
-            { icon: '📱', title: 'Publication de contenu', desc: "Publication régulière sur Instagram, TikTok et LinkedIn pour rester top-of-mind auprès de vos clients potentiels." },
+            { icon: '🏗️', title: 'Stratégie de contenu', desc: "Nous définissons votre stratégie de contenu centrée sur l'audience en fonction de vos objectifs d'affaires." },
+            { icon: '🎬', title: 'Création de contenu', desc: "Nous prenons en charge l'idéation, la préproduction, la production et la postproduction." },
+            { icon: '📱', title: 'Publication de contenu', desc: "Nous gérons votre calendrier de contenu et publions sur l'ensemble des plateformes." },
             { icon: '🎯', title: 'Meta Ads', desc: "Campagnes ciblées vers les propriétaires dans votre zone de service prêts à investir dans vos services premium." },
             { icon: '🔗', title: 'CRM & Pipeline', desc: "Système de suivi des leads — de la première demande de soumission jusqu'à la signature du contrat." },
-            { icon: '📈', title: 'Rapports', desc: "Rapport mensuel : portée, leads générés, coût par lead — vous savez exactement ce que vous rapporte chaque dollar investi." },
+            { icon: '📈', title: 'Rapports', desc: "Nous livrons un rapport mensuel avec des constats, puis nous appliquons tout ce que nous avons appris à la prochaine série de contenus." },
           ] : [
-            { icon: '🏗️', title: 'Content strategy', desc: "We define your content strategy around your expertise — before, during and after each client project." },
-            { icon: '🎬', title: 'Content creation', desc: "Client shoots, project before/afters, testimonials — content that demonstrates your expertise and converts." },
-            { icon: '📱', title: 'Content publishing', desc: "Regular publishing on Instagram, TikTok and LinkedIn to stay top-of-mind with potential clients." },
+            { icon: '🏗️', title: 'Content strategy', desc: "We define your audience-focused content strategy based on your business objectives." },
+            { icon: '🎬', title: 'Content creation', desc: "We handle ideation, pre-production, production and post-production." },
+            { icon: '📱', title: 'Content publishing', desc: "We manage your content calendar and publish across all platforms." },
             { icon: '🎯', title: 'Meta Ads', desc: "Targeted campaigns toward homeowners in your service area ready to invest in your premium services." },
             { icon: '🔗', title: 'CRM & Pipeline', desc: "Lead tracking system — from the first quote request to contract signing." },
-            { icon: '📈', title: 'Reports', desc: "Monthly report: reach, leads generated, cost per lead — you know exactly what every dollar invested brings back." },
+            { icon: '📈', title: 'Reports', desc: "We deliver a monthly report with insights, then apply everything learned to the next content series." },
           ]).map((item, i) => (
             <FadeIn key={i} delay={i * 0.07}>
               <div style={{ background: '#111', border: '0.5px solid rgba(255,255,255,0.07)', borderRadius: '12px', padding: '28px 24px', transition: 'border-color 0.2s', height: '100%' }}
