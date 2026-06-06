@@ -229,19 +229,39 @@ export default function Entreprises() {
   }, []);
 
   const faqs = fr ? [
-    { q: "Combien de temps avant de recevoir des leads qualifiés ?", a: "La plupart de nos clients voient leurs premières demandes de soumission via les réseaux sociaux dans les 60-90 premiers jours. L'autorité de marque se bâtit sur 3-6 mois." },
-    { q: "Est-ce que vous gérez tout le contenu ?", a: "Oui. On prend en charge la stratégie, la création de contenu, la production vidéo et la gestion des réseaux sociaux. Votre seul travail est d'approuver." },
-    { q: "Quel type de contenu créez-vous ?", a: "Tournages chez vos clients, avant/après de projets, témoignages clients, démonstrations de votre expertise — du contenu qui inspire confiance et donne envie de vous appeler." },
-    { q: "Avec quels types d'entreprises travaillez-vous ?", a: "On se spécialise avec des entreprises B2C high ticket dont le service coûte 2 000$ et plus — climatisation & chauffage, portes & fenêtres, aménagement paysager, rénovation, toiture, piscines, cuisine & salle de bain, et tout autre service résidentiel premium." },
-    { q: "Qu'est-ce qui est inclus dans le forfait de base ?", a: "8 vidéos courts formats par mois (chantiers, projets, équipe), gestion Instagram, TikTok & LinkedIn, stratégie éditoriale mensuelle, rapport de performance et réunion mensuelle dédiée." },
-    { q: "Est-ce que vous pouvez cibler des zones géographiques spécifiques ?", a: "Oui — on peut cibler précisément votre zone de service (ville, région, rayon) pour que vos publicités Meta Ads atteignent uniquement les clients potentiels dans votre secteur." },
+    {
+      q: "À quel type d'entreprise notre service de médias sociaux s'adresse-t-il ?",
+      a: "On se spécialise avec des entreprises B2C high ticket dont le service coûte 2 000$ et plus — climatisation & chauffage, portes & fenêtres, aménagement paysager, rénovation, toiture, piscines, cuisine & salle de bain, et tout autre service résidentiel premium."
+    },
+    {
+      q: "Qu'est-ce qu'un contenu centré sur l'audience ?",
+      a: "Un contenu centré sur l'audience, c'est un contenu créé en fonction de ce que l'audience a réellement envie de regarder, et non de ce que la marque souhaite simplement dire. En médias sociaux organiques, la distribution se mérite. Les plateformes favorisent les contenus qui retiennent l'attention et génèrent de forts signaux d'audience — temps de visionnement, engagement, commentaires et partages. C'est pourquoi un contenu organique efficace ne peut pas sembler trop promotionnel ou trop centré sur le produit. L'objectif est de capter l'attention bien avant que votre audience soit prête à acheter, afin que le moment venu, votre marque leur soit déjà familière, crédible et bien ancrée dans leur esprit."
+    },
+    {
+      q: "Quel type d'équipement est utilisé pour filmer mon contenu ?",
+      a: "On travaille avec du matériel professionnel adapté à la production de contenu social haute qualité. Notre setup principal est centré sur la Sony A7 IV — une caméra plein format reconnue pour son rendu cinématique — complétée par des optiques sélectionnées selon les besoins de chaque tournage, un éclairage professionnel et du matériel audio de qualité. L'objectif est que chaque vidéo reflète le niveau d'excellence de votre marque."
+    },
+    {
+      q: "Quels indicateurs utilisez-vous pour mesurer le succès ?",
+      a: "On suit les indicateurs qui permettent de savoir si le contenu capte réellement l'attention et génère les bons signaux auprès de l'audience — vues, temps de visionnement, rétention, mentions J'aime, commentaires, partages, enregistrements, gain d'abonnés, visites de profil et taux d'engagement. Ces données nous aident à comprendre ce qui résonne, ce qui fonctionne moins bien et si le contenu génère les signaux que les plateformes récompensent par davantage de portée. Sur le long terme, on s'intéresse aussi à la croissance de l'audience, la constance de la portée et la visibilité globale de la marque."
+    },
   ] : [
-    { q: "How long before receiving qualified leads?", a: "Most of our clients see their first quote requests via social media within the first 60-90 days. Brand authority builds over 3-6 months." },
-    { q: "Do you manage all the content?", a: "Yes. We handle strategy, content creation, video production and social media management. Your only job is to approve." },
-    { q: "What type of content do you create?", a: "Client shoots, before/after projects, client testimonials, expertise demonstrations — content that builds trust and makes people want to call you." },
-    { q: "What types of businesses do you work with?", a: "We specialize with B2C high ticket businesses whose service costs $2,000 and up — heating & cooling, doors & windows, landscaping, renovation, roofing, pools, kitchen & bathroom, and any other premium residential service." },
-    { q: "What's included in the base plan?", a: "8 short-form videos per month (job sites, projects, team), Instagram, TikTok & LinkedIn management, monthly editorial strategy, performance report and dedicated monthly meeting." },
-    { q: "Can you target specific geographic areas?", a: "Yes — we can precisely target your service area (city, region, radius) so your Meta Ads campaigns only reach potential clients in your sector." },
+    {
+      q: "What type of business does your social media service cater to?",
+      a: "We specialize with B2C high ticket businesses whose service costs $2,000 and up — heating & cooling, doors & windows, landscaping, renovation, roofing, pools, kitchen & bathroom, and any other premium residential service."
+    },
+    {
+      q: "What is audience-centric content?",
+      a: "Audience-centric content is content created based on what the audience actually wants to watch, not just what the brand wants to say. On organic social media, distribution is earned. Platforms favor content that holds attention and generates strong audience signals — watch time, engagement, comments and shares. That's why effective organic content can't feel too promotional or too product-focused. The goal is to capture attention long before your audience is ready to buy, so that when the moment comes, your brand is already familiar, credible and top of mind."
+    },
+    {
+      q: "What type of equipment is used to film my content?",
+      a: "We work with professional equipment suited for high-quality social content production. Our main setup is built around the Sony A7 IV — a full-frame camera known for its cinematic output — paired with carefully selected lenses, professional lighting and quality audio gear. The goal is for every video to reflect the level of excellence your brand deserves."
+    },
+    {
+      q: "What metrics do you use to measure success?",
+      a: "We track the indicators that tell us whether content is actually capturing attention and generating the right signals — views, watch time, retention, likes, comments, shares, saves, follower growth, profile visits and engagement rate. These help us understand what resonates, what underperforms, and whether content is generating the signals platforms reward with more reach. Over time, we also look at broader indicators like audience growth, reach consistency and overall brand visibility on the platform."
+    },
   ];
 
   const steps = fr ? [
@@ -792,7 +812,7 @@ export default function Entreprises() {
                     <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><line x1="5" y1="1" x2="5" y2="9" stroke="white" strokeWidth="1.5" strokeLinecap="round"/><line x1="1" y1="5" x2="9" y2="5" stroke="white" strokeWidth="1.5" strokeLinecap="round"/></svg>
                   </div>
                 </button>
-                <div style={{ maxHeight: openFaq === i ? '200px' : '0', overflow: 'hidden', transition: 'max-height 0.35s ease' }}>
+                <div style={{ maxHeight: openFaq === i ? '400px' : '0', overflow: 'hidden', transition: 'max-height 0.35s ease' }}>
                   <div style={{ padding: '0 24px 20px', fontSize: '13px', color: 'rgba(255,255,255,0.55)', lineHeight: 1.75, fontWeight: 300 }}>{faq.a}</div>
                 </div>
               </div>
