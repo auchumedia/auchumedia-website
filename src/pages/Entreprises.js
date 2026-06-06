@@ -645,7 +645,12 @@ export default function Entreprises() {
               </div>
               {/* Visual section */}
               <div style={{ height: '200px', background: `linear-gradient(135deg, ${i % 2 === 0 ? '#080f1c, #0d1428' : '#0d0d18, #161628'})`, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}>
-                {i === 1 ? (
+                {i === 0 ? (
+                  <div style={{ position: 'absolute', inset: 0 }}>
+                    <img src="/deroulement-1.jpg" alt="Stratégie" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }} />
+                    <div style={{ position: 'absolute', inset: 0, background: 'rgba(8,8,8,0.35)' }} />
+                  </div>
+                ) : i === 1 ? (
                   <div style={{ position: 'absolute', inset: 0 }}>
                     <img src="/deroulement-2.jpg" alt="Tournage" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 20%' }} />
                     <div style={{ position: 'absolute', inset: 0, background: 'rgba(8,8,8,0.35)' }} />
