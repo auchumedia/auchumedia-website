@@ -235,7 +235,7 @@ export default function Entreprises() {
     },
     {
       q: "Qu'est-ce qu'un contenu centré sur l'audience ?",
-      a: <span>Un contenu centré sur l'audience, c'est un contenu créé en fonction de ce que l'audience a réellement envie de regarder, et non de ce que la marque souhaite simplement dire.<br/><br/>En médias sociaux organiques, la distribution se mérite. Les plateformes favorisent les contenus qui retiennent l'attention et génèrent de forts signaux d'audience — temps de visionnement, engagement, commentaires et partages. C'est pourquoi un contenu organique efficace ne peut pas sembler trop promotionnel ou trop centré sur le produit.<br/><br/>L'objectif est de capter l'attention bien avant que votre audience soit prête à acheter, afin que le moment venu, votre marque leur soit déjà familière, crédible et bien ancrée dans leur esprit.</span>
+      a: <span>Un contenu centré sur l'audience, c'est un contenu créé en fonction de ce que l'audience a réellement envie de regarder, et non de ce que la marque souhaite simplement dire.<br/><br/>L'objectif est de capter l'attention bien avant que votre audience soit prête à acheter, afin que le moment venu, votre marque leur soit déjà familière, crédible et bien ancrée dans leur esprit.</span>
     },
     {
       q: "Quel type d'équipement est utilisé pour filmer mon contenu ?",
@@ -243,7 +243,7 @@ export default function Entreprises() {
     },
     {
       q: "Quels indicateurs utilisez-vous pour mesurer le succès ?",
-      a: <span>On suit les indicateurs qui permettent de savoir si le contenu capte réellement l'attention et génère les bons signaux auprès de l'audience.<br/><br/>Cela inclut les vues, le temps de visionnement, la rétention, les mentions J'aime, les commentaires, les partages, les enregistrements, le gain d'abonnés, les visites de profil et le taux d'engagement. Ces données nous aident à comprendre ce qui résonne, ce qui fonctionne moins bien et si le contenu génère les signaux que les plateformes récompensent par davantage de portée.<br/><br/>Sur le long terme, on s'intéresse aussi à la croissance de l'audience, la constance de la portée et la visibilité globale de la marque sur la plateforme.</span>
+      a: <span>On suit les indicateurs qui permettent de savoir si le contenu capte réellement l'attention et génère les bons signaux auprès de l'audience.<br/><br/>Cela inclut les vues, le temps de visionnement, la rétention, les mentions J'aime, les commentaires, les partages, les enregistrements, le gain d'abonnés, les visites de profil et le taux d'engagement. Ces données nous aident à comprendre ce qui résonne, ce qui fonctionne moins bien et si le contenu génère les signaux que les plateformes récompensent par davantage de portée.</span>
     },
   ] : [
     {
@@ -252,7 +252,7 @@ export default function Entreprises() {
     },
     {
       q: "What is audience-centric content?",
-      a: <span>Audience-centric content is content created based on what the audience actually wants to watch, not just what the brand wants to say.<br/><br/>On organic social media, distribution is earned. Platforms favor content that holds attention and generates strong audience signals — watch time, engagement, comments and shares. That's why effective organic content can't feel too promotional or too product-focused.<br/><br/>The goal is to capture attention long before your audience is ready to buy, so that when the moment comes, your brand is already familiar, credible and top of mind.</span>
+      a: <span>Audience-centric content is content created based on what the audience actually wants to watch, not just what the brand wants to say.<br/><br/>The goal is to capture attention long before your audience is ready to buy, so that when the moment comes, your brand is already familiar, credible and top of mind.</span>
     },
     {
       q: "What type of equipment is used to film my content?",
@@ -260,7 +260,7 @@ export default function Entreprises() {
     },
     {
       q: "What metrics do you use to measure success?",
-      a: <span>We track the indicators that tell us whether content is actually capturing attention and generating the right signals.<br/><br/>This includes views, watch time, retention, likes, comments, shares, saves, follower growth, profile visits and engagement rate. These help us understand what resonates, what underperforms, and whether content is generating the signals platforms reward with more reach.<br/><br/>Over time, we also look at broader indicators like audience growth, reach consistency and overall brand visibility on the platform.</span>
+      a: <span>We track the indicators that tell us whether content is actually capturing attention and generating the right signals.<br/><br/>This includes views, watch time, retention, likes, comments, shares, saves, follower growth, profile visits and engagement rate. These help us understand what resonates, what underperforms, and whether content is generating the signals platforms reward with more reach.</span>
     },
   ];
 
