@@ -599,8 +599,8 @@ export default function Entreprises() {
                       <div style={{ position: 'absolute', inset: 0, background: 'rgba(8,8,8,0.35)' }} />
                     </div>
                   ) : i === 2 ? (
-                    <div style={{ position: 'absolute', inset: 0 }}>
-                      <img src="/deroulement-3.jpg" alt="Résultats" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }} />
+                    <div style={{ position: 'absolute', inset: 0, background: '#0a0f1a', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
+                      <img src="/deroulement-3.jpg" alt="Résultats" style={{ maxWidth: '90%', maxHeight: '90%', objectFit: 'contain', borderRadius: '8px' }} />
                     </div>
                   ) : (
                     <>
@@ -660,8 +660,8 @@ export default function Entreprises() {
                     <div style={{ position: 'absolute', inset: 0, background: 'rgba(8,8,8,0.35)' }} />
                   </div>
                 ) : i === 2 ? (
-                  <div style={{ position: 'absolute', inset: 0 }}>
-                    <img src="/deroulement-3.jpg" alt="Résultats" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }} />
+                  <div style={{ position: 'absolute', inset: 0, background: '#0a0f1a', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px' }}>
+                    <img src="/deroulement-3.jpg" alt="Résultats" style={{ maxWidth: '90%', maxHeight: '90%', objectFit: 'contain', borderRadius: '8px' }} />
                   </div>
                 ) : (
                   <>
