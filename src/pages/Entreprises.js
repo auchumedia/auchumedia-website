@@ -258,18 +258,18 @@ export default function Entreprises() {
       points: ["Audit de votre présence actuelle", "Définition de l'identité de marque", "Calendrier éditorial du premier mois", "Configuration des outils & accès"]
     },
     {
-      num: '02', days: 'Jour 30–60', title: 'PREMIERS CONTENUS & AJUSTEMENTS',
-      desc: "On lance, on teste, on apprend. Les premières vidéos sont publiées et on analyse ce qui résonne avec votre audience.",
-      points: ["Publication des 8 premières vidéos", "Analyse des premières performances", "Ajustement du format et du ton", "Début de la croissance organique"]
+      num: '02', days: 'Jour 30–60', title: 'DÉBUT DE LA PRODUCTION',
+      desc: "La production de contenu est en cours et les premières publications commencent à être diffusées sur vos différentes plateformes.",
+      points: ["Analyse des premières performances", "Ajustement du format et du ton", "Début de la croissance organique"]
     },
     {
-      num: '03', days: 'Jour 60–90', title: 'OPTIMISATION & TRACTION',
+      num: '03', days: 'Jour 60–90', title: 'CROISSANCE ACCÉLÉRÉE',
       desc: "On identifie ce qui fonctionne et on double la mise. Les algorithmes commencent à vous favoriser.",
       points: ["Scale des formats performants", "Optimisation des horaires de publication", "Rapport de performance détaillé", "Première réunion stratégique mensuelle"]
     },
     {
-      num: '04', days: 'Jour 90–180', title: 'CROISSANCE ACCÉLÉRÉE',
-      desc: "Votre audience est engagée, votre marque est reconnue. On active les Meta Ads pour amplifier votre portée et générer des leads.",
+      num: '04', days: 'Jour 90–180', title: 'OPTIMISATION & TRACTION',
+      desc: "Avec une cadence de publication maintenant bien en place, nous commençons à obtenir des signaux plus clairs sur ce qui résonne et sur les contenus qui commencent à générer de l'élan.",
       points: ["Lancement des campagnes Meta Ads", "Intégration CRM & pipeline de leads", "Croissance audience significative", "Premiers leads qualifiés"]
     },
     {
@@ -284,18 +284,18 @@ export default function Entreprises() {
       points: ["Audit of your current presence", "Brand identity definition", "First month editorial calendar", "Tools & access configuration"]
     },
     {
-      num: '02', days: 'Day 30–60', title: 'FIRST CONTENT & ADJUSTMENTS',
-      desc: "We launch, test, and learn. First videos are published and we analyze what resonates with your audience.",
-      points: ["Publication of the first 8 videos", "First performance analysis", "Format and tone adjustment", "Start of organic growth"]
+      num: '02', days: 'Day 30–60', title: 'PRODUCTION BEGINS',
+      desc: "Content production is underway and the first publications begin to be distributed on your various platforms.",
+      points: ["First performance analysis", "Format and tone adjustment", "Start of organic growth"]
     },
     {
-      num: '03', days: 'Day 60–90', title: 'OPTIMIZATION & TRACTION',
+      num: '03', days: 'Day 60–90', title: 'ACCELERATED GROWTH',
       desc: "We identify what works and double down. Algorithms start favoring you.",
       points: ["Scale performing formats", "Publishing schedule optimization", "Detailed performance report", "First monthly strategic meeting"]
     },
     {
-      num: '04', days: 'Day 90–180', title: 'ACCELERATED GROWTH',
-      desc: "Your audience is engaged, your brand is recognized. We activate Meta Ads to amplify your reach and generate leads.",
+      num: '04', days: 'Day 90–180', title: 'OPTIMIZATION & TRACTION',
+      desc: "With a publishing cadence now well established, we begin to get clearer signals on what resonates and which content is starting to generate momentum.",
       points: ["Meta Ads campaign launch", "CRM & lead pipeline integration", "Significant audience growth", "First qualified leads"]
     },
     {
