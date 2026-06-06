@@ -655,7 +655,9 @@ export default function Entreprises() {
           <FadeIn delay={0.1}>
             <div style={{ background: '#0d0d0d', border: `1px solid rgba(0,61,165,0.3)`, borderRadius: '16px', padding: '36px', position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
               <div style={{ position: 'absolute', top: '-30px', right: '-30px', width: '160px', height: '160px', borderRadius: '50%', background: 'rgba(0,61,165,0.06)', filter: 'blur(30px)' }} />
-              <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE, marginBottom: '16px' }}>{fr ? 'Forfait Essentiel (8 vidéos/mois)' : 'Essential Plan (8 videos/month)'}</div>
+              <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE, marginBottom: '16px' }}>
+                {fr ? <>Forfait Essentiel <span style={{ color: '#fff' }}>(8 vidéos/mois)</span></> : <>Essential Plan <span style={{ color: '#fff' }}>(8 videos/month)</span></>}
+              </div>
               <div style={{ fontFamily: "'Bebas Neue'", fontSize: '48px', color: '#fff', lineHeight: 1, marginBottom: '4px' }}>3 500$</div>
               <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', marginBottom: '24px' }}>{fr ? '/ mois' : '/ month'}</div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '32px', flex: 1 }}>
@@ -668,7 +670,6 @@ export default function Entreprises() {
                   'Publication : calendrier, captions, thumbnails et mise en ligne',
                   'Gestion de communauté : réponses réactives et interactions proactives',
                   'Rapports : suivi mensuel des KPI, constats et optimisations',
-                  '8 vidéos / mois',
                 ] : [
                   'Strategy: content pillars and creative direction',
                   'Ideation: content ideas aligned with strategy',
@@ -678,7 +679,6 @@ export default function Entreprises() {
                   'Publishing: calendar, captions, thumbnails and posting',
                   'Community management: reactive replies and proactive interactions',
                   'Reports: monthly KPI tracking, insights and optimizations',
-                  '8 videos / month',
                 ]).map((item, i) => (
                   <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
                     <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: BLUE, flexShrink: 0, marginTop: '5px' }} />
@@ -698,7 +698,9 @@ export default function Entreprises() {
                 {fr ? 'POPULAIRE' : 'POPULAR'}
               </div>
               <div style={{ position: 'absolute', top: '-30px', right: '-30px', width: '160px', height: '160px', borderRadius: '50%', background: 'rgba(0,61,165,0.1)', filter: 'blur(30px)' }} />
-              <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE, marginBottom: '16px' }}>{fr ? 'Forfait Croissance (12 vidéos/mois)' : 'Growth Plan (12 videos/month)'}</div>
+              <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE, marginBottom: '16px' }}>
+                {fr ? <>Forfait Croissance <span style={{ color: '#fff' }}>(12 vidéos/mois)</span></> : <>Growth Plan <span style={{ color: '#fff' }}>(12 videos/month)</span></>}
+              </div>
               <div style={{ fontFamily: "'Bebas Neue'", fontSize: '48px', color: '#fff', lineHeight: 1, marginBottom: '4px' }}>4 500$</div>
               <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', marginBottom: '24px' }}>{fr ? '/ mois' : '/ month'}</div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '32px', flex: 1 }}>
@@ -711,7 +713,6 @@ export default function Entreprises() {
                   'Publication : calendrier, captions, thumbnails et mise en ligne',
                   'Gestion de communauté : réponses réactives et interactions proactives',
                   'Rapports : suivi mensuel des KPI, constats et optimisations',
-                  '12 vidéos / mois',
                 ] : [
                   'Strategy: content pillars and creative direction',
                   'Ideation: content ideas aligned with strategy',
@@ -721,7 +722,6 @@ export default function Entreprises() {
                   'Publishing: calendar, captions, thumbnails and posting',
                   'Community management: reactive replies and proactive interactions',
                   'Reports: monthly KPI tracking, insights and optimizations',
-                  '12 videos / month',
                 ]).map((item, i) => (
                   <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
                     <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: BLUE, flexShrink: 0, marginTop: '5px' }} />
