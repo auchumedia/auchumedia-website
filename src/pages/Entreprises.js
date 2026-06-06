@@ -562,25 +562,9 @@ export default function Entreprises() {
                       <div style={{ position: 'absolute', inset: 0, background: 'rgba(8,8,8,0.35)' }} />
                     </div>
                   ) : i === 2 ? (
-                    /* ── MODIFIÉ : image réduite, centrée, fond bleu foncé ── */
-                    <div style={{
-                      position: 'absolute', inset: 0,
-                      display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      background: 'linear-gradient(135deg, #080f1c, #0d1428)'
-                    }}>
-                      <img
-                        src="/deroulement-3.jpg"
-                        alt="Résultats Meta Ads"
-                        style={{
-                          width: '72%',
-                          height: '72%',
-                          objectFit: 'contain',
-                          borderRadius: '12px',
-                          boxShadow: '0 8px 40px rgba(0,0,0,0.7)',
-                          position: 'relative',
-                          zIndex: 1
-                        }}
-                      />
+                    <div style={{ position: 'absolute', inset: 0 }}>
+                      <img src="/deroulement-3.jpg" alt="Résultats Meta Ads" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }} />
+                      <div style={{ position: 'absolute', inset: 0, background: 'rgba(8,8,8,0.35)' }} />
                     </div>
                   ) : (
                     <>
@@ -636,25 +620,9 @@ export default function Entreprises() {
                     <div style={{ position: 'absolute', inset: 0, background: 'rgba(8,8,8,0.35)' }} />
                   </div>
                 ) : i === 2 ? (
-                  /* ── MODIFIÉ mobile : image réduite centrée ── */
-                  <div style={{
-                    position: 'absolute', inset: 0,
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    background: 'linear-gradient(135deg, #080f1c, #0d1428)'
-                  }}>
-                    <img
-                      src="/deroulement-3.jpg"
-                      alt="Résultats Meta Ads"
-                      style={{
-                        width: '78%',
-                        height: '78%',
-                        objectFit: 'contain',
-                        borderRadius: '10px',
-                        boxShadow: '0 4px 24px rgba(0,0,0,0.6)',
-                        position: 'relative',
-                        zIndex: 1
-                      }}
-                    />
+                  <div style={{ position: 'absolute', inset: 0 }}>
+                    <img src="/deroulement-3.jpg" alt="Résultats Meta Ads" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }} />
+                    <div style={{ position: 'absolute', inset: 0, background: 'rgba(8,8,8,0.35)' }} />
                   </div>
                 ) : (
                   <>
