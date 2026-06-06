@@ -599,79 +599,8 @@ export default function Entreprises() {
                       <div style={{ position: 'absolute', inset: 0, background: 'rgba(8,8,8,0.35)' }} />
                     </div>
                   ) : i === 2 ? (
-                    <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '16px', padding: '24px', background: 'linear-gradient(135deg, #080f1c, #0a0a1a)' }}>
-                      {/* Phone mockup */}
-                      <div style={{ position: 'relative', flexShrink: 0 }}>
-                        <div style={{ width: '110px', height: '220px', borderRadius: '18px', background: '#111', border: '2px solid rgba(255,255,255,0.15)', overflow: 'hidden', boxShadow: '0 20px 40px rgba(0,0,0,0.5)' }}>
-                          <div style={{ background: '#000', height: '14px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                            <div style={{ width: '30px', height: '3px', borderRadius: '2px', background: '#333' }} />
-                          </div>
-                          <div style={{ background: '#1a1a2e', flex: 1, height: '206px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '8px', position: 'relative', overflow: 'hidden' }}>
-                            <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(0,0,0,0) 50%, rgba(0,0,0,0.7) 100%)' }} />
-                            <div style={{ fontSize: '28px', marginBottom: '4px' }}>🏪</div>
-                            <div style={{ fontSize: '8px', fontWeight: 800, color: '#fff', textAlign: 'center', lineHeight: 1.2, position: 'relative', zIndex: 1, textShadow: '0 1px 4px rgba(0,0,0,0.8)' }}>C'EST-TU ASSEZ GROS?</div>
-                            <div style={{ position: 'absolute', bottom: '8px', right: '6px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
-                              <div style={{ fontSize: '10px' }}>❤️</div>
-                              <div style={{ fontSize: '6px', color: '#fff' }}>7 944</div>
-                            </div>
-                          </div>
-                        </div>
-                        {/* Stats badges */}
-                        <div style={{ position: 'absolute', left: '-70px', top: '20px', background: 'rgba(255,255,255,0.95)', borderRadius: '8px', padding: '5px 8px', display: 'flex', alignItems: 'center', gap: '5px', boxShadow: '0 4px 12px rgba(0,0,0,0.3)', minWidth: '120px' }}>
-                          <div style={{ width: '18px', height: '18px', borderRadius: '50%', background: BLUE, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                            <span style={{ fontSize: '8px' }}>📈</span>
-                          </div>
-                          <div>
-                            <div style={{ fontSize: '8px', fontWeight: 800, color: '#111' }}>1 438 <span style={{ color: '#666', fontWeight: 400 }}>leads</span></div>
-                            <div style={{ fontSize: '7px', color: '#888' }}>CA $4.65 / lead</div>
-                          </div>
-                        </div>
-                        <div style={{ position: 'absolute', left: '-70px', top: '65px', background: 'rgba(255,255,255,0.95)', borderRadius: '8px', padding: '5px 8px', display: 'flex', alignItems: 'center', gap: '5px', boxShadow: '0 4px 12px rgba(0,0,0,0.3)', minWidth: '120px' }}>
-                          <div style={{ width: '18px', height: '18px', borderRadius: '50%', background: BLUE, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                            <span style={{ fontSize: '8px' }}>📈</span>
-                          </div>
-                          <div>
-                            <div style={{ fontSize: '8px', fontWeight: 800, color: '#111' }}>997 <span style={{ color: '#666', fontWeight: 400 }}>leads</span></div>
-                            <div style={{ fontSize: '7px', color: '#888' }}>CA $3.39 / lead</div>
-                          </div>
-                        </div>
-                        <div style={{ position: 'absolute', left: '-70px', top: '110px', background: 'rgba(255,255,255,0.95)', borderRadius: '8px', padding: '5px 8px', display: 'flex', alignItems: 'center', gap: '5px', boxShadow: '0 4px 12px rgba(0,0,0,0.3)', minWidth: '120px' }}>
-                          <div style={{ width: '18px', height: '18px', borderRadius: '50%', background: BLUE, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                            <span style={{ fontSize: '8px' }}>📈</span>
-                          </div>
-                          <div>
-                            <div style={{ fontSize: '8px', fontWeight: 800, color: '#111' }}>2 113 <span style={{ color: '#666', fontWeight: 400 }}>leads</span></div>
-                            <div style={{ fontSize: '7px', color: '#888' }}>CA $1.22 / lead</div>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* CRM mockup */}
-                      <div style={{ width: '160px', height: '210px', borderRadius: '10px', background: '#fff', overflow: 'hidden', boxShadow: '0 20px 40px rgba(0,0,0,0.5)', flexShrink: 0 }}>
-                        <div style={{ background: '#1a1a2e', padding: '6px 8px', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                          <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: '#ff5f57' }} />
-                          <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: '#febc2e' }} />
-                          <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: '#28c840' }} />
-                          <span style={{ fontSize: '7px', color: 'rgba(255,255,255,0.5)', marginLeft: '4px' }}>NorCan CRM</span>
-                        </div>
-                        <div style={{ padding: '6px', background: '#f8f9fa', borderBottom: '1px solid #e9ecef' }}>
-                          <div style={{ fontSize: '7px', fontWeight: 700, color: '#333' }}>Opportunités</div>
-                          <div style={{ fontSize: '9px', fontWeight: 800, color: BLUE }}>252 opportunités</div>
-                        </div>
-                        <div style={{ padding: '4px', display: 'flex', gap: '3px', overflowX: 'hidden' }}>
-                          {['Relance', 'Pré-visite', 'Soumission', 'VENDU'].map((col, ci) => (
-                            <div key={ci} style={{ flex: 1, minWidth: '32px' }}>
-                              <div style={{ fontSize: '5px', fontWeight: 700, color: '#666', marginBottom: '3px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{col}</div>
-                              {[...Array(4)].map((_, ri) => (
-                                <div key={ri} style={{ background: ci === 3 ? 'rgba(0,61,165,0.08)' : '#f0f0f0', borderRadius: '3px', height: '22px', marginBottom: '2px', padding: '2px 3px' }}>
-                                  <div style={{ fontSize: '5px', color: '#333', fontWeight: 600 }}>{['Maher', 'NorCan', 'Patrick', 'Walid'][ri]}</div>
-                                  <div style={{ fontSize: '4px', color: '#888' }}>Facebook</div>
-                                </div>
-                              ))}
-                            </div>
-                          ))}
-                        </div>
-                      </div>
+                    <div style={{ position: 'absolute', inset: 0 }}>
+                      <img src="/deroulement-3.jpg" alt="Résultats" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }} />
                     </div>
                   ) : (
                     <>
@@ -729,6 +658,10 @@ export default function Entreprises() {
                   <div style={{ position: 'absolute', inset: 0 }}>
                     <img src="/deroulement-2.jpg" alt="Tournage" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 20%' }} />
                     <div style={{ position: 'absolute', inset: 0, background: 'rgba(8,8,8,0.35)' }} />
+                  </div>
+                ) : i === 2 ? (
+                  <div style={{ position: 'absolute', inset: 0 }}>
+                    <img src="/deroulement-3.jpg" alt="Résultats" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }} />
                   </div>
                 ) : (
                   <>
