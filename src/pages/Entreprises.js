@@ -562,9 +562,9 @@ export default function Entreprises() {
                       <div style={{ position: 'absolute', inset: 0, background: 'rgba(8,8,8,0.35)' }} />
                     </div>
                   ) : i === 2 ? (
-                    <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, #080f1c, #0d1428)' }}>
-                      <img src="/deroulement-3.jpg" alt="Résultats Meta Ads" style={{ width: '85%', height: '85%', objectFit: 'cover', objectPosition: 'center', borderRadius: '8px' }} />
-                      <div style={{ position: 'absolute', inset: 0, background: 'rgba(8,8,8,0.15)' }} />
+                    <div style={{ position: 'absolute', inset: 0 }}>
+                      <img src="/deroulement-3.jpg" alt="Résultats Meta Ads" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }} />
+                      <div style={{ position: 'absolute', inset: 0, background: 'rgba(8,8,8,0.35)' }} />
                     </div>
                   ) : (
                     <>
@@ -620,9 +620,9 @@ export default function Entreprises() {
                     <div style={{ position: 'absolute', inset: 0, background: 'rgba(8,8,8,0.35)' }} />
                   </div>
                 ) : i === 2 ? (
-                  <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, #080f1c, #0d1428)' }}>
-                    <img src="/deroulement-3.jpg" alt="Résultats Meta Ads" style={{ width: '85%', height: '85%', objectFit: 'cover', objectPosition: 'center', borderRadius: '8px' }} />
-                    <div style={{ position: 'absolute', inset: 0, background: 'rgba(8,8,8,0.15)' }} />
+                  <div style={{ position: 'absolute', inset: 0 }}>
+                    <img src="/deroulement-3.jpg" alt="Résultats Meta Ads" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }} />
+                    <div style={{ position: 'absolute', inset: 0, background: 'rgba(8,8,8,0.35)' }} />
                   </div>
                 ) : (
                   <>
@@ -655,7 +655,7 @@ export default function Entreprises() {
           <FadeIn delay={0.1}>
             <div style={{ background: '#0d0d0d', border: `1px solid rgba(0,61,165,0.3)`, borderRadius: '16px', padding: '36px', position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
               <div style={{ position: 'absolute', top: '-30px', right: '-30px', width: '160px', height: '160px', borderRadius: '50%', background: 'rgba(0,61,165,0.06)', filter: 'blur(30px)' }} />
-              <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE, marginBottom: '16px' }}>{fr ? 'Forfait Essentiel' : 'Essential Plan'}</div>
+              <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE, marginBottom: '16px' }}>{fr ? 'Forfait Essentiel (8 vidéos/mois)' : 'Essential Plan (8 videos/month)'}</div>
               <div style={{ fontFamily: "'Bebas Neue'", fontSize: '48px', color: '#fff', lineHeight: 1, marginBottom: '4px' }}>3 500$</div>
               <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', marginBottom: '24px' }}>{fr ? '/ mois' : '/ month'}</div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '32px', flex: 1 }}>
@@ -698,7 +698,7 @@ export default function Entreprises() {
                 {fr ? 'POPULAIRE' : 'POPULAR'}
               </div>
               <div style={{ position: 'absolute', top: '-30px', right: '-30px', width: '160px', height: '160px', borderRadius: '50%', background: 'rgba(0,61,165,0.1)', filter: 'blur(30px)' }} />
-              <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE, marginBottom: '16px' }}>{fr ? 'Forfait Croissance' : 'Growth Plan'}</div>
+              <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE, marginBottom: '16px' }}>{fr ? 'Forfait Croissance (12 vidéos/mois)' : 'Growth Plan (12 videos/month)'}</div>
               <div style={{ fontFamily: "'Bebas Neue'", fontSize: '48px', color: '#fff', lineHeight: 1, marginBottom: '4px' }}>4 500$</div>
               <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', marginBottom: '24px' }}>{fr ? '/ mois' : '/ month'}</div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '32px', flex: 1 }}>
@@ -738,10 +738,7 @@ export default function Entreprises() {
           <FadeIn delay={0.2}>
             <div style={{ background: '#0d0d0d', border: '0.5px solid rgba(255,255,255,0.08)', borderRadius: '16px', padding: '36px', display: 'flex', flexDirection: 'column' }}>
               <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginBottom: '16px' }}>Add-on · Meta Ads &amp; CRM</div>
-              <div style={{ display: 'flex', alignItems: 'baseline', gap: '4px', marginBottom: '4px' }}>
-                <span style={{ fontFamily: "'Bebas Neue'", fontSize: '32px', color: BLUE, lineHeight: 1 }}>+</span>
-                <span style={{ fontFamily: "'Bebas Neue'", fontSize: '48px', color: '#fff', lineHeight: 1 }}>3 000$</span>
-              </div>
+              <div style={{ fontFamily: "'Bebas Neue'", fontSize: '48px', color: '#fff', lineHeight: 1, marginBottom: '4px' }}>3 000$</div>
               <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', marginBottom: '24px' }}>{fr ? '/ mois · à ajouter à votre forfait' : '/ month · add to your plan'}</div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '16px', flex: 1 }}>
                 {(fr ? [
