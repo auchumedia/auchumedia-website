@@ -257,7 +257,7 @@ export default function Entreprises() {
     },
     {
       num: '03', days: 'Jour 60–90', title: 'CROISSANCE ACCÉLÉRÉE',
-      desc: "Avec une cadence de publication maintenant bien en place, nous commençons à obtenir des signaux plus clairs sur ce qui résonne et sur les contenus qui commencent à générer de l'élan.",
+      desc: "Avec une cadence de publication bien en place, on lance les premières campagnes Meta Ads et on intègre votre CRM pour automatiser le suivi des leads et transformer l'audience en clients.",
       points: ["Lancement des campagnes Meta Ads", "Intégration CRM & pipeline de leads", "Croissance audience significative", "Premiers leads qualifiés"]
     },
   ] : [
@@ -273,18 +273,8 @@ export default function Entreprises() {
     },
     {
       num: '03', days: 'Day 60–90', title: 'ACCELERATED GROWTH',
-      desc: "We identify what works and double down. Algorithms start favoring you.",
+      desc: "With a solid publishing cadence in place, we launch the first Meta Ads campaigns and integrate your CRM to automate lead follow-up and turn audience into paying clients.",
       points: ["Meta Ads campaign launch", "CRM & lead pipeline integration", "Significant audience growth", "First qualified leads"]
-    },
-    {
-      num: '04', days: 'Day 90–180', title: 'OPTIMIZATION & TRACTION',
-      desc: "With a publishing cadence now well established, we begin to get clearer signals on what resonates and which content is starting to generate momentum.",
-      points: ["Scale performing formats", "Publishing schedule optimization", "Detailed performance report", "Monthly strategic meeting"]
-    },
-    {
-      num: '05', days: 'Day 180–365', title: 'REFERENCE & SCALING',
-      desc: "You are now THE reference in your industry. We scale what works and build on your successes.",
-      points: ["Dominant position in your niche", "Well-oiled lead machine", "Scaling of performing campaigns", "Long-term strategy & partnerships"]
     },
   ];
 
