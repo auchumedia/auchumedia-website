@@ -239,7 +239,7 @@ export default function Entreprises() {
     },
     {
       q: "Quel type d'équipement est utilisé pour filmer mon contenu ?",
-      a: "On travaille avec du matériel professionnel adapté à la production de contenu social haute qualité. Notre setup principal est centré sur la Sony A7 IV — une caméra plein format reconnue pour son rendu cinématique — complétée par des optiques sélectionnées selon les besoins de chaque tournage, un éclairage professionnel et du matériel audio de qualité. L'objectif est que chaque vidéo reflète le niveau d'excellence de votre marque."
+      a: "On utilise la Sony A7 IV comme caméra principale — c'est ce qui donne ce look cinématique qu'on aime. On adapte les lentilles, l'éclairage et le son selon chaque tournage. En gros, t'as pas à t'inquiéter de ça — on arrive avec tout ce qu'il faut."
     },
     {
       q: "Quels indicateurs utilisez-vous pour mesurer le succès ?",
@@ -256,7 +256,7 @@ export default function Entreprises() {
     },
     {
       q: "What type of equipment is used to film my content?",
-      a: "We work with professional equipment suited for high-quality social content production. Our main setup is built around the Sony A7 IV — a full-frame camera known for its cinematic output — paired with carefully selected lenses, professional lighting and quality audio gear. The goal is for every video to reflect the level of excellence your brand deserves."
+      a: "We shoot with the Sony A7 IV as our main camera — that's what gives us that cinematic look we love. We adapt the lenses, lighting and audio to each shoot. Bottom line: you don't have to worry about any of that — we show up with everything we need."
     },
     {
       q: "What metrics do you use to measure success?",
