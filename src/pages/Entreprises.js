@@ -243,7 +243,7 @@ export default function Entreprises() {
     },
     {
       q: "Quels indicateurs utilisez-vous pour mesurer le succès ?",
-      a: <span>On suit les indicateurs qui permettent de savoir si le contenu capte réellement l'attention et génère les bons signaux auprès de l'audience.<br/><br/>Cela inclut les vues, le temps de visionnement, la rétention, les mentions J'aime, les commentaires, les partages, les enregistrements, le gain d'abonnés, les visites de profil et le taux d'engagement. Ces données nous aident à comprendre ce qui résonne, ce qui fonctionne moins bien et si le contenu génère les signaux que les plateformes récompensent par davantage de portée.</span>
+      a: <span>On suit les indicateurs qui permettent de savoir si le contenu capte réellement l'attention et génère les bons signaux auprès de l'audience.<br/><br/>Cela inclut les vues, le temps de visionnement, la rétention, les mentions J'aime, les commentaires, les partages, les enregistrements, le gain d'abonnés, les visites de profil et le taux d'engagement.<br/><br/>Ces données nous aident à comprendre ce qui résonne, ce qui fonctionne moins bien et si le contenu génère les signaux que les plateformes récompensent par davantage de portée.</span>
     },
   ] : [
     {
@@ -260,7 +260,7 @@ export default function Entreprises() {
     },
     {
       q: "What metrics do you use to measure success?",
-      a: <span>We track the indicators that tell us whether content is actually capturing attention and generating the right signals.<br/><br/>This includes views, watch time, retention, likes, comments, shares, saves, follower growth, profile visits and engagement rate. These help us understand what resonates, what underperforms, and whether content is generating the signals platforms reward with more reach.</span>
+      a: <span>We track the indicators that tell us whether content is actually capturing attention and generating the right signals.<br/><br/>This includes views, watch time, retention, likes, comments, shares, saves, follower growth, profile visits and engagement rate.<br/><br/>These help us understand what resonates, what underperforms, and whether content is generating the signals platforms reward with more reach.</span>
     },
   ];
 
