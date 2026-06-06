@@ -265,12 +265,12 @@ export default function Entreprises() {
     {
       num: '03', days: 'Jour 60–90', title: 'CROISSANCE ACCÉLÉRÉE',
       desc: "On identifie ce qui fonctionne et on double la mise. Les algorithmes commencent à vous favoriser.",
-      points: ["Scale des formats performants", "Optimisation des horaires de publication", "Rapport de performance détaillé", "Première réunion stratégique mensuelle"]
+      points: ["Lancement des campagnes Meta Ads", "Intégration CRM & pipeline de leads", "Croissance audience significative", "Premiers leads qualifiés"]
     },
     {
       num: '04', days: 'Jour 90–180', title: 'OPTIMISATION & TRACTION',
       desc: "Avec une cadence de publication maintenant bien en place, nous commençons à obtenir des signaux plus clairs sur ce qui résonne et sur les contenus qui commencent à générer de l'élan.",
-      points: ["Lancement des campagnes Meta Ads", "Intégration CRM & pipeline de leads", "Croissance audience significative", "Premiers leads qualifiés"]
+      points: ["Scale des formats performants", "Optimisation des horaires de publication", "Rapport de performance détaillé", "Réunion stratégique mensuelle"]
     },
     {
       num: '05', days: 'Jour 180–365', title: 'RÉFÉRENCE & SCALING',
@@ -291,12 +291,12 @@ export default function Entreprises() {
     {
       num: '03', days: 'Day 60–90', title: 'ACCELERATED GROWTH',
       desc: "We identify what works and double down. Algorithms start favoring you.",
-      points: ["Scale performing formats", "Publishing schedule optimization", "Detailed performance report", "First monthly strategic meeting"]
+      points: ["Meta Ads campaign launch", "CRM & lead pipeline integration", "Significant audience growth", "First qualified leads"]
     },
     {
       num: '04', days: 'Day 90–180', title: 'OPTIMIZATION & TRACTION',
       desc: "With a publishing cadence now well established, we begin to get clearer signals on what resonates and which content is starting to generate momentum.",
-      points: ["Meta Ads campaign launch", "CRM & lead pipeline integration", "Significant audience growth", "First qualified leads"]
+      points: ["Scale performing formats", "Publishing schedule optimization", "Detailed performance report", "Monthly strategic meeting"]
     },
     {
       num: '05', days: 'Day 180–365', title: 'REFERENCE & SCALING',
