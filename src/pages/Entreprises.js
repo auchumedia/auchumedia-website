@@ -69,7 +69,6 @@ const navLinks = [
   { id: 'faq', labelFr: 'FAQ', labelEn: 'FAQ' },
 ];
 
-
 function MultiStepForm({ fr, scrollTo, BLUE }) {
   const [step, setStep] = React.useState(1);
   const [form, setForm] = React.useState({
@@ -102,7 +101,6 @@ function MultiStepForm({ fr, scrollTo, BLUE }) {
 
   return (
     <div style={{ background: '#0d0d0d', border: '0.5px solid rgba(255,255,255,0.08)', borderRadius: '16px', padding: '36px 32px' }}>
-      {/* Progress bar */}
       <div style={{ marginBottom: '28px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
           <span style={{ fontSize: '11px', fontWeight: 700, color: BLUE, letterSpacing: '0.1em', textTransform: 'uppercase' }}>{steps[step - 1]}</span>
@@ -113,7 +111,6 @@ function MultiStepForm({ fr, scrollTo, BLUE }) {
         </div>
       </div>
 
-      {/* Step 1 — Infos personnelles */}
       {step === 1 && (
         <div>
           <div style={{ fontFamily: "'Bebas Neue'", fontSize: '24px', color: '#fff', marginBottom: '24px', letterSpacing: '0.04em' }}>{fr ? 'VOS INFORMATIONS' : 'YOUR INFORMATION'}</div>
@@ -134,7 +131,6 @@ function MultiStepForm({ fr, scrollTo, BLUE }) {
         </div>
       )}
 
-      {/* Step 2 — Entreprise */}
       {step === 2 && (
         <div>
           <div style={{ fontFamily: "'Bebas Neue'", fontSize: '24px', color: '#fff', marginBottom: '24px', letterSpacing: '0.04em' }}>{fr ? 'VOTRE ENTREPRISE' : 'YOUR BUSINESS'}</div>
@@ -150,7 +146,6 @@ function MultiStepForm({ fr, scrollTo, BLUE }) {
         </div>
       )}
 
-      {/* Step 3 — Structure marketing */}
       {step === 3 && (
         <div>
           <div style={{ fontFamily: "'Bebas Neue'", fontSize: '24px', color: '#fff', marginBottom: '24px', letterSpacing: '0.04em' }}>{fr ? 'VOTRE STRUCTURE MARKETING' : 'YOUR MARKETING STRUCTURE'}</div>
@@ -172,7 +167,6 @@ function MultiStepForm({ fr, scrollTo, BLUE }) {
         </div>
       )}
 
-      {/* Step 4 — Besoin */}
       {step === 4 && (
         <div>
           <div style={{ fontFamily: "'Bebas Neue'", fontSize: '24px', color: '#fff', marginBottom: '24px', letterSpacing: '0.04em' }}>{fr ? 'VOTRE BESOIN' : 'YOUR NEEDS'}</div>
@@ -191,7 +185,6 @@ function MultiStepForm({ fr, scrollTo, BLUE }) {
         </div>
       )}
 
-      {/* Navigation buttons */}
       <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '8px', gap: '12px' }}>
         {step > 1 ? (
           <button onClick={() => setStep(s => s - 1)} style={{ fontSize: '11px', fontWeight: 700, color: 'rgba(255,255,255,0.6)', background: 'transparent', border: '0.5px solid rgba(255,255,255,0.2)', padding: '12px 24px', borderRadius: '6px', cursor: 'pointer', fontFamily: "'DM Sans'", letterSpacing: '0.07em', textTransform: 'uppercase' }}>
@@ -264,18 +257,8 @@ export default function Entreprises() {
     },
     {
       num: '03', days: 'Jour 60–90', title: 'CROISSANCE ACCÉLÉRÉE',
-      desc: "On identifie ce qui fonctionne et on double la mise. Les algorithmes commencent à vous favoriser.",
-      points: ["Lancement des campagnes Meta Ads", "Intégration CRM & pipeline de leads", "Croissance audience significative", "Premiers leads qualifiés"]
-    },
-    {
-      num: '04', days: 'Jour 90–180', title: 'OPTIMISATION & TRACTION',
       desc: "Avec une cadence de publication maintenant bien en place, nous commençons à obtenir des signaux plus clairs sur ce qui résonne et sur les contenus qui commencent à générer de l'élan.",
-      points: ["Scale des formats performants", "Optimisation des horaires de publication", "Rapport de performance détaillé", "Réunion stratégique mensuelle"]
-    },
-    {
-      num: '05', days: 'Jour 180–365', title: 'RÉFÉRENCE & SCALING',
-      desc: "Vous êtes maintenant LA référence dans votre domaine. On scale ce qui fonctionne et on bâtit sur vos succès.",
-      points: ["Position dominante dans votre niche", "Machine à leads bien huilée", "Scaling des campagnes performantes", "Stratégie long terme & partenariats"]
+      points: ["Lancement des campagnes Meta Ads", "Intégration CRM & pipeline de leads", "Croissance audience significative", "Premiers leads qualifiés"]
     },
   ] : [
     {
@@ -318,10 +301,8 @@ export default function Entreprises() {
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         padding: '0 60px', height: '64px', gap: '16px'
       }}>
-        {/* Logo */}
         <a href="/" style={{ flexShrink: 0 }}><img src="/Copie de AUCHU.png.png" alt="AuchuMedia" style={{ height: '22px', width: 'auto' }} /></a>
 
-        {/* Section links — center */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '2px', overflowX: 'auto', scrollbarWidth: 'none', flex: 1, justifyContent: 'center' }} className="nav-links">
           {navLinks.map(link => (
             <button key={link.id} onClick={() => scrollTo(link.id)} style={{
@@ -339,7 +320,6 @@ export default function Entreprises() {
           ))}
         </div>
 
-        {/* Right — athletes + CTA + lang */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0, position: 'absolute', right: '60px' }}>
           <a href="/athletes" style={{ fontSize: '10px', fontWeight: 700, color: '#fff', background: 'transparent', padding: '8px 16px', borderRadius: '4px', border: '1px solid rgba(255,255,255,0.3)', textDecoration: 'none', letterSpacing: '0.07em', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>
             {fr ? 'Pour athlètes' : 'For athletes'}
@@ -354,7 +334,6 @@ export default function Entreprises() {
               </button>
             ))}
           </div>
-          {/* Hamburger */}
           <button onClick={() => setMobileOpen(!mobileOpen)} className="hamburger-btn" style={{ display: 'none', flexDirection: 'column', gap: '5px', background: 'none', border: 'none', cursor: 'pointer', padding: '8px', flexShrink: 0 }}>
             <span style={{ width: '22px', height: '1.5px', background: '#fff', display: 'block', transition: 'all 0.25s', transform: mobileOpen ? 'translateY(6.5px) rotate(45deg)' : 'none' }} />
             <span style={{ width: '22px', height: '1.5px', background: '#fff', display: 'block', opacity: mobileOpen ? 0 : 1, transition: 'all 0.25s' }} />
@@ -387,7 +366,6 @@ export default function Entreprises() {
         <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at 50% 60%, rgba(0,61,165,0.08) 0%, transparent 65%)', pointerEvents: 'none' }} />
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px)', backgroundSize: '60px 60px', pointerEvents: 'none' }} />
         <div style={{ position: 'relative', zIndex: 1, maxWidth: '860px' }}>
-
           <h1 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(52px, 7.5vw, 100px)', lineHeight: 0.93, color: '#fff', marginBottom: '28px', letterSpacing: '0.01em' }}>
             {fr ? 'DEVENEZ LA RÉFÉRENCE\nDANS VOTRE DOMAINE' : 'BECOME THE REFERENCE\nIN YOUR INDUSTRY'}
           </h1>
@@ -402,8 +380,6 @@ export default function Entreprises() {
               {fr ? 'Planifier un appel' : 'Book a call'}
             </button>
           </div>
-
-          {/* Static logos */}
           <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.2)', marginBottom: '24px' }}>
             {fr ? 'Des marques nous font confiance' : 'Brands that trust us'}
           </div>
@@ -414,7 +390,6 @@ export default function Entreprises() {
           </div>
         </div>
       </section>
-
 
       {/* ===== POURQUOI ===== */}
       <section id="pourquoi" style={{ padding: '80px 60px', background: '#0a0a0a', borderTop: '0.5px solid rgba(255,255,255,0.07)' }}>
@@ -462,7 +437,6 @@ export default function Entreprises() {
 
       {/* ===== ÉTUDES DE CAS ===== */}
       <section id="etudes-de-cas" style={{ borderTop: '0.5px solid rgba(255,255,255,0.07)', scrollMarginTop: '64px', overflow: 'hidden' }}>
-        {/* NorCan */}
         <div style={{ background: NORCAN_GREEN, padding: '80px 0 60px' }}>
           <div style={{ padding: '0 60px', marginBottom: '48px' }}>
             <FadeIn>
@@ -486,7 +460,6 @@ export default function Entreprises() {
           <div style={{ padding: '0 20px' }}><TikTokCarousel videos={NORCAN_VIDEOS} bgColor={NORCAN_GREEN} /></div>
         </div>
 
-        {/* SexxxPlus */}
         <div style={{ background: SEXXXPLUS_COLOR, padding: '80px 0 60px', borderTop: '0.5px solid rgba(255,255,255,0.07)' }}>
           <div style={{ padding: '0 60px', marginBottom: '48px' }}>
             <FadeIn>
@@ -510,7 +483,6 @@ export default function Entreprises() {
           <div style={{ padding: '0 20px' }}><TikTokCarousel videos={SEXXXPLUS_VIDEOS} bgColor={SEXXXPLUS_COLOR} /></div>
         </div>
 
-        {/* Maher */}
         <div style={{ background: MAHER_COLOR, padding: '80px 0 60px', borderTop: '0.5px solid rgba(255,255,255,0.07)' }}>
           <div style={{ padding: '0 60px', marginBottom: '48px' }}>
             <FadeIn>
@@ -535,9 +507,6 @@ export default function Entreprises() {
         </div>
       </section>
 
-
-
-
       {/* ===== DÉROULEMENT ===== */}
       <section id="deroulement" style={{ padding: '100px 0', background: '#080808', borderTop: '0.5px solid rgba(255,255,255,0.07)', scrollMarginTop: '64px' }}>
         <FadeIn>
@@ -552,7 +521,7 @@ export default function Entreprises() {
           </div>
         </FadeIn>
 
-        {/* Sticky scroll cards — desktop only */}
+        {/* Desktop — sticky cards */}
         <div className="sticky-cards" style={{ position: 'relative', paddingBottom: '200px' }}>
           {steps.map((step, i) => (
             <div key={i} style={{
@@ -560,7 +529,6 @@ export default function Entreprises() {
               top: `${64 + i * 12}px`,
               zIndex: i + 1,
               margin: '0 40px 0',
-              marginBottom: i < steps.length - 1 ? '0' : '0',
               borderRadius: '16px',
               background: i % 2 === 0 ? '#0d0d0d' : '#111',
               border: '0.5px solid rgba(255,255,255,0.08)',
@@ -586,8 +554,13 @@ export default function Entreprises() {
                     ))}
                   </div>
                 </div>
+
                 {/* Right — visual */}
-                <div style={{ background: i % 2 === 0 ? 'linear-gradient(135deg, #080f1c, #0d1428)' : 'linear-gradient(135deg, #0d0d0d, #161616)', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}>
+                <div style={{
+                  background: i % 2 === 0 ? 'linear-gradient(135deg, #080f1c, #0d1428)' : 'linear-gradient(135deg, #0d0d0d, #161616)',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  position: 'relative', overflow: 'hidden'
+                }}>
                   {i === 0 ? (
                     <div style={{ position: 'absolute', inset: 0 }}>
                       <img src="/deroulement-1.jpg" alt="Stratégie" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }} />
@@ -599,8 +572,25 @@ export default function Entreprises() {
                       <div style={{ position: 'absolute', inset: 0, background: 'rgba(8,8,8,0.35)' }} />
                     </div>
                   ) : i === 2 ? (
-                    <div style={{ position: 'absolute', inset: 0, background: '#0a0f1a', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
-                      <img src="/deroulement-3.jpg" alt="Résultats" style={{ maxWidth: '90%', maxHeight: '90%', objectFit: 'contain', borderRadius: '8px' }} />
+                    /* ── MODIFIÉ : image réduite, centrée, fond bleu foncé ── */
+                    <div style={{
+                      position: 'absolute', inset: 0,
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      background: 'linear-gradient(135deg, #080f1c, #0d1428)'
+                    }}>
+                      <img
+                        src="/deroulement-3.jpg"
+                        alt="Résultats Meta Ads"
+                        style={{
+                          width: '72%',
+                          height: '72%',
+                          objectFit: 'contain',
+                          borderRadius: '12px',
+                          boxShadow: '0 8px 40px rgba(0,0,0,0.7)',
+                          position: 'relative',
+                          zIndex: 1
+                        }}
+                      />
                     </div>
                   ) : (
                     <>
@@ -615,11 +605,10 @@ export default function Entreprises() {
               </div>
             </div>
           ))}
-          {/* Spacer so last card unsticks */}
           <div style={{ height: '40px' }} />
         </div>
 
-        {/* Mobile — Benjy style cards */}
+        {/* Mobile — timeline cards */}
         <div className="mobile-timeline" style={{ flexDirection: 'column', gap: '16px', padding: '0 16px', display: 'none' }}>
           {steps.map((step, i) => (
             <div key={i} style={{
@@ -629,7 +618,6 @@ export default function Entreprises() {
               overflow: 'hidden',
               boxShadow: '0 4px 24px rgba(0,0,0,0.3)',
             }}>
-              {/* Text section */}
               <div style={{ padding: '28px 24px' }}>
                 <div style={{ fontFamily: "'Bebas Neue'", fontSize: '48px', color: 'rgba(0,61,165,0.15)', lineHeight: 1, marginBottom: '8px' }}>{step.num}</div>
                 <div style={{ display: 'inline-flex', alignItems: 'center', background: 'rgba(0,61,165,0.1)', border: '0.5px solid rgba(0,61,165,0.25)', borderRadius: '20px', padding: '4px 12px', marginBottom: '12px' }}>
@@ -645,9 +633,7 @@ export default function Entreprises() {
                     </div>
                   ))}
                 </div>
-
               </div>
-              {/* Visual section */}
               <div style={{ height: '200px', background: `linear-gradient(135deg, ${i % 2 === 0 ? '#080f1c, #0d1428' : '#0d0d18, #161628'})`, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}>
                 {i === 0 ? (
                   <div style={{ position: 'absolute', inset: 0 }}>
@@ -660,8 +646,25 @@ export default function Entreprises() {
                     <div style={{ position: 'absolute', inset: 0, background: 'rgba(8,8,8,0.35)' }} />
                   </div>
                 ) : i === 2 ? (
-                  <div style={{ position: 'absolute', inset: 0, background: '#0a0f1a', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px' }}>
-                    <img src="/deroulement-3.jpg" alt="Résultats" style={{ maxWidth: '90%', maxHeight: '90%', objectFit: 'contain', borderRadius: '8px' }} />
+                  /* ── MODIFIÉ mobile : image réduite centrée ── */
+                  <div style={{
+                    position: 'absolute', inset: 0,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    background: 'linear-gradient(135deg, #080f1c, #0d1428)'
+                  }}>
+                    <img
+                      src="/deroulement-3.jpg"
+                      alt="Résultats Meta Ads"
+                      style={{
+                        width: '78%',
+                        height: '78%',
+                        objectFit: 'contain',
+                        borderRadius: '10px',
+                        boxShadow: '0 4px 24px rgba(0,0,0,0.6)',
+                        position: 'relative',
+                        zIndex: 1
+                      }}
+                    />
                   </div>
                 ) : (
                   <>
@@ -691,7 +694,6 @@ export default function Entreprises() {
           </h2>
         </FadeIn>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px', maxWidth: '1100px' }}>
-          {/* Forfait 1 — 3500$ */}
           <FadeIn delay={0.1}>
             <div style={{ background: '#0d0d0d', border: `1px solid rgba(0,61,165,0.3)`, borderRadius: '16px', padding: '36px', position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
               <div style={{ position: 'absolute', top: '-30px', right: '-30px', width: '160px', height: '160px', borderRadius: '50%', background: 'rgba(0,61,165,0.06)', filter: 'blur(30px)' }} />
@@ -712,7 +714,6 @@ export default function Entreprises() {
             </div>
           </FadeIn>
 
-          {/* Forfait 2 — 4500$ */}
           <FadeIn delay={0.15}>
             <div style={{ background: '#0d0d0d', border: `2px solid ${BLUE}`, borderRadius: '16px', padding: '36px', position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
               <div style={{ position: 'absolute', top: '0', right: '0', background: BLUE, fontSize: '9px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#fff', padding: '6px 14px', borderBottomLeftRadius: '8px' }}>
@@ -736,10 +737,9 @@ export default function Entreprises() {
             </div>
           </FadeIn>
 
-          {/* Forfait 3 — +3000$ */}
           <FadeIn delay={0.2}>
             <div style={{ background: '#0d0d0d', border: '0.5px solid rgba(255,255,255,0.08)', borderRadius: '16px', padding: '36px', display: 'flex', flexDirection: 'column' }}>
-              <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginBottom: '16px' }}>{fr ? 'Add-on · Meta Ads & CRM' : 'Add-on · Meta Ads & CRM'}</div>
+              <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginBottom: '16px' }}>Add-on · Meta Ads &amp; CRM</div>
               <div style={{ fontFamily: "'Bebas Neue'", fontSize: '48px', color: '#fff', lineHeight: 1, marginBottom: '4px' }}>+3 000$</div>
               <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', marginBottom: '24px' }}>{fr ? '/ mois · à ajouter à votre forfait' : '/ month · add to your plan'}</div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '16px', flex: 1 }}>
