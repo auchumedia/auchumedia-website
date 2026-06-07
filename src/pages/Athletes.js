@@ -346,7 +346,7 @@ export default function Athletes() {
       <section style={{ minHeight: '90vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '100px 60px 80px', position: 'relative', overflow: 'hidden', textAlign: 'center' }}>
         {/* Video background */}
         <video autoPlay muted loop playsInline style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0 }}>
-          <source src="https://drive.google.com/uc?export=download&id=1b9Q7aVmMxlnRg60-37Iv7OWVtvc0-kxU" type="video/mp4" />
+          <source src="https://res.cloudinary.com/dr0kwuqqa/video/upload/v1780793140/Video_hero_li3pom.mp4" type="video/mp4" />
         </video>
         {/* Overlay */}
         <div style={{ position: 'absolute', inset: 0, background: 'rgba(8,8,8,0.65)', zIndex: 1 }} />
