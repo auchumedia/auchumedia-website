@@ -72,7 +72,6 @@ const navLinks = [
   { id: 'pourquoi', labelFr: 'Pourquoi AuchuMedia', labelEn: 'Why AuchuMedia' },
   { id: 'etudes-de-cas', labelFr: 'Études de cas', labelEn: 'Case studies' },
   { id: 'deroulement', labelFr: 'Déroulement', labelEn: 'Process' },
-  { id: 'tarification', labelFr: 'Tarification', labelEn: 'Pricing' },
   { id: 'faq', labelFr: 'FAQ', labelEn: 'FAQ' },
 ];
 
@@ -147,11 +146,6 @@ function MultiStepForm({ fr, scrollTo, BLUE }) {
           </select>
           <label style={labelStyle}>{fr ? 'Ligue / Organisation *' : 'League / Organization *'}</label>
           <input type="text" value={form.ligue} onChange={e => set('ligue', e.target.value)} placeholder={fr ? 'ex: LNAH, QMJHL, NCAA...' : 'e.g. LNAH, QMJHL, NCAA...'} style={inputStyle} />
-          <label style={labelStyle}>{fr ? 'Niveau *' : 'Level *'}</label>
-          <select value={form.niveau} onChange={e => set('niveau', e.target.value)} style={selectStyle}>
-            <option value="">{fr ? 'Sélectionner' : 'Select'}</option>
-            {(fr ? ['Junior', 'Semi-professionnel', 'Professionnel', 'Retraité'] : ['Junior', 'Semi-professional', 'Professional', 'Retired']).map(o => <option key={o} value={o}>{o}</option>)}
-          </select>
         </div>
       )}
 
@@ -161,12 +155,12 @@ function MultiStepForm({ fr, scrollTo, BLUE }) {
           <label style={labelStyle}>{fr ? 'Qui gère tes réseaux sociaux ? *' : 'Who manages your social media? *'}</label>
           <select value={form.reseaux} onChange={e => set('reseaux', e.target.value)} style={selectStyle}>
             <option value="">{fr ? 'Sélectionner' : 'Select'}</option>
-            {(fr ? ["Personne pour l'instant", 'Moi-même', 'Mon équipe/club', 'Une agence', 'Un freelance'] : ['Nobody for now', 'Myself', 'My team/club', 'An agency', 'A freelancer']).map(o => <option key={o} value={o}>{o}</option>)}
+            {(fr ? ['Moi-même', 'Mon agent'] : ['Myself', 'My agent']).map(o => <option key={o} value={o}>{o}</option>)}
           </select>
           <label style={labelStyle}>{fr ? 'Ton objectif principal *' : 'Your main goal *'}</label>
           <select value={form.objectif} onChange={e => set('objectif', e.target.value)} style={selectStyle}>
             <option value="">{fr ? 'Sélectionner' : 'Select'}</option>
-            {(fr ? ['Attirer des commandites', 'Bâtir ma notoriété', 'Développer ma marque personnelle', 'Monétiser mon audience', 'Tout ça à la fois'] : ['Attract sponsorships', 'Build my notoriety', 'Develop my personal brand', 'Monetize my audience', 'All of the above']).map(o => <option key={o} value={o}>{o}</option>)}
+            {(fr ? ['Attirer des commanditaires', 'Développer ma marque personnelle', 'Tout ça à la fois'] : ['Attract sponsors', 'Develop my personal brand', 'All of the above']).map(o => <option key={o} value={o}>{o}</option>)}
           </select>
         </div>
       )}
