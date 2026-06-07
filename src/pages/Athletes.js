@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import Footer from '../components/Footer';
 
 const BLUE = '#003DA5';
+const BATAILLON_COLOR = '#3d4a2a';
+const SEB_COLOR = '#0a1628';
 
 function useInView(threshold = 0.15) {
   const ref = useRef(null);
@@ -20,13 +22,187 @@ function FadeIn({ children, delay = 0, direction = 'up' }) {
   return <div ref={ref} style={{ opacity: inView ? 1 : 0, transform: inView ? 'none' : t[direction], transition: `opacity 0.6s ease ${delay}s, transform 0.6s ease ${delay}s` }}>{children}</div>;
 }
 
+function TikTokCarousel({ videos, bgColor }) {
+  const scrollRef = useRef(null);
+  const scroll = (dir) => { if (scrollRef.current) scrollRef.current.scrollBy({ left: dir * 340, behavior: 'smooth' }); };
+  return (
+    <div style={{ position: 'relative' }}>
+      {['left','right'].map((dir, i) => (
+        <button key={dir} onClick={() => scroll(i === 0 ? -1 : 1)} style={{ position: 'absolute', top: '50%', transform: 'translateY(-50%)', [dir]: '-20px', zIndex: 10, width: '40px', height: '40px', borderRadius: '50%', background: 'rgba(0,0,0,0.8)', border: '0.5px solid rgba(255,255,255,0.2)', color: '#fff', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '16px' }}>
+          {i === 0 ? '←' : '→'}
+        </button>
+      ))}
+      <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: '60px', background: `linear-gradient(to right, ${bgColor}, transparent)`, zIndex: 2, pointerEvents: 'none' }} />
+      <div style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: '60px', background: `linear-gradient(to left, ${bgColor}, transparent)`, zIndex: 2, pointerEvents: 'none' }} />
+      <div ref={scrollRef} style={{ display: 'flex', gap: '16px', overflowX: 'auto', scrollbarWidth: 'none', padding: '8px 40px', scrollSnapType: 'x mandatory' }}>
+        {videos.map((url, i) => {
+          const videoId = url.split('/video/')[1]?.split('?')[0];
+          return (
+            <div key={i} style={{ flexShrink: 0, scrollSnapAlign: 'start', width: '300px', height: '530px', borderRadius: '16px', overflow: 'hidden', border: '0.5px solid rgba(255,255,255,0.1)', background: '#000' }}>
+              <iframe src={`https://www.tiktok.com/embed/v2/${videoId}`} style={{ width: '100%', height: '100%', border: 'none' }} allow="autoplay; encrypted-media" allowFullScreen title={`video ${i+1}`} />
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+const BATAILLON_VIDEOS = [
+  'https://www.tiktok.com/@bataillon.lnah/video/7631316992540036360',
+  'https://www.tiktok.com/@bataillon.lnah/video/7608346645570260231',
+  'https://www.tiktok.com/@bataillon.lnah/video/7588586702139165959',
+  'https://www.tiktok.com/@bataillon.lnah/video/7606782312935640327',
+  'https://www.tiktok.com/@bataillon.lnah/video/7611987075113487634',
+  'https://www.tiktok.com/@bataillon.lnah/video/7590904238792887559',
+  'https://www.tiktok.com/@bataillon.lnah/video/7599807332582722834',
+];
+
+const SEB_VIDEOS = [
+  'https://www.tiktok.com/@seb.sylvestre/video/7579015658093186327',
+  'https://www.tiktok.com/@seb.sylvestre/video/7580449261767200022',
+  'https://www.tiktok.com/@seb.sylvestre/video/7583910354443406614',
+  'https://www.tiktok.com/@seb.sylvestre/video/7593162731688185110',
+  'https://www.tiktok.com/@seb.sylvestre/video/7592733547325033750',
+  'https://www.tiktok.com/@seb.sylvestre/video/7592419813666950422',
+  'https://www.tiktok.com/@seb.sylvestre/video/7606450483724635414',
+];
+
 const navLinks = [
   { id: 'pourquoi', labelFr: 'Pourquoi AuchuMedia', labelEn: 'Why AuchuMedia' },
   { id: 'etudes-de-cas', labelFr: 'Études de cas', labelEn: 'Case studies' },
   { id: 'deroulement', labelFr: 'Déroulement', labelEn: 'Process' },
-  { id: 'faq', labelFr: 'FAQ', labelEn: 'FAQ' },
   { id: 'tarification', labelFr: 'Tarification', labelEn: 'Pricing' },
+  { id: 'faq', labelFr: 'FAQ', labelEn: 'FAQ' },
 ];
+
+function MultiStepForm({ fr, scrollTo, BLUE }) {
+  const [step, setStep] = React.useState(1);
+  const [form, setForm] = React.useState({
+    prenom: '', nom: '', email: '', instagram: '',
+    sport: '', ligue: '', niveau: '',
+    reseaux: '', objectif: '',
+    besoin: '', budget: '', quand: ''
+  });
+  const [submitted, setSubmitted] = React.useState(false);
+
+  const total = 4;
+  const set = (k, v) => setForm(f => ({ ...f, [k]: v }));
+  const inputStyle = { width: '100%', background: '#111', border: '0.5px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '12px 16px', color: '#fff', fontSize: '14px', outline: 'none', fontFamily: "'DM Sans'", marginBottom: '14px' };
+  const selectStyle = { ...inputStyle, appearance: 'none', cursor: 'pointer' };
+  const labelStyle = { display: 'block', fontSize: '13px', fontWeight: 600, color: 'rgba(255,255,255,0.7)', marginBottom: '8px' };
+
+  const steps = fr ? ['Tes informations', 'Ton profil sportif', 'Ta présence actuelle', 'Ton projet'] : ['Your information', 'Your sports profile', 'Your current presence', 'Your project'];
+
+  if (submitted) return (
+    <div style={{ background: '#0d0d0d', border: `1px solid rgba(0,61,165,0.3)`, borderRadius: '16px', padding: '48px 32px', textAlign: 'center' }}>
+      <div style={{ fontSize: '48px', marginBottom: '16px' }}>✅</div>
+      <div style={{ fontFamily: "'Bebas Neue'", fontSize: '28px', color: '#fff', marginBottom: '12px' }}>{fr ? 'DEMANDE REÇUE !' : 'REQUEST RECEIVED!'}</div>
+      <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.5)', lineHeight: 1.7 }}>{fr ? 'Notre équipe te contactera dans les 48h.' : 'Our team will contact you within 48h.'}</p>
+    </div>
+  );
+
+  return (
+    <div style={{ background: '#0d0d0d', border: '0.5px solid rgba(255,255,255,0.08)', borderRadius: '16px', padding: '36px 32px' }}>
+      <div style={{ marginBottom: '28px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+          <span style={{ fontSize: '11px', fontWeight: 700, color: BLUE, letterSpacing: '0.1em', textTransform: 'uppercase' }}>{steps[step - 1]}</span>
+          <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.3)' }}>{step}/{total}</span>
+        </div>
+        <div style={{ height: '3px', background: 'rgba(255,255,255,0.08)', borderRadius: '2px', overflow: 'hidden' }}>
+          <div style={{ height: '100%', width: `${(step / total) * 100}%`, background: BLUE, borderRadius: '2px', transition: 'width 0.4s ease' }} />
+        </div>
+      </div>
+
+      {step === 1 && (
+        <div>
+          <div style={{ fontFamily: "'Bebas Neue'", fontSize: '24px', color: '#fff', marginBottom: '24px', letterSpacing: '0.04em' }}>{fr ? 'TES INFORMATIONS' : 'YOUR INFORMATION'}</div>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0 14px' }}>
+            <div>
+              <label style={labelStyle}>{fr ? 'Prénom *' : 'First name *'}</label>
+              <input type="text" value={form.prenom} onChange={e => set('prenom', e.target.value)} placeholder="Alex" style={inputStyle} />
+            </div>
+            <div>
+              <label style={labelStyle}>{fr ? 'Nom *' : 'Last name *'}</label>
+              <input type="text" value={form.nom} onChange={e => set('nom', e.target.value)} placeholder="Tremblay" style={inputStyle} />
+            </div>
+          </div>
+          <label style={labelStyle}>Email *</label>
+          <input type="email" value={form.email} onChange={e => set('email', e.target.value)} placeholder="alex@monmail.com" style={inputStyle} />
+          <label style={labelStyle}>Instagram *</label>
+          <div style={{ position: 'relative', marginBottom: '14px' }}>
+            <span style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)', color: 'rgba(255,255,255,0.3)', fontSize: '14px' }}>@</span>
+            <input type="text" value={form.instagram} onChange={e => set('instagram', e.target.value)} placeholder="tonhandle" style={{ ...inputStyle, paddingLeft: '28px', marginBottom: 0 }} />
+          </div>
+        </div>
+      )}
+
+      {step === 2 && (
+        <div>
+          <div style={{ fontFamily: "'Bebas Neue'", fontSize: '24px', color: '#fff', marginBottom: '24px', letterSpacing: '0.04em' }}>{fr ? 'TON PROFIL SPORTIF' : 'YOUR SPORTS PROFILE'}</div>
+          <label style={labelStyle}>{fr ? 'Ton sport *' : 'Your sport *'}</label>
+          <select value={form.sport} onChange={e => set('sport', e.target.value)} style={selectStyle}>
+            <option value="">{fr ? 'Sélectionner' : 'Select'}</option>
+            {['Hockey', 'Football', 'Basketball', 'Baseball', fr ? 'Autre' : 'Other'].map(o => <option key={o} value={o}>{o}</option>)}
+          </select>
+          <label style={labelStyle}>{fr ? 'Ligue / Organisation *' : 'League / Organization *'}</label>
+          <input type="text" value={form.ligue} onChange={e => set('ligue', e.target.value)} placeholder={fr ? 'ex: LNAH, QMJHL, NCAA...' : 'e.g. LNAH, QMJHL, NCAA...'} style={inputStyle} />
+          <label style={labelStyle}>{fr ? 'Niveau *' : 'Level *'}</label>
+          <select value={form.niveau} onChange={e => set('niveau', e.target.value)} style={selectStyle}>
+            <option value="">{fr ? 'Sélectionner' : 'Select'}</option>
+            {(fr ? ['Junior', 'Semi-professionnel', 'Professionnel', 'Retraité'] : ['Junior', 'Semi-professional', 'Professional', 'Retired']).map(o => <option key={o} value={o}>{o}</option>)}
+          </select>
+        </div>
+      )}
+
+      {step === 3 && (
+        <div>
+          <div style={{ fontFamily: "'Bebas Neue'", fontSize: '24px', color: '#fff', marginBottom: '24px', letterSpacing: '0.04em' }}>{fr ? 'TA PRÉSENCE ACTUELLE' : 'YOUR CURRENT PRESENCE'}</div>
+          <label style={labelStyle}>{fr ? 'Qui gère tes réseaux sociaux ? *' : 'Who manages your social media? *'}</label>
+          <select value={form.reseaux} onChange={e => set('reseaux', e.target.value)} style={selectStyle}>
+            <option value="">{fr ? 'Sélectionner' : 'Select'}</option>
+            {(fr ? ["Personne pour l'instant", 'Moi-même', 'Mon équipe/club', 'Une agence', 'Un freelance'] : ['Nobody for now', 'Myself', 'My team/club', 'An agency', 'A freelancer']).map(o => <option key={o} value={o}>{o}</option>)}
+          </select>
+          <label style={labelStyle}>{fr ? 'Ton objectif principal *' : 'Your main goal *'}</label>
+          <select value={form.objectif} onChange={e => set('objectif', e.target.value)} style={selectStyle}>
+            <option value="">{fr ? 'Sélectionner' : 'Select'}</option>
+            {(fr ? ['Attirer des commandites', 'Bâtir ma notoriété', 'Développer ma marque personnelle', 'Monétiser mon audience', 'Tout ça à la fois'] : ['Attract sponsorships', 'Build my notoriety', 'Develop my personal brand', 'Monetize my audience', 'All of the above']).map(o => <option key={o} value={o}>{o}</option>)}
+          </select>
+        </div>
+      )}
+
+      {step === 4 && (
+        <div>
+          <div style={{ fontFamily: "'Bebas Neue'", fontSize: '24px', color: '#fff', marginBottom: '24px', letterSpacing: '0.04em' }}>{fr ? 'TON PROJET' : 'YOUR PROJECT'}</div>
+          <label style={labelStyle}>{fr ? 'Parle-nous de toi et de ton projet *' : 'Tell us about you and your project *'}</label>
+          <textarea value={form.besoin} onChange={e => set('besoin', e.target.value)} placeholder={fr ? 'Ton histoire, tes ambitions, ce que tu cherches...' : 'Your story, your ambitions, what you are looking for...'} style={{ ...inputStyle, resize: 'vertical', minHeight: '100px' }} />
+          <label style={labelStyle}>{fr ? 'Quand souhaites-tu commencer ? *' : 'When do you want to start? *'}</label>
+          <select value={form.quand} onChange={e => set('quand', e.target.value)} style={selectStyle}>
+            <option value="">{fr ? 'Sélectionner' : 'Select'}</option>
+            {(fr ? ['Immédiatement', 'Dans 1 à 3 mois', 'Dans 3 à 6 mois', "Je m'informe seulement"] : ['Immediately', 'In 1 to 3 months', 'In 3 to 6 months', 'Just gathering info']).map(o => <option key={o} value={o}>{o}</option>)}
+          </select>
+        </div>
+      )}
+
+      <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '8px', gap: '12px' }}>
+        {step > 1 ? (
+          <button onClick={() => setStep(s => s - 1)} style={{ fontSize: '11px', fontWeight: 700, color: 'rgba(255,255,255,0.6)', background: 'transparent', border: '0.5px solid rgba(255,255,255,0.2)', padding: '12px 24px', borderRadius: '6px', cursor: 'pointer', fontFamily: "'DM Sans'", letterSpacing: '0.07em', textTransform: 'uppercase' }}>
+            ← {fr ? 'Précédent' : 'Previous'}
+          </button>
+        ) : <div />}
+        {step < total ? (
+          <button onClick={() => setStep(s => s + 1)} style={{ fontSize: '11px', fontWeight: 700, color: '#fff', background: BLUE, border: 'none', padding: '12px 28px', borderRadius: '6px', cursor: 'pointer', fontFamily: "'DM Sans'", letterSpacing: '0.07em', textTransform: 'uppercase' }}>
+            {fr ? 'Suivant' : 'Next'} →
+          </button>
+        ) : (
+          <button onClick={() => setSubmitted(true)} style={{ fontSize: '11px', fontWeight: 700, color: '#fff', background: BLUE, border: 'none', padding: '12px 28px', borderRadius: '6px', cursor: 'pointer', fontFamily: "'DM Sans'", letterSpacing: '0.07em', textTransform: 'uppercase' }}>
+            {fr ? 'Soumettre' : 'Submit'} →
+          </button>
+        )}
+      </div>
+    </div>
+  );
+}
 
 export default function Athletes() {
   const [lang, setLang] = useState('fr');
@@ -66,17 +242,37 @@ export default function Athletes() {
   ];
 
   const steps = fr ? [
-    { num: '01', title: 'Appel découverte', desc: "On apprend à te connaître — ton histoire, tes objectifs, ta personnalité. Gratuit et sans engagement." },
-    { num: '02', title: 'Audit & stratégie', desc: "On analyse ta présence actuelle et on construit une stratégie sur mesure alignée avec tes objectifs." },
-    { num: '03', title: 'Création de contenu', desc: "Tournages, production vidéo, stratégie éditoriale — on crée du contenu qui te ressemble vraiment." },
-    { num: '04', title: 'Publication & croissance', desc: "On publie de façon cohérente et on optimise en continu pour maximiser ta portée et ton engagement." },
-    { num: '05', title: 'Partnerships', desc: "Une fois ton image solide, on identifie et approche les marques qui correspondent à ton identité." },
+    {
+      num: '01', days: 'Semaine 1–2', title: 'APPEL DÉCOUVERTE & AUDIT',
+      desc: "On apprend à te connaître — ton histoire, tes objectifs, ta personnalité. On analyse ta présence actuelle et on construit une stratégie sur mesure.",
+      points: ["Audit de ta présence actuelle", "Définition de ton identité de marque", "Stratégie de contenu personnalisée", "Calendrier éditorial du premier mois"]
+    },
+    {
+      num: '02', days: 'Semaine 2–4', title: 'CRÉATION DE CONTENU',
+      desc: "Tournages, production vidéo, direction créative — on crée du contenu qui te ressemble vraiment et qui capte l'attention.",
+      points: ["Tournage professionnel", "Montage & adaptation par plateforme", "Direction créative & storytelling", "Approbation avant publication"]
+    },
+    {
+      num: '03', days: 'Mois 1–3', title: 'PUBLICATION & CROISSANCE',
+      desc: "On publie de façon cohérente et on optimise en continu pour maximiser ta portée, ton engagement et ta visibilité.",
+      points: ["Publication cohérente sur toutes les plateformes", "Gestion de communauté active", "Optimisation basée sur les données", "Rapport mensuel de performance"]
+    },
   ] : [
-    { num: '01', title: 'Discovery call', desc: "We get to know you — your story, your goals, your personality. Free and no commitment." },
-    { num: '02', title: 'Audit & strategy', desc: "We analyze your current presence and build a custom strategy aligned with your goals." },
-    { num: '03', title: 'Content creation', desc: "Shoots, video production, editorial strategy — we create content that truly looks like you." },
-    { num: '04', title: 'Publishing & growth', desc: "We publish consistently and optimize continuously to maximize your reach and engagement." },
-    { num: '05', title: 'Partnerships', desc: "Once your image is solid, we identify and approach brands that match your identity." },
+    {
+      num: '01', days: 'Week 1–2', title: 'DISCOVERY CALL & AUDIT',
+      desc: "We get to know you — your story, your goals, your personality. We analyze your current presence and build a custom strategy.",
+      points: ["Audit of your current presence", "Brand identity definition", "Personalized content strategy", "First month editorial calendar"]
+    },
+    {
+      num: '02', days: 'Week 2–4', title: 'CONTENT CREATION',
+      desc: "Shoots, video production, creative direction — we create content that truly looks like you and captures attention.",
+      points: ["Professional shoot", "Editing & platform adaptation", "Creative direction & storytelling", "Approval before publishing"]
+    },
+    {
+      num: '03', days: 'Month 1–3', title: 'PUBLISHING & GROWTH',
+      desc: "We publish consistently and optimize continuously to maximize your reach, engagement and visibility.",
+      points: ["Consistent publishing across all platforms", "Active community management", "Data-driven optimization", "Monthly performance report"]
+    },
   ];
 
   return (
@@ -94,8 +290,7 @@ export default function Athletes() {
       }}>
         <a href="/" style={{ flexShrink: 0 }}><img src="/Copie de AUCHU.png.png" alt="AuchuMedia" style={{ height: '22px', width: 'auto' }} /></a>
 
-        {/* Section links center */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '2px', overflowX: 'auto', scrollbarWidth: 'none' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '2px', overflowX: 'auto', scrollbarWidth: 'none', flex: 1, justifyContent: 'center' }} className="nav-links">
           {navLinks.map(link => (
             <button key={link.id} onClick={() => scrollTo(link.id)} style={{
               fontSize: '11px', fontWeight: 600,
@@ -112,8 +307,7 @@ export default function Athletes() {
           ))}
         </div>
 
-        {/* Right — entreprises + CTA + lang */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0, position: 'absolute', right: '60px' }}>
           <a href="/entreprises" style={{ fontSize: '10px', fontWeight: 700, color: '#fff', background: 'transparent', padding: '8px 16px', borderRadius: '4px', border: '1px solid rgba(255,255,255,0.3)', textDecoration: 'none', letterSpacing: '0.07em', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>
             {fr ? 'Pour entreprises' : 'For businesses'}
           </a>
@@ -127,7 +321,6 @@ export default function Athletes() {
               </button>
             ))}
           </div>
-          {/* Hamburger */}
           <button onClick={() => setMobileOpen(!mobileOpen)} className="hamburger-btn" style={{ display: 'none', flexDirection: 'column', gap: '5px', background: 'none', border: 'none', cursor: 'pointer', padding: '8px', flexShrink: 0 }}>
             <span style={{ width: '22px', height: '1.5px', background: '#fff', display: 'block', transition: 'all 0.25s', transform: mobileOpen ? 'translateY(6.5px) rotate(45deg)' : 'none' }} />
             <span style={{ width: '22px', height: '1.5px', background: '#fff', display: 'block', opacity: mobileOpen ? 0 : 1, transition: 'all 0.25s' }} />
@@ -156,18 +349,17 @@ export default function Athletes() {
       )}
 
       {/* ===== HERO ===== */}
-      <section style={{ minHeight: '90vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '120px 60px 80px', position: 'relative', overflow: 'hidden', textAlign: 'center' }}>
+      <section style={{ minHeight: '90vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '100px 60px 80px', position: 'relative', overflow: 'hidden', textAlign: 'center' }}>
         <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at 50% 60%, rgba(0,61,165,0.08) 0%, transparent 65%)', pointerEvents: 'none' }} />
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px)', backgroundSize: '60px 60px', pointerEvents: 'none' }} />
         <div style={{ position: 'relative', zIndex: 1, maxWidth: '860px' }}>
-
           <h1 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(52px, 7.5vw, 100px)', lineHeight: 0.93, color: '#fff', marginBottom: '28px', letterSpacing: '0.01em' }}>
             {fr ? 'RAYONNE AU-DELÀ\nDE TON SPORT.' : 'RISE ABOVE\nYOUR SPORT.'}
           </h1>
           <p style={{ fontSize: 'clamp(15px, 1.8vw, 18px)', color: 'rgba(255,255,255,0.55)', lineHeight: 1.8, marginBottom: '40px', maxWidth: '580px', margin: '0 auto 40px', fontWeight: 300 }}>
             {fr ? "On bâtit la marque des athlètes qui dominent. Personal branding, partnerships et production vidéo — tout pour que tu deviennes la référence dans ton sport." : "We build the brand of athletes who dominate. Personal branding, partnerships and video production — everything to make you the reference in your sport."}
           </p>
-          <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '72px' }}>
             <button onClick={() => scrollTo('contact')} style={{ fontSize: '11px', fontWeight: 700, color: '#fff', background: BLUE, padding: '14px 32px', borderRadius: '4px', letterSpacing: '0.1em', textTransform: 'uppercase', border: 'none', cursor: 'pointer', boxShadow: '0 0 30px rgba(0,61,165,0.3)', fontFamily: "'DM Sans'" }}>
               {fr ? 'Prendre RDV →' : 'Book a call →'}
             </button>
@@ -177,7 +369,6 @@ export default function Athletes() {
           </div>
         </div>
       </section>
-
 
       {/* ===== POURQUOI ===== */}
       <section id="pourquoi" style={{ padding: '80px 60px', background: '#0a0a0a', borderTop: '0.5px solid rgba(255,255,255,0.07)' }}>
@@ -193,7 +384,7 @@ export default function Athletes() {
             </h2>
           </div>
         </FadeIn>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '12px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 320px)', gap: '12px', justifyContent: 'center' }}>
           {(fr ? [
             { icon: '🎯', title: 'Personal branding', desc: "On bâtit ton identité numérique de A à Z — image, ton, positionnement. Tu deviens reconnaissable." },
             { icon: '🎬', title: 'Production vidéo', desc: "Tournages, montage, direction créative. Du contenu cinématographique qui te démarque vraiment." },
@@ -210,7 +401,7 @@ export default function Athletes() {
             { icon: '📈', title: 'Reports & follow-up', desc: "Complete monthly report and strategic meeting to adjust and optimize continuously." },
           ]).map((item, i) => (
             <FadeIn key={i} delay={i * 0.07}>
-              <div style={{ background: '#111', border: '0.5px solid rgba(255,255,255,0.07)', borderRadius: '12px', padding: '28px 24px', transition: 'border-color 0.2s' }}
+              <div style={{ background: '#111', border: '0.5px solid rgba(255,255,255,0.07)', borderRadius: '12px', padding: '28px 24px', transition: 'border-color 0.2s', height: '100%' }}
                 onMouseEnter={e => e.currentTarget.style.borderColor = 'rgba(0,61,165,0.3)'}
                 onMouseLeave={e => e.currentTarget.style.borderColor = 'rgba(255,255,255,0.07)'}
               >
@@ -224,70 +415,141 @@ export default function Athletes() {
       </section>
 
       {/* ===== ÉTUDES DE CAS ===== */}
-      <section id="etudes-de-cas" style={{ padding: '100px 60px', background: '#0a0a0a', borderTop: '0.5px solid rgba(255,255,255,0.07)', scrollMarginTop: '64px' }}>
-        <FadeIn>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
-            <div style={{ width: '20px', height: '1px', background: BLUE }} />
-            <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE }}>{fr ? 'Études de cas · Résultats' : 'Case studies · Results'}</span>
-          </div>
-          <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(32px, 4vw, 52px)', color: '#fff', marginBottom: '48px', letterSpacing: '0.02em' }}>
-            {fr ? <>ILS NOUS ONT <span style={{ color: BLUE }}>FAIT CONFIANCE.</span></> : <>THEY <span style={{ color: BLUE }}>TRUSTED US.</span></>}
-          </h2>
-        </FadeIn>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
-          {[
-            { name: 'Le Bataillon LNAH', cat: 'Hockey · LNAH · Always-On', result: '+1M', label: fr ? 'vues générées' : 'views generated', desc: fr ? "Stratégie de contenu complète et gestion des médias sociaux pour l'équipe de hockey du Bataillon." : "Complete content strategy and social media management for the Bataillon hockey team." },
-            { name: 'NorCan — Web série', cat: fr ? 'Production · Web série' : 'Production · Web series', result: fr ? 'LANCÉE' : 'LAUNCHED', label: fr ? 'série YouTube' : 'YouTube series', desc: fr ? "Production d'une web série premium mettant en valeur l'expertise et la culture de NorCan." : "Production of a premium web series showcasing NorCan's expertise and culture." },
-          ].map((c, i) => (
-            <FadeIn key={i} delay={i * 0.1}>
-              <div style={{ background: '#111', border: '0.5px solid rgba(255,255,255,0.07)', borderRadius: '12px', overflow: 'hidden' }}>
-                <div style={{ height: '200px', background: i === 0 ? 'linear-gradient(135deg, #080f1c, #0d1428)' : 'linear-gradient(135deg, #1a3a2a, #0d2018)', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
-                  <span style={{ fontFamily: "'Bebas Neue'", fontSize: '100px', color: 'rgba(255,255,255,0.04)', position: 'absolute' }}>0{i+1}</span>
-                  <div style={{ width: '44px', height: '44px', borderRadius: '50%', background: 'rgba(0,61,165,0.1)', border: '0.5px solid rgba(0,61,165,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', zIndex: 1 }}>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={BLUE} strokeWidth="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                  </div>
+      <section id="etudes-de-cas" style={{ borderTop: '0.5px solid rgba(255,255,255,0.07)', scrollMarginTop: '64px', overflow: 'hidden' }}>
+
+        {/* Bataillon */}
+        <div style={{ background: BATAILLON_COLOR, padding: '80px 0 60px' }}>
+          <div style={{ padding: '0 60px', marginBottom: '48px' }}>
+            <FadeIn>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '24px' }}>
+                <div>
+                  <div style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.5)', marginBottom: '12px' }}>{fr ? 'Étude de cas 1/2' : 'Case study 1/2'}</div>
+                  <div style={{ fontFamily: "'Bebas Neue'", fontSize: '52px', color: '#fff', letterSpacing: '0.1em', lineHeight: 1 }}>LE BATAILLON</div>
+                  <div style={{ fontSize: '13px', color: 'rgba(255,255,255,0.5)', marginTop: '6px' }}>{fr ? 'Hockey · LNAH · St-Hyacinthe · Médias sociaux' : 'Hockey · LNAH · St-Hyacinthe · Social media'}</div>
                 </div>
-                <div style={{ padding: '24px' }}>
-                  <div style={{ fontSize: '9px', color: BLUE, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: '8px' }}>{c.cat}</div>
-                  <div style={{ fontSize: '18px', fontWeight: 700, color: '#fff', marginBottom: '10px' }}>{c.name}</div>
-                  <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.5)', lineHeight: 1.65, marginBottom: '16px', fontWeight: 300 }}>{c.desc}</p>
-                  <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px' }}>
-                    <span style={{ fontFamily: "'Bebas Neue'", fontSize: '32px', color: BLUE, letterSpacing: '0.05em' }}>{c.result}</span>
-                    <span style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)' }}>{c.label}</span>
-                  </div>
+                <div style={{ display: 'flex', gap: '32px', flexWrap: 'wrap' }}>
+                  {[{num:'3M',label:fr?'vues':'views'},{num:'100K',label:'engagements'},{num:'38',label:fr?'vidéos':'videos'},{num:'+5K',label:fr?'abonnés':'followers'}].map((m,i) => (
+                    <div key={i} style={{ textAlign: 'center' }}>
+                      <div style={{ fontFamily: "'Bebas Neue'", fontSize: '44px', color: '#fff', letterSpacing: '0.05em', lineHeight: 1 }}>{m.num}</div>
+                      <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.5)', letterSpacing: '0.1em', textTransform: 'uppercase', marginTop: '4px' }}>{m.label}</div>
+                    </div>
+                  ))}
                 </div>
               </div>
             </FadeIn>
-          ))}
+          </div>
+          <div style={{ padding: '0 20px' }}><TikTokCarousel videos={BATAILLON_VIDEOS} bgColor={BATAILLON_COLOR} /></div>
+        </div>
+
+        {/* Sébastien Sylvestre */}
+        <div style={{ background: SEB_COLOR, padding: '80px 0 60px', borderTop: '0.5px solid rgba(255,255,255,0.07)' }}>
+          <div style={{ padding: '0 60px', marginBottom: '48px' }}>
+            <FadeIn>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '24px' }}>
+                <div>
+                  <div style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.5)', marginBottom: '12px' }}>{fr ? 'Étude de cas 2/2' : 'Case study 2/2'}</div>
+                  <div style={{ fontFamily: "'Bebas Neue'", fontSize: '52px', color: '#fff', letterSpacing: '0.1em', lineHeight: 1 }}>SÉBASTIEN SYLVESTRE</div>
+                  <div style={{ fontSize: '13px', color: 'rgba(255,255,255,0.5)', marginTop: '6px' }}>{fr ? 'Hockey · LNAH · Personal branding' : 'Hockey · LNAH · Personal branding'}</div>
+                </div>
+                <div style={{ display: 'flex', gap: '32px', flexWrap: 'wrap' }}>
+                  {[{num:'2M',label:fr?'vues':'views'},{num:'26K',label:'engagements'},{num:'7',label:fr?'vidéos':'videos'}].map((m,i) => (
+                    <div key={i} style={{ textAlign: 'center' }}>
+                      <div style={{ fontFamily: "'Bebas Neue'", fontSize: '44px', color: '#fff', letterSpacing: '0.05em', lineHeight: 1 }}>{m.num}</div>
+                      <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.5)', letterSpacing: '0.1em', textTransform: 'uppercase', marginTop: '4px' }}>{m.label}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </FadeIn>
+          </div>
+          <div style={{ padding: '0 20px' }}><TikTokCarousel videos={SEB_VIDEOS} bgColor={SEB_COLOR} /></div>
         </div>
       </section>
 
-
       {/* ===== DÉROULEMENT ===== */}
-      <section id="deroulement" style={{ padding: '100px 60px', background: '#0a0a0a', borderTop: '0.5px solid rgba(255,255,255,0.07)', scrollMarginTop: '64px' }}>
+      <section id="deroulement" style={{ padding: '100px 0', background: '#080808', borderTop: '0.5px solid rgba(255,255,255,0.07)', scrollMarginTop: '64px' }}>
         <FadeIn>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
-            <div style={{ width: '20px', height: '1px', background: BLUE }} />
-            <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE }}>{fr ? 'Déroulement personnalisé' : 'Our process'}</span>
+          <div style={{ padding: '0 60px', marginBottom: '64px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
+              <div style={{ width: '20px', height: '1px', background: BLUE }} />
+              <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE }}>{fr ? 'Déroulement personnalisé' : 'Our process'}</span>
+            </div>
+            <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(32px, 4vw, 52px)', color: '#fff', letterSpacing: '0.02em' }}>
+              {fr ? <>COMMENT ON <span style={{ color: BLUE }}>TRAVAILLE.</span></> : <>HOW WE <span style={{ color: BLUE }}>WORK.</span></>}
+            </h2>
           </div>
-          <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(32px, 4vw, 52px)', color: '#fff', marginBottom: '56px', letterSpacing: '0.02em' }}>
-            {fr ? <>COMMENT ON <span style={{ color: BLUE }}>TRAVAILLE.</span></> : <>HOW WE <span style={{ color: BLUE }}>WORK.</span></>}
-          </h2>
         </FadeIn>
-        <div style={{ display: 'flex', flexDirection: 'column', maxWidth: '700px' }}>
+
+        {/* Desktop — sticky cards */}
+        <div className="sticky-cards" style={{ position: 'relative', paddingBottom: '200px' }}>
           {steps.map((step, i) => (
-            <FadeIn key={i} delay={i * 0.1}>
-              <div style={{ display: 'grid', gridTemplateColumns: '56px 1fr', position: 'relative' }}>
-                {i < steps.length - 1 && <div style={{ position: 'absolute', left: '27px', top: '44px', bottom: 0, width: '0.5px', background: 'rgba(255,255,255,0.06)' }} />}
-                <div style={{ paddingTop: '4px', display: 'flex', justifyContent: 'center' }}>
-                  <div style={{ width: '38px', height: '38px', borderRadius: '50%', background: 'rgba(0,61,165,0.08)', border: '0.5px solid rgba(0,61,165,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '11px', fontWeight: 800, color: BLUE }}>{step.num}</div>
+            <div key={i} style={{
+              position: 'sticky',
+              top: `${64 + i * 12}px`,
+              zIndex: i + 1,
+              margin: '0 40px',
+              borderRadius: '16px',
+              background: i % 2 === 0 ? '#0d0d0d' : '#111',
+              border: '0.5px solid rgba(255,255,255,0.08)',
+              overflow: 'hidden',
+              boxShadow: '0 8px 40px rgba(0,0,0,0.6)',
+              minHeight: '280px',
+            }}>
+              <div className="step-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', minHeight: '280px' }}>
+                <div style={{ padding: '48px 40px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                  <div style={{ fontFamily: "'Bebas Neue'", fontSize: '72px', color: 'rgba(0,61,165,0.15)', lineHeight: 1, marginBottom: '16px', letterSpacing: '-0.02em' }}>{step.num}</div>
+                  <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(0,61,165,0.1)', border: '0.5px solid rgba(0,61,165,0.25)', borderRadius: '20px', padding: '4px 12px', marginBottom: '16px', width: 'fit-content' }}>
+                    <span style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: BLUE }}>{step.days}</span>
+                  </div>
+                  <div style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(24px, 3vw, 36px)', color: '#fff', marginBottom: '16px', letterSpacing: '0.02em', lineHeight: 1.1 }}>{step.title}</div>
+                  <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.55)', lineHeight: 1.75, fontWeight: 300, marginBottom: '20px' }}>{step.desc}</p>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                    {step.points.map((pt, j) => (
+                      <div key={j} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                        <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: BLUE, flexShrink: 0 }} />
+                        <span style={{ fontSize: '13px', color: 'rgba(255,255,255,0.7)' }}>{pt}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <div style={{ paddingBottom: '40px', paddingLeft: '20px' }}>
-                  <div style={{ fontFamily: "'Bebas Neue'", fontSize: '22px', color: '#fff', marginBottom: '6px', letterSpacing: '0.04em' }}>{step.title}</div>
-                  <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.5)', lineHeight: 1.7, fontWeight: 300 }}>{step.desc}</p>
+                <div style={{
+                  background: i % 2 === 0 ? 'linear-gradient(135deg, #080f1c, #0d1428)' : 'linear-gradient(135deg, #0d0d0d, #161616)',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  position: 'relative', overflow: 'hidden'
+                }}>
+                  <div style={{ position: 'absolute', fontFamily: "'Bebas Neue'", fontSize: '200px', color: 'rgba(255,255,255,0.03)', lineHeight: 1, userSelect: 'none' }}>{String(i+1)}</div>
+                  <div style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
+                    <div style={{ fontFamily: "'Bebas Neue'", fontSize: '48px', color: BLUE, letterSpacing: '0.05em' }}>{step.days}</div>
+                    <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.3)', letterSpacing: '0.1em', textTransform: 'uppercase', marginTop: '4px' }}>{fr ? 'jalons' : 'milestone'}</div>
+                  </div>
                 </div>
               </div>
-            </FadeIn>
+            </div>
+          ))}
+          <div style={{ height: '40px' }} />
+        </div>
+
+        {/* Mobile */}
+        <div className="mobile-timeline" style={{ flexDirection: 'column', gap: '16px', padding: '0 16px', display: 'none' }}>
+          {steps.map((step, i) => (
+            <div key={i} style={{ borderRadius: '20px', background: i % 2 === 0 ? '#0d0d0d' : '#111', border: '0.5px solid rgba(255,255,255,0.08)', overflow: 'hidden' }}>
+              <div style={{ padding: '28px 24px' }}>
+                <div style={{ fontFamily: "'Bebas Neue'", fontSize: '48px', color: 'rgba(0,61,165,0.15)', lineHeight: 1, marginBottom: '8px' }}>{step.num}</div>
+                <div style={{ display: 'inline-flex', alignItems: 'center', background: 'rgba(0,61,165,0.1)', border: '0.5px solid rgba(0,61,165,0.25)', borderRadius: '20px', padding: '4px 12px', marginBottom: '12px' }}>
+                  <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: BLUE }}>{step.days}</span>
+                </div>
+                <div style={{ fontFamily: "'Bebas Neue'", fontSize: '26px', color: '#fff', marginBottom: '10px', letterSpacing: '0.02em', lineHeight: 1.1 }}>{step.title}</div>
+                <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.6)', lineHeight: 1.75, fontWeight: 300, marginBottom: '18px' }}>{step.desc}</p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  {step.points.map((pt, j) => (
+                    <div key={j} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                      <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: BLUE, border: '2px solid rgba(0,61,165,0.3)', flexShrink: 0 }} />
+                      <span style={{ fontSize: '13px', color: 'rgba(255,255,255,0.75)' }}>{pt}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
           ))}
         </div>
       </section>
@@ -312,7 +574,19 @@ export default function Athletes() {
               {fr ? "Chaque athlète est unique — ton offre l'est aussi. On construit une solution adaptée à ton niveau, tes objectifs et tes ressources." : "Every athlete is unique — your offer is too. We build a solution tailored to your level, your goals and your resources."}
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '36px' }}>
-              {(fr ? ['Personal branding & stratégie de contenu', 'Production vidéo (courts & longs formats)', 'Gestion des réseaux sociaux', 'Développement de partnerships', 'Rapport mensuel & suivi'] : ['Personal branding & content strategy', 'Video production (short & long format)', 'Social media management', 'Partnership development', 'Monthly report & follow-up']).map((item, i) => (
+              {(fr ? [
+                'Personal branding & stratégie de contenu',
+                'Production vidéo (courts & longs formats)',
+                'Gestion des réseaux sociaux',
+                'Développement de partnerships',
+                'Rapport mensuel & suivi',
+              ] : [
+                'Personal branding & content strategy',
+                'Video production (short & long format)',
+                'Social media management',
+                'Partnership development',
+                'Monthly report & follow-up',
+              ]).map((item, i) => (
                 <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                   <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: BLUE, flexShrink: 0 }} />
                   <span style={{ fontSize: '13px', color: 'rgba(255,255,255,0.7)' }}>{item}</span>
@@ -347,7 +621,7 @@ export default function Athletes() {
                     <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><line x1="5" y1="1" x2="5" y2="9" stroke="white" strokeWidth="1.5" strokeLinecap="round"/><line x1="1" y1="5" x2="9" y2="5" stroke="white" strokeWidth="1.5" strokeLinecap="round"/></svg>
                   </div>
                 </button>
-                <div style={{ maxHeight: openFaq === i ? '200px' : '0', overflow: 'hidden', transition: 'max-height 0.35s ease' }}>
+                <div style={{ maxHeight: openFaq === i ? '300px' : '0', overflow: 'hidden', transition: 'max-height 0.35s ease' }}>
                   <div style={{ padding: '0 24px 20px', fontSize: '13px', color: 'rgba(255,255,255,0.55)', lineHeight: 1.75, fontWeight: 300 }}>{faq.a}</div>
                 </div>
               </div>
@@ -372,44 +646,7 @@ export default function Athletes() {
             </p>
           </FadeIn>
           <FadeIn direction="right">
-            <div style={{ background: '#0d0d0d', border: '0.5px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '36px 32px' }}>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px', marginBottom: '14px' }}>
-                {[fr ? 'Prénom' : 'First name', fr ? 'Nom' : 'Last name'].map(l => (
-                  <div key={l}>
-                    <label style={{ display: 'block', fontSize: '10px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', marginBottom: '7px' }}>{l}</label>
-                    <input type="text" style={{ width: '100%', background: '#111', border: '0.5px solid rgba(255,255,255,0.1)', borderRadius: '6px', padding: '11px 14px', color: '#fff', fontSize: '13px', outline: 'none', fontFamily: "'DM Sans'" }} />
-                  </div>
-                ))}
-              </div>
-              {[{ label: 'Email', type: 'email' }].map(f => (
-                <div key={f.label} style={{ marginBottom: '14px' }}>
-                  <label style={{ display: 'block', fontSize: '10px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', marginBottom: '7px' }}>{f.label}</label>
-                  <input type={f.type} style={{ width: '100%', background: '#111', border: '0.5px solid rgba(255,255,255,0.1)', borderRadius: '6px', padding: '11px 14px', color: '#fff', fontSize: '13px', outline: 'none', fontFamily: "'DM Sans'" }} />
-                </div>
-              ))}
-              <div style={{ marginBottom: '14px', position: 'relative' }}>
-                <label style={{ display: 'block', fontSize: '10px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', marginBottom: '7px' }}>Instagram</label>
-                <div style={{ position: 'relative' }}>
-                  <span style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)', color: 'rgba(255,255,255,0.3)', fontSize: '14px' }}>@</span>
-                  <input type="text" style={{ width: '100%', background: '#111', border: '0.5px solid rgba(255,255,255,0.1)', borderRadius: '6px', padding: '11px 14px 11px 28px', color: '#fff', fontSize: '13px', outline: 'none', fontFamily: "'DM Sans'" }} />
-                </div>
-              </div>
-              <div style={{ marginBottom: '14px' }}>
-                <label style={{ display: 'block', fontSize: '10px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', marginBottom: '7px' }}>{fr ? 'Ton sport' : 'Your sport'}</label>
-                <select style={{ width: '100%', background: '#111', border: '0.5px solid rgba(255,255,255,0.1)', borderRadius: '6px', padding: '11px 14px', color: '#fff', fontSize: '13px', outline: 'none', fontFamily: "'DM Sans'", appearance: 'none', cursor: 'pointer' }}>
-                  <option value="">{fr ? 'Sélectionne ton sport' : 'Select your sport'}</option>
-                  {['Hockey', 'Football', 'Basketball', 'Baseball', fr ? 'Autres' : 'Others'].map(s => <option key={s}>{s}</option>)}
-                </select>
-              </div>
-              <div style={{ marginBottom: '14px' }}>
-                <label style={{ display: 'block', fontSize: '10px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', marginBottom: '7px' }}>{fr ? 'Ton projet (optionnel)' : 'Your project (optional)'}</label>
-                <textarea placeholder={fr ? 'Dis-nous en plus...' : 'Tell us more...'} style={{ width: '100%', background: '#111', border: '0.5px solid rgba(255,255,255,0.1)', borderRadius: '6px', padding: '11px 14px', color: '#fff', fontSize: '13px', outline: 'none', fontFamily: "'DM Sans'", resize: 'vertical', minHeight: '90px' }} />
-              </div>
-              <button style={{ width: '100%', fontSize: '11px', fontWeight: 700, color: '#fff', background: BLUE, padding: '14px', borderRadius: '5px', letterSpacing: '0.08em', textTransform: 'uppercase', cursor: 'pointer', border: 'none', fontFamily: "'DM Sans'" }}>
-                {fr ? 'Envoyer ma demande →' : 'Send my request →'}
-              </button>
-              <p style={{ fontSize: '10px', color: 'rgba(255,255,255,0.3)', textAlign: 'center', marginTop: '10px' }}>{fr ? 'Réponse dans les 48h.' : 'Response within 48h.'}</p>
-            </div>
+            <MultiStepForm fr={fr} scrollTo={scrollTo} BLUE={BLUE} />
           </FadeIn>
         </div>
       </section>
@@ -417,12 +654,12 @@ export default function Athletes() {
       <Footer />
 
       <style>{`
+        #etudes-de-cas > div { width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; }
         .hamburger-btn { display: flex !important; }
         @media (max-width: 768px) {
           nav { padding: 0 20px !important; }
           nav > div:nth-child(2) { display: none !important; }
           nav > div:last-child > *:not(.hamburger-btn) { display: none !important; }
-          nav > div:last-child { gap: 8px !important; }
           section { padding-left: 20px !important; padding-right: 20px !important; padding-top: 60px !important; padding-bottom: 60px !important; }
           div[style*="grid-template-columns: repeat(3"] { grid-template-columns: 1fr !important; }
           div[style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
