@@ -548,51 +548,7 @@ export default function Athletes() {
         </div>
       </section>
 
-      {/* ===== TARIFICATION ===== */}
-      <section id="tarification" style={{ padding: '100px 60px', background: '#080808', borderTop: '0.5px solid rgba(255,255,255,0.07)', scrollMarginTop: '64px' }}>
-        <FadeIn>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
-            <div style={{ width: '20px', height: '1px', background: BLUE }} />
-            <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE }}>{fr ? 'Tarification' : 'Pricing'}</span>
-          </div>
-          <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(32px, 4vw, 52px)', color: '#fff', marginBottom: '48px', letterSpacing: '0.02em' }}>
-            {fr ? <>UNE OFFRE <span style={{ color: BLUE }}>SUR MESURE.</span></> : <>A CUSTOM <span style={{ color: BLUE }}>OFFER.</span></>}
-          </h2>
-        </FadeIn>
-        <FadeIn>
-          <div style={{ maxWidth: '520px', background: '#0d0d0d', border: `1px solid rgba(0,61,165,0.25)`, borderRadius: '16px', padding: '48px', position: 'relative', overflow: 'hidden' }}>
-            <div style={{ position: 'absolute', top: '-40px', right: '-40px', width: '200px', height: '200px', borderRadius: '50%', background: 'rgba(0,61,165,0.06)', filter: 'blur(40px)' }} />
-            <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE, marginBottom: '20px' }}>{fr ? 'Athlètes · Toutes ligues' : 'Athletes · All leagues'}</div>
-            <div style={{ fontFamily: "'Bebas Neue'", fontSize: '56px', color: '#fff', letterSpacing: '0.02em', marginBottom: '8px' }}>{fr ? 'SUR DEMANDE' : 'ON REQUEST'}</div>
-            <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.5)', lineHeight: 1.75, marginBottom: '32px', fontWeight: 300 }}>
-              {fr ? "Chaque athlète est unique — ton offre l'est aussi. On construit une solution adaptée à ton niveau, tes objectifs et tes ressources." : "Every athlete is unique — your offer is too. We build a solution tailored to your level, your goals and your resources."}
-            </p>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '36px' }}>
-              {(fr ? [
-                'Personal branding & stratégie de contenu',
-                'Production vidéo (courts & longs formats)',
-                'Gestion des réseaux sociaux',
-                'Développement de partnerships',
-                'Rapport mensuel & suivi',
-              ] : [
-                'Personal branding & content strategy',
-                'Video production (short & long format)',
-                'Social media management',
-                'Partnership development',
-                'Monthly report & follow-up',
-              ]).map((item, i) => (
-                <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: BLUE, flexShrink: 0 }} />
-                  <span style={{ fontSize: '13px', color: 'rgba(255,255,255,0.7)' }}>{item}</span>
-                </div>
-              ))}
-            </div>
-            <button onClick={() => scrollTo('contact')} style={{ display: 'inline-flex', fontSize: '11px', fontWeight: 700, color: '#fff', background: BLUE, padding: '14px 32px', borderRadius: '4px', letterSpacing: '0.1em', textTransform: 'uppercase', border: 'none', cursor: 'pointer', fontFamily: "'DM Sans'" }}>
-              {fr ? 'Obtenir mon offre →' : 'Get my offer →'}
-            </button>
-          </div>
-        </FadeIn>
-      </section>
+
 
       {/* ===== FAQ ===== */}
       <section id="faq" style={{ padding: '100px 60px', background: '#0a0a0a', borderTop: '0.5px solid rgba(255,255,255,0.07)', scrollMarginTop: '64px' }}>
