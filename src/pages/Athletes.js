@@ -353,7 +353,7 @@ export default function Athletes() {
         <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at 50% 60%, rgba(0,61,165,0.08) 0%, transparent 65%)', zIndex: 1, pointerEvents: 'none' }} />
         <div style={{ position: 'relative', zIndex: 2, maxWidth: '860px' }}>
           <h1 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(52px, 7.5vw, 100px)', lineHeight: 0.93, color: '#fff', marginBottom: '28px', letterSpacing: '0.01em' }}>
-            {fr ? 'RAYONNE AU-DELÀ\nDE TON SPORT.' : 'RISE ABOVE\nYOUR SPORT.'}
+            {fr ? <>RAYONNE AU-DELÀ<br /><span style={{ color: BLUE }}>DE TON SPORT</span></> : <>RISE ABOVE<br /><span style={{ color: BLUE }}>YOUR SPORT</span></>}
           </h1>
           <p style={{ fontSize: 'clamp(15px, 1.8vw, 18px)', color: 'rgba(255,255,255,0.55)', lineHeight: 1.8, marginBottom: '40px', maxWidth: '580px', margin: '0 auto 40px', fontWeight: 300 }}>
             {fr ? "On bâtit la marque des athlètes qui dominent. Personal branding, partnerships et production vidéo — tout pour que tu deviennes la référence dans ton sport." : "We build the brand of athletes who dominate. Personal branding, partnerships and video production — everything to make you the reference in your sport."}
