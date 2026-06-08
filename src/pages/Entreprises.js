@@ -717,12 +717,12 @@ export default function Entreprises() {
                   'Final report: complete 3-month performance summary',
                 ]).map((item, i) => (
                   <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
-                    <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: 'rgba(255,255,255,0.3)', flexShrink: 0, marginTop: '5px' }} />
-                    <span style={{ fontSize: '13px', color: 'rgba(255,255,255,0.6)', lineHeight: 1.5 }}>{item}</span>
+                    <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: BLUE, flexShrink: 0, marginTop: '5px' }} />
+                    <span style={{ fontSize: '13px', color: 'rgba(255,255,255,0.7)', lineHeight: 1.5 }}>{item}</span>
                   </div>
                 ))}
               </div>
-              <button onClick={() => scrollTo('contact')} style={{ width: '100%', fontSize: '11px', fontWeight: 700, color: '#fff', background: 'rgba(255,255,255,0.08)', padding: '14px', borderRadius: '4px', letterSpacing: '0.08em', textTransform: 'uppercase', border: '0.5px solid rgba(255,255,255,0.15)', cursor: 'pointer', fontFamily: "'DM Sans'" }}>
+              <button onClick={() => scrollTo('contact')} style={{ width: '100%', fontSize: '11px', fontWeight: 700, color: '#fff', background: BLUE, padding: '14px', borderRadius: '4px', letterSpacing: '0.08em', textTransform: 'uppercase', border: 'none', cursor: 'pointer', fontFamily: "'DM Sans'" }}>
                 {fr ? 'Démarrer →' : 'Get started →'}
               </button>
             </div>
@@ -817,7 +817,7 @@ export default function Entreprises() {
               <p style={{ fontSize: '11px', color: 'rgba(255,255,255,0.25)', lineHeight: 1.5, marginBottom: '20px', fontStyle: 'italic' }}>
                 * {fr ? 'Budget publicitaire minimum de 1 000$/mois requis (non inclus).' : 'Minimum advertising budget of $1,000/month required (not included).'}
               </p>
-              <button onClick={() => scrollTo('contact')} style={{ width: '100%', fontSize: '11px', fontWeight: 700, color: 'rgba(255,255,255,0.7)', border: '0.5px solid rgba(255,255,255,0.2)', padding: '14px', borderRadius: '4px', letterSpacing: '0.08em', textTransform: 'uppercase', background: 'transparent', cursor: 'pointer', fontFamily: "'DM Sans'" }}>
+              <button onClick={() => scrollTo('contact')} style={{ width: '100%', fontSize: '11px', fontWeight: 700, color: '#fff', background: BLUE, padding: '14px', borderRadius: '4px', letterSpacing: '0.08em', textTransform: 'uppercase', border: 'none', cursor: 'pointer', fontFamily: "'DM Sans'" }}>
                 {fr ? 'Nous contacter →' : 'Contact us →'}
               </button>
             </div>
