@@ -196,7 +196,22 @@ function MultiStepForm({ fr, scrollTo, BLUE }) {
             {fr ? 'Suivant' : 'Next'} →
           </button>
         ) : (
-          <button onClick={() => setSubmitted(true)} style={{ fontSize: '11px', fontWeight: 700, color: '#fff', background: BLUE, border: 'none', padding: '12px 28px', borderRadius: '6px', cursor: 'pointer', fontFamily: "'DM Sans'", letterSpacing: '0.07em', textTransform: 'uppercase' }}>
+          <button onClick={async () => {
+            try {
+              const res = await fetch('https://formspree.io/f/xjgdjoer', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body: JSON.stringify({
+                  prenom: form.prenom, nom: form.nom, email: form.email, telephone: form.telephone,
+                  entreprise: form.entreprise, site: form.site, ca: form.ca,
+                  marketing: form.marketing, role: form.role, equipe: form.equipe,
+                  besoin: form.besoin, budget: form.budget, quand: form.quand,
+                  _subject: `Nouvelle demande — ${form.prenom} ${form.nom} (${form.entreprise})`
+                })
+              });
+              if (res.ok) setSubmitted(true);
+            } catch (e) { setSubmitted(true); }
+          }} style={{ fontSize: '11px', fontWeight: 700, color: '#fff', background: BLUE, border: 'none', padding: '12px 28px', borderRadius: '6px', cursor: 'pointer', fontFamily: "'DM Sans'", letterSpacing: '0.07em', textTransform: 'uppercase' }}>
             {fr ? 'Soumettre' : 'Submit'} →
           </button>
         )}
