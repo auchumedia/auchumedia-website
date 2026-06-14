@@ -189,7 +189,22 @@ function MultiStepForm({ fr, scrollTo, BLUE }) {
             {fr ? 'Suivant' : 'Next'} →
           </button>
         ) : (
-          <button onClick={() => setSubmitted(true)} style={{ fontSize: '11px', fontWeight: 700, color: '#fff', background: BLUE, border: 'none', padding: '12px 28px', borderRadius: '6px', cursor: 'pointer', fontFamily: "'DM Sans'", letterSpacing: '0.07em', textTransform: 'uppercase' }}>
+          <button onClick={async () => {
+            try {
+              const res = await fetch('https://formspree.io/f/xjgdjoer', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body: JSON.stringify({
+                  prenom: form.prenom, nom: form.nom, email: form.email, instagram: form.instagram,
+                  sport: form.sport, ligue: form.ligue,
+                  reseaux: form.reseaux, objectif: form.objectif,
+                  besoin: form.besoin, quand: form.quand,
+                  _subject: `Nouvelle demande athlète — ${form.prenom} ${form.nom} (${form.sport})`
+                })
+              });
+              if (res.ok) setSubmitted(true);
+            } catch (e) { setSubmitted(true); }
+          }} style={{ fontSize: '11px', fontWeight: 700, color: '#fff', background: BLUE, border: 'none', padding: '12px 28px', borderRadius: '6px', cursor: 'pointer', fontFamily: "'DM Sans'", letterSpacing: '0.07em', textTransform: 'uppercase' }}>
             {fr ? 'Soumettre' : 'Submit'} →
           </button>
         )}
@@ -345,7 +360,7 @@ export default function Athletes() {
       {/* ===== HERO ===== */}
       <section style={{ minHeight: '90vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '100px 60px 80px', position: 'relative', overflow: 'hidden', textAlign: 'center' }}>
         {/* Video background */}
-        <video autoPlay muted loop playsInline style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0 }}>
+        <video autoPlay muted loop playsInline crossOrigin="anonymous" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0 }}>
           <source src="https://res.cloudinary.com/dr0kwuqqa/video/upload/v1780793140/Video_hero_li3pom.mp4" type="video/mp4" />
         </video>
         {/* Overlay */}
