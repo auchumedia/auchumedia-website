@@ -712,14 +712,12 @@ export default function Entreprises() {
                 {(fr ? [
                   'Stratégie, idéation et direction créative',
                   'Préproduction, tournage et montage',
-                  'Adaptation et publication sur toutes les plateformes',
-                  'Gestion de communauté incluse',
+                  'Publication sur toutes les plateformes',
                   'Rapport de performance final',
                 ] : [
                   'Strategy, ideation and creative direction',
                   'Pre-production, filming and editing',
-                  'Adaptation and publishing on all platforms',
-                  'Community management included',
+                  'Publishing on all platforms',
                   'Final performance report',
                 ]).map((item, i) => (
                   <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
