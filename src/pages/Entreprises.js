@@ -707,7 +707,7 @@ export default function Entreprises() {
                 {fr ? <>Forfait Lancement <span style={{ color: '#fff' }}>(30 vidéos)</span></> : <>Launch Plan <span style={{ color: '#fff' }}>(30 videos)</span></>}
               </div>
               <div style={{ fontFamily: "'Bebas Neue'", fontSize: '48px', color: '#fff', lineHeight: 1, marginBottom: '4px' }}>12 000$</div>
-              <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', marginBottom: '24px' }}>{fr ? 'facturation unique · 3 mois' : 'one-time · 3 months'}</div>
+              <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', marginBottom: '24px' }}>{fr ? 'Facturation en 3 paiements' : 'Billing in 3 payments'}</div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '32px', flex: 1 }}>
                 {(fr ? [
                   'Stratégie, idéation et direction créative',
