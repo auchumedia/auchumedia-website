@@ -694,7 +694,7 @@ export default function Entreprises() {
             {fr ? "Chaque client commence quelque part. On a structuré nos offres pour t'accompagner à chaque étape de ta croissance." : "Every client starts somewhere. We structured our offers to support you at every stage of your growth."}
           </p>
         </FadeIn>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', maxWidth: '860px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', maxWidth: '860px', margin: '0 auto', alignItems: 'stretch' }}>
 
           {/* Forfait Lancement */}
           <FadeIn delay={0.1}>
