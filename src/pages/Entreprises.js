@@ -751,13 +751,13 @@ export default function Entreprises() {
               <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '24px', flex: 1 }}>
                 {(fr ? [
                   'Production complète : stratégie, tournage, montage et publication',
-                  '80 vidéos / an sur toutes les plateformes',
+                  '1 à 2 vidéos / semaine sur toutes les plateformes',
                   'Gestion Meta Ads (Facebook & Instagram) incluse',
                   'Intégration CRM & pipeline de leads automatisé',
                   'Rapports mensuels & optimisation continue',
                 ] : [
                   'Full production: strategy, filming, editing and publishing',
-                  '80 videos / year across all platforms',
+                  '1 to 2 videos / week across all platforms',
                   'Meta Ads management (Facebook & Instagram) included',
                   'CRM integration & automated lead pipeline',
                   'Monthly reports & continuous optimization',
