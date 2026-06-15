@@ -694,42 +694,33 @@ export default function Entreprises() {
             {fr ? "Chaque client commence quelque part. On a structuré nos offres pour t'accompagner à chaque étape de ta croissance." : "Every client starts somewhere. We structured our offers to support you at every stage of your growth."}
           </p>
         </FadeIn>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px', maxWidth: '1100px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', maxWidth: '860px' }}>
 
           {/* Forfait Lancement */}
           <FadeIn delay={0.1}>
             <div style={{ background: '#0d0d0d', border: '0.5px solid rgba(255,255,255,0.08)', borderRadius: '16px', padding: '36px', position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
               <div style={{ position: 'absolute', top: '-30px', right: '-30px', width: '160px', height: '160px', borderRadius: '50%', background: 'rgba(0,61,165,0.04)', filter: 'blur(30px)' }} />
               <div style={{ display: 'inline-flex', alignItems: 'center', background: 'rgba(0,61,165,0.1)', border: '0.5px solid rgba(0,61,165,0.25)', borderRadius: '20px', padding: '4px 10px', marginBottom: '16px', width: 'fit-content' }}>
-                <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: BLUE }}>{fr ? 'Pour démarrer' : 'To get started'}</span>
+                <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: BLUE }}>{fr ? 'Bloc de contenu' : 'Content block'}</span>
               </div>
               <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE, marginBottom: '8px' }}>
                 {fr ? <>Forfait Lancement <span style={{ color: '#fff' }}>(30 vidéos)</span></> : <>Launch Plan <span style={{ color: '#fff' }}>(30 videos)</span></>}
               </div>
               <div style={{ fontFamily: "'Bebas Neue'", fontSize: '48px', color: '#fff', lineHeight: 1, marginBottom: '4px' }}>12 000$</div>
-              <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', marginBottom: '8px' }}>{fr ? 'facturation unique · 3 mois' : 'one-time · 3 months'}</div>
-              <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', lineHeight: 1.6, marginBottom: '24px', fontStyle: 'italic', fontWeight: 300 }}>
-                {fr ? "Bâtis ta présence en ligne de zéro. 30 vidéos organiques pour asseoir ton autorité avant de lancer tes campagnes publicitaires." : "Build your online presence from scratch. 30 organic videos to establish your authority before launching your ad campaigns."}
-              </p>
+              <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', marginBottom: '24px' }}>{fr ? 'facturation unique · 3 mois' : 'one-time · 3 months'}</div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '32px', flex: 1 }}>
                 {(fr ? [
-                  'Stratégie : piliers de contenu et direction créative',
-                  'Idéation : idées de contenu alignées sur la stratégie',
-                  'Préproduction : scénarisation, planification et logistique',
-                  'Production : tournage selon le plan approuvé',
-                  'Postproduction : montage et adaptation par plateforme',
-                  'Publication : calendrier, captions, thumbnails et mise en ligne',
-                  'Gestion de communauté : réponses réactives et interactions',
-                  'Rapport final : bilan complet des 3 mois',
+                  'Stratégie, idéation et direction créative',
+                  'Préproduction, tournage et montage',
+                  'Adaptation et publication sur toutes les plateformes',
+                  'Gestion de communauté incluse',
+                  'Rapport de performance final',
                 ] : [
-                  'Strategy: content pillars and creative direction',
-                  'Ideation: content ideas aligned with strategy',
-                  'Pre-production: scripting, planning and logistics',
-                  'Production: filming based on approved plan',
-                  'Post-production: editing and adaptation per platform',
-                  'Publishing: calendar, captions, thumbnails and posting',
-                  'Community management: reactive replies and interactions',
-                  'Final report: complete 3-month performance summary',
+                  'Strategy, ideation and creative direction',
+                  'Pre-production, filming and editing',
+                  'Adaptation and publishing on all platforms',
+                  'Community management included',
+                  'Final performance report',
                 ]).map((item, i) => (
                   <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
                     <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: BLUE, flexShrink: 0, marginTop: '5px' }} />
@@ -747,39 +738,31 @@ export default function Entreprises() {
           <FadeIn delay={0.15}>
             <div style={{ background: '#0d0d0d', border: `2px solid ${BLUE}`, borderRadius: '16px', padding: '36px', position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
               <div style={{ position: 'absolute', top: '0', right: '0', background: BLUE, fontSize: '9px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#fff', padding: '6px 14px', borderBottomLeftRadius: '8px' }}>
-                {fr ? 'POPULAIRE' : 'POPULAR'}
+                {fr ? 'CLÉ EN MAIN' : 'TURNKEY'}
               </div>
               <div style={{ position: 'absolute', top: '-30px', right: '-30px', width: '160px', height: '160px', borderRadius: '50%', background: 'rgba(0,61,165,0.1)', filter: 'blur(30px)' }} />
-              <div style={{ display: 'inline-flex', alignItems: 'center', background: 'rgba(0,61,165,0.1)', border: '0.5px solid rgba(0,61,165,0.3)', borderRadius: '20px', padding: '4px 10px', marginBottom: '16px', width: 'fit-content' }}>
+              <div style={{ display: 'inline-flex', alignItems: 'center', background: 'rgba(0,61,165,0.1)', border: '0.5px solid rgba(0,61,165,0.25)', borderRadius: '20px', padding: '4px 10px', marginBottom: '16px', width: 'fit-content' }}>
                 <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: BLUE }}>{fr ? 'Mandat mensuel' : 'Monthly retainer'}</span>
               </div>
               <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE, marginBottom: '8px' }}>
                 {fr ? <>Forfait Croissance <span style={{ color: '#fff' }}>(8 vidéos/mois)</span></> : <>Growth Plan <span style={{ color: '#fff' }}>(8 videos/month)</span></>}
               </div>
-              <div style={{ fontFamily: "'Bebas Neue'", fontSize: '48px', color: '#fff', lineHeight: 1, marginBottom: '4px' }}>3 500$</div>
-              <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', marginBottom: '8px' }}>{fr ? '/ mois' : '/ month'}</div>
-              <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', lineHeight: 1.6, marginBottom: '24px', fontStyle: 'italic', fontWeight: 300 }}>
-                {fr ? "Une machine à contenu en continu. 2 vidéos par semaine, une présence cohérente toute l'année et une croissance organique constante." : "A continuous content machine. 2 videos per week, consistent presence all year and steady organic growth."}
-              </p>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '32px', flex: 1 }}>
+              <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.4)', marginBottom: '2px', fontWeight: 600, letterSpacing: '0.05em' }}>{fr ? 'À PARTIR DE' : 'STARTING AT'}</div>
+              <div style={{ fontFamily: "'Bebas Neue'", fontSize: '48px', color: '#fff', lineHeight: 1, marginBottom: '4px' }}>4 500$</div>
+              <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', marginBottom: '24px' }}>{fr ? '/ mois · contenu + Meta Ads & CRM' : '/ month · content + Meta Ads & CRM'}</div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '24px', flex: 1 }}>
                 {(fr ? [
-                  'Stratégie : piliers de contenu et direction créative',
-                  'Idéation : idées de contenu alignées sur la stratégie',
-                  'Préproduction : scénarisation, planification et logistique',
-                  'Production : tournage selon le plan approuvé',
-                  'Postproduction : montage et adaptation par plateforme',
-                  'Publication : calendrier, captions, thumbnails et mise en ligne',
-                  'Gestion de communauté : réponses réactives et interactions',
-                  'Rapports : suivi mensuel des KPI, constats et optimisations',
+                  'Production complète : stratégie, tournage, montage et publication',
+                  '8 vidéos / mois sur toutes les plateformes',
+                  'Gestion Meta Ads (Facebook & Instagram) incluse',
+                  'Intégration CRM & pipeline de leads automatisé',
+                  'Rapports mensuels & optimisation continue',
                 ] : [
-                  'Strategy: content pillars and creative direction',
-                  'Ideation: content ideas aligned with strategy',
-                  'Pre-production: scripting, planning and logistics',
-                  'Production: filming based on approved plan',
-                  'Post-production: editing and adaptation per platform',
-                  'Publishing: calendar, captions, thumbnails and posting',
-                  'Community management: reactive replies and interactions',
-                  'Reports: monthly KPI tracking, insights and optimizations',
+                  'Full production: strategy, filming, editing and publishing',
+                  '8 videos / month across all platforms',
+                  'Meta Ads management (Facebook & Instagram) included',
+                  'CRM integration & automated lead pipeline',
+                  'Monthly reports & continuous optimization',
                 ]).map((item, i) => (
                   <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
                     <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: BLUE, flexShrink: 0, marginTop: '5px' }} />
@@ -787,53 +770,11 @@ export default function Entreprises() {
                   </div>
                 ))}
               </div>
-              <button onClick={() => scrollTo('contact')} style={{ width: '100%', fontSize: '11px', fontWeight: 700, color: '#fff', background: BLUE, padding: '14px', borderRadius: '4px', letterSpacing: '0.08em', textTransform: 'uppercase', border: 'none', cursor: 'pointer', fontFamily: "'DM Sans'", boxShadow: '0 0 20px rgba(0,61,165,0.3)' }}>
-                {fr ? 'Démarrer →' : 'Get started →'}
-              </button>
-            </div>
-          </FadeIn>
-
-          {/* Add-on Meta Ads & CRM */}
-          <FadeIn delay={0.2}>
-            <div style={{ background: '#0d0d0d', border: '0.5px solid rgba(255,255,255,0.08)', borderRadius: '16px', padding: '36px', display: 'flex', flexDirection: 'column' }}>
-              <div style={{ display: 'inline-flex', alignItems: 'center', background: 'rgba(0,61,165,0.06)', border: '0.5px solid rgba(0,61,165,0.2)', borderRadius: '20px', padding: '4px 10px', marginBottom: '16px', width: 'fit-content' }}>
-                <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: BLUE }}>Add-on</span>
-              </div>
-              <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginBottom: '8px' }}>Meta Ads &amp; CRM</div>
-              <div style={{ fontFamily: "'Bebas Neue'", fontSize: '48px', color: '#fff', lineHeight: 1, marginBottom: '4px' }}>3 000$</div>
-              <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', marginBottom: '8px' }}>{fr ? '/ mois · à ajouter à votre forfait' : '/ month · add to your plan'}</div>
-              <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', lineHeight: 1.6, marginBottom: '24px', fontStyle: 'italic', fontWeight: 300 }}>
-                {fr ? "La présence organique est en place — maintenant on accélère. Meta Ads ciblées et CRM pour transformer l'audience en leads qualifiés." : "Organic presence is established — now we accelerate. Targeted Meta Ads and CRM to turn audience into qualified leads."}
-              </p>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '16px', flex: 1 }}>
-                {(fr ? [
-                  'Gestion complète Meta Ads (Facebook & Instagram)',
-                  'Création et optimisation des campagnes publicitaires',
-                  'Ciblage précis de votre zone de service',
-                  'Intégration & configuration CRM',
-                  'Pipeline de leads automatisé',
-                  'Rapports publicitaires mensuels détaillés',
-                  'Optimisation continue des campagnes',
-                ] : [
-                  'Full Meta Ads management (Facebook & Instagram)',
-                  'Ad campaign creation and optimization',
-                  'Precise targeting of your service area',
-                  'CRM integration & configuration',
-                  'Automated lead pipeline',
-                  'Detailed monthly advertising reports',
-                  'Continuous campaign optimization',
-                ]).map((item, i) => (
-                  <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
-                    <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: BLUE, flexShrink: 0, marginTop: '5px' }} />
-                    <span style={{ fontSize: '13px', color: 'rgba(255,255,255,0.5)', lineHeight: 1.5 }}>{item}</span>
-                  </div>
-                ))}
-              </div>
               <p style={{ fontSize: '11px', color: 'rgba(255,255,255,0.25)', lineHeight: 1.5, marginBottom: '20px', fontStyle: 'italic' }}>
                 * {fr ? 'Budget publicitaire minimum de 1 000$/mois requis (non inclus).' : 'Minimum advertising budget of $1,000/month required (not included).'}
               </p>
-              <button onClick={() => scrollTo('contact')} style={{ width: '100%', fontSize: '11px', fontWeight: 700, color: '#fff', background: BLUE, padding: '14px', borderRadius: '4px', letterSpacing: '0.08em', textTransform: 'uppercase', border: 'none', cursor: 'pointer', fontFamily: "'DM Sans'" }}>
-                {fr ? 'Nous contacter →' : 'Contact us →'}
+              <button onClick={() => scrollTo('contact')} style={{ width: '100%', fontSize: '11px', fontWeight: 700, color: '#fff', background: BLUE, padding: '14px', borderRadius: '4px', letterSpacing: '0.08em', textTransform: 'uppercase', border: 'none', cursor: 'pointer', fontFamily: "'DM Sans'", boxShadow: '0 0 20px rgba(0,61,165,0.3)' }}>
+                {fr ? 'Démarrer →' : 'Get started →'}
               </button>
             </div>
           </FadeIn>
