@@ -743,7 +743,7 @@ export default function Entreprises() {
                 <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: BLUE }}>{fr ? 'Mandat mensuel' : 'Monthly retainer'}</span>
               </div>
               <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE, marginBottom: '8px' }}>
-                {fr ? <>Forfait Croissance <span style={{ color: '#fff' }}>(8 vidéos/mois)</span></> : <>Growth Plan <span style={{ color: '#fff' }}>(8 videos/month)</span></>}
+                {fr ? <>Forfait Croissance <span style={{ color: '#fff' }}>(80 vidéos/an)</span></> : <>Growth Plan <span style={{ color: '#fff' }}>(80 videos/year)</span></>}
               </div>
               <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.4)', marginBottom: '2px', fontWeight: 600, letterSpacing: '0.05em' }}>{fr ? 'À PARTIR DE' : 'STARTING AT'}</div>
               <div style={{ fontFamily: "'Bebas Neue'", fontSize: '48px', color: '#fff', lineHeight: 1, marginBottom: '4px' }}>4 500$</div>
@@ -751,13 +751,13 @@ export default function Entreprises() {
               <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '24px', flex: 1 }}>
                 {(fr ? [
                   'Production complète : stratégie, tournage, montage et publication',
-                  '8 vidéos / mois sur toutes les plateformes',
+                  '80 vidéos / an sur toutes les plateformes',
                   'Gestion Meta Ads (Facebook & Instagram) incluse',
                   'Intégration CRM & pipeline de leads automatisé',
                   'Rapports mensuels & optimisation continue',
                 ] : [
                   'Full production: strategy, filming, editing and publishing',
-                  '8 videos / month across all platforms',
+                  '80 videos / year across all platforms',
                   'Meta Ads management (Facebook & Instagram) included',
                   'CRM integration & automated lead pipeline',
                   'Monthly reports & continuous optimization',
