@@ -698,7 +698,7 @@ export default function Entreprises() {
 
           {/* Forfait Lancement */}
           <FadeIn delay={0.1}>
-            <div style={{ background: '#0d0d0d', border: '0.5px solid rgba(255,255,255,0.08)', borderRadius: '16px', padding: '36px', position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+            <div style={{ background: '#0d0d0d', border: '0.5px solid rgba(255,255,255,0.08)', borderRadius: '16px', padding: '36px', position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column', height: '100%' }}>
               <div style={{ position: 'absolute', top: '-30px', right: '-30px', width: '160px', height: '160px', borderRadius: '50%', background: 'rgba(0,61,165,0.04)', filter: 'blur(30px)' }} />
               <div style={{ display: 'inline-flex', alignItems: 'center', background: 'rgba(0,61,165,0.1)', border: '0.5px solid rgba(0,61,165,0.25)', borderRadius: '20px', padding: '4px 10px', marginBottom: '16px', width: 'fit-content' }}>
                 <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: BLUE }}>{fr ? 'Bloc de contenu' : 'Content block'}</span>
@@ -736,7 +736,7 @@ export default function Entreprises() {
 
           {/* Forfait Croissance */}
           <FadeIn delay={0.15}>
-            <div style={{ background: '#0d0d0d', border: `2px solid ${BLUE}`, borderRadius: '16px', padding: '36px', position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+            <div style={{ background: '#0d0d0d', border: `2px solid ${BLUE}`, borderRadius: '16px', padding: '36px', position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column', height: '100%' }}>
               <div style={{ position: 'absolute', top: '0', right: '0', background: BLUE, fontSize: '9px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#fff', padding: '6px 14px', borderBottomLeftRadius: '8px' }}>
                 {fr ? 'CLÉ EN MAIN' : 'TURNKEY'}
               </div>
