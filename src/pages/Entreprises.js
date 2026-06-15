@@ -746,7 +746,7 @@ export default function Entreprises() {
                 {fr ? <>Forfait Croissance <span style={{ color: '#fff' }}>(80 vidéos/an)</span></> : <>Growth Plan <span style={{ color: '#fff' }}>(80 videos/year)</span></>}
               </div>
               <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.4)', marginBottom: '2px', fontWeight: 600, letterSpacing: '0.05em' }}>{fr ? 'À PARTIR DE' : 'STARTING AT'}</div>
-              <div style={{ fontFamily: "'Bebas Neue'", fontSize: '48px', color: '#fff', lineHeight: 1, marginBottom: '4px' }}>4 500$</div>
+              <div style={{ fontFamily: "'Bebas Neue'", fontSize: '48px', color: '#fff', lineHeight: 1, marginBottom: '4px' }}>4 000$</div>
               <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', marginBottom: '24px' }}>{fr ? '/ mois · contenu + Meta Ads & CRM' : '/ month · content + Meta Ads & CRM'}</div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '24px', flex: 1 }}>
                 {(fr ? [
