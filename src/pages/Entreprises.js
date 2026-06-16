@@ -707,7 +707,7 @@ export default function Entreprises() {
                 {fr ? <>Forfait Web Série <span style={{ color: '#fff' }}>(12 épisodes)</span></> : <>Web Series Plan <span style={{ color: '#fff' }}>(12 episodes)</span></>}
               </div>
               <div style={{ fontFamily: "'Bebas Neue'", fontSize: '48px', color: '#fff', lineHeight: 1, marginBottom: '4px' }}>10 000$</div>
-              <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', marginBottom: '16px' }}>{fr ? 'Facturation en 3 paiements' : 'Billing in 3 payments'}</div>
+              <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', marginBottom: '16px' }}>{fr ? 'Facturation en 2 paiements' : 'Billing in 2 payments'}</div>
               <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.45)', lineHeight: 1.7, marginBottom: '24px', fontWeight: 300, fontStyle: 'italic' }}>
                 {fr ? "12 épisodes. Une caméra dans les coulisses de ton entreprise. On capte ce que personne ne voit — l'équipe, le terrain, la culture — et on en fait une série qui bâtit une connexion réelle avec ton audience." : "12 episodes. A camera behind the scenes of your business. We capture what no one sees — the team, the field, the culture — and turn it into a series that builds a real connection with your audience."}
               </p>
