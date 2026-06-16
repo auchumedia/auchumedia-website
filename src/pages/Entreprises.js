@@ -696,29 +696,34 @@ export default function Entreprises() {
         </FadeIn>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', maxWidth: '860px', margin: '0 auto', alignItems: 'stretch' }}>
 
-          {/* Forfait Lancement */}
+          {/* Forfait Web Série */}
           <FadeIn delay={0.1}>
             <div style={{ background: '#0d0d0d', border: '0.5px solid rgba(255,255,255,0.08)', borderRadius: '16px', padding: '36px', position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column', height: '100%' }}>
               <div style={{ position: 'absolute', top: '-30px', right: '-30px', width: '160px', height: '160px', borderRadius: '50%', background: 'rgba(0,61,165,0.04)', filter: 'blur(30px)' }} />
               <div style={{ display: 'inline-flex', alignItems: 'center', background: 'rgba(0,61,165,0.1)', border: '0.5px solid rgba(0,61,165,0.25)', borderRadius: '20px', padding: '4px 10px', marginBottom: '16px', width: 'fit-content' }}>
-                <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: BLUE }}>{fr ? 'Bloc de contenu' : 'Content block'}</span>
+                <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: BLUE }}>{fr ? 'Production' : 'Production'}</span>
               </div>
               <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE, marginBottom: '8px' }}>
-                {fr ? <>Forfait Lancement <span style={{ color: '#fff' }}>(30 vidéos)</span></> : <>Launch Plan <span style={{ color: '#fff' }}>(30 videos)</span></>}
+                {fr ? <>Forfait Web Série <span style={{ color: '#fff' }}>(12 épisodes)</span></> : <>Web Series Plan <span style={{ color: '#fff' }}>(12 episodes)</span></>}
               </div>
-              <div style={{ fontFamily: "'Bebas Neue'", fontSize: '48px', color: '#fff', lineHeight: 1, marginBottom: '4px' }}>12 000$</div>
-              <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', marginBottom: '24px' }}>{fr ? 'Facturation en 3 paiements' : 'Billing in 3 payments'}</div>
+              <div style={{ fontFamily: "'Bebas Neue'", fontSize: '48px', color: '#fff', lineHeight: 1, marginBottom: '4px' }}>9 000$</div>
+              <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', marginBottom: '16px' }}>{fr ? 'Facturation en 3 paiements' : 'Billing in 3 payments'}</div>
+              <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.45)', lineHeight: 1.7, marginBottom: '24px', fontWeight: 300, fontStyle: 'italic' }}>
+                {fr ? "12 épisodes. Une caméra dans les coulisses de ton entreprise. On capte ce que personne ne voit — l'équipe, le terrain, la culture — et on en fait une série qui bâtit une connexion réelle avec ton audience." : "12 episodes. A camera behind the scenes of your business. We capture what no one sees — the team, the field, the culture — and turn it into a series that builds a real connection with your audience."}
+              </p>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '32px', flex: 1 }}>
                 {(fr ? [
-                  'Stratégie, idéation et direction créative',
-                  'Préproduction, tournage et montage',
-                  'Publication sur toutes les plateformes',
-                  'Rapport de performance final',
+                  'Développement du concept et direction créative',
+                  'Préproduction : scénarisation et planification des tournages',
+                  'Accès coulisses : équipe, chantiers, culture d\'entreprise',
+                  'Production & montage des 12 épisodes',
+                  'Publication et stratégie de lancement sur toutes les plateformes',
                 ] : [
-                  'Strategy, ideation and creative direction',
-                  'Pre-production, filming and editing',
-                  'Publishing on all platforms',
-                  'Final performance report',
+                  'Concept development and creative direction',
+                  'Pre-production: scripting and shoot planning',
+                  'Behind the scenes access: team, job sites, company culture',
+                  'Production & editing of all 12 episodes',
+                  'Publishing and launch strategy across all platforms',
                 ]).map((item, i) => (
                   <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
                     <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: BLUE, flexShrink: 0, marginTop: '5px' }} />
