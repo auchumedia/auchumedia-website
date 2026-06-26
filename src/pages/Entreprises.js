@@ -710,18 +710,21 @@ export default function Entreprises() {
                 {fr ? <>Forfait Croissance <span style={{ color: '#fff' }}>(8 vidéos/mois)</span></> : <>Growth Plan <span style={{ color: '#fff' }}>(8 videos/month)</span></>}
               </div>
               <div style={{ fontFamily: "'Bebas Neue'", fontSize: '48px', color: '#fff', lineHeight: 1, marginBottom: '4px' }}>3 500$</div>
-              <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', marginBottom: '24px' }}>{fr ? '/ mois' : '/ month'}</div>
+              <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', marginBottom: '12px' }}>{fr ? '/ mois' : '/ month'}</div>
+              <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.45)', lineHeight: 1.7, marginBottom: '24px', fontWeight: 300, fontStyle: 'italic' }}>
+                {fr ? "Une machine à contenu en continu. 2 vidéos par semaine, une présence cohérente toute l'année et une croissance organique constante." : "A continuous content machine. 2 videos per week, consistent presence all year and steady organic growth."}
+              </p>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '32px', flex: 1 }}>
                 {(fr ? [
                   'Stratégie, idéation et direction créative',
                   'Préproduction, tournage et montage',
-                  '1 à 2 vidéos / semaine sur toutes les plateformes',
+                  '2 vidéos / semaine sur toutes les plateformes',
                   'Gestion de communauté incluse',
                   'Rapports mensuels & optimisation continue',
                 ] : [
                   'Strategy, ideation and creative direction',
                   'Pre-production, filming and editing',
-                  '1 to 2 videos / week across all platforms',
+                  '2 videos / week across all platforms',
                   'Community management included',
                   'Monthly reports & continuous optimization',
                 ]).map((item, i) => (
@@ -747,8 +750,11 @@ export default function Entreprises() {
               <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE, marginBottom: '8px' }}>
                 {fr ? <>Vidéo Commerciale <span style={{ color: '#fff' }}>(1 minute)</span></> : <>Commercial Video <span style={{ color: '#fff' }}>(1 minute)</span></>}
               </div>
-              <div style={{ fontFamily: "'Bebas Neue'", fontSize: '48px', color: '#fff', lineHeight: 1, marginBottom: '4px' }}>5 000$</div>
-              <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', marginBottom: '24px' }}>{fr ? 'facturation unique' : 'one-time'}</div>
+              <div style={{ fontFamily: "'Bebas Neue'", fontSize: '48px', color: '#fff', lineHeight: 1, marginBottom: '4px' }}>4 000$</div>
+              <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', marginBottom: '12px' }}>{fr ? 'facturation unique' : 'one-time'}</div>
+              <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.45)', lineHeight: 1.7, marginBottom: '24px', fontWeight: 300, fontStyle: 'italic' }}>
+                {fr ? "Une vidéo commerciale d'une minute et une galerie de photos professionnelles pour présenter votre entreprise sous son meilleur jour." : "A one-minute commercial video and a professional photo gallery to showcase your business at its best."}
+              </p>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '32px', flex: 1 }}>
                 {(fr ? [
                   'Développement du concept et direction créative',
