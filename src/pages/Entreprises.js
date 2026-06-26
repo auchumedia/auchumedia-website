@@ -740,34 +740,38 @@ export default function Entreprises() {
             </div>
           </FadeIn>
 
-          {/* Forfait Production Vidéo */}
+          {/* Forfait Meta Ads & CRM */}
           <FadeIn delay={0.15}>
             <div style={{ background: '#0d0d0d', border: '0.5px solid rgba(255,255,255,0.08)', borderRadius: '16px', padding: '36px', position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column', height: '100%' }}>
               <div style={{ position: 'absolute', top: '-30px', right: '-30px', width: '160px', height: '160px', borderRadius: '50%', background: 'rgba(0,61,165,0.04)', filter: 'blur(30px)' }} />
               <div style={{ display: 'inline-flex', alignItems: 'center', background: 'rgba(0,61,165,0.1)', border: '0.5px solid rgba(0,61,165,0.25)', borderRadius: '20px', padding: '4px 10px', marginBottom: '16px', width: 'fit-content' }}>
-                <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: BLUE }}>{fr ? 'Production' : 'Production'}</span>
+                <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: BLUE }}>Add-on</span>
               </div>
               <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE, marginBottom: '8px' }}>
-                {fr ? <>Vidéo Commerciale <span style={{ color: '#fff' }}>(1 minute)</span></> : <>Commercial Video <span style={{ color: '#fff' }}>(1 minute)</span></>}
+                Meta Ads &amp; CRM
               </div>
-              <div style={{ fontFamily: "'Bebas Neue'", fontSize: '48px', color: '#fff', lineHeight: 1, marginBottom: '4px' }}>4 000$</div>
-              <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', marginBottom: '12px' }}>{fr ? 'facturation unique' : 'one-time'}</div>
+              <div style={{ fontFamily: "'Bebas Neue'", fontSize: '48px', color: '#fff', lineHeight: 1, marginBottom: '4px' }}>3 000$</div>
+              <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', marginBottom: '12px' }}>{fr ? '/ mois · à ajouter à votre forfait' : '/ month · add to your plan'}</div>
               <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.45)', lineHeight: 1.7, marginBottom: '24px', fontWeight: 300, fontStyle: 'italic' }}>
-                {fr ? "Une vidéo commerciale d'une minute et une galerie de photos professionnelles pour présenter votre entreprise sous son meilleur jour." : "A one-minute commercial video and a professional photo gallery to showcase your business at its best."}
+                {fr ? "La présence organique est en place — maintenant on accélère. Meta Ads ciblées et CRM pour transformer votre audience en leads qualifiés." : "Organic presence is established — now we accelerate. Targeted Meta Ads and CRM to turn your audience into qualified leads."}
               </p>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '32px', flex: 1 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '24px', flex: 1 }}>
                 {(fr ? [
-                  'Développement du concept et direction créative',
-                  'Préproduction : scénarisation et planification',
-                  'Tournage professionnel (vidéo + photos)',
-                  'Montage cinématique — vidéo 1 minute livrée',
-                  'Galerie photos professionnelles incluse',
+                  'Gestion complète Meta Ads (Facebook & Instagram)',
+                  'Création et optimisation des campagnes publicitaires',
+                  'Ciblage précis de votre zone de service',
+                  'Intégration & configuration CRM',
+                  'Pipeline de leads automatisé',
+                  'Rapports publicitaires mensuels détaillés',
+                  'Optimisation continue des campagnes',
                 ] : [
-                  'Concept development and creative direction',
-                  'Pre-production: scripting and planning',
-                  'Professional shoot (video + photos)',
-                  'Cinematic editing — 1 minute video delivered',
-                  'Professional photo gallery included',
+                  'Full Meta Ads management (Facebook & Instagram)',
+                  'Ad campaign creation and optimization',
+                  'Precise targeting of your service area',
+                  'CRM integration & configuration',
+                  'Automated lead pipeline',
+                  'Detailed monthly advertising reports',
+                  'Continuous campaign optimization',
                 ]).map((item, i) => (
                   <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
                     <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: BLUE, flexShrink: 0, marginTop: '5px' }} />
@@ -775,8 +779,11 @@ export default function Entreprises() {
                   </div>
                 ))}
               </div>
+              <p style={{ fontSize: '11px', color: 'rgba(255,255,255,0.25)', lineHeight: 1.5, marginBottom: '20px', fontStyle: 'italic' }}>
+                * {fr ? 'Budget publicitaire minimum de 1 000$/mois requis (non inclus).' : 'Minimum advertising budget of $1,000/month required (not included).'}
+              </p>
               <button onClick={() => scrollTo('contact')} style={{ width: '100%', fontSize: '11px', fontWeight: 700, color: '#fff', background: BLUE, padding: '14px', borderRadius: '4px', letterSpacing: '0.08em', textTransform: 'uppercase', border: 'none', cursor: 'pointer', fontFamily: "'DM Sans'" }}>
-                {fr ? 'Démarrer →' : 'Get started →'}
+                {fr ? 'Nous contacter →' : 'Contact us →'}
               </button>
             </div>
           </FadeIn>
