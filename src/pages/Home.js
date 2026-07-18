@@ -24,7 +24,7 @@ function FadeIn({ children, delay = 0, direction = 'up' }) {
 
 const navLinks = [
   { id: 'pourquoi', labelFr: 'Pourquoi AuchuMedia', labelEn: 'Why AuchuMedia' },
-  { id: 'etudes-de-cas', labelFr: 'Études de cas', labelEn: 'Case studies' },
+  { id: 'etudes-de-cas-home', labelFr: 'Études de cas', labelEn: 'Case studies' },
   { id: 'deroulement', labelFr: 'Déroulement', labelEn: 'Process' },
   { id: 'tarification', labelFr: 'Tarification', labelEn: 'Pricing' },
   { id: 'faq', labelFr: 'FAQ', labelEn: 'FAQ' },
@@ -417,9 +417,7 @@ export default function Home() {
       </section>
 
       {/* ===== ÉTUDES DE CAS ===== */}
-      <section id="etudes-de-cas" style={{ padding: '100px 60px', background: '#0a0a0a', borderTop: '0.5px solid rgba(0,0,0,0.07)', scrollMarginTop: '64px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        {/* Single wrapper so the global full-bleed "#etudes-de-cas > div" rule (used by Entreprises.js) can't reach the centered content below */}
-        <div style={{ width: '100%' }}>
+      <section id="etudes-de-cas-home" style={{ padding: '100px 60px', background: '#0a0a0a', borderTop: '0.5px solid rgba(0,0,0,0.07)', scrollMarginTop: '64px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <FadeIn>
           <div style={{ textAlign: 'center', width: '100%', marginBottom: '48px' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', marginBottom: '12px' }}>
@@ -433,7 +431,7 @@ export default function Home() {
           </div>
         </FadeIn>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2px', maxWidth: '1200px', width: '100%', margin: '0 auto' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '12px', maxWidth: '990px', margin: '0 auto', width: '100%' }}>
           {projets.map((p, i) => (
             <FadeIn key={p.slug} delay={i * 0.06}>
               <Link
@@ -480,7 +478,6 @@ export default function Home() {
               </Link>
             </FadeIn>
           ))}
-        </div>
         </div>
       </section>
 
