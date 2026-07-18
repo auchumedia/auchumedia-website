@@ -436,13 +436,12 @@ export default function Athletes() {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '12px', maxWidth: '700px', margin: '0 auto', width: '100%' }}>
           {athleteProjets.map((p, i) => (
             <FadeIn key={p.slug} delay={i * 0.06}>
-              <Link
-                to={`/projets/${p.slug}`}
+              <div
                 onMouseEnter={() => setHoveredProjet(p.slug)}
                 onMouseLeave={() => setHoveredProjet(null)}
                 style={{
-                  position: 'relative', display: 'block', overflow: 'hidden', borderRadius: '14px',
-                  border: '0.5px solid rgba(255,255,255,0.08)', height: '320px', textDecoration: 'none',
+                  position: 'relative', overflow: 'hidden', borderRadius: '14px',
+                  border: '0.5px solid rgba(255,255,255,0.08)', height: '320px',
                   background: 'linear-gradient(160deg, #1a1a1a 0%, #0a0a0a 100%)',
                 }}
               >
@@ -458,7 +457,7 @@ export default function Athletes() {
                   <div style={{ fontFamily: "'Bebas Neue'", fontSize: '26px', color: '#fff', marginBottom: '8px', lineHeight: 1 }}>
                     {p.client}
                   </div>
-                  <div style={{ display: 'flex', gap: '16px', marginBottom: '10px' }}>
+                  <div style={{ display: 'flex', gap: '16px' }}>
                     <div>
                       <div style={{ fontFamily: "'Bebas Neue'", fontSize: '16px', color: '#fff', lineHeight: 1 }}>{p.stats.vues}</div>
                       <div style={{ fontSize: '8px', color: 'rgba(255,255,255,0.5)', letterSpacing: '0.1em', textTransform: 'uppercase', marginTop: '2px' }}>{fr ? 'Vues' : 'Views'}</div>
@@ -468,16 +467,8 @@ export default function Athletes() {
                       <div style={{ fontSize: '8px', color: 'rgba(255,255,255,0.5)', letterSpacing: '0.1em', textTransform: 'uppercase', marginTop: '2px' }}>{fr ? 'Abonnés' : 'Followers'}</div>
                     </div>
                   </div>
-                  <span style={{
-                    fontSize: '11px', fontWeight: 700, color: '#fff', textTransform: 'uppercase', letterSpacing: '0.08em',
-                    display: 'inline-block', opacity: hoveredProjet === p.slug ? 1 : 0,
-                    transform: hoveredProjet === p.slug ? 'translateY(0)' : 'translateY(4px)',
-                    transition: 'all 0.3s ease',
-                  }}>
-                    {fr ? 'Voir le projet →' : 'View project →'}
-                  </span>
                 </div>
-              </Link>
+              </div>
             </FadeIn>
           ))}
         </div>

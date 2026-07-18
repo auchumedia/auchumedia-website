@@ -99,10 +99,6 @@ export default function Nav({ lang, onLangChange }) {
           </div>
  
           <div style={{ width: '0.5px', height: '16px', background: 'rgba(0,0,0,0.1)', margin: '0 4px' }} />
-          <Link to="/projets" style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(10,10,10,0.5)', padding: '8px 14px', borderRadius: '5px' }}>
-            {fr ? 'Projets' : 'Projects'}
-          </Link>
-          <div style={{ width: '0.5px', height: '16px', background: 'rgba(0,0,0,0.1)', margin: '0 4px' }} />
           <Link to="/a-propos" style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(10,10,10,0.5)', padding: '8px 14px', borderRadius: '5px' }}>
             {fr ? 'À propos' : 'About'}
           </Link>
@@ -157,9 +153,6 @@ export default function Nav({ lang, onLangChange }) {
               {item.label}
             </Link>
           ))}
-          <Link to="/projets" onClick={() => setMobileOpen(false)} style={{ fontSize: '13px', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'rgba(10,10,10,0.65)', padding: '12px 0', borderBottom: '0.5px solid rgba(0,0,0,0.07)' }}>
-            {fr ? 'Projets' : 'Projects'}
-          </Link>
           <Link to="/a-propos" onClick={() => setMobileOpen(false)} style={{ fontSize: '13px', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'rgba(10,10,10,0.65)', padding: '12px 0', borderBottom: '0.5px solid rgba(0,0,0,0.07)' }}>
             {fr ? 'À propos' : 'About'}
           </Link>
