@@ -308,12 +308,6 @@ export default function Home() {
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0, position: 'absolute', right: '60px' }}>
-          <Link to="/athletes" style={{ fontSize: '10px', fontWeight: 700, color: '#0a0a0a', background: 'transparent', padding: '8px 16px', borderRadius: '4px', border: '1px solid rgba(0,0,0,0.22)', textDecoration: 'none', letterSpacing: '0.07em', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>
-            {fr ? 'Pour athlètes' : 'For athletes'}
-          </Link>
-          <button onClick={() => scrollTo('contact')} style={{ fontSize: '10px', fontWeight: 700, color: '#fff', background: BLUE, padding: '9px 18px', borderRadius: '4px', border: 'none', cursor: 'pointer', letterSpacing: '0.07em', textTransform: 'uppercase', fontFamily: "'DM Sans'", whiteSpace: 'nowrap' }}>
-            {fr ? 'Planifier un appel' : 'Book a call'}
-          </button>
           <div style={{ display: 'flex', border: '0.5px solid rgba(0,0,0,0.15)', borderRadius: '4px', overflow: 'hidden' }}>
             {['fr','en'].map(l => (
               <button key={l} onClick={() => setLang(l)} style={{ fontSize: '9px', fontWeight: 700, padding: '5px 10px', cursor: 'pointer', border: 'none', background: lang === l ? 'rgba(0,0,0,0.08)' : 'transparent', color: lang === l ? '#0a0a0a' : 'rgba(10,10,10,0.35)', fontFamily: "'DM Sans'" }}>
@@ -368,11 +362,11 @@ export default function Home() {
             {fr ? "Contenu premium pour athlètes et marques ambitieuses — stratégie, production et croissance, du tournage jusqu'aux résultats." : "Premium content for athletes and ambitious brands — strategy, production and growth, from filming to results."}
           </p>
           <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <button onClick={() => scrollTo('etudes-de-cas')} style={{ fontSize: '11px', fontWeight: 700, color: '#fff', background: BLUE, padding: '14px 32px', borderRadius: '4px', letterSpacing: '0.1em', textTransform: 'uppercase', border: 'none', cursor: 'pointer', boxShadow: '0 0 30px rgba(0,61,165,0.3)', fontFamily: "'DM Sans'" }}>
-              {fr ? 'Voir nos projets' : 'See our projects'}
-            </button>
-            <button onClick={() => scrollTo('contact')} style={{ fontSize: '11px', fontWeight: 700, color: '#fff', border: '1px solid rgba(255,255,255,0.5)', padding: '14px 32px', borderRadius: '4px', textTransform: 'uppercase', letterSpacing: '0.1em', background: 'transparent', cursor: 'pointer', fontFamily: "'DM Sans'" }}>
-              {fr ? 'Planifier un appel' : 'Book a call'}
+            <Link to="/athletes" style={{ fontSize: '11px', fontWeight: 700, color: '#fff', border: '1px solid rgba(255,255,255,0.5)', padding: '14px 32px', borderRadius: '4px', textTransform: 'uppercase', letterSpacing: '0.1em', background: 'transparent', cursor: 'pointer', fontFamily: "'DM Sans'", textDecoration: 'none', display: 'inline-block' }}>
+              {fr ? 'Pour athlètes →' : 'For athletes →'}
+            </Link>
+            <button onClick={() => scrollTo('contact')} style={{ fontSize: '11px', fontWeight: 700, color: '#fff', background: BLUE, padding: '14px 32px', borderRadius: '4px', letterSpacing: '0.1em', textTransform: 'uppercase', border: 'none', cursor: 'pointer', boxShadow: '0 0 30px rgba(0,61,165,0.3)', fontFamily: "'DM Sans'" }}>
+              {fr ? 'Planifier un appel →' : 'Book a call →'}
             </button>
           </div>
         </div>
@@ -423,7 +417,7 @@ export default function Home() {
       </section>
 
       {/* ===== ÉTUDES DE CAS ===== */}
-      <section id="etudes-de-cas" style={{ padding: '80px 60px', background: '#0a0a0a', borderTop: '0.5px solid rgba(0,0,0,0.07)', scrollMarginTop: '64px' }}>
+      <section id="etudes-de-cas" style={{ padding: '80px 60px', background: '#0a0a0a', borderTop: '0.5px solid rgba(0,0,0,0.07)', scrollMarginTop: '64px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <FadeIn>
           <div style={{ textAlign: 'center', marginBottom: '48px' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', marginBottom: '12px' }}>
@@ -437,7 +431,7 @@ export default function Home() {
           </div>
         </FadeIn>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '12px', maxWidth: '1160px', margin: '0 auto', justifyContent: 'center' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '12px', maxWidth: '990px', margin: '0 auto', width: '100%' }}>
           {projets.map((p, i) => (
             <FadeIn key={p.slug} delay={i * 0.06}>
               <Link
