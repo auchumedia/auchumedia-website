@@ -350,11 +350,6 @@ export default function Home() {
         <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.55)', zIndex: 1 }} />
         <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at 50% 60%, rgba(0,61,165,0.1) 0%, transparent 65%)', zIndex: 1, pointerEvents: 'none' }} />
         <div style={{ position: 'relative', zIndex: 2, maxWidth: '860px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', marginBottom: '20px' }}>
-            <div style={{ width: '20px', height: '1px', background: BLUE }} />
-            <span style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: BLUE }}>{fr ? 'Agence de référence · Sport · Marketing' : 'Reference agency · Sport · Marketing'}</span>
-            <div style={{ width: '20px', height: '1px', background: BLUE }} />
-          </div>
           <h1 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(52px, 7.5vw, 100px)', lineHeight: 0.93, color: '#fff', marginBottom: '28px', letterSpacing: '0.01em' }}>
             {fr ? <>DEVENEZ LA RÉFÉRENCE<br />DANS VOTRE DOMAINE</> : <>BECOME THE REFERENCE<br />IN YOUR INDUSTRY</>}
           </h1>
