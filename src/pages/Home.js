@@ -356,10 +356,10 @@ export default function Home() {
             <div style={{ width: '20px', height: '1px', background: BLUE }} />
           </div>
           <h1 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(52px, 7.5vw, 100px)', lineHeight: 0.93, color: '#fff', marginBottom: '28px', letterSpacing: '0.01em' }}>
-            {fr ? <>ON RACONTE<br />TON HISTOIRE.</> : <>WE TELL<br />YOUR STORY.</>}
+            {fr ? <>DEVENEZ LA RÉFÉRENCE<br />DANS VOTRE DOMAINE</> : <>BECOME THE REFERENCE<br />IN YOUR INDUSTRY</>}
           </h1>
-          <p style={{ fontSize: 'clamp(15px, 1.8vw, 18px)', color: 'rgba(255,255,255,0.75)', lineHeight: 1.8, maxWidth: '580px', margin: '0 auto 40px', fontWeight: 300 }}>
-            {fr ? "Contenu premium pour athlètes et marques ambitieuses — stratégie, production et croissance, du tournage jusqu'aux résultats." : "Premium content for athletes and ambitious brands — strategy, production and growth, from filming to results."}
+          <p style={{ fontSize: 'clamp(15px, 1.8vw, 18px)', color: 'rgba(255,255,255,0.55)', lineHeight: 1.8, maxWidth: '580px', margin: '0 auto 40px', fontWeight: 300, textAlign: 'center' }}>
+            {fr ? "On aide les entreprises B2C high ticket à devenir la référence dans leur marché grâce à une présence en ligne qui génère des leads qualifiés et bâtit une autorité durable." : "We help B2C high ticket businesses become the reference in their market through an online presence that generates qualified leads and builds lasting authority."}
           </p>
           <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link to="/athletes" style={{ fontSize: '11px', fontWeight: 700, color: '#fff', border: '1px solid rgba(255,255,255,0.5)', padding: '14px 32px', borderRadius: '4px', textTransform: 'uppercase', letterSpacing: '0.1em', background: 'transparent', cursor: 'pointer', fontFamily: "'DM Sans'", textDecoration: 'none', display: 'inline-block' }}>
