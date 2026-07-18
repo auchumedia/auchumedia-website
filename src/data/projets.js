@@ -71,7 +71,7 @@ export const projets = [
       en: "Mandate in progress — details coming soon.",
     },
     stats: { vues: '60K', engagements: '2K', videos: '4', abonnes: '+200' },
-    image: null,
+    image: 'https://res.cloudinary.com/dr0kwuqqa/image/upload/v1784411204/bm-realisations-lemire-automobile_h8tv2h.jpg',
     tiktokVideos: [],
   },
   {
