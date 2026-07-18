@@ -59,7 +59,7 @@ export const projets = [
       en: "Mandate in progress — details coming soon.",
     },
     stats: { vues: '250K', engagements: '5K', videos: '10', abonnes: '+600' },
-    image: null,
+    image: 'https://res.cloudinary.com/dr0kwuqqa/image/upload/v1784411817/Capture_d_e%CC%81cran_le_2026-07-18_a%CC%80_17.56.25_rfb74n.png',
     tiktokVideos: [],
   },
   {
