@@ -458,7 +458,7 @@ export default function Home() {
                   <div style={{ fontFamily: "'Bebas Neue'", fontSize: '26px', color: '#fff', marginBottom: '8px', lineHeight: 1 }}>
                     {p.client}
                   </div>
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '8px 16px' }}>
+                  <div className="etudes-stats-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '8px 16px' }}>
                     <div>
                       <div style={{ fontFamily: "'Bebas Neue'", fontSize: '16px', color: '#fff', lineHeight: 1 }}>{p.stats.vues}</div>
                       <div style={{ fontSize: '8px', color: 'rgba(255,255,255,0.5)', letterSpacing: '0.1em', textTransform: 'uppercase', marginTop: '2px' }}>{fr ? 'Vues' : 'Views'}</div>
@@ -757,6 +757,7 @@ export default function Home() {
           div[style*="grid-template-columns: repeat(3"] { grid-template-columns: 1fr !important; }
           div[style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
           div[style*="grid-template-columns: repeat(2"] { grid-template-columns: 1fr !important; }
+          div.etudes-stats-grid { display: flex !important; flex-direction: row !important; grid-template-columns: none !important; justify-content: space-between !important; gap: 8px !important; }
           .sticky-cards { display: none !important; }
           .mobile-timeline { display: flex !important; }
         }
