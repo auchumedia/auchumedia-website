@@ -8,7 +8,7 @@ export const projets = [
       en: "Full social media management mandate for Nor-Can, a heating and air conditioning company. Content strategy focused on expertise, behind-the-scenes, and company culture.",
     },
     stats: { vues: '6M', engagements: '50K', videos: '172', abonnes: '+9K' },
-    image: null,
+    image: 'https://res.cloudinary.com/dr0kwuqqa/image/upload/v1784410798/Capture_d_e%CC%81cran_le_2025-10-03_a%CC%80_11.10.40_v5hyzr.png',
     tiktokVideos: [
       'https://www.tiktok.com/@norcan.57/video/7556376175652670721',
       'https://www.tiktok.com/@norcan.57/video/7574205401663655188',
@@ -26,7 +26,7 @@ export const projets = [
       en: "Content creation and social media management mandate for SexxxPlus. Educational, entertaining, audience-centric content that generated exceptional organic growth.",
     },
     stats: { vues: '22M', engagements: '1M', videos: '120', abonnes: '+35K' },
-    image: null,
+    image: 'https://res.cloudinary.com/dr0kwuqqa/image/upload/v1784410803/A7505403_sfvtwp.jpg',
     tiktokVideos: [
       'https://www.tiktok.com/@boutiqueerotiquesp/video/7463247824583412997',
       'https://www.tiktok.com/@boutiqueerotiquesp/video/7538563446787362066',
@@ -43,7 +43,7 @@ export const projets = [
       en: "Personal branding and social media management mandate for Raf & Steve Maher, RE/MAX brokers. Real estate content that builds trust and authority.",
     },
     stats: { vues: '700K', engagements: '14K', videos: '30', abonnes: '+2K' },
-    image: null,
+    image: 'https://res.cloudinary.com/dr0kwuqqa/image/upload/v1784410790/Raf_Steve_ycvtgk.png',
     tiktokVideos: [
       'https://www.tiktok.com/@famillemaher/video/7600921134854360327',
       'https://www.tiktok.com/@famillemaher/video/7602054271172906248',
