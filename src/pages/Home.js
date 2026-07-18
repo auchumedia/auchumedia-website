@@ -42,9 +42,9 @@ function MultiStepForm({ fr, scrollTo, BLUE }) {
 
   const total = 4;
   const set = (k, v) => setForm(f => ({ ...f, [k]: v }));
-  const inputStyle = { width: '100%', background: '#ffffff', border: '0.5px solid rgba(0,0,0,0.15)', borderRadius: '8px', padding: '12px 16px', color: '#0a0a0a', fontSize: '14px', outline: 'none', fontFamily: "'DM Sans'", marginBottom: '14px' };
+  const inputStyle = { width: '100%', background: '#0a0a0a', border: '0.5px solid rgba(255,255,255,0.15)', borderRadius: '8px', padding: '12px 16px', color: '#ffffff', fontSize: '14px', outline: 'none', fontFamily: "'DM Sans'", marginBottom: '14px' };
   const selectStyle = { ...inputStyle, appearance: 'none', cursor: 'pointer' };
-  const labelStyle = { display: 'block', fontSize: '13px', fontWeight: 600, color: 'rgba(10,10,10,0.7)', marginBottom: '8px' };
+  const labelStyle = { display: 'block', fontSize: '13px', fontWeight: 600, color: 'rgba(255,255,255,0.7)', marginBottom: '8px' };
 
   const steps = fr ? [
     'Vos informations', 'Votre entreprise', 'Votre structure marketing', 'Votre besoin'
@@ -53,28 +53,28 @@ function MultiStepForm({ fr, scrollTo, BLUE }) {
   ];
 
   if (submitted) return (
-    <div style={{ background: '#f5f5f5', border: `1px solid rgba(0,61,165,0.3)`, borderRadius: '16px', padding: '48px 32px', textAlign: 'center' }}>
+    <div style={{ background: '#111', border: `1px solid rgba(0,61,165,0.3)`, borderRadius: '16px', padding: '48px 32px', textAlign: 'center' }}>
       <div style={{ fontSize: '48px', marginBottom: '16px' }}>✅</div>
-      <div style={{ fontFamily: "'Bebas Neue'", fontSize: '28px', color: '#0a0a0a', marginBottom: '12px' }}>{fr ? 'DEMANDE REÇUE !' : 'REQUEST RECEIVED!'}</div>
-      <p style={{ fontSize: '14px', color: 'rgba(10,10,10,0.55)', lineHeight: 1.7 }}>{fr ? 'Notre équipe vous contactera dans les 48h.' : 'Our team will contact you within 48h.'}</p>
+      <div style={{ fontFamily: "'Bebas Neue'", fontSize: '28px', color: '#ffffff', marginBottom: '12px' }}>{fr ? 'DEMANDE REÇUE !' : 'REQUEST RECEIVED!'}</div>
+      <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.6)', lineHeight: 1.7 }}>{fr ? 'Notre équipe vous contactera dans les 48h.' : 'Our team will contact you within 48h.'}</p>
     </div>
   );
 
   return (
-    <div style={{ background: '#f5f5f5', border: '0.5px solid rgba(0,0,0,0.08)', borderRadius: '16px', padding: '36px 32px' }}>
+    <div style={{ background: '#111', border: '0.5px solid rgba(255,255,255,0.08)', borderRadius: '16px', padding: '36px 32px' }}>
       <div style={{ marginBottom: '28px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
           <span style={{ fontSize: '11px', fontWeight: 700, color: BLUE, letterSpacing: '0.1em', textTransform: 'uppercase' }}>{steps[step - 1]}</span>
-          <span style={{ fontSize: '11px', color: 'rgba(10,10,10,0.35)' }}>{step}/{total}</span>
+          <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.4)' }}>{step}/{total}</span>
         </div>
-        <div style={{ height: '3px', background: 'rgba(0,0,0,0.08)', borderRadius: '2px', overflow: 'hidden' }}>
+        <div style={{ height: '3px', background: 'rgba(255,255,255,0.1)', borderRadius: '2px', overflow: 'hidden' }}>
           <div style={{ height: '100%', width: `${(step / total) * 100}%`, background: BLUE, borderRadius: '2px', transition: 'width 0.4s ease' }} />
         </div>
       </div>
 
       {step === 1 && (
         <div>
-          <div style={{ fontFamily: "'Bebas Neue'", fontSize: '24px', color: '#0a0a0a', marginBottom: '24px', letterSpacing: '0.04em' }}>{fr ? 'VOS INFORMATIONS' : 'YOUR INFORMATION'}</div>
+          <div style={{ fontFamily: "'Bebas Neue'", fontSize: '24px', color: '#ffffff', marginBottom: '24px', letterSpacing: '0.04em' }}>{fr ? 'VOS INFORMATIONS' : 'YOUR INFORMATION'}</div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0 14px' }}>
             <div>
               <label style={labelStyle}>{fr ? 'Prénom *' : 'First name *'}</label>
@@ -94,7 +94,7 @@ function MultiStepForm({ fr, scrollTo, BLUE }) {
 
       {step === 2 && (
         <div>
-          <div style={{ fontFamily: "'Bebas Neue'", fontSize: '24px', color: '#0a0a0a', marginBottom: '24px', letterSpacing: '0.04em' }}>{fr ? 'VOTRE ENTREPRISE' : 'YOUR BUSINESS'}</div>
+          <div style={{ fontFamily: "'Bebas Neue'", fontSize: '24px', color: '#ffffff', marginBottom: '24px', letterSpacing: '0.04em' }}>{fr ? 'VOTRE ENTREPRISE' : 'YOUR BUSINESS'}</div>
           <label style={labelStyle}>{fr ? "Nom de l'entreprise *" : 'Company name *'}</label>
           <input type="text" value={form.entreprise} onChange={e => set('entreprise', e.target.value)} placeholder="Nom inc." style={inputStyle} />
           <label style={labelStyle}>{fr ? 'Site web' : 'Website'}</label>
@@ -109,7 +109,7 @@ function MultiStepForm({ fr, scrollTo, BLUE }) {
 
       {step === 3 && (
         <div>
-          <div style={{ fontFamily: "'Bebas Neue'", fontSize: '24px', color: '#0a0a0a', marginBottom: '24px', letterSpacing: '0.04em' }}>{fr ? 'VOTRE STRUCTURE MARKETING' : 'YOUR MARKETING STRUCTURE'}</div>
+          <div style={{ fontFamily: "'Bebas Neue'", fontSize: '24px', color: '#ffffff', marginBottom: '24px', letterSpacing: '0.04em' }}>{fr ? 'VOTRE STRUCTURE MARKETING' : 'YOUR MARKETING STRUCTURE'}</div>
           <label style={labelStyle}>{fr ? 'Qui gère vos réseaux sociaux actuellement ? *' : 'Who currently manages your social media? *'}</label>
           <select value={form.marketing} onChange={e => set('marketing', e.target.value)} style={selectStyle}>
             <option value="">{fr ? 'Sélectionner' : 'Select'}</option>
@@ -130,7 +130,7 @@ function MultiStepForm({ fr, scrollTo, BLUE }) {
 
       {step === 4 && (
         <div>
-          <div style={{ fontFamily: "'Bebas Neue'", fontSize: '24px', color: '#0a0a0a', marginBottom: '24px', letterSpacing: '0.04em' }}>{fr ? 'VOTRE BESOIN' : 'YOUR NEEDS'}</div>
+          <div style={{ fontFamily: "'Bebas Neue'", fontSize: '24px', color: '#ffffff', marginBottom: '24px', letterSpacing: '0.04em' }}>{fr ? 'VOTRE BESOIN' : 'YOUR NEEDS'}</div>
           <label style={labelStyle}>{fr ? 'Pourquoi envisagez-vous de travailler avec AuchuMedia ? *' : 'Why are you considering working with AuchuMedia? *'}</label>
           <textarea value={form.besoin} onChange={e => set('besoin', e.target.value)} placeholder={fr ? 'Partagez le plus de contexte possible...' : 'Share as much context as possible...'} style={{ ...inputStyle, resize: 'vertical', minHeight: '100px' }} />
           <label style={labelStyle}>{fr ? 'Budget mensuel prévu *' : 'Monthly budget *'}</label>
@@ -148,7 +148,7 @@ function MultiStepForm({ fr, scrollTo, BLUE }) {
 
       <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '8px', gap: '12px' }}>
         {step > 1 ? (
-          <button onClick={() => setStep(s => s - 1)} style={{ fontSize: '11px', fontWeight: 700, color: 'rgba(10,10,10,0.6)', background: 'transparent', border: '0.5px solid rgba(0,0,0,0.2)', padding: '12px 24px', borderRadius: '6px', cursor: 'pointer', fontFamily: "'DM Sans'", letterSpacing: '0.07em', textTransform: 'uppercase' }}>
+          <button onClick={() => setStep(s => s - 1)} style={{ fontSize: '11px', fontWeight: 700, color: 'rgba(255,255,255,0.65)', background: 'transparent', border: '0.5px solid rgba(255,255,255,0.25)', padding: '12px 24px', borderRadius: '6px', cursor: 'pointer', fontFamily: "'DM Sans'", letterSpacing: '0.07em', textTransform: 'uppercase' }}>
             ← {fr ? 'Précédent' : 'Previous'}
           </button>
         ) : <div />}
@@ -423,7 +423,7 @@ export default function Home() {
       </section>
 
       {/* ===== ÉTUDES DE CAS ===== */}
-      <section id="etudes-de-cas" style={{ padding: '80px 60px', background: '#f5f5f5', borderTop: '0.5px solid rgba(0,0,0,0.07)', scrollMarginTop: '64px' }}>
+      <section id="etudes-de-cas" style={{ padding: '80px 60px', background: '#0a0a0a', borderTop: '0.5px solid rgba(0,0,0,0.07)', scrollMarginTop: '64px' }}>
         <FadeIn>
           <div style={{ textAlign: 'center', marginBottom: '48px' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', marginBottom: '12px' }}>
@@ -431,13 +431,13 @@ export default function Home() {
               <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE }}>{fr ? 'Études de cas' : 'Case studies'}</span>
               <div style={{ width: '20px', height: '1px', background: BLUE }} />
             </div>
-            <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(28px, 3.5vw, 44px)', color: '#0a0a0a', letterSpacing: '0.02em' }}>
+            <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(28px, 3.5vw, 44px)', color: '#ffffff', letterSpacing: '0.02em', textAlign: 'center' }}>
               {fr ? <>DES RÉSULTATS <span style={{ color: BLUE }}>CONCRETS.</span></> : <>REAL <span style={{ color: BLUE }}>RESULTS.</span></>}
             </h2>
           </div>
         </FadeIn>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '12px', maxWidth: '1160px', margin: '0 auto' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '12px', maxWidth: '1160px', margin: '0 auto', justifyContent: 'center' }}>
           {projets.map((p, i) => (
             <FadeIn key={p.slug} delay={i * 0.06}>
               <Link
@@ -446,7 +446,7 @@ export default function Home() {
                 onMouseLeave={() => setHoveredProjet(null)}
                 style={{
                   position: 'relative', display: 'block', overflow: 'hidden', borderRadius: '14px',
-                  border: '0.5px solid rgba(0,0,0,0.08)', height: '320px', textDecoration: 'none',
+                  border: '0.5px solid rgba(255,255,255,0.08)', height: '320px', textDecoration: 'none',
                   background: 'linear-gradient(160deg, #1a1a1a 0%, #0a0a0a 100%)',
                 }}
               >
@@ -595,16 +595,16 @@ export default function Home() {
       </section>
 
       {/* ===== TARIFICATION ===== */}
-      <section id="tarification" style={{ padding: '100px 60px', background: '#f5f5f5', borderTop: '0.5px solid rgba(0,0,0,0.07)', scrollMarginTop: '64px' }}>
+      <section id="tarification" style={{ padding: '100px 60px', background: '#0a0a0a', borderTop: '0.5px solid rgba(0,0,0,0.07)', scrollMarginTop: '64px' }}>
         <FadeIn>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
             <div style={{ width: '20px', height: '1px', background: BLUE }} />
             <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE }}>{fr ? 'Tarification' : 'Pricing'}</span>
           </div>
-          <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(32px, 4vw, 52px)', color: '#0a0a0a', marginBottom: '12px', letterSpacing: '0.02em' }}>
+          <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(32px, 4vw, 52px)', color: '#ffffff', marginBottom: '12px', letterSpacing: '0.02em' }}>
             {fr ? <>UNE OFFRE <span style={{ color: BLUE }}>TRANSPARENTE.</span></> : <>TRANSPARENT <span style={{ color: BLUE }}>PRICING.</span></>}
           </h2>
-          <p style={{ fontSize: '14px', color: 'rgba(10,10,10,0.55)', lineHeight: 1.75, marginBottom: '48px', maxWidth: '560px', fontWeight: 300 }}>
+          <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.6)', lineHeight: 1.75, marginBottom: '48px', maxWidth: '560px', fontWeight: 300 }}>
             {fr ? "Chaque client commence quelque part. On a structuré nos offres pour t'accompagner à chaque étape de ta croissance." : "Every client starts somewhere. We structured our offers to support you at every stage of your growth."}
           </p>
         </FadeIn>
@@ -612,20 +612,20 @@ export default function Home() {
 
           {/* Forfait Croissance */}
           <FadeIn delay={0.1}>
-            <div style={{ background: '#ffffff', border: `2px solid ${BLUE}`, borderRadius: '16px', padding: '36px', position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column', height: '100%' }}>
+            <div style={{ background: '#111', border: `2px solid ${BLUE}`, borderRadius: '16px', padding: '36px', position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column', height: '100%' }}>
               <div style={{ position: 'absolute', top: '0', right: '0', background: BLUE, fontSize: '9px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#fff', padding: '6px 14px', borderBottomLeftRadius: '8px' }}>
                 {fr ? 'POPULAIRE' : 'POPULAR'}
               </div>
-              <div style={{ position: 'absolute', top: '-30px', right: '-30px', width: '160px', height: '160px', borderRadius: '50%', background: 'rgba(0,61,165,0.08)', filter: 'blur(30px)' }} />
-              <div style={{ display: 'inline-flex', alignItems: 'center', background: 'rgba(0,61,165,0.08)', border: '0.5px solid rgba(0,61,165,0.25)', borderRadius: '20px', padding: '4px 10px', marginBottom: '16px', width: 'fit-content' }}>
+              <div style={{ position: 'absolute', top: '-30px', right: '-30px', width: '160px', height: '160px', borderRadius: '50%', background: 'rgba(0,61,165,0.12)', filter: 'blur(30px)' }} />
+              <div style={{ display: 'inline-flex', alignItems: 'center', background: 'rgba(0,61,165,0.1)', border: '0.5px solid rgba(0,61,165,0.3)', borderRadius: '20px', padding: '4px 10px', marginBottom: '16px', width: 'fit-content' }}>
                 <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: BLUE }}>{fr ? 'Mandat mensuel' : 'Monthly retainer'}</span>
               </div>
               <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE, marginBottom: '8px' }}>
-                {fr ? <>Forfait Croissance <span style={{ color: '#0a0a0a' }}>(8 vidéos/mois)</span></> : <>Growth Plan <span style={{ color: '#0a0a0a' }}>(8 videos/month)</span></>}
+                {fr ? <>Forfait Croissance <span style={{ color: '#ffffff' }}>(8 vidéos/mois)</span></> : <>Growth Plan <span style={{ color: '#ffffff' }}>(8 videos/month)</span></>}
               </div>
-              <div style={{ fontFamily: "'Bebas Neue'", fontSize: '48px', color: '#0a0a0a', lineHeight: 1, marginBottom: '4px' }}>3 500$</div>
-              <div style={{ fontSize: '12px', color: 'rgba(10,10,10,0.45)', marginBottom: '12px' }}>{fr ? '/ mois' : '/ month'}</div>
-              <p style={{ fontSize: '13px', color: 'rgba(10,10,10,0.55)', lineHeight: 1.7, marginBottom: '24px', fontWeight: 300, fontStyle: 'italic' }}>
+              <div style={{ fontFamily: "'Bebas Neue'", fontSize: '48px', color: '#ffffff', lineHeight: 1, marginBottom: '4px' }}>3 500$</div>
+              <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)', marginBottom: '12px' }}>{fr ? '/ mois' : '/ month'}</div>
+              <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.6)', lineHeight: 1.7, marginBottom: '24px', fontWeight: 300, fontStyle: 'italic' }}>
                 {fr ? "Une machine à contenu en continu. 2 vidéos par semaine, une présence cohérente toute l'année et une croissance organique constante." : "A continuous content machine. 2 videos per week, consistent presence all year and steady organic growth."}
               </p>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '32px', flex: 1 }}>
@@ -644,7 +644,7 @@ export default function Home() {
                 ]).map((item, i) => (
                   <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
                     <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: BLUE, flexShrink: 0, marginTop: '5px' }} />
-                    <span style={{ fontSize: '13px', color: 'rgba(10,10,10,0.75)', lineHeight: 1.5 }}>{item}</span>
+                    <span style={{ fontSize: '13px', color: 'rgba(255,255,255,0.8)', lineHeight: 1.5 }}>{item}</span>
                   </div>
                 ))}
               </div>
@@ -656,17 +656,17 @@ export default function Home() {
 
           {/* Forfait Meta Ads & CRM */}
           <FadeIn delay={0.15}>
-            <div style={{ background: '#ffffff', border: '0.5px solid rgba(0,0,0,0.08)', borderRadius: '16px', padding: '36px', position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column', height: '100%' }}>
-              <div style={{ position: 'absolute', top: '-30px', right: '-30px', width: '160px', height: '160px', borderRadius: '50%', background: 'rgba(0,61,165,0.04)', filter: 'blur(30px)' }} />
-              <div style={{ display: 'inline-flex', alignItems: 'center', background: 'rgba(0,61,165,0.08)', border: '0.5px solid rgba(0,61,165,0.25)', borderRadius: '20px', padding: '4px 10px', marginBottom: '16px', width: 'fit-content' }}>
+            <div style={{ background: '#111', border: '0.5px solid rgba(255,255,255,0.08)', borderRadius: '16px', padding: '36px', position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column', height: '100%' }}>
+              <div style={{ position: 'absolute', top: '-30px', right: '-30px', width: '160px', height: '160px', borderRadius: '50%', background: 'rgba(0,61,165,0.06)', filter: 'blur(30px)' }} />
+              <div style={{ display: 'inline-flex', alignItems: 'center', background: 'rgba(0,61,165,0.1)', border: '0.5px solid rgba(0,61,165,0.3)', borderRadius: '20px', padding: '4px 10px', marginBottom: '16px', width: 'fit-content' }}>
                 <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: BLUE }}>Add-on</span>
               </div>
               <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE, marginBottom: '8px' }}>
                 Meta Ads &amp; CRM
               </div>
-              <div style={{ fontFamily: "'Bebas Neue'", fontSize: '48px', color: '#0a0a0a', lineHeight: 1, marginBottom: '4px' }}>3 000$</div>
-              <div style={{ fontSize: '12px', color: 'rgba(10,10,10,0.45)', marginBottom: '12px' }}>{fr ? '/ mois · à ajouter à votre forfait' : '/ month · add to your plan'}</div>
-              <p style={{ fontSize: '13px', color: 'rgba(10,10,10,0.55)', lineHeight: 1.7, marginBottom: '24px', fontWeight: 300, fontStyle: 'italic' }}>
+              <div style={{ fontFamily: "'Bebas Neue'", fontSize: '48px', color: '#ffffff', lineHeight: 1, marginBottom: '4px' }}>3 000$</div>
+              <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)', marginBottom: '12px' }}>{fr ? '/ mois · à ajouter à votre forfait' : '/ month · add to your plan'}</div>
+              <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.6)', lineHeight: 1.7, marginBottom: '24px', fontWeight: 300, fontStyle: 'italic' }}>
                 {fr ? "La présence organique est en place — maintenant on accélère. Meta Ads ciblées et CRM pour transformer votre audience en leads qualifiés." : "Organic presence is established — now we accelerate. Targeted Meta Ads and CRM to turn your audience into qualified leads."}
               </p>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '24px', flex: 1 }}>
@@ -689,11 +689,11 @@ export default function Home() {
                 ]).map((item, i) => (
                   <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
                     <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: BLUE, flexShrink: 0, marginTop: '5px' }} />
-                    <span style={{ fontSize: '13px', color: 'rgba(10,10,10,0.75)', lineHeight: 1.5 }}>{item}</span>
+                    <span style={{ fontSize: '13px', color: 'rgba(255,255,255,0.8)', lineHeight: 1.5 }}>{item}</span>
                   </div>
                 ))}
               </div>
-              <p style={{ fontSize: '11px', color: 'rgba(10,10,10,0.4)', lineHeight: 1.5, marginBottom: '20px', fontStyle: 'italic' }}>
+              <p style={{ fontSize: '11px', color: 'rgba(255,255,255,0.45)', lineHeight: 1.5, marginBottom: '20px', fontStyle: 'italic' }}>
                 * {fr ? 'Budget publicitaire minimum de 1 000$/mois requis (non inclus).' : 'Minimum advertising budget of $1,000/month required (not included).'}
               </p>
               <button onClick={() => scrollTo('contact')} style={{ width: '100%', fontSize: '11px', fontWeight: 700, color: '#fff', background: BLUE, padding: '14px', borderRadius: '4px', letterSpacing: '0.08em', textTransform: 'uppercase', border: 'none', cursor: 'pointer', fontFamily: "'DM Sans'" }}>
@@ -736,17 +736,17 @@ export default function Home() {
       </section>
 
       {/* ===== CONTACT ===== */}
-      <section id="contact" style={{ padding: '100px 60px', background: '#f5f5f5', borderTop: '0.5px solid rgba(0,0,0,0.07)', scrollMarginTop: '64px' }}>
+      <section id="contact" style={{ padding: '100px 60px', background: '#0a0a0a', borderTop: '0.5px solid rgba(0,0,0,0.07)', scrollMarginTop: '64px' }}>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '80px', alignItems: 'start' }}>
           <FadeIn direction="left">
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
               <div style={{ width: '20px', height: '1px', background: BLUE }} />
               <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE }}>{fr ? 'Planifier un appel' : 'Book a call'}</span>
             </div>
-            <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(36px, 4.5vw, 60px)', color: '#0a0a0a', marginBottom: '16px', letterSpacing: '0.02em', lineHeight: 0.95 }}>
+            <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(36px, 4.5vw, 60px)', color: '#ffffff', marginBottom: '16px', letterSpacing: '0.02em', lineHeight: 0.95 }}>
               {fr ? <>PARLONS DE<br />VOTRE <span style={{ color: BLUE }}>CROISSANCE.</span></> : <>LET'S TALK<br />ABOUT YOUR <span style={{ color: BLUE }}>GROWTH.</span></>}
             </h2>
-            <p style={{ fontSize: '14px', color: 'rgba(10,10,10,0.55)', lineHeight: 1.8, fontWeight: 300 }}>
+            <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.6)', lineHeight: 1.8, fontWeight: 300 }}>
               {fr ? "Notre équipe vous reviendra dans les 48h." : "Our team will get back to you within 48h."}
             </p>
           </FadeIn>
