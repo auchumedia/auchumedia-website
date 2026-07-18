@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Navigate, Link } from 'react-router-dom';
 import Footer from '../components/Footer';
-import TikTokCarousel from '../components/TikTokCarousel';
 import { projets } from '../data/projets';
 import { athletesData } from '../data/athletesData';
 
@@ -100,10 +99,11 @@ export default function ProjetDetail() {
         </div>
       )}
 
-      {/* ===== HERO ===== */}
+      {/* ===== PLACEHOLDER ===== */}
       <section style={{
-        position: 'relative', minHeight: '80vh', display: 'flex', flexDirection: 'column',
-        justifyContent: 'flex-end', padding: '100px 60px 72px', overflow: 'hidden',
+        position: 'relative', minHeight: '100vh', display: 'flex', flexDirection: 'column',
+        alignItems: 'center', justifyContent: 'center', textAlign: 'center',
+        padding: '100px 60px', overflow: 'hidden',
         background: 'linear-gradient(160deg, #1a1a1a 0%, #0a0a0a 100%)',
       }}>
         <div style={{ position: 'absolute', top: '-96px', right: '-96px', width: '600px', height: '600px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(0,61,165,0.12) 0%, transparent 70%)', pointerEvents: 'none' }} />
@@ -119,48 +119,13 @@ export default function ProjetDetail() {
           <div style={{ fontSize: '13px', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: BLUE, marginBottom: '16px' }}>
             {projet.domaine[lang]}
           </div>
-          <h1 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(48px, 7vw, 96px)', lineHeight: 0.95, color: '#fff', letterSpacing: '0.01em' }}>
+          <h1 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(48px, 7vw, 96px)', lineHeight: 0.95, color: '#fff', letterSpacing: '0.01em', marginBottom: '28px' }}>
             {projet.client}
           </h1>
+          <p style={{ fontSize: '16px', color: 'rgba(255,255,255,0.55)', lineHeight: 1.7, fontWeight: 300 }}>
+            {fr ? "Ce chapitre n'est pas encore écrit. Revenez bientôt." : "This chapter hasn't been written yet. Check back soon."}
+          </p>
         </div>
-      </section>
-
-      {/* ===== STATS ===== */}
-      <div style={{ background: '#0a0a0a', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)' }}>
-        {[
-          { val: projet.stats.vues, label: fr ? 'Vues' : 'Views' },
-          { val: projet.stats.engagements, label: fr ? 'Engagements' : 'Engagements' },
-          { val: projet.stats.videos, label: fr ? 'Vidéos' : 'Videos' },
-          { val: projet.stats.abonnes, label: fr ? 'Abonnés' : 'Followers' },
-        ].map((s, i) => (
-          <div key={i} style={{ padding: '40px 20px', textAlign: 'center', borderRight: i < 3 ? '0.5px solid rgba(255,255,255,0.1)' : 'none', borderTop: '0.5px solid rgba(255,255,255,0.08)' }}>
-            <div style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(32px, 4vw, 48px)', color: '#fff', lineHeight: 1 }}>{s.val}</div>
-            <div style={{ fontSize: '10px', color: 'rgba(255,255,255,0.5)', letterSpacing: '0.12em', textTransform: 'uppercase', marginTop: '8px' }}>{s.label}</div>
-          </div>
-        ))}
-      </div>
-
-      {/* ===== LE MANDAT ===== */}
-      <section style={{ padding: '100px 60px', background: '#ffffff' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
-          <div style={{ width: '20px', height: '1px', background: BLUE }} />
-          <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE }}>{fr ? 'Le mandat' : 'The mandate'}</span>
-        </div>
-        <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(28px, 3.5vw, 44px)', color: '#0a0a0a', marginBottom: '24px', letterSpacing: '0.02em' }}>
-          {fr ? 'CE QUON A FAIT.' : 'WHAT WE DID.'}
-        </h2>
-        <p style={{ fontSize: '15px', color: 'rgba(10,10,10,0.65)', lineHeight: 1.85, maxWidth: '720px', fontWeight: 300 }}>
-          {projet.description[lang]}
-        </p>
-      </section>
-
-      {/* ===== TIKTOK CAROUSEL ===== */}
-      <section style={{ padding: '100px 60px', background: '#0a0a0a', borderTop: '0.5px solid rgba(255,255,255,0.07)' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '32px' }}>
-          <div style={{ width: '20px', height: '1px', background: BLUE }} />
-          <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE }}>{fr ? 'Contenu' : 'Content'}</span>
-        </div>
-        <TikTokCarousel videos={projet.tiktokVideos} emptyLabel={fr ? 'Contenu à venir' : 'Content coming soon'} />
       </section>
 
       <Footer />
@@ -171,8 +136,7 @@ export default function ProjetDetail() {
           nav div[style*="padding: 0 60px"] { padding: 0 20px !important; }
           nav > div:nth-child(2) { display: none !important; }
           nav > div:last-child > *:not(.hamburger-btn) { display: none !important; }
-          section { padding-left: 20px !important; padding-right: 20px !important; padding-top: 60px !important; padding-bottom: 60px !important; }
-          div[style*="grid-template-columns: repeat(4"] { grid-template-columns: repeat(2, 1fr) !important; }
+          section { padding-left: 20px !important; padding-right: 20px !important; }
         }
       `}</style>
     </div>
