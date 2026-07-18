@@ -123,7 +123,7 @@ export default function ProjetDetail() {
             {projet.client}
           </h1>
           <p style={{ fontSize: '16px', color: 'rgba(255,255,255,0.55)', lineHeight: 1.7, fontWeight: 300 }}>
-            {fr ? "Ce chapitre n'est pas encore écrit. Revenez bientôt." : "This chapter hasn't been written yet. Check back soon."}
+            {fr ? "Ce chapitre n'est pas encore construit. Revenez bientôt." : "This chapter hasn't been built yet. Check back soon."}
           </p>
         </div>
       </section>
