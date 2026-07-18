@@ -354,7 +354,7 @@ export default function Home() {
             {fr ? <>DEVENEZ LA RÉFÉRENCE<br />DANS VOTRE DOMAINE</> : <>BECOME THE REFERENCE<br />IN YOUR INDUSTRY</>}
           </h1>
           <p style={{ fontSize: 'clamp(15px, 1.8vw, 18px)', color: 'rgba(255,255,255,0.55)', lineHeight: 1.8, maxWidth: '580px', margin: '0 auto 40px', fontWeight: 300, textAlign: 'center' }}>
-            {fr ? "On aide les entreprises B2C high ticket à devenir la référence dans leur marché grâce à une présence en ligne qui génère des leads qualifiés et bâtit une autorité durable." : "We help B2C high ticket businesses become the reference in their market through an online presence that generates qualified leads and builds lasting authority."}
+            {fr ? "On aide les entreprises de services B2C à devenir la référence dans leur marché grâce au storytelling vidéo qui capte l'attention, bâtit l'autorité et génère de la croissance." : "We help B2C service businesses become the reference in their market through video storytelling that captures attention, builds authority and drives growth."}
           </p>
           <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link to="/athletes" style={{ fontSize: '11px', fontWeight: 700, color: '#fff', border: '1px solid rgba(255,255,255,0.5)', padding: '14px 32px', borderRadius: '4px', textTransform: 'uppercase', letterSpacing: '0.1em', background: 'transparent', cursor: 'pointer', fontFamily: "'DM Sans'", textDecoration: 'none', display: 'inline-block' }}>
