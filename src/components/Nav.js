@@ -78,7 +78,7 @@ export default function Nav({ lang, onLangChange }) {
                   </div>
                   <span style={{ color: 'rgba(10,10,10,0.3)' }}>→</span>
                 </Link>
-                <Link to="/entreprises" onClick={() => setDdOpen(false)} style={{
+                <Link to="/" onClick={() => setDdOpen(false)} style={{
                   display: 'flex', alignItems: 'center', gap: '14px', padding: '18px 20px',
                   transition: 'background 0.15s'
                 }}
@@ -150,7 +150,7 @@ export default function Nav({ lang, onLangChange }) {
           <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(10,10,10,0.4)', padding: '12px 0 8px' }}>Services</div>
           {[
             { to: '/athletes', label: fr ? 'Pour athlètes' : 'For athletes' },
-            { to: '/entreprises', label: fr ? 'Pour entreprises' : 'For businesses' },
+            { to: '/', label: fr ? 'Pour entreprises' : 'For businesses' },
           ].map(item => (
             <Link key={item.to} to={item.to} onClick={() => setMobileOpen(false)} style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', fontWeight: 600, color: 'rgba(10,10,10,0.6)', padding: '10px 0 10px 14px', borderBottom: '0.5px solid rgba(0,0,0,0.06)' }}>
               <div style={{ width: '4px', height: '4px', borderRadius: '50%', background: BLUE, flexShrink: 0 }} />

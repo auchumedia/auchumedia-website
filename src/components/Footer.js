@@ -22,7 +22,6 @@ export default function Footer() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             {[
               { to: '/athletes', label: 'Pour les athlètes' },
-              { to: '/entreprises', label: 'Pour les entreprises' },
               { to: '/projets', label: 'Nos projets' },
             ].map(link => (
               <Link key={link.to} to={link.to} style={{ fontSize: '13px', color: 'rgba(10,10,10,0.6)', fontWeight: 300, transition: 'color 0.2s' }}
