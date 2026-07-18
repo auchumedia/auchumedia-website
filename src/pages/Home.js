@@ -431,7 +431,7 @@ export default function Home() {
           </div>
         </FadeIn>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '12px', maxWidth: '990px', margin: '0 auto', width: '100%' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '12px', maxWidth: '990px', margin: '0 auto', width: '100%' }}>
           {projets.map((p, i) => (
             <FadeIn key={p.slug} delay={i * 0.06}>
               <Link
@@ -440,7 +440,7 @@ export default function Home() {
                 onMouseLeave={() => setHoveredProjet(null)}
                 style={{
                   position: 'relative', display: 'block', overflow: 'hidden', borderRadius: '14px',
-                  border: '0.5px solid rgba(255,255,255,0.08)', height: '280px', textDecoration: 'none',
+                  border: '0.5px solid rgba(255,255,255,0.08)', height: '260px', textDecoration: 'none',
                   background: 'linear-gradient(160deg, #1a1a1a 0%, #0a0a0a 100%)',
                 }}
               >
