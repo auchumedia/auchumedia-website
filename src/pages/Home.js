@@ -417,9 +417,11 @@ export default function Home() {
       </section>
 
       {/* ===== ÉTUDES DE CAS ===== */}
-      <section id="etudes-de-cas" style={{ padding: '80px 60px', background: '#0a0a0a', borderTop: '0.5px solid rgba(0,0,0,0.07)', scrollMarginTop: '64px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <section id="etudes-de-cas" style={{ padding: '100px 60px', background: '#0a0a0a', borderTop: '0.5px solid rgba(0,0,0,0.07)', scrollMarginTop: '64px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        {/* Single wrapper so the global full-bleed "#etudes-de-cas > div" rule (used by Entreprises.js) can't reach the centered content below */}
+        <div style={{ width: '100%' }}>
         <FadeIn>
-          <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+          <div style={{ textAlign: 'center', width: '100%', marginBottom: '48px' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', marginBottom: '12px' }}>
               <div style={{ width: '20px', height: '1px', background: BLUE }} />
               <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE }}>{fr ? 'Études de cas' : 'Case studies'}</span>
@@ -431,7 +433,7 @@ export default function Home() {
           </div>
         </FadeIn>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '12px', maxWidth: '990px', margin: '0 auto', width: '100%' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2px', maxWidth: '1200px', width: '100%', margin: '0 auto' }}>
           {projets.map((p, i) => (
             <FadeIn key={p.slug} delay={i * 0.06}>
               <Link
@@ -478,6 +480,7 @@ export default function Home() {
               </Link>
             </FadeIn>
           ))}
+        </div>
         </div>
       </section>
 
