@@ -453,9 +453,6 @@ export default function Home() {
                   <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.45)' }} />
                 )}
                 <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,61,165,0.28)', opacity: hoveredProjet === p.slug ? 1 : 0, transition: 'opacity 0.3s ease' }} />
-                <span style={{ position: 'absolute', top: '20px', right: '24px', fontFamily: "'Bebas Neue'", fontSize: '90px', color: 'rgba(255,255,255,0.05)', lineHeight: 1 }}>
-                  0{i + 1}
-                </span>
 
                 <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, padding: '24px' }}>
                   <div style={{ fontFamily: "'Bebas Neue'", fontSize: '26px', color: '#fff', marginBottom: '8px', lineHeight: 1 }}>
