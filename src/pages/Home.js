@@ -205,6 +205,13 @@ export default function Home() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (window.location.hash) {
+      const id = window.location.hash.slice(1);
+      setTimeout(() => scrollTo(id), 100);
+    }
+  }, []);
+
   const faqs = fr ? [
     {
       q: "À quel type d'entreprise notre service de médias sociaux s'adresse-t-il ?",
@@ -429,12 +436,13 @@ export default function Home() {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '12px', maxWidth: '990px', margin: '0 auto', width: '100%' }}>
           {projets.map((p, i) => (
             <FadeIn key={p.slug} delay={i * 0.06}>
-              <div
+              <Link
+                to={`/projets/${p.slug}`}
                 onMouseEnter={() => setHoveredProjet(p.slug)}
                 onMouseLeave={() => setHoveredProjet(null)}
                 style={{
-                  position: 'relative', overflow: 'hidden', borderRadius: '14px',
-                  border: '0.5px solid rgba(255,255,255,0.08)', height: '260px',
+                  position: 'relative', display: 'block', overflow: 'hidden', borderRadius: '14px',
+                  border: '0.5px solid rgba(255,255,255,0.08)', height: '260px', textDecoration: 'none',
                   background: 'linear-gradient(160deg, #1a1a1a 0%, #0a0a0a 100%)',
                 }}
               >
@@ -469,7 +477,7 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             </FadeIn>
           ))}
         </div>

@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
-import { projets } from '../data/projets';
+import { athletesData } from '../data/athletesData';
 
 const BLUE = '#003DA5';
 
@@ -199,7 +199,7 @@ export default function Athletes() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const athleteProjets = projets.filter(p => p.slug === 'bataillon' || p.slug === 'sylvestre');
+  const athleteProjets = athletesData;
 
   const faqs = fr ? [
     {
@@ -436,12 +436,13 @@ export default function Athletes() {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '12px', maxWidth: '700px', margin: '0 auto', width: '100%' }}>
           {athleteProjets.map((p, i) => (
             <FadeIn key={p.slug} delay={i * 0.06}>
-              <div
+              <Link
+                to={`/projets/${p.slug}`}
                 onMouseEnter={() => setHoveredProjet(p.slug)}
                 onMouseLeave={() => setHoveredProjet(null)}
                 style={{
-                  position: 'relative', overflow: 'hidden', borderRadius: '14px',
-                  border: '0.5px solid rgba(255,255,255,0.08)', height: '320px',
+                  position: 'relative', display: 'block', overflow: 'hidden', borderRadius: '14px',
+                  border: '0.5px solid rgba(255,255,255,0.08)', height: '320px', textDecoration: 'none',
                   background: 'linear-gradient(160deg, #1a1a1a 0%, #0a0a0a 100%)',
                 }}
               >
@@ -452,7 +453,7 @@ export default function Athletes() {
 
                 <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, padding: '24px' }}>
                   <span style={{ display: 'inline-block', fontSize: '9px', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#fff', background: 'rgba(0,61,165,0.35)', border: '0.5px solid rgba(255,255,255,0.3)', padding: '4px 10px', borderRadius: '20px', marginBottom: '12px' }}>
-                    {p.categorie[lang]}
+                    {p.domaine[lang]}
                   </span>
                   <div style={{ fontFamily: "'Bebas Neue'", fontSize: '26px', color: '#fff', marginBottom: '8px', lineHeight: 1 }}>
                     {p.client}
@@ -468,7 +469,7 @@ export default function Athletes() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             </FadeIn>
           ))}
         </div>
