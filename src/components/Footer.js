@@ -5,29 +5,29 @@ const BLUE = '#003DA5';
 
 export default function Footer() {
   return (
-    <footer style={{ background: '#060606', borderTop: '0.5px solid rgba(255,255,255,0.08)' }}>
+    <footer style={{ background: '#ffffff', borderTop: '0.5px solid rgba(0,0,0,0.08)' }}>
       {/* Main footer */}
       <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: '48px', padding: '64px 60px 48px' }}>
         {/* Brand */}
         <div>
-          <div style={{ marginBottom: '16px' }}><img src="/Copie de AUCHU.png.png" alt="AuchuMedia" style={{ height: '20px', width: 'auto' }} /></div>
-          <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.4)', lineHeight: 1.75, fontWeight: 300, maxWidth: '280px' }}>
+          <div style={{ marginBottom: '16px' }}><img src="/Copie de AUCHU.png.png" alt="AuchuMedia" style={{ height: '20px', width: 'auto', filter: 'invert(1)' }} /></div>
+          <p style={{ fontSize: '13px', color: 'rgba(10,10,10,0.55)', lineHeight: 1.75, fontWeight: 300, maxWidth: '280px' }}>
             L'agence de référence pour les athlètes et les entreprises ambitieuses. Sport · Marketing · Croissance.
           </p>
         </div>
 
         {/* Services */}
         <div>
-          <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', marginBottom: '20px' }}>Services</div>
+          <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(10,10,10,0.4)', marginBottom: '20px' }}>Services</div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             {[
               { to: '/athletes', label: 'Pour les athlètes' },
               { to: '/entreprises', label: 'Pour les entreprises' },
               { to: '/projets', label: 'Nos projets' },
             ].map(link => (
-              <Link key={link.to} to={link.to} style={{ fontSize: '13px', color: 'rgba(255,255,255,0.45)', fontWeight: 300, transition: 'color 0.2s' }}
-                onMouseEnter={e => e.target.style.color = '#fff'}
-                onMouseLeave={e => e.target.style.color = 'rgba(255,255,255,0.45)'}
+              <Link key={link.to} to={link.to} style={{ fontSize: '13px', color: 'rgba(10,10,10,0.6)', fontWeight: 300, transition: 'color 0.2s' }}
+                onMouseEnter={e => e.target.style.color = '#0a0a0a'}
+                onMouseLeave={e => e.target.style.color = 'rgba(10,10,10,0.6)'}
               >{link.label}</Link>
             ))}
           </div>
@@ -35,15 +35,15 @@ export default function Footer() {
 
         {/* Compagnie */}
         <div>
-          <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', marginBottom: '20px' }}>Compagnie</div>
+          <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(10,10,10,0.4)', marginBottom: '20px' }}>Compagnie</div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             {[
               { to: '/a-propos', label: 'À propos' },
               { to: '/athletes#form', label: 'Contact' },
             ].map(link => (
-              <Link key={link.to} to={link.to} style={{ fontSize: '13px', color: 'rgba(255,255,255,0.45)', fontWeight: 300, transition: 'color 0.2s' }}
-                onMouseEnter={e => e.target.style.color = '#fff'}
-                onMouseLeave={e => e.target.style.color = 'rgba(255,255,255,0.45)'}
+              <Link key={link.to} to={link.to} style={{ fontSize: '13px', color: 'rgba(10,10,10,0.6)', fontWeight: 300, transition: 'color 0.2s' }}
+                onMouseEnter={e => e.target.style.color = '#0a0a0a'}
+                onMouseLeave={e => e.target.style.color = 'rgba(10,10,10,0.6)'}
               >{link.label}</Link>
             ))}
           </div>
@@ -51,10 +51,10 @@ export default function Footer() {
 
         {/* Contact */}
         <div>
-          <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', marginBottom: '20px' }}>Contact</div>
-          <a href="mailto:raphael@auchumedia.com" style={{ fontSize: '13px', color: 'rgba(255,255,255,0.45)', fontWeight: 300, display: 'block', marginBottom: '20px', transition: 'color 0.2s' }}
-            onMouseEnter={e => e.target.style.color = '#fff'}
-            onMouseLeave={e => e.target.style.color = 'rgba(255,255,255,0.45)'}
+          <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(10,10,10,0.4)', marginBottom: '20px' }}>Contact</div>
+          <a href="mailto:raphael@auchumedia.com" style={{ fontSize: '13px', color: 'rgba(10,10,10,0.6)', fontWeight: 300, display: 'block', marginBottom: '20px', transition: 'color 0.2s' }}
+            onMouseEnter={e => e.target.style.color = '#0a0a0a'}
+            onMouseLeave={e => e.target.style.color = 'rgba(10,10,10,0.6)'}
           >raphael@auchumedia.com</a>
           <div style={{ display: 'flex', gap: '14px', alignItems: 'center' }}>
             {/* Instagram */}
@@ -94,8 +94,8 @@ export default function Footer() {
       </div>
 
       {/* Bottom bar */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '20px 60px', borderTop: '0.5px solid rgba(255,255,255,0.06)' }}>
-        <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.2)' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '20px 60px', borderTop: '0.5px solid rgba(0,0,0,0.06)' }}>
+        <div style={{ fontSize: '11px', color: 'rgba(10,10,10,0.35)' }}>
           © 2025 Agence AuchuMedia Inc. · Montréal, Québec
         </div>
       </div>

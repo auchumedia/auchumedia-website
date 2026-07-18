@@ -28,7 +28,7 @@ export default function Home() {
   };
 
   return (
-    <div style={{ background: '#080808', minHeight: '100vh' }}>
+    <div style={{ background: '#ffffff', minHeight: '100vh' }}>
       <Nav lang={lang} onLangChange={setLang} />
 
       {/* HERO */}
@@ -41,7 +41,7 @@ export default function Home() {
           src="https://res.cloudinary.com/dr0kwuqqa/video/upload/v1780793836/Expedia_ip7xmb.mp4"
           style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
         />
-        <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.6)' }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.45)' }} />
 
         <div style={{ position: 'relative', zIndex: 1, height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: '0 24px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '24px' }}>
@@ -58,7 +58,7 @@ export default function Home() {
           <a
             href="#projets"
             style={{ fontSize: '11px', fontWeight: 700, color: '#fff', border: '1px solid #fff', padding: '14px 32px', borderRadius: '5px', letterSpacing: '0.08em', textTransform: 'uppercase', transition: 'all 0.3s ease' }}
-            onMouseEnter={(e) => { e.currentTarget.style.background = '#fff'; e.currentTarget.style.color = '#080808'; }}
+            onMouseEnter={(e) => { e.currentTarget.style.background = '#fff'; e.currentTarget.style.color = '#0a0a0a'; }}
             onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#fff'; }}
           >
             {t.scroll}
@@ -72,11 +72,11 @@ export default function Home() {
       </section>
 
       {/* NOS PROJETS */}
-      <section id="projets" style={{ padding: '80px 60px', borderBottom: '0.5px solid rgba(255,255,255,0.12)' }}>
-        <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.6)', marginBottom: '16px' }}>
+      <section id="projets" style={{ padding: '80px 60px', background: '#ffffff', borderBottom: '0.5px solid rgba(0,0,0,0.08)' }}>
+        <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(10,10,10,0.55)', marginBottom: '16px' }}>
           {t.projectsLabel}
         </div>
-        <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(40px, 5vw, 64px)', lineHeight: 0.95, color: '#fff', marginBottom: '48px', letterSpacing: '0.02em' }}>
+        <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(40px, 5vw, 64px)', lineHeight: 0.95, color: '#0a0a0a', marginBottom: '48px', letterSpacing: '0.02em' }}>
           {t.projectsTitle}
         </h2>
 
@@ -89,24 +89,24 @@ export default function Home() {
               onMouseLeave={() => setHovered(null)}
               style={{
                 position: 'relative', display: 'block', overflow: 'hidden', borderRadius: '12px',
-                border: '0.5px solid rgba(255,255,255,0.08)', height: '380px',
-                background: 'linear-gradient(160deg, #141414 0%, #080808 75%)',
+                border: '0.5px solid rgba(0,0,0,0.08)', height: '380px',
+                background: 'linear-gradient(160deg, #f5f5f5 0%, #ffffff 100%)',
               }}
             >
-              <div style={{ position: 'absolute', inset: 0, background: 'rgba(255,255,255,0.04)', opacity: hovered === p.slug ? 1 : 0, transition: 'opacity 0.3s ease' }} />
-              <span style={{ position: 'absolute', top: '24px', right: '28px', fontFamily: "'Bebas Neue'", fontSize: '110px', color: hovered === p.slug ? 'rgba(255,255,255,0.08)' : 'rgba(255,255,255,0.05)', transition: 'color 0.3s ease' }}>
+              <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.03)', opacity: hovered === p.slug ? 1 : 0, transition: 'opacity 0.3s ease' }} />
+              <span style={{ position: 'absolute', top: '24px', right: '28px', fontFamily: "'Bebas Neue'", fontSize: '110px', color: hovered === p.slug ? 'rgba(0,0,0,0.07)' : 'rgba(0,0,0,0.04)', transition: 'color 0.3s ease' }}>
                 0{i + 1}
               </span>
 
               <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, padding: '28px' }}>
-                <span style={{ display: 'inline-block', fontSize: '9px', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: BLUE, background: 'rgba(0,61,165,0.1)', border: '0.5px solid rgba(0,61,165,0.28)', padding: '4px 10px', borderRadius: '20px', marginBottom: '12px' }}>
+                <span style={{ display: 'inline-block', fontSize: '9px', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: BLUE, background: 'rgba(0,61,165,0.08)', border: '0.5px solid rgba(0,61,165,0.28)', padding: '4px 10px', borderRadius: '20px', marginBottom: '12px' }}>
                   {p.categorie[lang]}
                 </span>
-                <div style={{ fontFamily: "'Bebas Neue'", fontSize: '30px', color: '#fff', marginBottom: '12px', lineHeight: 1 }}>
+                <div style={{ fontFamily: "'Bebas Neue'", fontSize: '30px', color: '#0a0a0a', marginBottom: '12px', lineHeight: 1 }}>
                   {p.client}
                 </div>
                 <span style={{
-                  fontSize: '11px', fontWeight: 700, color: '#fff', textTransform: 'uppercase', letterSpacing: '0.08em',
+                  fontSize: '11px', fontWeight: 700, color: BLUE, textTransform: 'uppercase', letterSpacing: '0.08em',
                   display: 'inline-block', opacity: hovered === p.slug ? 1 : 0,
                   transform: hovered === p.slug ? 'translateY(0)' : 'translateY(4px)',
                   transition: 'all 0.3s ease',
@@ -120,21 +120,21 @@ export default function Home() {
       </section>
 
       {/* ATHLETES DIVISION */}
-      <section style={{ padding: '96px 60px', textAlign: 'center', background: '#111', borderBottom: '0.5px solid rgba(255,255,255,0.12)' }}>
-        <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.5)', marginBottom: '20px' }}>
+      <section style={{ padding: '96px 60px', textAlign: 'center', background: '#f5f5f5', borderBottom: '0.5px solid rgba(0,0,0,0.08)' }}>
+        <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(10,10,10,0.5)', marginBottom: '20px' }}>
           {t.athletesEyebrow}
         </div>
-        <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(36px, 5vw, 60px)', lineHeight: 0.95, color: '#fff', marginBottom: '24px', letterSpacing: '0.02em' }}>
+        <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(36px, 5vw, 60px)', lineHeight: 0.95, color: '#0a0a0a', marginBottom: '24px', letterSpacing: '0.02em' }}>
           {t.athletesTitle.map((line, i) => <span key={i}>{line}<br /></span>)}
         </h2>
-        <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.6)', maxWidth: '440px', margin: '0 auto 40px' }}>
+        <p style={{ fontSize: '14px', color: 'rgba(10,10,10,0.6)', maxWidth: '440px', margin: '0 auto 40px' }}>
           {t.athletesDesc}
         </p>
         <Link
           to="/athletes"
-          style={{ display: 'inline-block', fontSize: '11px', fontWeight: 700, color: '#fff', border: '1px solid #fff', padding: '14px 32px', borderRadius: '5px', letterSpacing: '0.08em', textTransform: 'uppercase', transition: 'all 0.3s ease' }}
-          onMouseEnter={(e) => { e.currentTarget.style.background = '#fff'; e.currentTarget.style.color = '#111'; }}
-          onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#fff'; }}
+          style={{ display: 'inline-block', fontSize: '11px', fontWeight: 700, color: '#fff', background: BLUE, border: `1px solid ${BLUE}`, padding: '14px 32px', borderRadius: '5px', letterSpacing: '0.08em', textTransform: 'uppercase', transition: 'opacity 0.3s ease' }}
+          onMouseEnter={(e) => { e.currentTarget.style.opacity = '0.88'; }}
+          onMouseLeave={(e) => { e.currentTarget.style.opacity = '1'; }}
         >
           {t.athletesBtn}
         </Link>
