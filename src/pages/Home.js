@@ -604,6 +604,47 @@ export default function Home() {
         </FadeIn>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', maxWidth: '860px', margin: '0 auto', alignItems: 'stretch' }}>
 
+          {/* Forfait Essentiel */}
+          <FadeIn delay={0.05}>
+            <div style={{ background: '#111', border: '0.5px solid rgba(255,255,255,0.08)', borderRadius: '16px', padding: '36px', position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column', height: '100%' }}>
+              <div style={{ position: 'absolute', top: '-30px', right: '-30px', width: '160px', height: '160px', borderRadius: '50%', background: 'rgba(0,61,165,0.06)', filter: 'blur(30px)' }} />
+              <div style={{ display: 'inline-flex', alignItems: 'center', background: 'rgba(0,61,165,0.1)', border: '0.5px solid rgba(0,61,165,0.3)', borderRadius: '20px', padding: '4px 10px', marginBottom: '16px', width: 'fit-content' }}>
+                <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: BLUE }}>{fr ? 'Mandat mensuel' : 'Monthly retainer'}</span>
+              </div>
+              <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE, marginBottom: '8px' }}>
+                {fr ? <>Forfait Essentiel <span style={{ color: '#ffffff' }}>(4 vidéos/mois)</span></> : <>Essential Plan <span style={{ color: '#ffffff' }}>(4 videos/month)</span></>}
+              </div>
+              <div style={{ fontFamily: "'Bebas Neue'", fontSize: '48px', color: '#ffffff', lineHeight: 1, marginBottom: '4px' }}>2 000$</div>
+              <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)', marginBottom: '12px' }}>{fr ? '/ mois' : '/ month'}</div>
+              <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.6)', lineHeight: 1.7, marginBottom: '24px', fontWeight: 300, fontStyle: 'italic' }}>
+                {fr ? "Une présence cohérente et accessible. 1 vidéo par semaine pour bâtir ton audience et ta crédibilité en ligne." : "A consistent, accessible presence. 1 video per week to build your audience and your credibility online."}
+              </p>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '32px', flex: 1 }}>
+                {(fr ? [
+                  'Stratégie et direction créative',
+                  'Préproduction, tournage et montage',
+                  '1 vidéo / semaine sur toutes les plateformes',
+                  'Gestion de communauté incluse',
+                  'Rapport de performance mensuel',
+                ] : [
+                  'Strategy and creative direction',
+                  'Pre-production, filming and editing',
+                  '1 video / week across all platforms',
+                  'Community management included',
+                  'Monthly performance report',
+                ]).map((item, i) => (
+                  <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
+                    <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: BLUE, flexShrink: 0, marginTop: '5px' }} />
+                    <span style={{ fontSize: '13px', color: 'rgba(255,255,255,0.8)', lineHeight: 1.5 }}>{item}</span>
+                  </div>
+                ))}
+              </div>
+              <button onClick={() => scrollTo('contact')} style={{ width: '100%', fontSize: '11px', fontWeight: 700, color: '#fff', background: BLUE, padding: '14px', borderRadius: '4px', letterSpacing: '0.08em', textTransform: 'uppercase', border: 'none', cursor: 'pointer', fontFamily: "'DM Sans'" }}>
+                {fr ? 'Démarrer →' : 'Get started →'}
+              </button>
+            </div>
+          </FadeIn>
+
           {/* Forfait Croissance */}
           <FadeIn delay={0.1}>
             <div style={{ background: '#111', border: `2px solid ${BLUE}`, borderRadius: '16px', padding: '36px', position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column', height: '100%' }}>
@@ -644,54 +685,6 @@ export default function Home() {
               </div>
               <button onClick={() => scrollTo('contact')} style={{ width: '100%', fontSize: '11px', fontWeight: 700, color: '#fff', background: BLUE, padding: '14px', borderRadius: '4px', letterSpacing: '0.08em', textTransform: 'uppercase', border: 'none', cursor: 'pointer', fontFamily: "'DM Sans'", boxShadow: '0 0 20px rgba(0,61,165,0.25)' }}>
                 {fr ? 'Démarrer →' : 'Get started →'}
-              </button>
-            </div>
-          </FadeIn>
-
-          {/* Forfait Meta Ads & CRM */}
-          <FadeIn delay={0.15}>
-            <div style={{ background: '#111', border: '0.5px solid rgba(255,255,255,0.08)', borderRadius: '16px', padding: '36px', position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column', height: '100%' }}>
-              <div style={{ position: 'absolute', top: '-30px', right: '-30px', width: '160px', height: '160px', borderRadius: '50%', background: 'rgba(0,61,165,0.06)', filter: 'blur(30px)' }} />
-              <div style={{ display: 'inline-flex', alignItems: 'center', background: 'rgba(0,61,165,0.1)', border: '0.5px solid rgba(0,61,165,0.3)', borderRadius: '20px', padding: '4px 10px', marginBottom: '16px', width: 'fit-content' }}>
-                <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: BLUE }}>Add-on</span>
-              </div>
-              <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE, marginBottom: '8px' }}>
-                Meta Ads &amp; CRM
-              </div>
-              <div style={{ fontFamily: "'Bebas Neue'", fontSize: '48px', color: '#ffffff', lineHeight: 1, marginBottom: '4px' }}>3 000$</div>
-              <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)', marginBottom: '12px' }}>{fr ? '/ mois · à ajouter à votre forfait' : '/ month · add to your plan'}</div>
-              <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.6)', lineHeight: 1.7, marginBottom: '24px', fontWeight: 300, fontStyle: 'italic' }}>
-                {fr ? "La présence organique est en place — maintenant on accélère. Meta Ads ciblées et CRM pour transformer votre audience en leads qualifiés." : "Organic presence is established — now we accelerate. Targeted Meta Ads and CRM to turn your audience into qualified leads."}
-              </p>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '24px', flex: 1 }}>
-                {(fr ? [
-                  'Gestion complète Meta Ads (Facebook & Instagram)',
-                  'Création et optimisation des campagnes publicitaires',
-                  'Ciblage précis de votre zone de service',
-                  'Intégration & configuration CRM',
-                  'Pipeline de leads automatisé',
-                  'Rapports publicitaires mensuels détaillés',
-                  'Optimisation continue des campagnes',
-                ] : [
-                  'Full Meta Ads management (Facebook & Instagram)',
-                  'Ad campaign creation and optimization',
-                  'Precise targeting of your service area',
-                  'CRM integration & configuration',
-                  'Automated lead pipeline',
-                  'Detailed monthly advertising reports',
-                  'Continuous campaign optimization',
-                ]).map((item, i) => (
-                  <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
-                    <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: BLUE, flexShrink: 0, marginTop: '5px' }} />
-                    <span style={{ fontSize: '13px', color: 'rgba(255,255,255,0.8)', lineHeight: 1.5 }}>{item}</span>
-                  </div>
-                ))}
-              </div>
-              <p style={{ fontSize: '11px', color: 'rgba(255,255,255,0.45)', lineHeight: 1.5, marginBottom: '20px', fontStyle: 'italic' }}>
-                * {fr ? 'Budget publicitaire minimum de 1 000$/mois requis (non inclus).' : 'Minimum advertising budget of $1,000/month required (not included).'}
-              </p>
-              <button onClick={() => scrollTo('contact')} style={{ width: '100%', fontSize: '11px', fontWeight: 700, color: '#fff', background: BLUE, padding: '14px', borderRadius: '4px', letterSpacing: '0.08em', textTransform: 'uppercase', border: 'none', cursor: 'pointer', fontFamily: "'DM Sans'" }}>
-                {fr ? 'Nous contacter →' : 'Contact us →'}
               </button>
             </div>
           </FadeIn>
