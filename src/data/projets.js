@@ -77,7 +77,7 @@ export const projets = [
       fr: "Mandat en cours — détails à venir.",
       en: "Mandate in progress — details coming soon.",
     },
-    stats: { vues: '—', engagements: '—', videos: '—', abonnes: '—' },
+    stats: { vues: '2.5M', engagements: '50K', videos: '60', abonnes: '+10K' },
     tiktokVideos: [],
   },
 ];
