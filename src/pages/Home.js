@@ -443,9 +443,15 @@ export default function Home() {
                 style={{
                   position: 'relative', display: 'block', overflow: 'hidden', borderRadius: '14px',
                   border: '0.5px solid rgba(255,255,255,0.08)', height: '260px', textDecoration: 'none',
-                  background: 'linear-gradient(160deg, #1a1a1a 0%, #0a0a0a 100%)',
+                  background: p.image ? '#0a0a0a' : 'linear-gradient(160deg, #1a1a1a 0%, #0a0a0a 100%)',
                 }}
               >
+                {p.image && (
+                  <img src={p.image} alt={p.client} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+                )}
+                {p.image && (
+                  <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.45)' }} />
+                )}
                 <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,61,165,0.28)', opacity: hoveredProjet === p.slug ? 1 : 0, transition: 'opacity 0.3s ease' }} />
                 <span style={{ position: 'absolute', top: '20px', right: '24px', fontFamily: "'Bebas Neue'", fontSize: '90px', color: 'rgba(255,255,255,0.05)', lineHeight: 1 }}>
                   0{i + 1}
