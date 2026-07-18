@@ -452,12 +452,12 @@ export default function Home() {
                 </span>
 
                 <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, padding: '24px' }}>
-                  <span style={{ display: 'inline-block', fontSize: '9px', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#fff', background: 'rgba(0,61,165,0.35)', border: '0.5px solid rgba(255,255,255,0.3)', padding: '4px 10px', borderRadius: '20px', marginBottom: '12px' }}>
-                    {p.domaine[lang]}
-                  </span>
                   <div style={{ fontFamily: "'Bebas Neue'", fontSize: '26px', color: '#fff', marginBottom: '8px', lineHeight: 1 }}>
                     {p.client}
                   </div>
+                  <span style={{ display: 'inline-block', fontSize: '9px', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#fff', background: 'rgba(0,61,165,0.35)', border: '0.5px solid rgba(255,255,255,0.3)', padding: '4px 10px', borderRadius: '20px', marginBottom: '12px' }}>
+                    {p.domaine[lang]}
+                  </span>
                   <div className="etudes-stats-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '8px 16px' }}>
                     <div>
                       <div style={{ fontFamily: "'Bebas Neue'", fontSize: '16px', color: '#fff', lineHeight: 1 }}>{p.stats.vues}</div>
