@@ -1,95 +1,146 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import Nav from '../components/Nav';
 import Footer from '../components/Footer';
+import { projets } from '../data/projets';
 
 const BLUE = '#003DA5';
 
 export default function Home() {
   const [lang, setLang] = useState('fr');
-  const [heroVisible, setHeroVisible] = useState(false);
   const [hovered, setHovered] = useState(null);
   const fr = lang === 'fr';
 
-  useEffect(() => { setTimeout(() => setHeroVisible(true), 100); }, []);
-
-  const cards = [
-    {
-      key: 'athletes',
-      to: '/athletes',
-      eyebrow: fr ? 'Pour les athlètes' : 'For athletes',
-      title: fr ? ['RAYONNE', 'AU-DELÀ DE', 'TON SPORT.'] : ['RISE ABOVE', 'YOUR', 'SPORT.'],
-      desc: fr ? 'Personal branding, partnerships et production vidéo pour les athlètes qui veulent dominer.' : 'Personal branding, partnerships and video production for athletes who want to dominate.',
-      cta: fr ? 'Je suis un athlète →' : 'I am an athlete →',
-    },
-    {
-      key: 'entreprises',
-      to: '/entreprises',
-      eyebrow: fr ? 'Pour les entreprises' : 'For businesses',
-      title: fr ? ['PROPULSONS', 'VOTRE', 'CROISSANCE.'] : ["LET'S SCALE", 'YOUR', 'BUSINESS.'],
-      desc: fr ? 'Médias sociaux, Meta Ads et CRM pour les entreprises B2C ambitieuses.' : 'Social media, Meta Ads and CRM for ambitious B2C businesses.',
-      cta: fr ? 'Je suis une entreprise →' : 'I am a business →',
-    },
-  ];
+  const t = {
+    eyebrow: fr ? 'Agence de référence · Sport · Marketing' : 'Reference agency · Sport · Marketing',
+    h1: fr ? ['ON RACONTE', 'TON HISTOIRE.'] : ['WE TELL', 'YOUR STORY.'],
+    h2: fr ? 'Contenu premium pour athlètes et marques ambitieuses.' : 'Premium content for athletes and ambitious brands.',
+    scroll: fr ? 'Voir nos projets' : 'See our projects',
+    projectsLabel: fr ? 'Nos projets' : 'Our projects',
+    projectsTitle: fr ? 'NOS PROJETS' : 'OUR PROJECTS',
+    view: fr ? 'Voir le projet →' : 'View project →',
+    athletesEyebrow: fr ? 'Division athlètes' : 'Athletes division',
+    athletesTitle: fr ? ['TU ES UN ATHLÈTE', 'DE HAUT NIVEAU ?'] : ['ARE YOU AN', 'ELITE ATHLETE?'],
+    athletesDesc: fr
+      ? 'On bâtit la marque personnelle des athlètes qui dominent — sur et en dehors du terrain.'
+      : 'We build the personal brand of athletes who dominate — on and off the field.',
+    athletesBtn: fr ? 'Pour athlètes →' : 'For athletes →',
+  };
 
   return (
-    <div style={{ background: '#080808', minHeight: '100vh', overflow: 'hidden' }}>
+    <div style={{ background: '#080808', minHeight: '100vh' }}>
+      <Nav lang={lang} onLangChange={setLang} />
 
-      {/* Mini top bar */}
-      <div style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 500, background: 'rgba(8,8,8,0.9)', backdropFilter: 'blur(10px)', borderBottom: '0.5px solid rgba(255,255,255,0.07)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 32px', height: '52px' }}>
-        <div><img src="/Copie de AUCHU.png.png" alt="AuchuMedia" style={{ height: '22px', width: 'auto' }} /></div>
-        <div style={{ display: 'flex', border: '0.5px solid rgba(255,255,255,0.15)', borderRadius: '4px', overflow: 'hidden' }}>
-          {['fr', 'en'].map(l => (
-            <button key={l} onClick={() => setLang(l)} style={{ fontSize: '9px', fontWeight: 700, padding: '5px 10px', cursor: 'pointer', border: 'none', background: lang === l ? 'rgba(255,255,255,0.1)' : 'transparent', color: lang === l ? '#fff' : 'rgba(255,255,255,0.3)', fontFamily: "'DM Sans'" }}>
-              {l.toUpperCase()}
-            </button>
+      {/* HERO */}
+      <section style={{ position: 'relative', width: '100%', height: '100vh', overflow: 'hidden' }}>
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          src="https://res.cloudinary.com/dr0kwuqqa/video/upload/v1780793836/Expedia_ip7xmb.mp4"
+          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
+        />
+        <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.6)' }} />
+
+        <div style={{ position: 'relative', zIndex: 1, height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: '0 24px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '24px' }}>
+            <div style={{ width: '24px', height: '1px', background: BLUE }} />
+            <span style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: BLUE }}>{t.eyebrow}</span>
+            <div style={{ width: '24px', height: '1px', background: BLUE }} />
+          </div>
+          <h1 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(56px, 9vw, 128px)', lineHeight: 0.92, color: '#fff', marginBottom: '24px', letterSpacing: '0.01em' }}>
+            {t.h1.map((line, i) => <span key={i}>{line}<br /></span>)}
+          </h1>
+          <p style={{ fontSize: 'clamp(15px, 1.6vw, 19px)', color: 'rgba(255,255,255,0.7)', marginBottom: '48px', maxWidth: '480px' }}>
+            {t.h2}
+          </p>
+          <a
+            href="#projets"
+            style={{ fontSize: '11px', fontWeight: 700, color: '#fff', border: '1px solid #fff', padding: '14px 32px', borderRadius: '5px', letterSpacing: '0.08em', textTransform: 'uppercase', transition: 'all 0.3s ease' }}
+            onMouseEnter={(e) => { e.currentTarget.style.background = '#fff'; e.currentTarget.style.color = '#080808'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#fff'; }}
+          >
+            {t.scroll}
+          </a>
+        </div>
+
+        <div style={{ position: 'absolute', bottom: '32px', left: '50%', transform: 'translateX(-50%)', zIndex: 1, opacity: 0.6 }}>
+          <div style={{ width: '1px', height: '32px', background: 'rgba(255,255,255,0.5)', animation: 'scrollpulse 1.8s ease-in-out infinite' }} />
+        </div>
+        <style>{`@keyframes scrollpulse { 0%, 100% { opacity: 0.2; } 50% { opacity: 0.8; } }`}</style>
+      </section>
+
+      {/* NOS PROJETS */}
+      <section id="projets" style={{ padding: '80px 60px', borderBottom: '0.5px solid rgba(255,255,255,0.12)' }}>
+        <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.6)', marginBottom: '16px' }}>
+          {t.projectsLabel}
+        </div>
+        <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(40px, 5vw, 64px)', lineHeight: 0.95, color: '#fff', marginBottom: '48px', letterSpacing: '0.02em' }}>
+          {t.projectsTitle}
+        </h2>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '12px' }}>
+          {projets.map((p, i) => (
+            <Link
+              key={p.slug}
+              to={`/projets/${p.slug}`}
+              onMouseEnter={() => setHovered(p.slug)}
+              onMouseLeave={() => setHovered(null)}
+              style={{
+                position: 'relative', display: 'block', overflow: 'hidden', borderRadius: '12px',
+                border: '0.5px solid rgba(255,255,255,0.08)', height: '380px',
+                background: 'linear-gradient(160deg, #141414 0%, #080808 75%)',
+              }}
+            >
+              <div style={{ position: 'absolute', inset: 0, background: 'rgba(255,255,255,0.04)', opacity: hovered === p.slug ? 1 : 0, transition: 'opacity 0.3s ease' }} />
+              <span style={{ position: 'absolute', top: '24px', right: '28px', fontFamily: "'Bebas Neue'", fontSize: '110px', color: hovered === p.slug ? 'rgba(255,255,255,0.08)' : 'rgba(255,255,255,0.05)', transition: 'color 0.3s ease' }}>
+                0{i + 1}
+              </span>
+
+              <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, padding: '28px' }}>
+                <span style={{ display: 'inline-block', fontSize: '9px', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: BLUE, background: 'rgba(0,61,165,0.1)', border: '0.5px solid rgba(0,61,165,0.28)', padding: '4px 10px', borderRadius: '20px', marginBottom: '12px' }}>
+                  {p.categorie[lang]}
+                </span>
+                <div style={{ fontFamily: "'Bebas Neue'", fontSize: '30px', color: '#fff', marginBottom: '12px', lineHeight: 1 }}>
+                  {p.client}
+                </div>
+                <span style={{
+                  fontSize: '11px', fontWeight: 700, color: '#fff', textTransform: 'uppercase', letterSpacing: '0.08em',
+                  display: 'inline-block', opacity: hovered === p.slug ? 1 : 0,
+                  transform: hovered === p.slug ? 'translateY(0)' : 'translateY(4px)',
+                  transition: 'all 0.3s ease',
+                }}>
+                  {t.view}
+                </span>
+              </div>
+            </Link>
           ))}
         </div>
-      </div>
+      </section>
 
-      {/* HERO split */}
-      <div style={{ display: 'flex', height: '100vh', paddingTop: '52px' }}>
-        {cards.map((card, i) => (
-          <a key={card.key} href={card.to}
-            onMouseEnter={() => setHovered(card.key)}
-            onMouseLeave={() => setHovered(null)}
-            style={{
-              flex: hovered === card.key ? '1.6' : hovered && hovered !== card.key ? '0.4' : '1',
-              transition: 'flex 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
-              position: 'relative', overflow: 'hidden', display: 'flex',
-              flexDirection: 'column', justifyContent: 'flex-end',
-              padding: '60px', cursor: 'pointer', textDecoration: 'none',
-              borderRight: i === 0 ? '0.5px solid rgba(255,255,255,0.06)' : 'none',
-              background: '#080808',
-            }}
-          >
-            <div style={{ position: 'absolute', inset: 0, background: `radial-gradient(ellipse at ${i === 0 ? '30%' : '70%'} 40%, rgba(0,61,165,${hovered === card.key ? '0.12' : '0.05'}) 0%, transparent 70%)`, transition: 'all 0.5s', pointerEvents: 'none' }} />
-            <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px)', backgroundSize: '60px 60px', pointerEvents: 'none' }} />
+      {/* ATHLETES DIVISION */}
+      <section style={{ padding: '96px 60px', textAlign: 'center', background: '#111', borderBottom: '0.5px solid rgba(255,255,255,0.12)' }}>
+        <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.5)', marginBottom: '20px' }}>
+          {t.athletesEyebrow}
+        </div>
+        <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(36px, 5vw, 60px)', lineHeight: 0.95, color: '#fff', marginBottom: '24px', letterSpacing: '0.02em' }}>
+          {t.athletesTitle.map((line, i) => <span key={i}>{line}<br /></span>)}
+        </h2>
+        <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.6)', maxWidth: '440px', margin: '0 auto 40px' }}>
+          {t.athletesDesc}
+        </p>
+        <Link
+          to="/athletes"
+          style={{ display: 'inline-block', fontSize: '11px', fontWeight: 700, color: '#fff', border: '1px solid #fff', padding: '14px 32px', borderRadius: '5px', letterSpacing: '0.08em', textTransform: 'uppercase', transition: 'all 0.3s ease' }}
+          onMouseEnter={(e) => { e.currentTarget.style.background = '#fff'; e.currentTarget.style.color = '#111'; }}
+          onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#fff'; }}
+        >
+          {t.athletesBtn}
+        </Link>
+      </section>
 
-            <div style={{ position: 'relative', zIndex: 1, opacity: heroVisible ? 1 : 0, transform: heroVisible ? 'none' : 'translateY(30px)', transition: `opacity 0.8s ease ${0.3 + i * 0.2}s, transform 0.8s ease ${0.3 + i * 0.2}s` }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
-                <div style={{ width: '20px', height: '1px', background: BLUE }} />
-                <span style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: BLUE }}>{card.eyebrow}</span>
-              </div>
-              <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(44px, 5.5vw, 80px)', lineHeight: 0.9, color: '#fff', marginBottom: '20px', letterSpacing: '0.01em' }}>
-                {card.title.map((line, j) => <span key={j}>{line}<br /></span>)}
-              </h2>
-              <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.5)', lineHeight: 1.75, marginBottom: '28px', maxWidth: '340px', fontWeight: 300, opacity: hovered === card.key ? 1 : 0.6, transition: 'opacity 0.3s' }}>{card.desc}</p>
-              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', fontSize: '11px', fontWeight: 700, color: '#fff', background: hovered === card.key ? BLUE : 'rgba(0,61,165,0.2)', border: `1px solid ${hovered === card.key ? BLUE : 'rgba(0,61,165,0.3)'}`, padding: '12px 24px', borderRadius: '4px', letterSpacing: '0.08em', textTransform: 'uppercase', transition: 'all 0.3s' }}>
-                {card.cta}
-              </div>
-            </div>
-            <div style={{ position: 'absolute', top: '50%', right: '-20px', transform: 'translateY(-50%)', fontFamily: "'Bebas Neue'", fontSize: '280px', color: 'rgba(255,255,255,0.02)', lineHeight: 1, userSelect: 'none', pointerEvents: 'none' }}>
-              {i + 1}
-            </div>
-          </a>
-        ))}
-      </div>
-
-      <style>{`
-        @media (max-width: 768px) {
-          div[style*="display: flex; height: 100vh"] { flex-direction: column !important; height: auto !important; }
-          div[style*="display: flex; height: 100vh"] > a { flex: 1 !important; min-height: 50vh !important; padding: 40px 24px !important; }
-        }
-      `}</style>
+      <Footer />
     </div>
   );
 }
