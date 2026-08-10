@@ -106,12 +106,6 @@ export default function Nav({ lang, onLangChange }) {
  
         {/* Right */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <a href="https://app.auchumedia.com" style={{
-            fontSize: '10px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase',
-            color: 'rgba(10,10,10,0.5)', padding: '8px 14px', borderRadius: '5px'
-          }} className="nav-desktop">
-            {fr ? 'Connexion' : 'Login'}
-          </a>
           <div style={{ display: 'flex', border: '0.5px solid rgba(0,0,0,0.15)', borderRadius: '4px', overflow: 'hidden' }}>
             {['fr', 'en'].map(l => (
               <button key={l} onClick={() => onLangChange(l)} style={{
