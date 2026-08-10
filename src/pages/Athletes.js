@@ -312,6 +312,9 @@ export default function Athletes() {
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0, position: 'absolute', right: '60px' }}>
+          <a href="https://app.auchumedia.com" style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(10,10,10,0.5)', padding: '8px 14px', borderRadius: '5px' }}>
+            {fr ? 'Connexion' : 'Login'}
+          </a>
           <div style={{ display: 'flex', border: '0.5px solid rgba(0,0,0,0.15)', borderRadius: '4px', overflow: 'hidden' }}>
             {['fr','en'].map(l => (
               <button key={l} onClick={() => setLang(l)} style={{ fontSize: '9px', fontWeight: 700, padding: '5px 10px', cursor: 'pointer', border: 'none', background: lang === l ? 'rgba(0,0,0,0.08)' : 'transparent', color: lang === l ? '#0a0a0a' : 'rgba(10,10,10,0.35)', fontFamily: "'DM Sans'" }}>
@@ -339,6 +342,9 @@ export default function Athletes() {
             <Link to="/" style={{ fontSize: '12px', fontWeight: 700, color: '#0a0a0a', background: 'transparent', padding: '12px 20px', borderRadius: '4px', border: '1px solid rgba(0,0,0,0.22)', textDecoration: 'none', letterSpacing: '0.07em', textTransform: 'uppercase', textAlign: 'center' }}>
               {fr ? 'Pour entreprises' : 'For businesses'}
             </Link>
+            <a href="https://app.auchumedia.com" onClick={() => setMobileOpen(false)} style={{ fontSize: '13px', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'rgba(10,10,10,0.65)', padding: '12px 0', textAlign: 'center' }}>
+              {fr ? 'Connexion' : 'Login'}
+            </a>
             <button onClick={() => { scrollTo('contact'); setMobileOpen(false); }} style={{ fontSize: '12px', fontWeight: 700, color: '#fff', background: BLUE, padding: '13px 20px', borderRadius: '4px', border: 'none', cursor: 'pointer', letterSpacing: '0.07em', textTransform: 'uppercase', fontFamily: "'DM Sans'" }}>
               {fr ? 'Prendre RDV' : 'Book a call'}
             </button>

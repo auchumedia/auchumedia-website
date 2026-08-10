@@ -36,8 +36,6 @@ export default function Footer() {
           <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(10,10,10,0.4)', marginBottom: '20px' }}>Compagnie</div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             {[
-              { to: '/a-propos', label: 'À propos' },
-              { to: '/athletes#form', label: 'Contact' },
             ].map(link => (
               <Link key={link.to} to={link.to} style={{ fontSize: '13px', color: 'rgba(10,10,10,0.6)', fontWeight: 300, transition: 'color 0.2s' }}
                 onMouseEnter={e => e.target.style.color = '#0a0a0a'}
