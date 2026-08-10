@@ -312,9 +312,6 @@ export default function Athletes() {
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0, position: 'absolute', right: '60px' }}>
-          <Link to="/" style={{ fontSize: '10px', fontWeight: 700, color: '#0a0a0a', background: 'transparent', padding: '8px 16px', borderRadius: '4px', border: '1px solid rgba(0,0,0,0.22)', textDecoration: 'none', letterSpacing: '0.07em', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>
-            {fr ? 'Pour entreprises' : 'For businesses'}
-          </Link>
           <div style={{ display: 'flex', border: '0.5px solid rgba(0,0,0,0.15)', borderRadius: '4px', overflow: 'hidden' }}>
             {['fr','en'].map(l => (
               <button key={l} onClick={() => setLang(l)} style={{ fontSize: '9px', fontWeight: 700, padding: '5px 10px', cursor: 'pointer', border: 'none', background: lang === l ? 'rgba(0,0,0,0.08)' : 'transparent', color: lang === l ? '#0a0a0a' : 'rgba(10,10,10,0.35)', fontFamily: "'DM Sans'" }}>
@@ -364,9 +361,9 @@ export default function Athletes() {
             {fr ? "On aide les athlètes de haut niveau à bâtir leur personal branding grâce au storytelling vidéo qui capte l'attention et attire les commanditaires." : "We help elite athletes build their personal brand through video storytelling that captures attention and attracts sponsors."}
           </p>
           <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <button onClick={() => scrollTo('contact')} style={{ fontSize: '11px', fontWeight: 700, color: '#fff', background: BLUE, padding: '14px 32px', borderRadius: '4px', letterSpacing: '0.1em', textTransform: 'uppercase', border: 'none', cursor: 'pointer', boxShadow: '0 0 30px rgba(0,61,165,0.3)', fontFamily: "'DM Sans'" }}>
-              {fr ? 'Prendre RDV →' : 'Book a call →'}
-            </button>
+            <Link to="/" style={{ fontSize: '11px', fontWeight: 700, color: '#fff', background: BLUE, padding: '14px 32px', borderRadius: '4px', letterSpacing: '0.1em', textTransform: 'uppercase', border: 'none', cursor: 'pointer', boxShadow: '0 0 30px rgba(0,61,165,0.3)', fontFamily: "'DM Sans'", textDecoration: 'none', display: 'inline-block' }}>
+              {fr ? 'Pour entreprises' : 'For businesses'}
+            </Link>
             <button onClick={() => scrollTo('etudes-de-cas-athletes')} style={{ fontSize: '11px', fontWeight: 700, color: '#fff', border: '1px solid rgba(255,255,255,0.5)', padding: '14px 32px', borderRadius: '4px', textTransform: 'uppercase', letterSpacing: '0.1em', background: 'transparent', cursor: 'pointer', fontFamily: "'DM Sans'" }}>
               {fr ? 'Voir les résultats' : 'See the results'}
             </button>
