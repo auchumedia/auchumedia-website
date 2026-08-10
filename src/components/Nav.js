@@ -162,9 +162,6 @@ export default function Nav({ lang, onLangChange }) {
           <Link to="/a-propos" onClick={() => setMobileOpen(false)} style={{ fontSize: '13px', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'rgba(10,10,10,0.65)', padding: '12px 0', borderBottom: '0.5px solid rgba(0,0,0,0.07)' }}>
             {fr ? 'À propos' : 'About'}
           </Link>
-          <a href="https://app.auchumedia.com" onClick={() => setMobileOpen(false)} style={{ fontSize: '13px', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'rgba(10,10,10,0.65)', padding: '12px 0', borderBottom: '0.5px solid rgba(0,0,0,0.07)' }}>
-            {fr ? 'Connexion' : 'Login'}
-          </a>
           <div style={{ display: 'flex', gap: '8px', padding: '12px 0' }}>
             {['fr', 'en'].map(l => (
               <button key={l} onClick={() => onLangChange(l)} style={{ fontSize: '10px', fontWeight: 700, color: lang === l ? '#0a0a0a' : 'rgba(10,10,10,0.4)', border: '0.5px solid rgba(0,0,0,0.15)', padding: '5px 12px', borderRadius: '4px', cursor: 'pointer', background: lang === l ? 'rgba(0,0,0,0.08)' : 'none', fontFamily: "'DM Sans'" }}>
@@ -175,6 +172,9 @@ export default function Nav({ lang, onLangChange }) {
           <Link to="/athletes#form" onClick={() => setMobileOpen(false)} style={{ fontSize: '12px', fontWeight: 700, color: '#fff', background: BLUE, padding: '12px 20px', borderRadius: '4px', textAlign: 'center', marginTop: '12px', letterSpacing: '0.07em', textTransform: 'uppercase' }}>
             {fr ? 'Prendre RDV' : 'Book a call'}
           </Link>
+          <a href="https://app.auchumedia.com" onClick={() => setMobileOpen(false)} style={{ fontSize: '13px', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'rgba(10,10,10,0.65)', padding: '12px 0', textAlign: 'center' }}>
+            {fr ? 'Connexion' : 'Login'}
+          </a>
         </div>
       </div>
  

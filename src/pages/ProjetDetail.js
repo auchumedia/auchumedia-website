@@ -95,12 +95,12 @@ export default function ProjetDetail() {
             <Link to="/athletes" style={{ fontSize: '12px', fontWeight: 700, color: '#0a0a0a', background: 'transparent', padding: '12px 20px', borderRadius: '4px', border: '1px solid rgba(0,0,0,0.22)', textDecoration: 'none', letterSpacing: '0.07em', textTransform: 'uppercase', textAlign: 'center' }}>
               {fr ? 'Pour athlètes' : 'For athletes'}
             </Link>
-            <a href="https://app.auchumedia.com" onClick={() => setMobileOpen(false)} style={{ fontSize: '13px', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'rgba(10,10,10,0.65)', padding: '12px 0', textAlign: 'center' }}>
-              {fr ? 'Connexion' : 'Login'}
-            </a>
             <Link to="/#contact" onClick={() => setMobileOpen(false)} style={{ fontSize: '12px', fontWeight: 700, color: '#fff', background: BLUE, padding: '13px 20px', borderRadius: '4px', border: 'none', cursor: 'pointer', letterSpacing: '0.07em', textTransform: 'uppercase', fontFamily: "'DM Sans'", textDecoration: 'none', textAlign: 'center' }}>
               {fr ? 'Planifier un appel' : 'Book a call'}
             </Link>
+            <a href="https://app.auchumedia.com" onClick={() => setMobileOpen(false)} style={{ fontSize: '13px', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'rgba(10,10,10,0.65)', padding: '12px 0', textAlign: 'center' }}>
+              {fr ? 'Connexion' : 'Login'}
+            </a>
           </div>
         </div>
       )}
