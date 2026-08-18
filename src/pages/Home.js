@@ -396,14 +396,14 @@ export default function Home() {
             { icon: '🏗️', title: 'Stratégie de contenu', desc: "Nous définissons votre stratégie de contenu centrée sur le storytelling et l'audience, en créant un univers narratif unique pour vous démarquer dans votre domaine." },
             { icon: '🎬', title: 'Création de contenu', desc: "Nous prenons en charge l'idéation, la préproduction, la production et la postproduction." },
             { icon: '📱', title: 'Publication de contenu', desc: "Nous gérons votre calendrier de contenu et publions sur l'ensemble des plateformes." },
-            { icon: '🏆', title: 'Devenir la référence', desc: "On t'accompagne jusqu'à ce que tu sois reconnu comme LA référence dans ton domaine." },
             { icon: '📈', title: 'Rapports', desc: "Nous livrons un rapport mensuel avec des constats, puis nous appliquons tout ce que nous avons appris à la prochaine série de contenus." },
+            { icon: '🏆', title: 'Devenir la référence', desc: "Nous vous accompagnons jusqu'à ce que vous soyez reconnu comme LA référence dans votre domaine." },
           ] : [
             { icon: '🏗️', title: 'Content strategy', desc: "We define your content strategy centered on storytelling and audience, creating a unique narrative universe to set you apart in your field based on your business objectives." },
             { icon: '🎬', title: 'Content creation', desc: "We handle ideation, pre-production, production and post-production." },
             { icon: '📱', title: 'Content publishing', desc: "We manage your content calendar and publish across all platforms." },
-            { icon: '🏆', title: 'Become the reference', desc: "We support you until you're recognized as THE reference in your field." },
             { icon: '📈', title: 'Reports', desc: "We deliver a monthly report with insights, then apply everything learned to the next content series." },
+            { icon: '🏆', title: 'Become the reference', desc: "We support you until you're recognized as THE reference in your field." },
           ]).map((item, i) => (
             <FadeIn key={i} delay={i * 0.07}>
               <div style={{ background: '#f5f5f5', border: '0.5px solid rgba(0,0,0,0.07)', borderRadius: '12px', padding: '28px 24px', transition: 'border-color 0.2s', height: '100%', width: '320px', maxWidth: '100%' }}
