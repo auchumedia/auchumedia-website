@@ -616,11 +616,25 @@ export default function Home() {
                 {fr ? 'À partir de 3 500$' : 'Starting at $3,500'}
               </div>
               <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)', marginBottom: '24px' }}>{fr ? '/ mois' : '/ month'}</div>
-              <div style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', marginBottom: '32px' }}>
-                <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: BLUE, flexShrink: 0, marginTop: '5px' }} />
-                <span style={{ fontSize: '13px', color: 'rgba(255,255,255,0.8)', lineHeight: 1.5 }}>
-                  {fr ? '8 vidéos par mois' : '8 videos per month'}
-                </span>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '32px' }}>
+                {(fr ? [
+                  'Stratégie, idéation et direction créative',
+                  'Préproduction, tournage et montage',
+                  '2 vidéos / semaine sur toutes les plateformes',
+                  'Gestion de communauté incluse',
+                  'Rapports mensuels & optimisation continue',
+                ] : [
+                  'Strategy, ideation and creative direction',
+                  'Pre-production, filming and editing',
+                  '2 videos / week across all platforms',
+                  'Community management included',
+                  'Monthly reports & continuous optimization',
+                ]).map((item, i) => (
+                  <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
+                    <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: BLUE, flexShrink: 0, marginTop: '5px' }} />
+                    <span style={{ fontSize: '13px', color: 'rgba(255,255,255,0.8)', lineHeight: 1.5 }}>{item}</span>
+                  </div>
+                ))}
               </div>
               <button onClick={() => scrollTo('contact')} style={{ width: '100%', fontSize: '11px', fontWeight: 700, color: '#fff', background: BLUE, padding: '14px', borderRadius: '4px', letterSpacing: '0.08em', textTransform: 'uppercase', border: 'none', cursor: 'pointer', fontFamily: "'DM Sans'", boxShadow: '0 0 20px rgba(0,61,165,0.25)' }}>
                 {fr ? 'Planifier un appel →' : 'Book a call →'}
