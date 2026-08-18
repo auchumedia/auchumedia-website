@@ -25,7 +25,6 @@ function FadeIn({ children, delay = 0, direction = 'up' }) {
 const navLinks = [
   { id: 'pourquoi', labelFr: 'Pourquoi AuchuMedia', labelEn: 'Why AuchuMedia' },
   { id: 'etudes-de-cas-home', labelFr: 'Études de cas', labelEn: 'Case studies' },
-  { id: 'deroulement', labelFr: 'Déroulement', labelEn: 'Process' },
   { id: 'tarification', labelFr: 'Tarification', labelEn: 'Pricing' },
   { id: 'faq', labelFr: 'FAQ', labelEn: 'FAQ' },
 ];
@@ -248,40 +247,6 @@ export default function Home() {
     },
   ];
 
-  const steps = fr ? [
-    {
-      num: '01', title: 'STRATÉGIE & ONBOARDING',
-      desc: "On plonge dans votre business. Audit complet, définition de votre audience cible, et construction de votre stratégie de contenu sur mesure.",
-      points: ["Audit de votre présence actuelle", "Définition de l'identité de marque", "Calendrier éditorial du premier mois", "Configuration des outils & accès"]
-    },
-    {
-      num: '02', title: 'DÉBUT DE LA PRODUCTION',
-      desc: "La production de contenu est en cours et les premières publications commencent à être diffusées sur vos différentes plateformes.",
-      points: ["Analyse des premières performances", "Ajustement du format et du ton", "Début de la croissance organique"]
-    },
-    {
-      num: '03', title: 'CROISSANCE ACCÉLÉRÉE',
-      desc: "Avec une cadence de publication bien en place, on lance les premières campagnes Meta Ads et on intègre votre CRM pour automatiser le suivi des leads et transformer l'audience en clients.",
-      points: ["Lancement des campagnes Meta Ads", "Intégration CRM & pipeline de leads", "Croissance audience significative", "Premiers leads qualifiés"]
-    },
-  ] : [
-    {
-      num: '01', title: 'STRATEGY & ONBOARDING',
-      desc: "We dive deep into your business. Complete audit, target audience definition, and custom content strategy building.",
-      points: ["Audit of your current presence", "Brand identity definition", "First month editorial calendar", "Tools & access configuration"]
-    },
-    {
-      num: '02', title: 'PRODUCTION BEGINS',
-      desc: "Content production is underway and the first publications begin to be distributed on your various platforms.",
-      points: ["First performance analysis", "Format and tone adjustment", "Start of organic growth"]
-    },
-    {
-      num: '03', title: 'ACCELERATED GROWTH',
-      desc: "With a solid publishing cadence in place, we launch the first Meta Ads campaigns and integrate your CRM to automate lead follow-up and turn audience into paying clients.",
-      points: ["Meta Ads campaign launch", "CRM & lead pipeline integration", "Significant audience growth", "First qualified leads"]
-    },
-  ];
-
   return (
     <div style={{ background: '#ffffff', minHeight: '100vh' }}>
 
@@ -486,107 +451,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ===== DÉROULEMENT ===== */}
-      <section id="deroulement" style={{ padding: '100px 0', background: '#ffffff', borderTop: '0.5px solid rgba(0,0,0,0.07)', scrollMarginTop: '64px' }}>
-        <FadeIn>
-          <div style={{ padding: '0 60px', marginBottom: '64px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
-              <div style={{ width: '20px', height: '1px', background: BLUE }} />
-              <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE }}>{fr ? 'Déroulement personnalisé' : 'Our process'}</span>
-            </div>
-            <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(32px, 4vw, 52px)', color: '#0a0a0a', letterSpacing: '0.02em' }}>
-              {fr ? <>COMMENT ON <span style={{ color: BLUE }}>TRAVAILLE.</span></> : <>HOW WE <span style={{ color: BLUE }}>WORK.</span></>}
-            </h2>
-          </div>
-        </FadeIn>
-
-        {/* Desktop — sticky cards */}
-        <div className="sticky-cards" style={{ position: 'relative', paddingBottom: '200px' }}>
-          {steps.map((step, i) => (
-            <div key={i} style={{
-              position: 'sticky',
-              top: `${64 + i * 12}px`,
-              zIndex: i + 1,
-              margin: '0 40px 0',
-              borderRadius: '16px',
-              background: i % 2 === 0 ? '#ffffff' : '#f5f5f5',
-              border: '0.5px solid rgba(0,0,0,0.08)',
-              overflow: 'hidden',
-              boxShadow: '0 8px 40px rgba(0,0,0,0.08)',
-              minHeight: '280px',
-            }}>
-              <div className="step-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', minHeight: '280px' }}>
-                {/* Left — text */}
-                <div style={{ padding: '48px 40px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                  <div style={{ fontFamily: "'Bebas Neue'", fontSize: '72px', color: 'rgba(0,61,165,0.15)', lineHeight: 1, marginBottom: '16px', letterSpacing: '-0.02em' }}>{step.num}</div>
-                  <div style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(24px, 3vw, 36px)', color: '#0a0a0a', marginBottom: '16px', letterSpacing: '0.02em', lineHeight: 1.1 }}>{step.title}</div>
-                  <p style={{ fontSize: '14px', color: 'rgba(10,10,10,0.6)', lineHeight: 1.75, fontWeight: 300, marginBottom: '20px' }}>{step.desc}</p>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                    {step.points.map((pt, j) => (
-                      <div key={j} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                        <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: BLUE, flexShrink: 0 }} />
-                        <span style={{ fontSize: '13px', color: 'rgba(10,10,10,0.75)' }}>{pt}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Right — visual */}
-                <div style={{
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  position: 'relative', overflow: 'hidden'
-                }}>
-                  <div style={{ position: 'absolute', inset: 0 }}>
-                    <img
-                      src={i === 0 ? '/deroulement-1.jpg' : i === 1 ? '/deroulement-2.jpg' : '/deroulement-3.jpg'}
-                      alt={step.title}
-                      style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: i === 1 ? 'center 20%' : 'center' }}
-                    />
-                    <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.2)' }} />
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-          <div style={{ height: '40px' }} />
-        </div>
-
-        {/* Mobile — timeline cards */}
-        <div className="mobile-timeline" style={{ flexDirection: 'column', gap: '16px', padding: '0 16px', display: 'none' }}>
-          {steps.map((step, i) => (
-            <div key={i} style={{
-              borderRadius: '20px',
-              background: i % 2 === 0 ? '#ffffff' : '#f5f5f5',
-              border: '0.5px solid rgba(0,0,0,0.08)',
-              overflow: 'hidden',
-              boxShadow: '0 4px 24px rgba(0,0,0,0.06)',
-            }}>
-              <div style={{ padding: '28px 24px' }}>
-                <div style={{ fontFamily: "'Bebas Neue'", fontSize: '48px', color: 'rgba(0,61,165,0.15)', lineHeight: 1, marginBottom: '8px' }}>{step.num}</div>
-                <div style={{ fontFamily: "'Bebas Neue'", fontSize: '26px', color: '#0a0a0a', marginBottom: '10px', letterSpacing: '0.02em', lineHeight: 1.1 }}>{step.title}</div>
-                <p style={{ fontSize: '14px', color: 'rgba(10,10,10,0.65)', lineHeight: 1.75, fontWeight: 300, marginBottom: '18px' }}>{step.desc}</p>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '20px' }}>
-                  {step.points.map((pt, j) => (
-                    <div key={j} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                      <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: BLUE, border: '2px solid rgba(0,61,165,0.2)', flexShrink: 0 }} />
-                      <span style={{ fontSize: '13px', color: 'rgba(10,10,10,0.8)' }}>{pt}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div style={{ height: '200px', position: 'relative', overflow: 'hidden' }}>
-                <img
-                  src={i === 0 ? '/deroulement-1.jpg' : i === 1 ? '/deroulement-2.jpg' : '/deroulement-3.jpg'}
-                  alt={step.title}
-                  style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: i === 1 ? 'center 20%' : 'center' }}
-                />
-                <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.2)' }} />
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
       {/* ===== TARIFICATION ===== */}
       <section id="tarification" style={{ padding: '100px 60px', background: '#0a0a0a', borderTop: '0.5px solid rgba(0,0,0,0.07)', scrollMarginTop: '64px' }}>
         <FadeIn>
@@ -639,6 +503,54 @@ export default function Home() {
             </div>
           </FadeIn>
 
+        </div>
+      </section>
+
+      {/* ===== ON VA PLUS LOIN ===== */}
+      <section id="plus-loin" style={{ padding: '80px 60px', background: '#ffffff', borderTop: '0.5px solid rgba(0,0,0,0.07)', scrollMarginTop: '64px' }}>
+        <FadeIn>
+          <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', marginBottom: '12px' }}>
+              <div style={{ width: '20px', height: '1px', background: BLUE }} />
+              <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE }}>{fr ? 'On va plus loin' : 'We go further'}</span>
+              <div style={{ width: '20px', height: '1px', background: BLUE }} />
+            </div>
+            <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(28px, 3.5vw, 44px)', color: '#0a0a0a', marginBottom: '12px', letterSpacing: '0.02em' }}>
+              {fr ? <>ON VA PLUS <span style={{ color: BLUE }}>LOIN.</span></> : <>WE GO <span style={{ color: BLUE }}>FURTHER.</span></>}
+            </h2>
+            <p style={{ fontSize: '14px', color: 'rgba(10,10,10,0.55)', lineHeight: 1.75, maxWidth: '560px', margin: '0 auto', fontWeight: 300 }}>
+              {fr ? "Au-delà du contenu, on construit les outils qui font grandir votre business." : "Beyond content, we build the tools that grow your business."}
+            </p>
+          </div>
+        </FadeIn>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', justifyContent: 'center', marginBottom: '40px' }}>
+          {(fr ? [
+            { icon: '🌐', title: 'Site web', desc: "Nous concevons votre site web pour bien vous représenter et convertir vos visiteurs en clients." },
+            { icon: '🗂️', title: 'Espace client sur mesure', desc: "Un portail branded et personnalisé pour vos clients, où ils suivent leurs projets et approuvent les contenus en temps réel." },
+            { icon: '🛠️', title: 'Outils & app sur mesure', desc: "Nous développons des applications et logiciels internes pour optimiser la productivité de votre équipe." },
+            { icon: '🤖', title: 'Automatisations IA', desc: "Nous créons des automatisations intelligentes pour éliminer les tâches répétitives et maximiser l'efficacité de votre business." },
+          ] : [
+            { icon: '🌐', title: 'Website', desc: "We design your website to properly represent you and convert your visitors into clients." },
+            { icon: '🗂️', title: 'Custom client portal', desc: "A branded, personalized portal for your clients to track their projects and approve content in real time." },
+            { icon: '🛠️', title: 'Custom tools & apps', desc: "We build internal applications and software to optimize your team's productivity." },
+            { icon: '🤖', title: 'AI automations', desc: "We create smart automations to eliminate repetitive tasks and maximize your business's efficiency." },
+          ]).map((item, i) => (
+            <FadeIn key={i} delay={i * 0.07}>
+              <div style={{ background: '#f5f5f5', border: '0.5px solid rgba(0,0,0,0.07)', borderRadius: '12px', padding: '28px 24px', transition: 'border-color 0.2s', height: '100%', width: '320px', maxWidth: '100%' }}
+                onMouseEnter={e => e.currentTarget.style.borderColor = 'rgba(0,61,165,0.4)'}
+                onMouseLeave={e => e.currentTarget.style.borderColor = 'rgba(0,0,0,0.07)'}
+              >
+                <div style={{ fontSize: '28px', marginBottom: '14px' }}>{item.icon}</div>
+                <div style={{ fontSize: '13px', fontWeight: 700, color: '#0a0a0a', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{item.title}</div>
+                <div style={{ fontSize: '13px', color: 'rgba(10,10,10,0.55)', lineHeight: 1.65, fontWeight: 300 }}>{item.desc}</div>
+              </div>
+            </FadeIn>
+          ))}
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <button onClick={() => scrollTo('contact')} style={{ fontSize: '11px', fontWeight: 700, color: '#fff', background: BLUE, padding: '14px 32px', borderRadius: '4px', letterSpacing: '0.08em', textTransform: 'uppercase', border: 'none', cursor: 'pointer', fontFamily: "'DM Sans'" }}>
+            {fr ? 'Discuter de mon projet →' : 'Discuss my project →'}
+          </button>
         </div>
       </section>
 
@@ -706,8 +618,6 @@ export default function Home() {
           div[style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
           div[style*="grid-template-columns: repeat(2"] { grid-template-columns: 1fr !important; }
           div.etudes-stats-grid { display: flex !important; flex-direction: row !important; grid-template-columns: none !important; justify-content: space-between !important; gap: 8px !important; }
-          .sticky-cards { display: none !important; }
-          .mobile-timeline { display: flex !important; }
         }
       `}</style>
     </div>
