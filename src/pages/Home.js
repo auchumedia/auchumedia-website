@@ -534,54 +534,6 @@ export default function Home() {
         </FadeIn>
       </section>
 
-      {/* ===== ON VA PLUS LOIN ===== */}
-      <section id="plus-loin" style={{ padding: '80px 60px', background: '#ffffff', borderTop: '0.5px solid rgba(0,0,0,0.07)', scrollMarginTop: '64px' }}>
-        <FadeIn>
-          <div style={{ textAlign: 'center', marginBottom: '48px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', marginBottom: '12px' }}>
-              <div style={{ width: '20px', height: '1px', background: BLUE }} />
-              <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE }}>{fr ? 'On va plus loin' : 'We go further'}</span>
-              <div style={{ width: '20px', height: '1px', background: BLUE }} />
-            </div>
-            <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(28px, 3.5vw, 44px)', color: '#0a0a0a', marginBottom: '12px', letterSpacing: '0.02em' }}>
-              {fr ? <>ON VA PLUS <span style={{ color: BLUE }}>LOIN.</span></> : <>WE GO <span style={{ color: BLUE }}>FURTHER.</span></>}
-            </h2>
-            <p style={{ fontSize: '14px', color: 'rgba(10,10,10,0.55)', lineHeight: 1.75, maxWidth: '560px', margin: '0 auto', fontWeight: 300 }}>
-              {fr ? "Au-delà du contenu, on construit les outils qui font grandir votre business." : "Beyond content, we build the tools that grow your business."}
-            </p>
-          </div>
-        </FadeIn>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', justifyContent: 'center', marginBottom: '40px' }}>
-          {(fr ? [
-            { icon: '🌐', title: 'Site web', desc: "Nous concevons votre site web pour bien vous représenter et convertir vos visiteurs en clients." },
-            { icon: '🗂️', title: 'Espace client sur mesure', desc: "Un portail branded et personnalisé pour vos clients, où ils suivent leurs projets et approuvent les contenus en temps réel." },
-            { icon: '🛠️', title: 'Outils & app sur mesure', desc: "Nous développons des applications et logiciels internes pour optimiser la productivité de votre équipe." },
-            { icon: '🤖', title: 'Automatisations IA', desc: "Nous créons des automatisations intelligentes pour éliminer les tâches répétitives et maximiser l'efficacité de votre business." },
-          ] : [
-            { icon: '🌐', title: 'Website', desc: "We design your website to properly represent you and convert your visitors into clients." },
-            { icon: '🗂️', title: 'Custom client portal', desc: "A branded, personalized portal for your clients to track their projects and approve content in real time." },
-            { icon: '🛠️', title: 'Custom tools & apps', desc: "We build internal applications and software to optimize your team's productivity." },
-            { icon: '🤖', title: 'AI automations', desc: "We create smart automations to eliminate repetitive tasks and maximize your business's efficiency." },
-          ]).map((item, i) => (
-            <FadeIn key={i} delay={i * 0.07}>
-              <div style={{ background: '#f5f5f5', border: '0.5px solid rgba(0,0,0,0.07)', borderRadius: '12px', padding: '28px 24px', transition: 'border-color 0.2s', height: '100%', width: '320px', maxWidth: '100%' }}
-                onMouseEnter={e => e.currentTarget.style.borderColor = 'rgba(0,61,165,0.4)'}
-                onMouseLeave={e => e.currentTarget.style.borderColor = 'rgba(0,0,0,0.07)'}
-              >
-                <div style={{ fontSize: '28px', marginBottom: '14px' }}>{item.icon}</div>
-                <div style={{ fontSize: '13px', fontWeight: 700, color: '#0a0a0a', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{item.title}</div>
-                <div style={{ fontSize: '13px', color: 'rgba(10,10,10,0.55)', lineHeight: 1.65, fontWeight: 300 }}>{item.desc}</div>
-              </div>
-            </FadeIn>
-          ))}
-        </div>
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <button onClick={() => scrollTo('contact')} style={{ fontSize: '11px', fontWeight: 700, color: '#fff', background: BLUE, padding: '14px 32px', borderRadius: '4px', letterSpacing: '0.08em', textTransform: 'uppercase', border: 'none', cursor: 'pointer', fontFamily: "'DM Sans'" }}>
-            {fr ? 'Discuter de mon projet →' : 'Discuss my project →'}
-          </button>
-        </div>
-      </section>
-
       {/* ===== FAQ ===== */}
       <section id="faq" style={{ padding: '100px 60px', background: '#ffffff', borderTop: '0.5px solid rgba(0,0,0,0.07)', scrollMarginTop: '64px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <FadeIn>
