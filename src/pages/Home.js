@@ -490,46 +490,54 @@ export default function Home() {
             {fr ? <>UNE OFFRE <span style={{ color: BLUE }}>TRANSPARENTE.</span></> : <>TRANSPARENT <span style={{ color: BLUE }}>PRICING.</span></>}
           </h2>
           <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.6)', lineHeight: 1.75, marginBottom: '48px', maxWidth: '560px', fontWeight: 300 }}>
-            {fr ? "Pas de forfaits compliqués. Une seule offre, tout inclus, pour propulser ta croissance." : "No complicated tiers. One all-inclusive offer to drive your growth."}
+            {fr ? "Pas de forfaits compliqués. Deux offres tout inclus, pour propulser ta croissance." : "No complicated tiers. Two all-inclusive offers to drive your growth."}
           </p>
         </FadeIn>
-        <div style={{ maxWidth: '460px', margin: '0 auto' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', justifyContent: 'center', maxWidth: '860px', margin: '0 auto' }}>
 
-          <FadeIn delay={0.05}>
-            <div style={{ background: '#111', border: `2px solid ${BLUE}`, borderRadius: '16px', padding: '36px', position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
-              <div style={{ position: 'absolute', top: '-30px', right: '-30px', width: '160px', height: '160px', borderRadius: '50%', background: 'rgba(0,61,165,0.12)', filter: 'blur(30px)' }} />
-              <div style={{ display: 'inline-flex', alignItems: 'center', background: 'rgba(0,61,165,0.1)', border: '0.5px solid rgba(0,61,165,0.3)', borderRadius: '20px', padding: '4px 10px', marginBottom: '16px', width: 'fit-content' }}>
-                <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: BLUE }}>{fr ? 'Mandat mensuel' : 'Monthly retainer'}</span>
+          {(fr ? [
+            { price: '3 500$', videos: '2 vidéos / semaine sur toutes les plateformes' },
+            { price: '5 000$', videos: '3 vidéos / semaine sur toutes les plateformes' },
+          ] : [
+            { price: '$3,500', videos: '2 videos / week across all platforms' },
+            { price: '$5,000', videos: '3 videos / week across all platforms' },
+          ]).map((plan, i) => (
+            <FadeIn key={i} delay={0.05 + i * 0.05}>
+              <div style={{ background: '#111', border: `2px solid ${BLUE}`, borderRadius: '16px', padding: '36px', position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column', width: '380px', maxWidth: '100%', height: '100%' }}>
+                <div style={{ position: 'absolute', top: '-30px', right: '-30px', width: '160px', height: '160px', borderRadius: '50%', background: 'rgba(0,61,165,0.12)', filter: 'blur(30px)' }} />
+                <div style={{ display: 'inline-flex', alignItems: 'center', background: 'rgba(0,61,165,0.1)', border: '0.5px solid rgba(0,61,165,0.3)', borderRadius: '20px', padding: '4px 10px', marginBottom: '16px', width: 'fit-content' }}>
+                  <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: BLUE }}>{fr ? 'Mandat mensuel' : 'Monthly retainer'}</span>
+                </div>
+                <div style={{ fontFamily: "'Bebas Neue'", fontSize: '40px', color: '#ffffff', lineHeight: 1, marginBottom: '4px' }}>
+                  {plan.price}
+                </div>
+                <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)', marginBottom: '24px' }}>{fr ? '/ mois' : '/ month'}</div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '32px', flex: 1 }}>
+                  {(fr ? [
+                    'Stratégie, idéation et direction créative',
+                    'Préproduction, tournage et montage',
+                    plan.videos,
+                    'Gestion de communauté incluse',
+                    'Rapports mensuels & optimisation continue',
+                  ] : [
+                    'Strategy, ideation and creative direction',
+                    'Pre-production, filming and editing',
+                    plan.videos,
+                    'Community management included',
+                    'Monthly reports & continuous optimization',
+                  ]).map((item, j) => (
+                    <div key={j} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
+                      <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: BLUE, flexShrink: 0, marginTop: '5px' }} />
+                      <span style={{ fontSize: '13px', color: 'rgba(255,255,255,0.8)', lineHeight: 1.5 }}>{item}</span>
+                    </div>
+                  ))}
+                </div>
+                <button onClick={() => scrollTo('contact')} style={{ width: '100%', fontSize: '11px', fontWeight: 700, color: '#fff', background: BLUE, padding: '14px', borderRadius: '4px', letterSpacing: '0.08em', textTransform: 'uppercase', border: 'none', cursor: 'pointer', fontFamily: "'DM Sans'", boxShadow: '0 0 20px rgba(0,61,165,0.25)' }}>
+                  {fr ? 'Planifier un appel →' : 'Book a call →'}
+                </button>
               </div>
-              <div style={{ fontFamily: "'Bebas Neue'", fontSize: '40px', color: '#ffffff', lineHeight: 1, marginBottom: '4px' }}>
-                {fr ? 'À partir de 3 500$' : 'Starting at $3,500'}
-              </div>
-              <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)', marginBottom: '24px' }}>{fr ? '/ mois' : '/ month'}</div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '32px' }}>
-                {(fr ? [
-                  'Stratégie, idéation et direction créative',
-                  'Préproduction, tournage et montage',
-                  '2 vidéos / semaine sur toutes les plateformes',
-                  'Gestion de communauté incluse',
-                  'Rapports mensuels & optimisation continue',
-                ] : [
-                  'Strategy, ideation and creative direction',
-                  'Pre-production, filming and editing',
-                  '2 videos / week across all platforms',
-                  'Community management included',
-                  'Monthly reports & continuous optimization',
-                ]).map((item, i) => (
-                  <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
-                    <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: BLUE, flexShrink: 0, marginTop: '5px' }} />
-                    <span style={{ fontSize: '13px', color: 'rgba(255,255,255,0.8)', lineHeight: 1.5 }}>{item}</span>
-                  </div>
-                ))}
-              </div>
-              <button onClick={() => scrollTo('contact')} style={{ width: '100%', fontSize: '11px', fontWeight: 700, color: '#fff', background: BLUE, padding: '14px', borderRadius: '4px', letterSpacing: '0.08em', textTransform: 'uppercase', border: 'none', cursor: 'pointer', fontFamily: "'DM Sans'", boxShadow: '0 0 20px rgba(0,61,165,0.25)' }}>
-                {fr ? 'Planifier un appel →' : 'Book a call →'}
-              </button>
-            </div>
-          </FadeIn>
+            </FadeIn>
+          ))}
 
         </div>
       </section>
