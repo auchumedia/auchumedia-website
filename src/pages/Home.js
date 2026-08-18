@@ -609,9 +609,6 @@ export default function Home() {
               <div style={{ display: 'inline-flex', alignItems: 'center', background: 'rgba(0,61,165,0.1)', border: '0.5px solid rgba(0,61,165,0.3)', borderRadius: '20px', padding: '4px 10px', marginBottom: '16px', width: 'fit-content' }}>
                 <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: BLUE }}>{fr ? 'Mandat mensuel' : 'Monthly retainer'}</span>
               </div>
-              <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE, marginBottom: '8px' }}>
-                {fr ? 'Une seule offre, tout inclus' : 'One all-inclusive offer'}
-              </div>
               <div style={{ fontFamily: "'Bebas Neue'", fontSize: '40px', color: '#ffffff', lineHeight: 1, marginBottom: '4px' }}>
                 {fr ? 'À partir de 3 500$' : 'Starting at $3,500'}
               </div>
