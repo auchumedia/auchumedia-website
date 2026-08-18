@@ -391,9 +391,9 @@ export default function Home() {
             </h2>
           </div>
         </FadeIn>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 320px)', gap: '12px', justifyContent: 'center' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', justifyContent: 'center' }}>
           {(fr ? [
-            { icon: '🏗️', title: 'Stratégie de contenu', desc: "Nous définissons votre stratégie de contenu centrée sur le storytelling et l'audience, en créant un univers narratif unique pour vous démarquer dans votre domaine en fonction de vos objectifs d'affaires." },
+            { icon: '🏗️', title: 'Stratégie de contenu', desc: "Nous définissons votre stratégie de contenu centrée sur le storytelling et l'audience, en créant un univers narratif unique pour vous démarquer dans votre domaine." },
             { icon: '🎬', title: 'Création de contenu', desc: "Nous prenons en charge l'idéation, la préproduction, la production et la postproduction." },
             { icon: '📱', title: 'Publication de contenu', desc: "Nous gérons votre calendrier de contenu et publions sur l'ensemble des plateformes." },
             { icon: '🏆', title: 'Devenir la référence', desc: "On t'accompagne jusqu'à ce que tu sois reconnu comme LA référence dans ton domaine." },
@@ -406,7 +406,7 @@ export default function Home() {
             { icon: '📈', title: 'Reports', desc: "We deliver a monthly report with insights, then apply everything learned to the next content series." },
           ]).map((item, i) => (
             <FadeIn key={i} delay={i * 0.07}>
-              <div style={{ background: '#f5f5f5', border: '0.5px solid rgba(0,0,0,0.07)', borderRadius: '12px', padding: '28px 24px', transition: 'border-color 0.2s', height: '100%' }}
+              <div style={{ background: '#f5f5f5', border: '0.5px solid rgba(0,0,0,0.07)', borderRadius: '12px', padding: '28px 24px', transition: 'border-color 0.2s', height: '100%', width: '320px', maxWidth: '100%' }}
                 onMouseEnter={e => e.currentTarget.style.borderColor = 'rgba(0,61,165,0.4)'}
                 onMouseLeave={e => e.currentTarget.style.borderColor = 'rgba(0,0,0,0.07)'}
               >
