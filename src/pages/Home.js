@@ -26,6 +26,7 @@ const navLinks = [
   { id: 'pourquoi', labelFr: 'Pourquoi AuchuMedia', labelEn: 'Why AuchuMedia' },
   { id: 'etudes-de-cas-home', labelFr: 'Études de cas', labelEn: 'Case studies' },
   { id: 'tarification', labelFr: 'Tarification', labelEn: 'Pricing' },
+  { id: 'temoignages', labelFr: 'Témoignages', labelEn: 'Testimonials' },
   { id: 'faq', labelFr: 'FAQ', labelEn: 'FAQ' },
 ];
 
@@ -504,6 +505,33 @@ export default function Home() {
           </FadeIn>
 
         </div>
+      </section>
+
+      {/* ===== TÉMOIGNAGES ===== */}
+      <section id="temoignages" style={{ padding: '100px 60px', background: '#0a0a0a', borderTop: '0.5px solid rgba(0,0,0,0.07)', scrollMarginTop: '64px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <FadeIn>
+          <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', marginBottom: '12px' }}>
+              <div style={{ width: '20px', height: '1px', background: BLUE }} />
+              <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE }}>{fr ? 'Témoignages' : 'Testimonials'}</span>
+              <div style={{ width: '20px', height: '1px', background: BLUE }} />
+            </div>
+            <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(28px, 3.5vw, 44px)', color: '#ffffff', marginBottom: '12px', letterSpacing: '0.02em' }}>
+              {fr ? <>CE QU'ILS DISENT <span style={{ color: BLUE }}>DE NOUS.</span></> : <>WHAT THEY <span style={{ color: BLUE }}>SAY ABOUT US.</span></>}
+            </h2>
+            <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.55)', lineHeight: 1.75, maxWidth: '560px', margin: '0 auto', fontWeight: 300 }}>
+              {fr ? "Des résultats concrets, des clients satisfaits." : "Real results, satisfied clients."}
+            </p>
+          </div>
+        </FadeIn>
+        <FadeIn delay={0.1}>
+          <div style={{ border: '0.5px dashed rgba(255,255,255,0.2)', borderRadius: '16px', padding: '64px 48px', textAlign: 'center', maxWidth: '560px', margin: '0 auto' }}>
+            <div style={{ fontSize: '28px', marginBottom: '16px' }}>💬</div>
+            <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.5)', lineHeight: 1.7, fontWeight: 300 }}>
+              {fr ? "Les témoignages arrivent bientôt." : "Testimonials coming soon."}
+            </p>
+          </div>
+        </FadeIn>
       </section>
 
       {/* ===== ON VA PLUS LOIN ===== */}
