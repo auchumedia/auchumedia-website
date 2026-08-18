@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Navigate, Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import Footer from '../components/Footer';
 import { projets } from '../data/projets';
 import { athletesData } from '../data/athletesData';
@@ -9,7 +10,7 @@ const BLUE = '#003DA5';
 const navLinks = [
   { id: 'pourquoi', labelFr: 'Pourquoi AuchuMedia', labelEn: 'Why AuchuMedia' },
   { id: 'etudes-de-cas-home', labelFr: 'Études de cas', labelEn: 'Case studies' },
-  { id: 'deroulement', labelFr: 'Déroulement', labelEn: 'Process' },
+  { id: 'temoignages', labelFr: 'Témoignages', labelEn: 'Testimonials' },
   { id: 'tarification', labelFr: 'Tarification', labelEn: 'Pricing' },
   { id: 'faq', labelFr: 'FAQ', labelEn: 'FAQ' },
 ];
@@ -31,8 +32,23 @@ export default function ProjetDetail() {
   const projet = [...projets, ...athletesData].find(p => p.slug === slug);
   if (!projet) return <Navigate to="/" replace />;
 
+  const pageTitle = fr ? `${projet.client} | Étude de cas AuchuMedia` : `${projet.client} | AuchuMedia Case Study`;
+  const pageDescription = fr
+    ? `Découvrez comment AuchuMedia a accompagné ${projet.client} (${projet.domaine.fr}) grâce à une stratégie de contenu vidéo sur mesure.`
+    : `See how AuchuMedia supported ${projet.client} (${projet.domaine.en}) with a custom video content strategy.`;
+
   return (
     <div style={{ background: '#ffffff', minHeight: '100vh' }}>
+      <Helmet>
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription} />
+        <link rel="canonical" href={`https://auchumedia.com/projets/${projet.slug}`} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={`https://auchumedia.com/projets/${projet.slug}`} />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={pageDescription} />
+        <meta property="og:image" content={projet.image || 'https://auchumedia.com/Copie%20de%20AUCHU.png.png'} />
+      </Helmet>
 
       {/* ===== MAIN NAV ===== */}
       <nav style={{
@@ -44,7 +60,7 @@ export default function ProjetDetail() {
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         padding: '0 60px', height: '64px', gap: '16px'
       }}>
-        <Link to="/" style={{ flexShrink: 0 }}><img src="/Copie de AUCHU.png.png" alt="AuchuMedia" style={{ height: '22px', width: 'auto', filter: 'invert(1)' }} /></Link>
+        <Link to="/" style={{ flexShrink: 0 }}><img src="/Copie de AUCHU.png.png" alt="AuchuMedia — agence de contenu vidéo Montréal" style={{ height: '22px', width: 'auto', filter: 'invert(1)' }} /></Link>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '2px', overflowX: 'auto', scrollbarWidth: 'none', flex: 1, justifyContent: 'center' }} className="nav-links">
           {navLinks.map(link => (

@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 
@@ -77,6 +78,16 @@ export default function APropos() {
 
   return (
     <div style={{ background: '#080808', minHeight: '100vh' }}>
+      <Helmet>
+        <title>{fr ? 'À propos | AuchuMedia — Agence de contenu vidéo à Montréal' : 'About | AuchuMedia — Montreal Video Content Agency'}</title>
+        <meta name="description" content={fr ? "Fondée par Raphaël Auchu, ancien gardien repêché dans la LHJMQ, AuchuMedia est l'agence de contenu vidéo qui aide athlètes et entreprises à bâtir des marques qui durent." : "Founded by Raphaël Auchu, a former QMJHL drafted goaltender, AuchuMedia is the video content agency that helps athletes and businesses build brands that last."} />
+        <link rel="canonical" href="https://auchumedia.com/a-propos" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://auchumedia.com/a-propos" />
+        <meta property="og:title" content={fr ? 'À propos | AuchuMedia — Agence de contenu vidéo à Montréal' : 'About | AuchuMedia — Montreal Video Content Agency'} />
+        <meta property="og:description" content={fr ? "Fondée par Raphaël Auchu, ancien gardien repêché dans la LHJMQ, AuchuMedia est l'agence de contenu vidéo qui aide athlètes et entreprises à bâtir des marques qui durent." : "Founded by Raphaël Auchu, a former QMJHL drafted goaltender, AuchuMedia is the video content agency that helps athletes and businesses build brands that last."} />
+        <meta property="og:image" content="https://auchumedia.com/Copie%20de%20AUCHU.png.png" />
+      </Helmet>
       <Nav lang={lang} onLangChange={setLang} />
 
       {/* HERO */}
@@ -136,11 +147,11 @@ export default function APropos() {
           <div style={{ display: 'grid', gridTemplateColumns: '200px 1fr', gap: '40px', alignItems: 'center', background: '#0d0d0d', border: `1px solid rgba(0,61,165,0.2)`, borderRadius: '16px', padding: '40px', marginBottom: '16px', position: 'relative', overflow: 'hidden' }}>
             <div style={{ position: 'absolute', top: '-40px', right: '-40px', width: '200px', height: '200px', borderRadius: '50%', background: 'rgba(0,61,165,0.05)', filter: 'blur(40px)' }} />
             <div style={{ width: '160px', height: '160px', borderRadius: '50%', overflow: 'hidden', border: `2px solid rgba(0,61,165,0.3)`, flexShrink: 0 }}>
-              <img src={team[0].photo} alt={team[0].name} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 35%' }} />
+              <img src={team[0].photo} alt={`${team[0].name}, ${team[0].role} d'AuchuMedia`} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 35%' }} />
             </div>
             <div>
               <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE, marginBottom: '10px' }}>{fr ? 'Fondateur' : 'Founder'}</div>
-              <div style={{ fontFamily: "'Bebas Neue'", fontSize: '32px', color: '#fff', letterSpacing: '0.06em', marginBottom: '4px' }}>{team[0].name}</div>
+              <h3 style={{ margin: 0, fontFamily: "'Bebas Neue'", fontSize: '32px', color: '#fff', letterSpacing: '0.06em', marginBottom: '4px' }}>{team[0].name}</h3>
               <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '16px' }}>{team[0].role}</div>
               <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.55)', lineHeight: 1.75, fontWeight: 300 }}>{team[0].desc}</p>
             </div>
@@ -154,7 +165,7 @@ export default function APropos() {
               <div style={{ background: '#0d0d0d', border: '0.5px solid rgba(255,255,255,0.07)', borderRadius: '12px', padding: '28px', display: 'flex', gap: '20px', alignItems: 'flex-start' }}>
                 <AvatarPlaceholder initials={member.initials} size={72} />
                 <div>
-                  <div style={{ fontFamily: "'Bebas Neue'", fontSize: '20px', color: '#fff', letterSpacing: '0.05em', marginBottom: '3px' }}>{member.name}</div>
+                  <h3 style={{ margin: 0, fontFamily: "'Bebas Neue'", fontSize: '20px', color: '#fff', letterSpacing: '0.05em', marginBottom: '3px' }}>{member.name}</h3>
                   <div style={{ fontSize: '10px', color: BLUE, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '12px' }}>{member.role}</div>
                   <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)', lineHeight: 1.65, fontWeight: 300 }}>{member.desc}</p>
                 </div>
@@ -185,7 +196,7 @@ export default function APropos() {
             <FadeIn key={i} delay={i * 0.1}>
               <div style={{ background: '#111', border: '0.5px solid rgba(255,255,255,0.07)', borderRadius: '10px', padding: '32px 28px' }}>
                 <div style={{ fontFamily: "'Bebas Neue'", fontSize: '48px', color: 'rgba(0,61,165,0.2)', lineHeight: 1, marginBottom: '16px' }}>{v.num}</div>
-                <div style={{ fontSize: '16px', fontWeight: 700, color: '#fff', marginBottom: '10px' }}>{v.title}</div>
+                <h3 style={{ margin: 0, fontSize: '16px', fontWeight: 700, color: '#fff', marginBottom: '10px' }}>{v.title}</h3>
                 <div style={{ fontSize: '13px', color: 'rgba(255,255,255,0.5)', lineHeight: 1.7, fontWeight: 300 }}>{v.desc}</div>
               </div>
             </FadeIn>

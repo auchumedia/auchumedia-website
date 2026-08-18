@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import Footer from '../components/Footer';
 import { projets } from '../data/projets';
 
@@ -250,6 +251,17 @@ export default function Home() {
 
   return (
     <div style={{ background: '#ffffff', minHeight: '100vh' }}>
+      <Helmet>
+        <title>{fr ? 'Pour Entreprises | AuchuMedia — Agence Contenu Vidéo Montréal' : 'For Businesses | AuchuMedia — Montreal Video Content Agency'}</title>
+        <meta name="description" content={fr ? "Devenez la référence dans votre domaine grâce à une stratégie de contenu vidéo sur mesure. AuchuMedia vous accompagne de la stratégie à la publication." : "Become the reference in your field with a custom video content strategy. AuchuMedia supports you from strategy to publishing."} />
+        <meta name="keywords" content="agence contenu vidéo Montréal, création contenu réseaux sociaux, stratégie de marque, storytelling, agence marketing vidéo Québec, personal branding athlète" />
+        <link rel="canonical" href="https://auchumedia.com/" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://auchumedia.com/" />
+        <meta property="og:title" content={fr ? 'Pour Entreprises | AuchuMedia — Agence Contenu Vidéo Montréal' : 'For Businesses | AuchuMedia — Montreal Video Content Agency'} />
+        <meta property="og:description" content={fr ? "Devenez la référence dans votre domaine grâce à une stratégie de contenu vidéo sur mesure. AuchuMedia vous accompagne de la stratégie à la publication." : "Become the reference in your field with a custom video content strategy. AuchuMedia supports you from strategy to publishing."} />
+        <meta property="og:image" content="https://auchumedia.com/Copie%20de%20AUCHU.png.png" />
+      </Helmet>
 
       {/* ===== MAIN NAV ===== */}
       <nav style={{
@@ -261,7 +273,7 @@ export default function Home() {
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         padding: '0 60px', height: '64px', gap: '16px'
       }}>
-        <Link to="/" style={{ flexShrink: 0 }}><img src="/Copie de AUCHU.png.png" alt="AuchuMedia" style={{ height: '22px', width: 'auto', filter: 'invert(1)' }} /></Link>
+        <Link to="/" style={{ flexShrink: 0 }}><img src="/Copie de AUCHU.png.png" alt="AuchuMedia — agence de contenu vidéo Montréal" style={{ height: '22px', width: 'auto', filter: 'invert(1)' }} /></Link>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '2px', overflowX: 'auto', scrollbarWidth: 'none', flex: 1, justifyContent: 'center' }} className="nav-links">
           {navLinks.map(link => (
@@ -377,7 +389,7 @@ export default function Home() {
                 onMouseLeave={e => e.currentTarget.style.borderColor = 'rgba(0,0,0,0.07)'}
               >
                 <div style={{ fontSize: '28px', marginBottom: '14px' }}>{item.icon}</div>
-                <div style={{ fontSize: '13px', fontWeight: 700, color: '#0a0a0a', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{item.title}</div>
+                <h3 style={{ margin: 0, fontSize: '13px', fontWeight: 700, color: '#0a0a0a', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{item.title}</h3>
                 <div style={{ fontSize: '13px', color: 'rgba(10,10,10,0.55)', lineHeight: 1.65, fontWeight: 300 }}>{item.desc}</div>
               </div>
             </FadeIn>
@@ -413,7 +425,7 @@ export default function Home() {
                 }}
               >
                 {p.image && (
-                  <img src={p.image} alt={p.client} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+                  <img src={p.image} alt={fr ? `${p.client} — étude de cas contenu vidéo ${p.domaine.fr} par AuchuMedia` : `${p.client} — ${p.domaine.en} video content case study by AuchuMedia`} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
                 )}
                 {p.image && (
                   <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.45)' }} />
@@ -557,12 +569,14 @@ export default function Home() {
           {faqs.map((faq, i) => (
             <FadeIn key={i} delay={i * 0.05}>
               <div style={{ background: openFaq === i ? '#f5f5f5' : '#ffffff', border: '0.5px solid rgba(0,0,0,0.08)', borderRadius: '8px', overflow: 'hidden', transition: 'background 0.2s', marginBottom: '4px' }}>
-                <button onClick={() => setOpenFaq(openFaq === i ? null : i)} style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '20px 24px', background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left' }}>
-                  <span style={{ fontSize: '14px', fontWeight: 600, color: '#0a0a0a', lineHeight: 1.4 }}>{faq.q}</span>
-                  <div style={{ width: '24px', height: '32px', borderRadius: '50%', border: '0.5px solid rgba(0,0,0,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginLeft: '16px', transform: openFaq === i ? 'rotate(45deg)' : 'none', transition: 'transform 0.25s', background: openFaq === i ? BLUE : 'transparent' }}>
-                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><line x1="5" y1="1" x2="5" y2="9" stroke={openFaq === i ? 'white' : '#0a0a0a'} strokeWidth="1.5" strokeLinecap="round"/><line x1="1" y1="5" x2="9" y2="5" stroke={openFaq === i ? 'white' : '#0a0a0a'} strokeWidth="1.5" strokeLinecap="round"/></svg>
-                  </div>
-                </button>
+                <h3 style={{ margin: 0 }}>
+                  <button onClick={() => setOpenFaq(openFaq === i ? null : i)} style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '20px 24px', background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left', fontFamily: "'DM Sans'" }}>
+                    <span style={{ fontSize: '14px', fontWeight: 600, color: '#0a0a0a', lineHeight: 1.4 }}>{faq.q}</span>
+                    <div style={{ width: '24px', height: '32px', borderRadius: '50%', border: '0.5px solid rgba(0,0,0,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginLeft: '16px', transform: openFaq === i ? 'rotate(45deg)' : 'none', transition: 'transform 0.25s', background: openFaq === i ? BLUE : 'transparent' }}>
+                      <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><line x1="5" y1="1" x2="5" y2="9" stroke={openFaq === i ? 'white' : '#0a0a0a'} strokeWidth="1.5" strokeLinecap="round"/><line x1="1" y1="5" x2="9" y2="5" stroke={openFaq === i ? 'white' : '#0a0a0a'} strokeWidth="1.5" strokeLinecap="round"/></svg>
+                    </div>
+                  </button>
+                </h3>
                 <div style={{ maxHeight: openFaq === i ? '400px' : '0', overflow: 'hidden', transition: 'max-height 0.35s ease' }}>
                   <div style={{ padding: '0 24px 20px', fontSize: '13px', color: 'rgba(10,10,10,0.6)', lineHeight: 1.75, fontWeight: 300 }}>{faq.a}</div>
                 </div>

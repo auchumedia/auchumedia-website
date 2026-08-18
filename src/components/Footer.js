@@ -10,7 +10,7 @@ export default function Footer() {
       <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: '48px', padding: '64px 60px 48px' }}>
         {/* Brand */}
         <div>
-          <div style={{ marginBottom: '16px' }}><img src="/Copie de AUCHU.png.png" alt="AuchuMedia" style={{ height: '20px', width: 'auto', filter: 'invert(1)' }} /></div>
+          <div style={{ marginBottom: '16px' }}><img src="/Copie de AUCHU.png.png" alt="AuchuMedia — agence de contenu vidéo Montréal" style={{ height: '20px', width: 'auto', filter: 'invert(1)' }} /></div>
           <p style={{ fontSize: '13px', color: 'rgba(10,10,10,0.55)', lineHeight: 1.75, fontWeight: 300, maxWidth: '280px' }}>
             L'agence de référence pour les athlètes et les entreprises ambitieuses. Sport · Marketing · Croissance.
           </p>

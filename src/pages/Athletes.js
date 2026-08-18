@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import Footer from '../components/Footer';
 import { athletesData } from '../data/athletesData';
 
@@ -281,6 +282,17 @@ export default function Athletes() {
 
   return (
     <div style={{ background: '#ffffff', minHeight: '100vh' }}>
+      <Helmet>
+        <title>{fr ? 'Pour Athlètes | AuchuMedia — Personal Branding & Contenu Vidéo' : 'For Athletes | AuchuMedia — Personal Branding & Video Content'}</title>
+        <meta name="description" content={fr ? "On aide les athlètes de haut niveau à bâtir leur personal branding grâce au storytelling vidéo qui capte l'attention et attire les commanditaires." : "We help elite athletes build their personal brand through video storytelling that captures attention and attracts sponsors."} />
+        <meta name="keywords" content="personal branding athlète, contenu vidéo athlète, agence marketing sportif Québec, storytelling athlète, commandite athlète" />
+        <link rel="canonical" href="https://auchumedia.com/athletes" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://auchumedia.com/athletes" />
+        <meta property="og:title" content={fr ? 'Pour Athlètes | AuchuMedia — Personal Branding & Contenu Vidéo' : 'For Athletes | AuchuMedia — Personal Branding & Video Content'} />
+        <meta property="og:description" content={fr ? "On aide les athlètes de haut niveau à bâtir leur personal branding grâce au storytelling vidéo qui capte l'attention et attire les commanditaires." : "We help elite athletes build their personal brand through video storytelling that captures attention and attracts sponsors."} />
+        <meta property="og:image" content="https://auchumedia.com/Copie%20de%20AUCHU.png.png" />
+      </Helmet>
 
       {/* ===== MAIN NAV ===== */}
       <nav style={{
@@ -292,7 +304,7 @@ export default function Athletes() {
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         padding: '0 60px', height: '64px', gap: '16px'
       }}>
-        <Link to="/" style={{ flexShrink: 0 }}><img src="/Copie de AUCHU.png.png" alt="AuchuMedia" style={{ height: '22px', width: 'auto', filter: 'invert(1)' }} /></Link>
+        <Link to="/" style={{ flexShrink: 0 }}><img src="/Copie de AUCHU.png.png" alt="AuchuMedia — agence de contenu vidéo Montréal" style={{ height: '22px', width: 'auto', filter: 'invert(1)' }} /></Link>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '2px', overflowX: 'auto', scrollbarWidth: 'none', flex: 1, justifyContent: 'center' }} className="nav-links">
           {navLinks.map(link => (
@@ -410,7 +422,7 @@ export default function Athletes() {
                 onMouseLeave={e => e.currentTarget.style.borderColor = 'rgba(0,0,0,0.07)'}
               >
                 <div style={{ fontSize: '28px', marginBottom: '14px' }}>{item.icon}</div>
-                <div style={{ fontSize: '13px', fontWeight: 700, color: '#0a0a0a', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{item.title}</div>
+                <h3 style={{ margin: 0, fontSize: '13px', fontWeight: 700, color: '#0a0a0a', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{item.title}</h3>
                 <div style={{ fontSize: '13px', color: 'rgba(10,10,10,0.55)', lineHeight: 1.65, fontWeight: 300 }}>{item.desc}</div>
               </div>
             </FadeIn>
@@ -511,7 +523,7 @@ export default function Athletes() {
                   <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(0,61,165,0.08)', border: '0.5px solid rgba(0,61,165,0.25)', borderRadius: '20px', padding: '4px 12px', marginBottom: '16px', width: 'fit-content' }}>
                     <span style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: BLUE }}>{step.days}</span>
                   </div>
-                  <div style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(24px, 3vw, 36px)', color: '#0a0a0a', marginBottom: '16px', letterSpacing: '0.02em', lineHeight: 1.1 }}>{step.title}</div>
+                  <h3 style={{ margin: 0, fontFamily: "'Bebas Neue'", fontSize: 'clamp(24px, 3vw, 36px)', color: '#0a0a0a', marginBottom: '16px', letterSpacing: '0.02em', lineHeight: 1.1 }}>{step.title}</h3>
                   <p style={{ fontSize: '14px', color: 'rgba(10,10,10,0.6)', lineHeight: 1.75, fontWeight: 300, marginBottom: '20px' }}>{step.desc}</p>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                     {step.points.map((pt, j) => (
@@ -531,7 +543,7 @@ export default function Athletes() {
                   <div style={{ position: 'absolute', inset: 0 }}>
                     <img
                       src={i === 0 ? '/deroulement-1.jpg' : i === 1 ? '/deroulement-2.jpg' : '/deroulement-3.jpg'}
-                      alt={step.title}
+                      alt={fr ? `${step.title} — accompagnement personal branding AuchuMedia` : `${step.title} — AuchuMedia personal branding process`}
                       style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: i === 1 ? 'center 20%' : 'center' }}
                     />
                     <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.2)' }} />
@@ -558,7 +570,7 @@ export default function Athletes() {
                 <div style={{ display: 'inline-flex', alignItems: 'center', background: 'rgba(0,61,165,0.08)', border: '0.5px solid rgba(0,61,165,0.25)', borderRadius: '20px', padding: '4px 12px', marginBottom: '12px' }}>
                   <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: BLUE }}>{step.days}</span>
                 </div>
-                <div style={{ fontFamily: "'Bebas Neue'", fontSize: '26px', color: '#0a0a0a', marginBottom: '10px', letterSpacing: '0.02em', lineHeight: 1.1 }}>{step.title}</div>
+                <h3 style={{ margin: 0, fontFamily: "'Bebas Neue'", fontSize: '26px', color: '#0a0a0a', marginBottom: '10px', letterSpacing: '0.02em', lineHeight: 1.1 }}>{step.title}</h3>
                 <p style={{ fontSize: '14px', color: 'rgba(10,10,10,0.65)', lineHeight: 1.75, fontWeight: 300, marginBottom: '18px' }}>{step.desc}</p>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '20px' }}>
                   {step.points.map((pt, j) => (
@@ -572,7 +584,7 @@ export default function Athletes() {
               <div style={{ height: '200px', position: 'relative', overflow: 'hidden' }}>
                 <img
                   src={i === 0 ? '/deroulement-1.jpg' : i === 1 ? '/deroulement-2.jpg' : '/deroulement-3.jpg'}
-                  alt={step.title}
+                  alt={fr ? `${step.title} — accompagnement personal branding AuchuMedia` : `${step.title} — AuchuMedia personal branding process`}
                   style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: i === 1 ? 'center 20%' : 'center' }}
                 />
                 <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.2)' }} />
@@ -597,12 +609,14 @@ export default function Athletes() {
           {faqs.map((faq, i) => (
             <FadeIn key={i} delay={i * 0.05}>
               <div style={{ background: openFaq === i ? '#f5f5f5' : '#ffffff', border: '0.5px solid rgba(0,0,0,0.08)', borderRadius: '8px', overflow: 'hidden', transition: 'background 0.2s', marginBottom: '4px' }}>
-                <button onClick={() => setOpenFaq(openFaq === i ? null : i)} style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '20px 24px', background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left' }}>
-                  <span style={{ fontSize: '14px', fontWeight: 600, color: '#0a0a0a', lineHeight: 1.4 }}>{faq.q}</span>
-                  <div style={{ width: '24px', height: '32px', borderRadius: '50%', border: '0.5px solid rgba(0,0,0,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginLeft: '16px', transform: openFaq === i ? 'rotate(45deg)' : 'none', transition: 'transform 0.25s', background: openFaq === i ? BLUE : 'transparent' }}>
-                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><line x1="5" y1="1" x2="5" y2="9" stroke={openFaq === i ? 'white' : '#0a0a0a'} strokeWidth="1.5" strokeLinecap="round"/><line x1="1" y1="5" x2="9" y2="5" stroke={openFaq === i ? 'white' : '#0a0a0a'} strokeWidth="1.5" strokeLinecap="round"/></svg>
-                  </div>
-                </button>
+                <h3 style={{ margin: 0 }}>
+                  <button onClick={() => setOpenFaq(openFaq === i ? null : i)} style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '20px 24px', background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left', fontFamily: "'DM Sans'" }}>
+                    <span style={{ fontSize: '14px', fontWeight: 600, color: '#0a0a0a', lineHeight: 1.4 }}>{faq.q}</span>
+                    <div style={{ width: '24px', height: '32px', borderRadius: '50%', border: '0.5px solid rgba(0,0,0,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginLeft: '16px', transform: openFaq === i ? 'rotate(45deg)' : 'none', transition: 'transform 0.25s', background: openFaq === i ? BLUE : 'transparent' }}>
+                      <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><line x1="5" y1="1" x2="5" y2="9" stroke={openFaq === i ? 'white' : '#0a0a0a'} strokeWidth="1.5" strokeLinecap="round"/><line x1="1" y1="5" x2="9" y2="5" stroke={openFaq === i ? 'white' : '#0a0a0a'} strokeWidth="1.5" strokeLinecap="round"/></svg>
+                    </div>
+                  </button>
+                </h3>
                 <div style={{ maxHeight: openFaq === i ? '400px' : '0', overflow: 'hidden', transition: 'max-height 0.35s ease' }}>
                   <div style={{ padding: '0 24px 20px', fontSize: '13px', color: 'rgba(10,10,10,0.6)', lineHeight: 1.75, fontWeight: 300 }}>{faq.a}</div>
                 </div>
