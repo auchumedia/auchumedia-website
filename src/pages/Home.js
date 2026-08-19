@@ -508,11 +508,11 @@ export default function Home() {
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', justifyContent: 'center', maxWidth: '860px', margin: '0 auto' }}>
 
           {(fr ? [
-            { price: '3 500$', videos: '2 vidéos / semaine sur toutes les plateformes' },
-            { price: '5 000$', videos: '3 vidéos / semaine sur toutes les plateformes' },
+            { title: 'Forfait Essentiel (4 vidéos/mois)', price: '2 000$', description: "Une présence cohérente et accessible. 1 vidéo par semaine pour bâtir ton audience et ta crédibilité en ligne.", videos: '1 vidéo / semaine sur toutes les plateformes' },
+            { title: 'Forfait Croissance (8 vidéos/mois)', price: '3 500$', description: "Une croissance constante. 2 vidéos par semaine pour multiplier ta présence et accélérer ton audience en ligne.", videos: '2 vidéos / semaine sur toutes les plateformes' },
           ] : [
-            { price: '$3,500', videos: '2 videos / week across all platforms' },
-            { price: '$5,000', videos: '3 videos / week across all platforms' },
+            { title: 'Essential Plan (4 videos/month)', price: '$2,000', description: "A consistent, accessible presence. 1 video per week to build your audience and credibility online.", videos: '1 video / week across all platforms' },
+            { title: 'Growth Plan (8 videos/month)', price: '$3,500', description: "Steady momentum. 2 videos per week to multiply your reach and accelerate your audience online.", videos: '2 videos / week across all platforms' },
           ]).map((plan, i) => (
             <FadeIn key={i} delay={0.05 + i * 0.05}>
               <div style={{ background: '#111', border: `2px solid ${BLUE}`, borderRadius: '16px', padding: '36px', position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column', width: '380px', maxWidth: '100%', height: '100%' }}>
@@ -520,10 +520,16 @@ export default function Home() {
                 <div style={{ display: 'inline-flex', alignItems: 'center', background: 'rgba(0,61,165,0.1)', border: '0.5px solid rgba(0,61,165,0.3)', borderRadius: '20px', padding: '4px 10px', marginBottom: '16px', width: 'fit-content' }}>
                   <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: BLUE }}>{fr ? 'Mandat mensuel' : 'Monthly retainer'}</span>
                 </div>
+                <div style={{ fontFamily: "'Bebas Neue'", fontSize: '20px', color: '#ffffff', letterSpacing: '0.02em', marginBottom: '8px' }}>
+                  {plan.title}
+                </div>
                 <div style={{ fontFamily: "'Bebas Neue'", fontSize: '40px', color: '#ffffff', lineHeight: 1, marginBottom: '4px' }}>
                   {plan.price}
                 </div>
-                <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)', marginBottom: '24px' }}>{fr ? '/ mois' : '/ month'}</div>
+                <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)', marginBottom: '16px' }}>{fr ? '/ mois' : '/ month'}</div>
+                <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.6)', lineHeight: 1.6, marginBottom: '24px', fontWeight: 300 }}>
+                  {plan.description}
+                </p>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '32px', flex: 1 }}>
                   {(fr ? [
                     'Stratégie, idéation et direction créative',
