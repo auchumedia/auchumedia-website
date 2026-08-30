@@ -256,7 +256,7 @@ export default function Athletes() {
   ];
 
   return (
-    <div style={{ background: '#ffffff', minHeight: '100vh' }}>
+    <div style={{ background: '#ffffff', minHeight: '100vh', marginTop: 0, paddingTop: 0 }}>
       <Helmet>
         <title>{fr ? 'Athlètes | AuchuMedia — Building Athletes Brands' : 'Athletes | AuchuMedia — Building Athletes Brands'}</title>
         <meta name="description" content={fr ? "On aide les joueurs de hockey de haut niveau à bâtir leur marque personnelle sur et hors glace. Personal branding, production vidéo et partenariats." : "We help elite hockey players build their personal brand on and off the ice. Personal branding, video production and brand partnerships."} />
@@ -369,7 +369,7 @@ export default function Athletes() {
         transform: splashLeaving ? 'scale(1)' : 'scale(1.05)',
         transition: 'opacity 0.9s ease-in-out, transform 0.9s ease-in-out'
       }}>
-      <section style={{ height: '100vh', position: 'relative', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <section style={{ height: '100vh', marginTop: 0, paddingTop: 0, position: 'relative', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <div style={{ position: 'absolute', inset: 0, overflow: 'hidden' }}>
           <video
             autoPlay muted loop playsInline crossOrigin="anonymous"
