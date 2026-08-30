@@ -418,11 +418,12 @@ export default function Athletes() {
       <section style={{ padding: '120px 60px', background: '#ffffff' }}>
         <div className="two-col founder-grid" style={{ display: 'grid', gridTemplateColumns: '400px 1fr', gap: '80px', alignItems: 'center', maxWidth: '1100px', margin: '0 auto' }}>
           <FadeIn direction="left">
-            <div style={{ width: '100%', maxWidth: '400px', height: '500px', borderRadius: '16px', background: 'linear-gradient(160deg, #1a1a1a 0%, #0a0a0a 100%)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '16px', margin: '0 auto' }}>
-              <svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="1.2" opacity="0.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-              <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.4)', letterSpacing: '0.1em', textTransform: 'uppercase', fontFamily: "'DM Sans'" }}>
-                {fr ? 'Photo à venir' : 'Photo coming soon'}
-              </span>
+            <div style={{ width: '100%', maxWidth: '400px', height: '500px', margin: '0 auto' }}>
+              <img
+                src="https://res.cloudinary.com/dr0kwuqqa/image/upload/v1788129452/bdfd0b36-20a9-496e-aa89-b5951701ed46_nweexm.jpg"
+                alt="Raphaël Auchu"
+                style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '12px' }}
+              />
             </div>
           </FadeIn>
           <FadeIn direction="right" delay={0.15}>
@@ -486,53 +487,42 @@ export default function Athletes() {
       </section>
 
       {/* ===== POURQUOI ===== */}
-      <section id="pourquoi" style={{ background: '#050505', padding: '100px 60px 200px' }}>
+      <section id="pourquoi" style={{ background: '#050505', padding: '100px 60px' }}>
         <h2 style={{ color: '#fff', textAlign: 'center', fontFamily: "'Bebas Neue'", fontSize: 'clamp(40px,5vw,64px)', marginBottom: '80px', letterSpacing: '0.02em' }}>
           {fr ? 'POURQUOI AUCHUMEDIA ?' : 'WHY AUCHUMEDIA?'}
         </h2>
-
-        <div style={{ position: 'relative' }}>
-          {pourquoiItems.map((item, i) => (
-            <div
-              key={i}
-              className="pourquoi-card"
-              style={{
-                position: 'sticky',
-                top: `${64 + i * 24}px`,
-                '--pq-top-mobile': `${64 + i * 16}px`,
-                zIndex: i + 1,
-                height: '520px',
-                maxWidth: '900px',
-                width: '100%',
-                margin: '0 auto',
-                borderRadius: '20px',
-                overflow: 'hidden',
-                boxShadow: 'none'
-              }}
-            >
-              {item.image ? (
-                <img src={item.image} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
-              ) : (
-                <div style={{ position: 'absolute', inset: 0, background: item.gradient }} />
-              )}
-              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.2) 100%)' }} />
-              <div className="pourquoi-card-text" style={{ position: 'absolute', bottom: '48px', left: '48px', maxWidth: '440px', zIndex: 2 }}>
-                <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#003DA5', marginBottom: '12px' }}>
-                  {fr ? 'POURQUOI AUCHUMEDIA' : 'WHY AUCHUMEDIA'}
-                </div>
-                <div className="pourquoi-card-title" style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(32px, 4vw, 48px)', color: '#fff', marginBottom: '16px', lineHeight: 1.1 }}>
-                  {fr ? item.titre.fr : item.titre.en}
-                </div>
-                <p className="pourquoi-card-desc" style={{ fontSize: '15px', color: 'rgba(255,255,255,0.65)', lineHeight: 1.75, margin: 0 }}>
-                  {fr ? item.desc.fr : item.desc.en}
-                </p>
-                <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.3)', marginTop: '24px', letterSpacing: '0.1em' }}>
-                  0{i + 1} / 0{pourquoiItems.length}
-                </div>
+        {pourquoiItems.map((item, i) => (
+          <div key={i} style={{
+            height: '520px',
+            maxWidth: '900px',
+            width: '100%',
+            margin: '0 auto',
+            marginBottom: '32px',
+            borderRadius: '20px',
+            overflow: 'hidden',
+            position: 'relative',
+          }}>
+            {item.image
+              ? <img src={item.image} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+              : <div style={{ position: 'absolute', inset: 0, background: item.gradient }} />
+            }
+            <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.5) 60%, rgba(0,0,0,0.1) 100%)' }} />
+            <div style={{ position: 'absolute', bottom: '48px', left: '48px', maxWidth: '440px', zIndex: 2 }}>
+              <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#003DA5', marginBottom: '12px' }}>
+                {fr ? 'POURQUOI AUCHUMEDIA' : 'WHY AUCHUMEDIA'}
+              </div>
+              <div style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(32px,4vw,48px)', color: '#fff', marginBottom: '16px', lineHeight: 1.1 }}>
+                {fr ? item.titre.fr : item.titre.en}
+              </div>
+              <p style={{ fontSize: '15px', color: 'rgba(255,255,255,0.65)', lineHeight: 1.75, margin: 0 }}>
+                {fr ? item.desc.fr : item.desc.en}
+              </p>
+              <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.3)', marginTop: '24px' }}>
+                0{i + 1} / 0{pourquoiItems.length}
               </div>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </section>
 
       {/* ===== CLIENTS ===== */}
