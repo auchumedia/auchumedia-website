@@ -1,9 +1,21 @@
 import React from 'react';
 
 const items = [
-  { title: 'Card 1', bg: '#1a1a2e' },
-  { title: 'Card 2', bg: '#16213e' },
-  { title: 'Card 3', bg: '#0f3460' },
+  {
+    title: 'CONTRÔLE DE TON IMAGE',
+    bg: 'linear-gradient(135deg, #1a0a2a, #2a1a3a)',
+    image: null
+  },
+  {
+    title: 'REVENUS DIVERSIFIÉS',
+    bg: null,
+    image: 'https://res.cloudinary.com/dr0kwuqqa/image/upload/v1788118137/Capture_d_%C3%A9cran_le_2026-08-30_%C3%A0_15.28.22_wwxod5.png'
+  },
+  {
+    title: "PRÉPARER L'APRÈS-CARRIÈRE",
+    bg: null,
+    image: 'https://res.cloudinary.com/dr0kwuqqa/image/upload/v1788122678/Capture_d_%C3%A9cran_le_2026-08-30_%C3%A0_16.43.54_qlkahx.png'
+  },
 ];
 
 export default function StickyTest() {
@@ -21,13 +33,17 @@ export default function StickyTest() {
               maxWidth: '900px',
               margin: '0 auto',
               borderRadius: '20px',
-              background: item.bg,
+              overflow: 'hidden',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
             }}
           >
-            <h2 style={{ color: '#fff', fontFamily: 'sans-serif', fontSize: '48px' }}>{item.title}</h2>
+            {item.image
+              ? <img src={item.image} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+              : <div style={{ position: 'absolute', inset: 0, background: item.bg }} />
+            }
+            <h2 style={{ position: 'relative', zIndex: 1, color: '#fff', fontFamily: 'sans-serif', fontSize: '48px', textAlign: 'center', padding: '0 24px' }}>{item.title}</h2>
           </div>
         ))}
       </div>
