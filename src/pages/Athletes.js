@@ -500,15 +500,23 @@ export default function Athletes() {
                     <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.6)', lineHeight: 1.7, fontWeight: 300, fontFamily: "'DM Sans'" }}>{card.desc}</p>
                   </div>
                   <div className="pourquoi-visual" style={{
-                    width: '100%', height: '420px', background: '#111111', borderRadius: '12px',
+                    width: '100%', height: '420px', background: '#111111', borderRadius: '12px', overflow: 'hidden',
                     border: '0.5px solid rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center',
                     opacity: activeIndex === i ? 1 : 0.3,
                     transform: activeIndex === i ? 'scale(1)' : 'scale(0.97)',
                     transition: 'opacity 0.4s ease, transform 0.4s ease'
                   }}>
-                    <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.2)', letterSpacing: '0.1em', textTransform: 'uppercase', fontFamily: "'DM Sans'" }}>
-                      {fr ? 'Visuel à venir' : 'Visual coming soon'}
-                    </span>
+                    {i === 0 ? (
+                      <img
+                        src="https://res.cloudinary.com/dr0kwuqqa/image/upload/v1788118137/Capture_d_%C3%A9cran_le_2026-08-30_%C3%A0_15.28.22_wwxod5.png"
+                        alt="Partenariats"
+                        style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '12px' }}
+                      />
+                    ) : (
+                      <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.2)', letterSpacing: '0.1em', textTransform: 'uppercase', fontFamily: "'DM Sans'" }}>
+                        {fr ? 'Visuel à venir' : 'Visual coming soon'}
+                      </span>
+                    )}
                   </div>
                 </FadeIn>
               </div>
