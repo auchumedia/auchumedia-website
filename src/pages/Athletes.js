@@ -68,7 +68,7 @@ function ContactForm({ fr }) {
           {fr ? 'DEMANDE REÇUE !' : 'REQUEST RECEIVED!'}
         </div>
         <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.6)', lineHeight: 1.7 }}>
-          {fr ? 'Notre équipe te contactera dans les 48h.' : 'Our team will contact you within 48h.'}
+          {fr ? 'Mon équipe te contactera dans les 48h.' : 'My team will contact you within 48h.'}
         </p>
       </div>
     );
@@ -91,7 +91,7 @@ function ContactForm({ fr }) {
       <label style={labelStyle}>{fr ? 'Ligue / Organisation' : 'League / Organization'}</label>
       <input type="text" value={form.organisation} onChange={e => set('organisation', e.target.value)} placeholder={fr ? 'Optionnel' : 'Optional'} style={inputStyle} />
       <label style={labelStyle}>{fr ? 'Message *' : 'Message *'}</label>
-      <textarea required value={form.message} onChange={e => set('message', e.target.value)} placeholder={fr ? 'Parle-nous de ton projet...' : 'Tell us about your project...'} style={{ ...inputStyle, resize: 'vertical', minHeight: '120px' }} />
+      <textarea required value={form.message} onChange={e => set('message', e.target.value)} placeholder={fr ? 'Parle-moi de ton projet...' : 'Tell me about your project...'} style={{ ...inputStyle, resize: 'vertical', minHeight: '120px' }} />
       <button type="submit" disabled={sending} style={{ width: '100%', fontSize: '12px', fontWeight: 700, color: '#fff', background: BLUE, padding: '15px', borderRadius: '6px', letterSpacing: '0.1em', textTransform: 'uppercase', border: 'none', cursor: sending ? 'default' : 'pointer', fontFamily: "'DM Sans'", transition: 'opacity 0.3s ease', opacity: sending ? 0.6 : 1, marginTop: '4px' }}>
         {sending ? (fr ? 'Envoi...' : 'Sending...') : (fr ? 'Envoyer →' : 'Send →')}
       </button>
@@ -208,12 +208,12 @@ export default function Athletes() {
   const services = fr ? [
     { icon: '🎬', title: 'Highlights & Clips', desc: "Des capsules dynamiques de tes meilleurs moments sur glace, optimisées pour capter l'attention et être partagées sur toutes les plateformes." },
     { icon: '🏷️', title: 'Personal Branding & Stratégie', desc: "Une identité de marque cohérente — positionnement, ton, esthétique — pour que ton image reflète vraiment qui tu es." },
-    { icon: '🤝', title: 'Brand Partnerships', desc: "On identifie les marques qui te ressemblent et on structure des collaborations qui reflètent ta vraie valeur." },
+    { icon: '🤝', title: 'Brand Partnerships', desc: "J'identifie les marques qui te ressemblent et je structure des collaborations qui reflètent ta vraie valeur." },
     { icon: '🎥', title: 'Production YouTube & Mini-docs', desc: "Des formats longs pour approfondir ton histoire — entraînements, quotidien, coulisses — et bâtir une connexion durable avec ton audience." },
   ] : [
     { icon: '🎬', title: 'Highlights & Clips', desc: "Dynamic clips of your best on-ice moments, optimized to capture attention and get shared across every platform." },
     { icon: '🏷️', title: 'Personal Branding & Strategy', desc: "A consistent brand identity — positioning, tone, aesthetic — so your image truly reflects who you are." },
-    { icon: '🤝', title: 'Brand Partnerships', desc: "We identify brands that match who you are and structure collaborations that reflect your real value." },
+    { icon: '🤝', title: 'Brand Partnerships', desc: "I identify brands that match who you are and structure collaborations that reflect your real value." },
     { icon: '🎥', title: 'YouTube & Mini-doc Production', desc: "Long-form content to dig deeper into your story — training, day-to-day life, behind the scenes — building a lasting connection with your audience." },
   ];
 
@@ -242,13 +242,13 @@ export default function Athletes() {
     <div style={{ background: '#ffffff', minHeight: '100vh', marginTop: 0, paddingTop: 0 }}>
       <Helmet>
         <title>{fr ? 'Athlètes | AuchuMedia — Building Athletes Brands' : 'Athletes | AuchuMedia — Building Athletes Brands'}</title>
-        <meta name="description" content={fr ? "On aide les joueurs de hockey de haut niveau à bâtir leur marque personnelle sur et hors glace. Personal branding, production vidéo et partenariats." : "We help elite hockey players build their personal brand on and off the ice. Personal branding, video production and brand partnerships."} />
+        <meta name="description" content={fr ? "J'aide les joueurs de hockey de haut niveau à bâtir leur marque personnelle sur et hors glace. Personal branding, production vidéo et partenariats." : "I help elite hockey players build their personal brand on and off the ice. Personal branding, video production and brand partnerships."} />
         <meta name="keywords" content="personal branding hockey, contenu vidéo athlète, agence marketing sportif Québec, storytelling athlète, commandite hockey, building athletes brands" />
         <link rel="canonical" href="https://auchumedia.com/" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://auchumedia.com/" />
         <meta property="og:title" content={fr ? 'Athlètes | AuchuMedia — Building Athletes Brands' : 'Athletes | AuchuMedia — Building Athletes Brands'} />
-        <meta property="og:description" content={fr ? "On aide les joueurs de hockey de haut niveau à bâtir leur marque personnelle sur et hors glace." : "We help elite hockey players build their personal brand on and off the ice."} />
+        <meta property="og:description" content={fr ? "J'aide les joueurs de hockey de haut niveau à bâtir leur marque personnelle sur et hors glace." : "I help elite hockey players build their personal brand on and off the ice."} />
         <meta property="og:image" content="https://auchumedia.com/Copie%20de%20AUCHU.png.png" />
       </Helmet>
 
@@ -322,7 +322,7 @@ export default function Athletes() {
             onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-1px)'; e.currentTarget.style.boxShadow = '0 6px 20px rgba(0,61,165,0.4)'; }}
             onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = 'none'; }}
           >
-            {fr ? 'Travailler avec nous' : 'Work with us'}
+            {fr ? 'Travailler avec moi' : 'Work with me'}
           </button>
           <button onClick={() => setMobileOpen(!mobileOpen)} className="hamburger-btn" style={{ display: 'none', flexDirection: 'column', gap: '5px', background: 'none', border: 'none', cursor: 'pointer', padding: '8px', flexShrink: 0 }}>
             <span style={{ width: '22px', height: '1.5px', background: '#fff', display: 'block', transition: 'all 0.25s', transform: mobileOpen ? 'translateY(6.5px) rotate(45deg)' : 'none' }} />
@@ -341,7 +341,7 @@ export default function Athletes() {
             </button>
           ))}
           <button onClick={() => { scrollTo('contact'); setMobileOpen(false); }} style={{ fontSize: '12px', fontWeight: 700, color: '#fff', background: BLUE, padding: '14px 20px', borderRadius: '4px', border: 'none', cursor: 'pointer', letterSpacing: '0.07em', textTransform: 'uppercase', fontFamily: "'DM Sans'", marginTop: '20px' }}>
-            {fr ? 'Travailler avec nous' : 'Work with us'}
+            {fr ? 'Travailler avec moi' : 'Work with me'}
           </button>
         </div>
       )}
@@ -376,7 +376,7 @@ export default function Athletes() {
               onMouseEnter={e => { e.currentTarget.style.background = '#ffffff'; e.currentTarget.style.color = '#0a0a0a'; }}
               onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#ffffff'; }}
             >
-              {fr ? 'Travailler avec nous →' : 'Work with us →'}
+              {fr ? 'Travailler avec moi →' : 'Work with me →'}
             </button>
           </div>
         </div>
@@ -394,15 +394,15 @@ export default function Athletes() {
             <div>
               <div style={{ width: '48px', height: '3px', background: BLUE, marginBottom: '20px' }} />
               <span style={{ display: 'block', fontSize: '11px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE, marginBottom: '16px' }}>
-                {fr ? 'Notre mission' : 'Our mission'}
+                {fr ? 'Ma mission' : 'My mission'}
               </span>
               <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(40px, 5vw, 72px)', color: '#0a0a0a', lineHeight: 0.95, marginBottom: '28px', letterSpacing: '0.01em' }}>
                 {fr ? <>LE HOCKEY<br />MÉRITE MIEUX.</> : <>HOCKEY<br />DESERVES MORE.</>}
               </h2>
               <p style={{ fontSize: '16px', color: 'rgba(10,10,10,0.6)', lineHeight: 1.9, fontFamily: "'DM Sans'", fontWeight: 300 }}>
                 {fr
-                  ? "Dans plusieurs sports professionnels, l'image personnelle est devenue aussi importante que la performance elle-même. Au hockey, cette réalité reste encore trop souvent ignorée — on continue de miser uniquement sur les statistiques, en oubliant que les marques et les partisans s'attachent d'abord à une histoire, une personnalité, une communauté. Les joueurs qui prennent le contrôle de leur récit — qui documentent leur parcours, partagent qui ils sont vraiment et bâtissent une audience fidèle — se positionnent différemment : plus visibles, plus attractifs pour les commanditaires, et mieux préparés pour l'après-carrière. On croit que chaque joueur mérite cette opportunité, peu importe son niveau."
-                  : "In many professional sports, personal image has become just as important as performance itself. In hockey, that reality is still too often ignored — success is measured only in stats, forgetting that brands and fans connect first with a story, a personality, a community. Players who take control of their narrative — documenting their journey, sharing who they truly are, and building a loyal audience — position themselves differently: more visible, more attractive to sponsors, and better prepared for life after their playing career. We believe every player deserves that opportunity, no matter their level."}
+                  ? "Dans plusieurs sports professionnels, l'image personnelle est devenue aussi importante que la performance elle-même. Au hockey, cette réalité reste encore trop souvent ignorée — je continue de voir des joueurs miser uniquement sur les statistiques, en oubliant que les marques et les partisans s'attachent d'abord à une histoire, une personnalité, une communauté. Les joueurs qui prennent le contrôle de leur récit — qui documentent leur parcours, partagent qui ils sont vraiment et bâtissent une audience fidèle — se positionnent différemment : plus visibles, plus attractifs pour les commanditaires, et mieux préparés pour l'après-carrière. Je crois que chaque joueur mérite cette opportunité, peu importe son niveau."
+                  : "In many professional sports, personal image has become just as important as performance itself. In hockey, that reality is still too often ignored — I keep seeing players rely only on stats, forgetting that brands and fans connect first with a story, a personality, a community. Players who take control of their narrative — documenting their journey, sharing who they truly are, and building a loyal audience — position themselves differently: more visible, more attractive to sponsors, and better prepared for life after their playing career. I believe every player deserves that opportunity, no matter their level."}
               </p>
             </div>
           </FadeIn>
@@ -420,15 +420,50 @@ export default function Athletes() {
         </div>
       </section>
 
+      {/* ===== FONDATEUR ===== */}
+      <section style={{ padding: '120px 60px', background: '#ffffff' }}>
+        <div className="two-col founder-grid" style={{ display: 'grid', gridTemplateColumns: '400px 1fr', gap: '80px', alignItems: 'center', maxWidth: '1100px', margin: '0 auto' }}>
+          <FadeIn direction="left">
+            <div style={{ width: '100%', maxWidth: '400px', height: '500px', borderRadius: '16px', background: 'linear-gradient(160deg, #1a1a1a 0%, #0a0a0a 100%)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '16px', margin: '0 auto' }}>
+              <svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="1.2" opacity="0.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.4)', letterSpacing: '0.1em', textTransform: 'uppercase', fontFamily: "'DM Sans'" }}>
+                {fr ? 'Photo à venir' : 'Photo coming soon'}
+              </span>
+            </div>
+          </FadeIn>
+          <FadeIn direction="right" delay={0.15}>
+            <div>
+              <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(36px, 4.5vw, 56px)', color: '#0a0a0a', letterSpacing: '0.02em', marginBottom: '10px' }}>
+                RAPHAËL AUCHU
+              </h2>
+              <p style={{ fontSize: '14px', color: 'rgba(10,10,10,0.5)', fontFamily: "'DM Sans'", marginBottom: '24px' }}>
+                {fr ? 'Brand Builder & Ancien joueur LHJMQ' : 'Brand Builder & Former QMJHL Player'}
+              </p>
+              <div style={{ width: '100%', height: '1px', background: 'rgba(0,61,165,0.25)', marginBottom: '24px' }} />
+              <p style={{ fontSize: '15px', color: 'rgba(10,10,10,0.65)', lineHeight: 1.9, fontFamily: "'DM Sans'", fontWeight: 300, marginBottom: '24px' }}>
+                {fr
+                  ? "Ancien gardien de but repêché dans la LHJMQ, Raphaël a vécu de l'intérieur les hauts et les bas du hockey junior — la pression de performer, la compétition pour une place, et l'incertitude de l'après-carrière. Cette expérience l'a convaincu qu'un joueur ne devrait jamais dépendre uniquement de ses statistiques pour être reconnu."
+                  : "A former QMJHL drafted goaltender, Raphaël experienced firsthand the highs and lows of junior hockey — the pressure to perform, the competition for a spot, and the uncertainty of life after the game. That experience convinced him that a player should never have to rely on stats alone to be recognized."}
+              </p>
+              <p style={{ fontSize: '15px', color: 'rgba(10,10,10,0.65)', lineHeight: 1.9, fontFamily: "'DM Sans'", fontWeight: 300, marginBottom: '32px' }}>
+                {fr
+                  ? "Il a fondé AuchuMedia pour donner aux athlètes les outils, la stratégie et la caméra nécessaires pour raconter leur propre histoire — et pour qu'ils gardent le contrôle de leur image, sur la glace comme en dehors."
+                  : "He founded AuchuMedia to give athletes the tools, strategy and camera they need to tell their own story — and to stay in control of their image, on the ice and off it."}
+              </p>
+            </div>
+          </FadeIn>
+        </div>
+      </section>
+
       {/* ===== SERVICES ===== */}
       <section id="services" style={{ padding: '120px 60px', background: '#000000', scrollMarginTop: '72px' }}>
         <FadeIn>
           <div style={{ textAlign: 'center', marginBottom: '64px' }}>
             <span style={{ display: 'block', fontSize: '11px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE, marginBottom: '16px' }}>
-              {fr ? 'Nos services' : 'Our services'}
+              {fr ? 'Mes services' : 'My services'}
             </span>
             <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(32px, 4.5vw, 56px)', color: '#ffffff', letterSpacing: '0.02em' }}>
-              {fr ? 'CE QU’ON FAIT.' : 'WHAT WE DO.'}
+              {fr ? 'CE QUE JE FAIS.' : 'WHAT I DO.'}
             </h2>
           </div>
         </FadeIn>
@@ -461,7 +496,7 @@ export default function Athletes() {
         <h2 style={{
           fontFamily: "'Bebas Neue'",
           fontSize: 'clamp(40px, 5vw, 64px)',
-          color: '#003DA5',
+          color: '#ffffff',
           textAlign: 'center',
           marginBottom: '80px',
           letterSpacing: '0.02em'
@@ -518,46 +553,11 @@ export default function Athletes() {
         </div>
       </section>
 
-      {/* ===== FONDATEUR ===== */}
-      <section style={{ padding: '120px 60px', background: '#ffffff' }}>
-        <div className="two-col founder-grid" style={{ display: 'grid', gridTemplateColumns: '400px 1fr', gap: '80px', alignItems: 'center', maxWidth: '1100px', margin: '0 auto' }}>
-          <FadeIn direction="left">
-            <div style={{ width: '100%', maxWidth: '400px', height: '500px', borderRadius: '16px', background: 'linear-gradient(160deg, #1a1a1a 0%, #0a0a0a 100%)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '16px', margin: '0 auto' }}>
-              <svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="1.2" opacity="0.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-              <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.4)', letterSpacing: '0.1em', textTransform: 'uppercase', fontFamily: "'DM Sans'" }}>
-                {fr ? 'Photo à venir' : 'Photo coming soon'}
-              </span>
-            </div>
-          </FadeIn>
-          <FadeIn direction="right" delay={0.15}>
-            <div>
-              <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(36px, 4.5vw, 56px)', color: '#0a0a0a', letterSpacing: '0.02em', marginBottom: '10px' }}>
-                RAPHAËL AUCHU
-              </h2>
-              <p style={{ fontSize: '14px', color: 'rgba(10,10,10,0.5)', fontFamily: "'DM Sans'", marginBottom: '24px' }}>
-                {fr ? 'Brand Builder & Ancien joueur LHJMQ' : 'Brand Builder & Former QMJHL Player'}
-              </p>
-              <div style={{ width: '100%', height: '1px', background: 'rgba(0,61,165,0.25)', marginBottom: '24px' }} />
-              <p style={{ fontSize: '15px', color: 'rgba(10,10,10,0.65)', lineHeight: 1.9, fontFamily: "'DM Sans'", fontWeight: 300, marginBottom: '24px' }}>
-                {fr
-                  ? "Ancien gardien de but repêché dans la LHJMQ, Raphaël a vécu de l'intérieur les hauts et les bas du hockey junior — la pression de performer, la compétition pour une place, et l'incertitude de l'après-carrière. Cette expérience l'a convaincu qu'un joueur ne devrait jamais dépendre uniquement de ses statistiques pour être reconnu."
-                  : "A former QMJHL drafted goaltender, Raphaël experienced firsthand the highs and lows of junior hockey — the pressure to perform, the competition for a spot, and the uncertainty of life after the game. That experience convinced him that a player should never have to rely on stats alone to be recognized."}
-              </p>
-              <p style={{ fontSize: '15px', color: 'rgba(10,10,10,0.65)', lineHeight: 1.9, fontFamily: "'DM Sans'", fontWeight: 300, marginBottom: '32px' }}>
-                {fr
-                  ? "Il a fondé AuchuMedia pour donner aux athlètes les outils, la stratégie et la caméra nécessaires pour raconter leur propre histoire — et pour qu'ils gardent le contrôle de leur image, sur la glace comme en dehors."
-                  : "He founded AuchuMedia to give athletes the tools, strategy and camera they need to tell their own story — and to stay in control of their image, on the ice and off it."}
-              </p>
-            </div>
-          </FadeIn>
-        </div>
-      </section>
-
       {/* ===== CLIENTS ===== */}
       <section id="clients" style={{ padding: '120px 60px', background: '#ffffff', scrollMarginTop: '72px' }}>
         <FadeIn>
           <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(32px, 4.5vw, 56px)', color: '#0a0a0a', letterSpacing: '0.02em', textAlign: 'center', marginBottom: '64px' }}>
-            {fr ? 'ILS NOUS FONT CONFIANCE.' : 'THEY TRUST US.'}
+            {fr ? 'ILS ME FONT CONFIANCE.' : 'THEY TRUST ME.'}
           </h2>
         </FadeIn>
         <div className="clients-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px', maxWidth: '1080px', margin: '0 auto' }}>
@@ -593,7 +593,7 @@ export default function Athletes() {
             {fr ? <>TRAVAILLONS<br />ENSEMBLE.</> : <>LET'S WORK<br />TOGETHER.</>}
           </h2>
           <p style={{ fontSize: '15px', color: 'rgba(255,255,255,0.55)', textAlign: 'center', maxWidth: '480px', margin: '0 auto 56px', lineHeight: 1.8, fontFamily: "'DM Sans'", fontWeight: 300 }}>
-            {fr ? 'Notre équipe te reviendra dans les 48h.' : "Our team will get back to you within 48h."}
+            {fr ? 'Mon équipe te reviendra dans les 48h.' : "My team will get back to you within 48h."}
           </p>
         </FadeIn>
         <FadeIn delay={0.1}>
