@@ -7,35 +7,23 @@ export default function Footer() {
   return (
     <footer style={{ background: '#ffffff', borderTop: '0.5px solid rgba(0,0,0,0.08)' }}>
       {/* Main footer */}
-      <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: '48px', padding: '64px 60px 48px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr', gap: '48px', padding: '64px 60px 48px' }}>
         {/* Brand */}
         <div>
           <div style={{ marginBottom: '16px' }}><img src="/Copie de AUCHU.png.png" alt="AuchuMedia — agence de contenu vidéo Montréal" style={{ height: '20px', width: 'auto', filter: 'invert(1)' }} /></div>
           <p style={{ fontSize: '13px', color: 'rgba(10,10,10,0.55)', lineHeight: 1.75, fontWeight: 300, maxWidth: '280px' }}>
-            L'agence de référence pour les athlètes et les entreprises ambitieuses. Sport · Marketing · Croissance.
+            L'agence de référence pour bâtir la marque personnelle des athlètes. Sport · Marketing · Croissance.
           </p>
         </div>
 
-        {/* Services */}
+        {/* Navigation */}
         <div>
-          <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(10,10,10,0.4)', marginBottom: '20px' }}>Services</div>
+          <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(10,10,10,0.4)', marginBottom: '20px' }}>Navigation</div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             {[
-              { to: '/athletes', label: 'Pour les athlètes' },
-            ].map(link => (
-              <Link key={link.to} to={link.to} style={{ fontSize: '13px', color: 'rgba(10,10,10,0.6)', fontWeight: 300, transition: 'color 0.2s' }}
-                onMouseEnter={e => e.target.style.color = '#0a0a0a'}
-                onMouseLeave={e => e.target.style.color = 'rgba(10,10,10,0.6)'}
-              >{link.label}</Link>
-            ))}
-          </div>
-        </div>
-
-        {/* Compagnie */}
-        <div>
-          <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(10,10,10,0.4)', marginBottom: '20px' }}>Compagnie</div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-            {[
+              { to: '/#a-propos', label: 'À propos' },
+              { to: '/#services', label: 'Services' },
+              { to: '/#clients', label: 'Clients' },
             ].map(link => (
               <Link key={link.to} to={link.to} style={{ fontSize: '13px', color: 'rgba(10,10,10,0.6)', fontWeight: 300, transition: 'color 0.2s' }}
                 onMouseEnter={e => e.target.style.color = '#0a0a0a'}

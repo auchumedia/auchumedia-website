@@ -151,6 +151,13 @@ export default function Athletes() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (window.location.hash) {
+      const id = window.location.hash.slice(1);
+      setTimeout(() => scrollTo(id), 100);
+    }
+  }, []);
+
   const [statsRef, statsInView] = useInView(0.3);
 
   const pourquoiCards = fr ? [
@@ -206,9 +213,9 @@ export default function Athletes() {
         <title>{fr ? 'Athlètes | AuchuMedia — Building Athletes Brands' : 'Athletes | AuchuMedia — Building Athletes Brands'}</title>
         <meta name="description" content={fr ? "On aide les joueurs de hockey de haut niveau à bâtir leur marque personnelle sur et hors glace. Personal branding, production vidéo et partenariats." : "We help elite hockey players build their personal brand on and off the ice. Personal branding, video production and brand partnerships."} />
         <meta name="keywords" content="personal branding hockey, contenu vidéo athlète, agence marketing sportif Québec, storytelling athlète, commandite hockey, building athletes brands" />
-        <link rel="canonical" href="https://auchumedia.com/athletes" />
+        <link rel="canonical" href="https://auchumedia.com/" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://auchumedia.com/athletes" />
+        <meta property="og:url" content="https://auchumedia.com/" />
         <meta property="og:title" content={fr ? 'Athlètes | AuchuMedia — Building Athletes Brands' : 'Athletes | AuchuMedia — Building Athletes Brands'} />
         <meta property="og:description" content={fr ? "On aide les joueurs de hockey de haut niveau à bâtir leur marque personnelle sur et hors glace." : "We help elite hockey players build their personal brand on and off the ice."} />
         <meta property="og:image" content="https://auchumedia.com/Copie%20de%20AUCHU.png.png" />
