@@ -490,48 +490,69 @@ export default function Athletes() {
       </section>
 
       {/* ===== POURQUOI ===== */}
-      <section id="pourquoi" style={{ background: '#050505', padding: '100px 60px 200px' }}>
+      <section id="pourquoi" style={{ background: '#050505', padding: '100px 60px 300px' }}>
         <h2 style={{ color: '#fff', textAlign: 'center', fontFamily: "'Bebas Neue'", fontSize: 'clamp(40px,5vw,64px)', marginBottom: '80px', letterSpacing: '0.02em' }}>
           {fr ? 'POURQUOI AUCHUMEDIA ?' : 'WHY AUCHUMEDIA?'}
         </h2>
 
-        <div>
-          {pourquoiItems.map((item, i) => (
+        <div style={{ position: 'relative' }}>
+          {[
+            {
+              bg: '#1a0a2a',
+              image: null,
+              titreFr: 'CONTRÔLE DE TON IMAGE',
+              titreEn: 'CONTROL YOUR NARRATIVE',
+              descFr: "Plutôt qu'être défini par les médias ou tes performances du moment, tu deviens maître de ton histoire et de la façon dont le monde te perçoit.",
+              descEn: "Rather than being defined by media or your on-ice performances, you become the author of your story and how the world perceives you.",
+            },
+            {
+              bg: null,
+              image: 'https://res.cloudinary.com/dr0kwuqqa/image/upload/v1788118137/Capture_d_%C3%A9cran_le_2026-08-30_%C3%A0_15.28.22_wwxod5.png',
+              titreFr: 'REVENUS DIVERSIFIÉS',
+              titreEn: 'DIVERSIFIED REVENUE',
+              descFr: "Collaborations commerciales, placements de produits, contenu monétisé. Un bon branding ouvre des portes financières bien au-delà du sport.",
+              descEn: "Brand collaborations, product placements, monetized content. Strong branding opens financial doors well beyond the sport itself.",
+            },
+            {
+              bg: null,
+              image: 'https://res.cloudinary.com/dr0kwuqqa/image/upload/v1788122678/Capture_d_%C3%A9cran_le_2026-08-30_%C3%A0_16.43.54_qlkahx.png',
+              titreFr: "PRÉPARER L'APRÈS-CARRIÈRE",
+              titreEn: 'POST-CAREER PREPARATION',
+              descFr: "Un branding fort te garde visible et pertinent même après avoir raccroché les patins — que ce soit pour lancer une entreprise, devenir analyste ou mentor.",
+              descEn: "A strong personal brand keeps you visible and relevant even after you hang up the skates — whether to launch a business, become an analyst or a mentor.",
+            },
+          ].map((item, i) => (
             <div
               key={i}
-              className="pourquoi-card"
               style={{
                 position: 'sticky',
                 top: `${80 + i * 30}px`,
                 zIndex: i + 1,
-                height: '500px',
+                height: '520px',
                 maxWidth: '900px',
+                width: '100%',
                 margin: '0 auto',
                 borderRadius: '20px',
                 overflow: 'hidden',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
               }}
             >
-              {item.image ? (
-                <img src={item.image} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
-              ) : (
-                <div style={{ position: 'absolute', inset: 0, background: item.gradient }} />
-              )}
+              {item.image
+                ? <img src={item.image} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+                : <div style={{ position: 'absolute', inset: 0, background: item.bg }} />
+              }
               <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.2) 100%)' }} />
-              <div className="pourquoi-card-text" style={{ position: 'absolute', bottom: '48px', left: '48px', maxWidth: '440px', zIndex: 2 }}>
+              <div style={{ position: 'absolute', bottom: '48px', left: '48px', maxWidth: '440px', zIndex: 2 }}>
                 <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#003DA5', marginBottom: '12px' }}>
                   {fr ? 'POURQUOI AUCHUMEDIA' : 'WHY AUCHUMEDIA'}
                 </div>
-                <div className="pourquoi-card-title" style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(32px, 4vw, 48px)', color: '#fff', marginBottom: '16px', lineHeight: 1.1 }}>
-                  {fr ? item.titre.fr : item.titre.en}
+                <div style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(32px, 4vw, 48px)', color: '#fff', marginBottom: '16px', lineHeight: 1.1 }}>
+                  {fr ? item.titreFr : item.titreEn}
                 </div>
-                <p className="pourquoi-card-desc" style={{ fontSize: '15px', color: 'rgba(255,255,255,0.65)', lineHeight: 1.75, margin: 0 }}>
-                  {fr ? item.desc.fr : item.desc.en}
+                <p style={{ fontSize: '15px', color: 'rgba(255,255,255,0.65)', lineHeight: 1.75, margin: 0 }}>
+                  {fr ? item.descFr : item.descEn}
                 </p>
                 <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.3)', marginTop: '24px', letterSpacing: '0.1em' }}>
-                  0{i + 1} / 0{pourquoiItems.length}
+                  0{i + 1} / 03
                 </div>
               </div>
             </div>
