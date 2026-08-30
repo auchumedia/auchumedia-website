@@ -27,11 +27,7 @@ a { text-decoration: none; color: inherit; }
 
 @media (max-width: 768px) {
   /* No horizontal overflow */
-  html, body, #root { overflow-x: hidden; max-width: 100vw; }
-  
-  /* Hide scrollbars on carousels */
-  div { scrollbar-width: none; }
-  div::-webkit-scrollbar { display: none; }
+  html, body { overflow-x: clip; overflow-y: visible; }
 
   /* Section padding */
   section {
