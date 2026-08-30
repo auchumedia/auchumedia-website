@@ -57,6 +57,52 @@ function RoadmapItem({ item, index, isLast, fr }) {
   );
 }
 
+function ServiceRow({ service, index, total, isLast }) {
+  const [ref, inView] = useInView(0.2);
+  return (
+    <div
+      ref={ref}
+      className="service-row"
+      style={{
+        display: 'grid', gridTemplateColumns: '1fr 420px', gap: '56px', alignItems: 'center',
+        padding: '56px 0', borderBottom: isLast ? 'none' : '0.5px solid rgba(255,255,255,0.08)',
+        opacity: inView ? 1 : 0, transform: inView ? 'translateY(0)' : 'translateY(50px)',
+        transition: 'opacity 0.8s ease, transform 0.8s ease'
+      }}
+    >
+      <div>
+        <div style={{ fontFamily: "'Bebas Neue'", fontSize: '90px', color: 'rgba(255,255,255,0.07)', lineHeight: 1, marginBottom: '8px' }}>
+          0{index + 1}
+        </div>
+        <h3 style={{ margin: '0 0 16px', fontFamily: "'Bebas Neue'", fontSize: 'clamp(28px, 3vw, 40px)', color: '#fff', textTransform: 'uppercase', letterSpacing: '0.02em', lineHeight: 1.1 }}>
+          {service.title}
+        </h3>
+        <p style={{ fontSize: '15px', color: 'rgba(255,255,255,0.6)', lineHeight: 1.8, maxWidth: '480px', margin: '0 0 20px', fontFamily: "'DM Sans'", fontWeight: 300 }}>
+          {service.desc}
+        </p>
+        <div style={{ fontSize: '12px', color: BLUE, letterSpacing: '0.1em', fontFamily: "'DM Sans'", fontWeight: 700 }}>
+          {`0${index + 1} // 0${total}`}
+        </div>
+      </div>
+      <div className="service-visual" style={{ position: 'relative', height: '280px', borderRadius: '16px', overflow: 'hidden', background: '#111111' }}>
+        {service.video ? (
+          <video autoPlay muted loop playsInline crossOrigin="anonymous" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}>
+            <source src={service.video} type="video/mp4" />
+            {service.videoMov && <source src={service.videoMov} type="video/quicktime" />}
+          </video>
+        ) : service.image ? (
+          <img src={service.image} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+        ) : (
+          <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '56px' }}>
+            {service.icon}
+          </div>
+        )}
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, rgba(10,10,10,0.35) 0%, rgba(10,10,10,0) 45%)' }} />
+      </div>
+    </div>
+  );
+}
+
 const navLinks = [
   { id: 'a-propos', labelFr: 'À propos', labelEn: 'About' },
   { id: 'services', labelFr: 'Services', labelEn: 'Services' },
@@ -233,15 +279,15 @@ export default function Athletes() {
   ];
 
   const services = fr ? [
-    { icon: '🎬', title: 'Highlights & Clips', desc: "Des capsules dynamiques de tes meilleurs moments sur glace, optimisées pour capter l'attention et être partagées sur toutes les plateformes." },
+    { icon: '🎬', title: 'Highlights & Clips', desc: "Des capsules dynamiques de tes meilleurs moments sur glace, optimisées pour capter l'attention et être partagées sur toutes les plateformes.", video: 'https://res.cloudinary.com/dr0kwuqqa/video/upload/v1788131184/Batail2_l0vfaq.mp4', videoMov: 'https://res.cloudinary.com/dr0kwuqqa/video/upload/v1788131184/Batail2_l0vfaq.mov' },
     { icon: '🏷️', title: 'Personal Branding & Stratégie', desc: "Une identité de marque cohérente — positionnement, ton, esthétique — pour que ton image reflète vraiment qui tu es." },
     { icon: '🤝', title: 'Brand Partnerships', desc: "J'identifie les marques qui te ressemblent et je structure des collaborations qui reflètent ta vraie valeur." },
-    { icon: '🎥', title: 'Production YouTube & Mini-docs', desc: "Des formats longs pour approfondir ton histoire — entraînements, quotidien, coulisses — et bâtir une connexion durable avec ton audience." },
+    { icon: '🎥', title: 'Production YouTube & Mini-docs', desc: "Des formats longs pour approfondir ton histoire — entraînements, quotidien, coulisses — et bâtir une connexion durable avec ton audience.", image: 'https://res.cloudinary.com/dr0kwuqqa/image/upload/v1788132498/Capture_d_%C3%A9cran_le_2026-08-30_%C3%A0_19.27.24_p9dffe.png' },
   ] : [
-    { icon: '🎬', title: 'Highlights & Clips', desc: "Dynamic clips of your best on-ice moments, optimized to capture attention and get shared across every platform." },
+    { icon: '🎬', title: 'Highlights & Clips', desc: "Dynamic clips of your best on-ice moments, optimized to capture attention and get shared across every platform.", video: 'https://res.cloudinary.com/dr0kwuqqa/video/upload/v1788131184/Batail2_l0vfaq.mp4', videoMov: 'https://res.cloudinary.com/dr0kwuqqa/video/upload/v1788131184/Batail2_l0vfaq.mov' },
     { icon: '🏷️', title: 'Personal Branding & Strategy', desc: "A consistent brand identity — positioning, tone, aesthetic — so your image truly reflects who you are." },
     { icon: '🤝', title: 'Brand Partnerships', desc: "I identify brands that match who you are and structure collaborations that reflect your real value." },
-    { icon: '🎥', title: 'YouTube & Mini-doc Production', desc: "Long-form content to dig deeper into your story — training, day-to-day life, behind the scenes — building a lasting connection with your audience." },
+    { icon: '🎥', title: 'YouTube & Mini-doc Production', desc: "Long-form content to dig deeper into your story — training, day-to-day life, behind the scenes — building a lasting connection with your audience.", image: 'https://res.cloudinary.com/dr0kwuqqa/image/upload/v1788132498/Capture_d_%C3%A9cran_le_2026-08-30_%C3%A0_19.27.24_p9dffe.png' },
   ];
 
   const clients = [
@@ -495,52 +541,9 @@ export default function Athletes() {
             </h2>
           </div>
         </FadeIn>
-        <div className="services-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', maxWidth: '960px', margin: '0 auto' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           {services.map((s, i) => (
-            <FadeIn key={i} delay={i * 0.1}>
-              <div
-                className="service-card"
-                style={{ background: '#0d0d0d', border: '0.5px solid rgba(255,255,255,0.07)', borderRadius: '16px', padding: '36px', position: 'relative', overflow: 'hidden', height: '100%', transition: 'all 0.3s ease' }}
-                onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.02)'; e.currentTarget.style.borderColor = BLUE; e.currentTarget.style.boxShadow = '0 10px 40px rgba(0,61,165,0.25)'; }}
-                onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.07)'; e.currentTarget.style.boxShadow = 'none'; }}
-              >
-                {s.title === 'Highlights & Clips' && (
-                  <>
-                    <video
-                      autoPlay
-                      muted
-                      loop
-                      playsInline
-                      crossOrigin="anonymous"
-                      style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0 }}
-                    >
-                      <source src="https://res.cloudinary.com/dr0kwuqqa/video/upload/v1788131184/Batail2_l0vfaq.mp4" type="video/mp4" />
-                      <source src="https://res.cloudinary.com/dr0kwuqqa/video/upload/v1788131184/Batail2_l0vfaq.mov" type="video/quicktime" />
-                    </video>
-                    <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.5)' }} />
-                  </>
-                )}
-                {(s.title === 'Production YouTube & Mini-docs' || s.title === 'YouTube & Mini-doc Production') && (
-                  <>
-                    <img
-                      src="https://res.cloudinary.com/dr0kwuqqa/image/upload/v1788132498/Capture_d_%C3%A9cran_le_2026-08-30_%C3%A0_19.27.24_p9dffe.png"
-                      alt="Production"
-                      style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0 }}
-                    />
-                    <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.5)' }} />
-                  </>
-                )}
-                <span style={{ position: 'absolute', top: '12px', right: '20px', fontFamily: "'Bebas Neue'", fontSize: '90px', color: 'rgba(255,255,255,0.05)', lineHeight: 1 }}>
-                  0{i + 1}
-                </span>
-                <div style={{ position: 'relative', zIndex: 1 }}>
-                  <div style={{ fontSize: '32px', marginBottom: '18px' }}>{s.icon}</div>
-                  <h3 style={{ margin: 0, fontSize: '16px', fontWeight: 700, color: '#ffffff', textTransform: 'uppercase', letterSpacing: '0.03em', marginBottom: '12px', fontFamily: "'DM Sans'" }}>{s.title}</h3>
-                  <p style={{ fontSize: '13.5px', color: 'rgba(255,255,255,0.55)', lineHeight: 1.75, fontWeight: 300, margin: '0 0 20px' }}>{s.desc}</p>
-                  <div style={{ width: '40px', height: '3px', background: BLUE }} />
-                </div>
-              </div>
-            </FadeIn>
+            <ServiceRow key={i} service={s} index={i} total={services.length} isLast={i === services.length - 1} />
           ))}
         </div>
       </section>
@@ -672,10 +675,11 @@ export default function Athletes() {
           section { padding-left: 20px !important; padding-right: 20px !important; }
           .two-col { grid-template-columns: 1fr !important; gap: 40px !important; }
           .founder-grid { grid-template-columns: 1fr !important; }
-          .services-grid { grid-template-columns: 1fr !important; }
           .clients-grid { grid-template-columns: 1fr !important; }
           .nav-right button:not(.hamburger-btn) { padding: 9px 14px !important; font-size: 10px !important; }
           .hero-content { bottom: 40px !important; left: 24px !important; right: 24px !important; }
+          .service-row { grid-template-columns: 1fr !important; gap: 24px !important; }
+          .service-visual { height: 220px !important; order: -1; }
         }
 
         @media (max-width: 480px) {
