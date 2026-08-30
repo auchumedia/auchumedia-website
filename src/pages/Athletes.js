@@ -420,7 +420,7 @@ export default function Athletes() {
           <FadeIn direction="left">
             <div style={{ width: '100%', maxWidth: '400px', height: '500px', margin: '0 auto' }}>
               <img
-                src="https://res.cloudinary.com/dr0kwuqqa/image/upload/v1788129452/bdfd0b36-20a9-496e-aa89-b5951701ed46_nweexm.jpg"
+                src="https://res.cloudinary.com/dr0kwuqqa/image/upload/v1788129784/att.NWd5Lxz4DebA3MChOrgQ6_fuagLyL-JCsBepIwjdOko_yx4tgj.jpg"
                 alt="Raphaël Auchu"
                 style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '12px' }}
               />
