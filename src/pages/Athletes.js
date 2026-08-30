@@ -180,7 +180,7 @@ export default function Athletes() {
     const observers = itemRefs.current.map((ref, i) => {
       const obs = new IntersectionObserver(
         ([entry]) => { if (entry.isIntersecting) setActiveIndex(i); },
-        { threshold: 0.5 }
+        { threshold: 0.5, rootMargin: '-20% 0px -20% 0px' }
       );
       if (ref) obs.observe(ref);
       return obs;
@@ -454,45 +454,56 @@ export default function Athletes() {
       </section>
 
       {/* ===== POURQUOI (sticky scroll) ===== */}
-      <section id="pourquoi" style={{ position: 'relative', height: `${pourquoiCards.length * 100}vh` }}>
-        <div className="pourquoi-flex" style={{ display: 'flex', height: '100%' }}>
-          <div className="pourquoi-sticky-left" style={{
-            position: 'sticky', top: 0, height: '100vh', width: '50%',
-            display: 'flex', flexDirection: 'column', justifyContent: 'center',
-            padding: '80px 60px', background: '#080808', overflow: 'hidden'
-          }}>
-            <span style={{ fontSize: '10px', fontWeight: 700, color: BLUE, letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '24px' }}>
+      <section id="pourquoi" style={{ padding: '100px 60px', background: '#080808' }}>
+        <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(40px, 5vw, 64px)', color: '#ffffff', lineHeight: 1, letterSpacing: '0.01em', marginBottom: '80px' }}>
+          {fr ? <>POURQUOI<br />AUCHUMEDIA ?</> : <>WHY<br />AUCHUMEDIA?</>}
+        </h2>
+        <div className="pourquoi-flex" style={{ position: 'relative', maxWidth: '1100px', margin: '0 auto', height: `${pourquoiCards.length * 600}px`, display: 'flex' }}>
+          <div className="pourquoi-sticky-left" style={{ position: 'sticky', top: '120px', width: '45%', height: 'fit-content' }}>
+            <span style={{ display: 'block', fontSize: '10px', fontWeight: 700, color: BLUE, letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '24px' }}>
               {fr ? 'POURQUOI AUCHUMEDIA' : 'WHY AUCHUMEDIA'}
             </span>
-            <div key={activeIndex} className="pourquoi-fade" style={{ position: 'relative' }}>
-              <span className="pourquoi-bignum" style={{ position: 'absolute', top: '-40px', left: 0, fontFamily: "'Bebas Neue'", fontSize: '140px', color: 'rgba(255,255,255,0.04)', lineHeight: 1, zIndex: 0 }}>
+            <div style={{ position: 'relative' }}>
+              <span style={{ position: 'absolute', top: '-30px', left: 0, fontFamily: "'Bebas Neue'", fontSize: '100px', color: 'rgba(255,255,255,0.05)', lineHeight: 1, zIndex: 0 }}>
                 0{activeIndex + 1}
               </span>
-              <h3 className="pourquoi-active-title" style={{ position: 'relative', zIndex: 1, margin: '0 0 20px', fontFamily: "'Bebas Neue'", fontSize: '52px', color: '#ffffff', letterSpacing: '0.01em', lineHeight: 1.05 }}>
+              <h3 style={{ position: 'relative', zIndex: 1, margin: '0 0 20px', fontFamily: "'Bebas Neue'", fontSize: '48px', color: '#ffffff', letterSpacing: '0.01em', lineHeight: 1.05, transition: 'opacity 0.4s ease, transform 0.4s ease' }}>
                 {pourquoiCards[activeIndex].title}
               </h3>
-              <p style={{ position: 'relative', zIndex: 1, fontSize: '16px', color: 'rgba(255,255,255,0.6)', lineHeight: 1.8, fontWeight: 300, margin: 0, maxWidth: '460px', fontFamily: "'DM Sans'" }}>
+              <p style={{ position: 'relative', zIndex: 1, fontSize: '15px', color: 'rgba(255,255,255,0.6)', lineHeight: 1.8, fontWeight: 300, margin: 0, maxWidth: '420px', fontFamily: "'DM Sans'", transition: 'opacity 0.4s ease, transform 0.4s ease' }}>
                 {pourquoiCards[activeIndex].desc}
               </p>
             </div>
+            <div style={{ marginTop: '32px', fontSize: '12px', color: 'rgba(255,255,255,0.4)', letterSpacing: '0.05em', fontFamily: "'DM Sans'" }}>
+              0{activeIndex + 1} / 0{pourquoiCards.length}
+            </div>
           </div>
-          <div className="pourquoi-scroll-right" style={{ width: '50%' }}>
+
+          <div className="pourquoi-scroll-right" style={{ width: '55%' }}>
             {pourquoiCards.map((card, i) => (
               <div
                 key={i}
                 ref={el => { itemRefs.current[i] = el; }}
-                style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: i % 2 === 0 ? '#080808' : '#0a0a0a' }}
+                className="pourquoi-item"
+                style={{ height: '600px', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px' }}
               >
-                <div className="pourquoi-visual" style={{
-                  background: '#111111', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  transform: activeIndex === i ? 'scale(1)' : 'scale(0.95)',
-                  opacity: activeIndex === i ? 1 : 0.35,
-                  transition: 'all 0.4s ease'
-                }}>
-                  <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.2)', letterSpacing: '0.1em', textTransform: 'uppercase', fontFamily: "'DM Sans'" }}>
-                    {fr ? 'Visuel à venir' : 'Visual coming soon'}
-                  </span>
-                </div>
+                <FadeIn>
+                  <div className="pourquoi-mobile-text" style={{ display: 'none', marginBottom: '24px' }}>
+                    <h3 style={{ fontFamily: "'Bebas Neue'", fontSize: '36px', color: '#ffffff', marginBottom: '12px', lineHeight: 1.1 }}>{card.title}</h3>
+                    <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.6)', lineHeight: 1.7, fontWeight: 300, fontFamily: "'DM Sans'" }}>{card.desc}</p>
+                  </div>
+                  <div className="pourquoi-visual" style={{
+                    width: '100%', height: '420px', background: '#111111', borderRadius: '12px',
+                    border: '0.5px solid rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    opacity: activeIndex === i ? 1 : 0.3,
+                    transform: activeIndex === i ? 'scale(1)' : 'scale(0.97)',
+                    transition: 'opacity 0.4s ease, transform 0.4s ease'
+                  }}>
+                    <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.2)', letterSpacing: '0.1em', textTransform: 'uppercase', fontFamily: "'DM Sans'" }}>
+                      {fr ? 'Visuel à venir' : 'Visual coming soon'}
+                    </span>
+                  </div>
+                </FadeIn>
               </div>
             ))}
           </div>
@@ -624,10 +635,6 @@ export default function Athletes() {
           from { opacity: 0; transform: translateY(12px); }
           to { opacity: 1; transform: translateY(0); }
         }
-        @keyframes pourquoiFade {
-          from { opacity: 0; transform: translateY(16px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
         .splash-logo { animation: fadeInLogo 0.8s ease forwards; }
         .splash-explore { animation: fadeInLogo 0.8s ease 0.4s both; }
         .bounce { animation: bounce 1.4s ease-in-out infinite; }
@@ -635,8 +642,6 @@ export default function Athletes() {
         .hero-title { opacity: 0; animation: fadeInUp 0.8s ease 0.2s forwards; }
         .hero-cta { opacity: 0; animation: fadeInUp 0.8s ease 0.8s forwards; }
         .hamburger-btn { display: flex !important; }
-        .pourquoi-fade { animation: pourquoiFade 0.4s ease; }
-        .pourquoi-visual { width: 400px; height: 500px; }
 
         @media (max-width: 900px) {
           .nav-links { display: none !important; }
@@ -654,11 +659,12 @@ export default function Athletes() {
           .clients-grid { grid-template-columns: 1fr !important; }
           .nav-right button:not(.hamburger-btn) { padding: 9px 14px !important; font-size: 10px !important; }
           .hero-content { bottom: 40px !important; left: 24px !important; right: 24px !important; }
-          .pourquoi-flex { flex-direction: column !important; }
-          .pourquoi-sticky-left { position: sticky !important; top: 0 !important; height: 50vh !important; width: 100% !important; padding: 80px 24px 24px !important; }
+          .pourquoi-flex { flex-direction: column !important; height: auto !important; padding: 24px !important; }
+          .pourquoi-sticky-left { display: none !important; }
           .pourquoi-scroll-right { width: 100% !important; }
-          .pourquoi-visual { width: 280px !important; height: 320px !important; }
-          .pourquoi-active-title { font-size: 36px !important; }
+          .pourquoi-item { height: auto !important; padding: 24px 0 !important; }
+          .pourquoi-mobile-text { display: block !important; }
+          .pourquoi-visual { height: 280px !important; opacity: 1 !important; transform: none !important; }
         }
 
         @media (max-width: 480px) {
