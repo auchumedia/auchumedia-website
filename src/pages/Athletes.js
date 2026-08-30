@@ -491,7 +491,7 @@ export default function Athletes() {
           {fr ? 'POURQUOI AUCHUMEDIA ?' : 'WHY AUCHUMEDIA?'}
         </h2>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0px', position: 'relative' }}>
+        <div style={{ position: 'relative' }}>
           {pourquoiItems.map((item, i) => (
             <div
               key={i}
@@ -636,10 +636,6 @@ export default function Athletes() {
           overflow-x: hidden;
           -webkit-overflow-scrolling: touch;
         }
-        .pourquoi-card {
-          position: -webkit-sticky;
-          position: sticky;
-        }
 
         @media (max-width: 900px) {
           .nav-links { display: none !important; }
@@ -657,12 +653,6 @@ export default function Athletes() {
           .clients-grid { grid-template-columns: 1fr !important; }
           .nav-right button:not(.hamburger-btn) { padding: 9px 14px !important; font-size: 10px !important; }
           .hero-content { bottom: 40px !important; left: 24px !important; right: 24px !important; }
-          .pourquoi-card {
-            position: -webkit-sticky !important;
-            position: sticky !important;
-            top: var(--pq-top-mobile) !important;
-            height: 420px !important;
-          }
           .pourquoi-card-text { bottom: 28px !important; left: 24px !important; right: 24px !important; }
           .pourquoi-card-title { font-size: 30px !important; }
           .pourquoi-card-desc { font-size: 13px !important; }
