@@ -173,18 +173,33 @@ export default function Athletes() {
     }
   }, []);
 
+  const itemRefs = useRef([]);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    const observers = itemRefs.current.map((ref, i) => {
+      const obs = new IntersectionObserver(
+        ([entry]) => { if (entry.isIntersecting) setActiveIndex(i); },
+        { threshold: 0.5 }
+      );
+      if (ref) obs.observe(ref);
+      return obs;
+    });
+    return () => observers.forEach(obs => obs.disconnect());
+  }, []);
+
   const pourquoiCards = fr ? [
-    { icon: '🎯', title: 'Partenariats mieux rémunérés', desc: "Les marques veulent s'associer à une image forte, des valeurs, une communauté engagée." },
-    { icon: '🤝', title: 'Communauté fidèle', desc: "Une audience bien construite devient un véritable actif qui te suit au-delà de ta carrière." },
-    { icon: '💰', title: 'Revenus diversifiés', desc: "Collaborations, placements de produits, contenu monétisé — le branding ouvre des portes hors-glace." },
-    { icon: '📱', title: 'Contrôle de ton image', desc: "Plutôt qu'être défini par les médias, tu deviens maître de ton histoire." },
-    { icon: '🏆', title: "Préparer l'après-carrière", desc: "Un branding fort te garde visible et pertinent même après avoir raccroché les patins." },
+    { title: 'Partenariats mieux rémunérés', desc: "Les marques veulent s'associer à une image forte, des valeurs, une communauté engagée. Un bon branding t'ouvre des portes que le talent seul ne peut pas ouvrir." },
+    { title: 'Communauté fidèle', desc: "Une audience bien construite sur les réseaux sociaux devient un véritable actif. Elle te suit dans les hauts, les bas, et reste au-delà de ta carrière." },
+    { title: 'Revenus diversifiés', desc: "Collaborations commerciales, placements de produits, contenu monétisé. Un bon branding ouvre des portes financières bien au-delà du sport." },
+    { title: 'Contrôle de ton image', desc: "Plutôt qu'être défini par les médias ou tes performances du moment, tu deviens maître de ton histoire et de la façon dont le monde te perçoit." },
+    { title: "Préparer l'après-carrière", desc: "Un branding fort te garde visible et pertinent même après avoir raccroché les patins — que ce soit pour lancer une entreprise, devenir analyste ou mentor." },
   ] : [
-    { icon: '🎯', title: 'Better brand deals', desc: "Brands want to associate with a strong image, values and an engaged community." },
-    { icon: '🤝', title: 'Loyal community', desc: "A well-built audience becomes a real asset that follows you beyond your career." },
-    { icon: '💰', title: 'Diversified revenue', desc: "Collaborations, product placements, monetized content — branding opens doors off the ice." },
-    { icon: '📱', title: 'Control your narrative', desc: "Rather than being defined by media, you become the author of your story." },
-    { icon: '🏆', title: 'Post-career preparation', desc: "A strong brand keeps you visible and relevant even after you hang up the skates." },
+    { title: 'Better brand deals', desc: "Brands want to associate with a strong image, values and an engaged community. Good branding opens doors that talent alone cannot." },
+    { title: 'Loyal community', desc: "A well-built social media audience becomes a real asset. It follows you through the highs and lows, and stays with you beyond your playing career." },
+    { title: 'Diversified revenue', desc: "Brand collaborations, product placements, monetized content. Strong branding opens financial doors well beyond the sport itself." },
+    { title: 'Control your narrative', desc: "Rather than being defined by media or your on-ice performances, you become the author of your story and how the world perceives you." },
+    { title: 'Post-career preparation', desc: "A strong personal brand keeps you visible and relevant even after you hang up the skates — whether to launch a business, become an analyst or a mentor." },
   ];
 
   const services = fr ? [
@@ -402,81 +417,6 @@ export default function Athletes() {
         </div>
       </section>
 
-      {/* ===== POURQUOI ===== */}
-      <section id="pourquoi" style={{ padding: '120px 60px', background: '#0a0a0a' }}>
-        <FadeIn>
-          <div style={{ marginBottom: '72px' }}>
-            <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(32px, 4.5vw, 56px)', color: '#ffffff', letterSpacing: '0.02em', marginBottom: '16px' }}>
-              {fr ? 'POURQUOI AUCHUMEDIA ?' : 'WHY AUCHUMEDIA?'}
-            </h2>
-            <p style={{ fontSize: '15px', color: 'rgba(255,255,255,0.55)', lineHeight: 1.8, maxWidth: '560px', fontFamily: "'DM Sans'", fontWeight: 300 }}>
-              {fr ? "On combine le storytelling et la stratégie de marque pour livrer des résultats tangibles." : "We combine storytelling and brand strategy to deliver tangible results."}
-            </p>
-          </div>
-        </FadeIn>
-        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
-          {pourquoiCards.map((card, i) => (
-            <FadeIn key={i} delay={i * 0.1}>
-              <div
-                className="pourquoi-row"
-                style={{ display: 'grid', gridTemplateColumns: '80px 1fr 1fr', gap: '32px', alignItems: 'center', padding: '48px 0', borderTop: '0.5px solid rgba(255,255,255,0.08)', position: 'relative' }}
-              >
-                <span style={{ fontFamily: "'Bebas Neue'", fontSize: '15px', color: 'rgba(255,255,255,0.4)', letterSpacing: '0.05em' }}>
-                  0{i + 1}
-                </span>
-                <div>
-                  <h3 style={{ margin: '0 0 12px', fontFamily: "'Bebas Neue'", fontSize: '32px', color: '#ffffff', letterSpacing: '0.01em', lineHeight: 1.05 }}>{card.title}</h3>
-                  <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.55)', lineHeight: 1.7, fontWeight: 300, margin: 0, fontFamily: "'DM Sans'" }}>{card.desc}</p>
-                </div>
-                <div className="pourquoi-placeholder" style={{ height: '200px', background: '#1a1a1a', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <span style={{ fontSize: '10px', color: 'rgba(255,255,255,0.3)', letterSpacing: '0.1em', textTransform: 'uppercase', fontFamily: "'DM Sans'" }}>
-                    {fr ? 'Image à venir' : 'Image coming soon'}
-                  </span>
-                </div>
-              </div>
-            </FadeIn>
-          ))}
-        </div>
-      </section>
-
-      {/* ===== FONDATEUR ===== */}
-      <section style={{ padding: '120px 60px', background: '#ffffff' }}>
-        <div className="two-col founder-grid" style={{ display: 'grid', gridTemplateColumns: '400px 1fr', gap: '80px', alignItems: 'center', maxWidth: '1100px', margin: '0 auto' }}>
-          <FadeIn direction="left">
-            <div style={{ width: '100%', maxWidth: '400px', height: '500px', borderRadius: '16px', background: 'linear-gradient(160deg, #1a1a1a 0%, #0a0a0a 100%)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '16px', margin: '0 auto' }}>
-              <svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="1.2" opacity="0.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-              <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.4)', letterSpacing: '0.1em', textTransform: 'uppercase', fontFamily: "'DM Sans'" }}>
-                {fr ? 'Photo à venir' : 'Photo coming soon'}
-              </span>
-            </div>
-          </FadeIn>
-          <FadeIn direction="right" delay={0.15}>
-            <div>
-              <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(36px, 4.5vw, 56px)', color: '#0a0a0a', letterSpacing: '0.02em', marginBottom: '10px' }}>
-                RAPHAËL AUCHU
-              </h2>
-              <p style={{ fontSize: '14px', color: 'rgba(10,10,10,0.5)', fontFamily: "'DM Sans'", marginBottom: '24px' }}>
-                {fr ? 'Brand Builder & Ancien joueur LHJMQ' : 'Brand Builder & Former QMJHL Player'}
-              </p>
-              <div style={{ width: '100%', height: '1px', background: 'rgba(0,61,165,0.25)', marginBottom: '24px' }} />
-              <p style={{ fontSize: '15px', color: 'rgba(10,10,10,0.65)', lineHeight: 1.9, fontFamily: "'DM Sans'", fontWeight: 300, marginBottom: '24px' }}>
-                {fr
-                  ? "Ancien gardien de but repêché dans la LHJMQ, Raphaël a vécu de l'intérieur les hauts et les bas du hockey junior — la pression de performer, la compétition pour une place, et l'incertitude de l'après-carrière. Cette expérience l'a convaincu qu'un joueur ne devrait jamais dépendre uniquement de ses statistiques pour être reconnu."
-                  : "A former QMJHL drafted goaltender, Raphaël experienced firsthand the highs and lows of junior hockey — the pressure to perform, the competition for a spot, and the uncertainty of life after the game. That experience convinced him that a player should never have to rely on stats alone to be recognized."}
-              </p>
-              <p style={{ fontSize: '15px', color: 'rgba(10,10,10,0.65)', lineHeight: 1.9, fontFamily: "'DM Sans'", fontWeight: 300, marginBottom: '32px' }}>
-                {fr
-                  ? "Il a fondé AuchuMedia pour donner aux athlètes les outils, la stratégie et la caméra nécessaires pour raconter leur propre histoire — et pour qu'ils gardent le contrôle de leur image, sur la glace comme en dehors."
-                  : "He founded AuchuMedia to give athletes the tools, strategy and camera they need to tell their own story — and to stay in control of their image, on the ice and off it."}
-              </p>
-              <div style={{ fontFamily: "'Bebas Neue'", fontSize: '22px', color: BLUE, fontStyle: 'italic', letterSpacing: '0.03em' }}>
-                — {fr ? 'Raphaël Auchu, Fondateur' : 'Raphaël Auchu, Founder'}
-              </div>
-            </div>
-          </FadeIn>
-        </div>
-      </section>
-
       {/* ===== SERVICES ===== */}
       <section id="services" style={{ padding: '120px 60px', background: '#000000', scrollMarginTop: '72px' }}>
         <FadeIn>
@@ -510,6 +450,87 @@ export default function Athletes() {
               </div>
             </FadeIn>
           ))}
+        </div>
+      </section>
+
+      {/* ===== POURQUOI (sticky scroll) ===== */}
+      <section id="pourquoi" style={{ position: 'relative', height: `${pourquoiCards.length * 100}vh` }}>
+        <div className="pourquoi-flex" style={{ display: 'flex', height: '100%' }}>
+          <div className="pourquoi-sticky-left" style={{
+            position: 'sticky', top: 0, height: '100vh', width: '50%',
+            display: 'flex', flexDirection: 'column', justifyContent: 'center',
+            padding: '80px 60px', background: '#080808', overflow: 'hidden'
+          }}>
+            <span style={{ fontSize: '10px', fontWeight: 700, color: BLUE, letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '24px' }}>
+              {fr ? 'POURQUOI AUCHUMEDIA' : 'WHY AUCHUMEDIA'}
+            </span>
+            <div key={activeIndex} className="pourquoi-fade" style={{ position: 'relative' }}>
+              <span className="pourquoi-bignum" style={{ position: 'absolute', top: '-40px', left: 0, fontFamily: "'Bebas Neue'", fontSize: '140px', color: 'rgba(255,255,255,0.04)', lineHeight: 1, zIndex: 0 }}>
+                0{activeIndex + 1}
+              </span>
+              <h3 className="pourquoi-active-title" style={{ position: 'relative', zIndex: 1, margin: '0 0 20px', fontFamily: "'Bebas Neue'", fontSize: '52px', color: '#ffffff', letterSpacing: '0.01em', lineHeight: 1.05 }}>
+                {pourquoiCards[activeIndex].title}
+              </h3>
+              <p style={{ position: 'relative', zIndex: 1, fontSize: '16px', color: 'rgba(255,255,255,0.6)', lineHeight: 1.8, fontWeight: 300, margin: 0, maxWidth: '460px', fontFamily: "'DM Sans'" }}>
+                {pourquoiCards[activeIndex].desc}
+              </p>
+            </div>
+          </div>
+          <div className="pourquoi-scroll-right" style={{ width: '50%' }}>
+            {pourquoiCards.map((card, i) => (
+              <div
+                key={i}
+                ref={el => { itemRefs.current[i] = el; }}
+                style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: i % 2 === 0 ? '#080808' : '#0a0a0a' }}
+              >
+                <div className="pourquoi-visual" style={{
+                  background: '#111111', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  transform: activeIndex === i ? 'scale(1)' : 'scale(0.95)',
+                  opacity: activeIndex === i ? 1 : 0.35,
+                  transition: 'all 0.4s ease'
+                }}>
+                  <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.2)', letterSpacing: '0.1em', textTransform: 'uppercase', fontFamily: "'DM Sans'" }}>
+                    {fr ? 'Visuel à venir' : 'Visual coming soon'}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ===== FONDATEUR ===== */}
+      <section style={{ padding: '120px 60px', background: '#ffffff' }}>
+        <div className="two-col founder-grid" style={{ display: 'grid', gridTemplateColumns: '400px 1fr', gap: '80px', alignItems: 'center', maxWidth: '1100px', margin: '0 auto' }}>
+          <FadeIn direction="left">
+            <div style={{ width: '100%', maxWidth: '400px', height: '500px', borderRadius: '16px', background: 'linear-gradient(160deg, #1a1a1a 0%, #0a0a0a 100%)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '16px', margin: '0 auto' }}>
+              <svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="1.2" opacity="0.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.4)', letterSpacing: '0.1em', textTransform: 'uppercase', fontFamily: "'DM Sans'" }}>
+                {fr ? 'Photo à venir' : 'Photo coming soon'}
+              </span>
+            </div>
+          </FadeIn>
+          <FadeIn direction="right" delay={0.15}>
+            <div>
+              <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(36px, 4.5vw, 56px)', color: '#0a0a0a', letterSpacing: '0.02em', marginBottom: '10px' }}>
+                RAPHAËL AUCHU
+              </h2>
+              <p style={{ fontSize: '14px', color: 'rgba(10,10,10,0.5)', fontFamily: "'DM Sans'", marginBottom: '24px' }}>
+                {fr ? 'Brand Builder & Ancien joueur LHJMQ' : 'Brand Builder & Former QMJHL Player'}
+              </p>
+              <div style={{ width: '100%', height: '1px', background: 'rgba(0,61,165,0.25)', marginBottom: '24px' }} />
+              <p style={{ fontSize: '15px', color: 'rgba(10,10,10,0.65)', lineHeight: 1.9, fontFamily: "'DM Sans'", fontWeight: 300, marginBottom: '24px' }}>
+                {fr
+                  ? "Ancien gardien de but repêché dans la LHJMQ, Raphaël a vécu de l'intérieur les hauts et les bas du hockey junior — la pression de performer, la compétition pour une place, et l'incertitude de l'après-carrière. Cette expérience l'a convaincu qu'un joueur ne devrait jamais dépendre uniquement de ses statistiques pour être reconnu."
+                  : "A former QMJHL drafted goaltender, Raphaël experienced firsthand the highs and lows of junior hockey — the pressure to perform, the competition for a spot, and the uncertainty of life after the game. That experience convinced him that a player should never have to rely on stats alone to be recognized."}
+              </p>
+              <p style={{ fontSize: '15px', color: 'rgba(10,10,10,0.65)', lineHeight: 1.9, fontFamily: "'DM Sans'", fontWeight: 300, marginBottom: '32px' }}>
+                {fr
+                  ? "Il a fondé AuchuMedia pour donner aux athlètes les outils, la stratégie et la caméra nécessaires pour raconter leur propre histoire — et pour qu'ils gardent le contrôle de leur image, sur la glace comme en dehors."
+                  : "He founded AuchuMedia to give athletes the tools, strategy and camera they need to tell their own story — and to stay in control of their image, on the ice and off it."}
+              </p>
+            </div>
+          </FadeIn>
         </div>
       </section>
 
@@ -603,6 +624,10 @@ export default function Athletes() {
           from { opacity: 0; transform: translateY(12px); }
           to { opacity: 1; transform: translateY(0); }
         }
+        @keyframes pourquoiFade {
+          from { opacity: 0; transform: translateY(16px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
         .splash-logo { animation: fadeInLogo 0.8s ease forwards; }
         .splash-explore { animation: fadeInLogo 0.8s ease 0.4s both; }
         .bounce { animation: bounce 1.4s ease-in-out infinite; }
@@ -610,6 +635,8 @@ export default function Athletes() {
         .hero-title { opacity: 0; animation: fadeInUp 0.8s ease 0.2s forwards; }
         .hero-cta { opacity: 0; animation: fadeInUp 0.8s ease 0.8s forwards; }
         .hamburger-btn { display: flex !important; }
+        .pourquoi-fade { animation: pourquoiFade 0.4s ease; }
+        .pourquoi-visual { width: 400px; height: 500px; }
 
         @media (max-width: 900px) {
           .nav-links { display: none !important; }
@@ -625,10 +652,13 @@ export default function Athletes() {
           .founder-grid { grid-template-columns: 1fr !important; }
           .services-grid { grid-template-columns: 1fr !important; }
           .clients-grid { grid-template-columns: 1fr !important; }
-          .pourquoi-row { grid-template-columns: 1fr !important; gap: 16px !important; padding: 32px 0 !important; }
-          .pourquoi-placeholder { height: 160px !important; }
           .nav-right button:not(.hamburger-btn) { padding: 9px 14px !important; font-size: 10px !important; }
           .hero-content { bottom: 40px !important; left: 24px !important; right: 24px !important; }
+          .pourquoi-flex { flex-direction: column !important; }
+          .pourquoi-sticky-left { position: sticky !important; top: 0 !important; height: 50vh !important; width: 100% !important; padding: 80px 24px 24px !important; }
+          .pourquoi-scroll-right { width: 100% !important; }
+          .pourquoi-visual { width: 280px !important; height: 320px !important; }
+          .pourquoi-active-title { font-size: 36px !important; }
         }
 
         @media (max-width: 480px) {
