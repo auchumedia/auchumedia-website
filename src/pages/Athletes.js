@@ -138,9 +138,40 @@ export default function Athletes() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrollY, setScrollY] = useState(0);
+  const [showSplash, setShowSplash] = useState(true);
+  const [splashLeaving, setSplashLeaving] = useState(false);
+  const splashTriggered = useRef(false);
   const fr = lang === 'fr';
 
   const scrollTo = (id) => { const el = document.getElementById(id); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); };
+
+  useEffect(() => {
+    document.body.style.overflow = showSplash ? 'hidden' : 'auto';
+    return () => { document.body.style.overflow = 'auto'; };
+  }, [showSplash]);
+
+  useEffect(() => {
+    let mobileTimer;
+    const leave = () => {
+      if (splashTriggered.current) return;
+      splashTriggered.current = true;
+      window.removeEventListener('wheel', leave);
+      window.removeEventListener('touchstart', leave);
+      clearTimeout(mobileTimer);
+      setSplashLeaving(true);
+      setTimeout(() => setShowSplash(false), 900);
+    };
+    window.addEventListener('wheel', leave, { passive: true });
+    window.addEventListener('touchstart', leave, { passive: true });
+    if (window.innerWidth <= 768) {
+      mobileTimer = setTimeout(leave, 800);
+    }
+    return () => {
+      window.removeEventListener('wheel', leave);
+      window.removeEventListener('touchstart', leave);
+      clearTimeout(mobileTimer);
+    };
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -221,6 +252,32 @@ export default function Athletes() {
         <meta property="og:image" content="https://auchumedia.com/Copie%20de%20AUCHU.png.png" />
       </Helmet>
 
+      {/* ===== SPLASH SCREEN ===== */}
+      {showSplash && (
+        <div style={{
+          position: 'fixed', inset: 0, zIndex: 9999,
+          background: '#080808',
+          display: 'flex', flexDirection: 'column',
+          alignItems: 'center', justifyContent: 'center',
+          transition: splashLeaving ? 'transform 0.9s ease-in-out' : 'none',
+          transform: splashLeaving ? 'scaleY(0)' : 'scaleY(1)',
+          transformOrigin: 'top'
+        }}>
+          <div className="splash-logo" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <img src="/Copie de AUCHU.png.png" alt="AuchuMedia" style={{ height: '36px', filter: 'brightness(0) invert(1)' }} />
+            <p style={{ fontSize: '11px', letterSpacing: '0.3em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginTop: '16px', fontFamily: "'DM Sans'", textAlign: 'center' }}>
+              {fr ? 'Building Athletes Brands' : 'Building Athletes Brands'}
+            </p>
+          </div>
+          <div className="splash-explore" style={{ position: 'absolute', bottom: '48px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
+            <span style={{ fontSize: '10px', letterSpacing: '0.2em', color: 'rgba(255,255,255,0.4)', fontFamily: "'DM Sans'", textTransform: 'uppercase' }}>
+              {fr ? 'Explorer' : 'Explore'}
+            </span>
+            <svg className="bounce" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+          </div>
+        </div>
+      )}
+
       {/* ===== NAV ===== */}
       <nav style={{
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 500,
@@ -231,8 +288,8 @@ export default function Athletes() {
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         padding: '0 60px', height: '72px', gap: '16px'
       }}>
-        <Link to="/" style={{ flexShrink: 0, fontFamily: "'Bebas Neue'", fontSize: '22px', letterSpacing: '0.18em', color: '#ffffff' }}>
-          AUCHUMEDIA
+        <Link to="/" style={{ flexShrink: 0, display: 'flex', alignItems: 'center' }}>
+          <img src="/Copie de AUCHU.png.png" alt="AuchuMedia" style={{ height: '22px', width: 'auto', filter: 'brightness(0) invert(1)' }} />
         </Link>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '2px', flex: 1, justifyContent: 'center' }} className="nav-links">
@@ -290,6 +347,11 @@ export default function Athletes() {
       )}
 
       {/* ===== HERO ===== */}
+      <div style={{
+        opacity: splashLeaving ? 1 : 0,
+        transform: splashLeaving ? 'scale(1)' : 'scale(1.05)',
+        transition: 'opacity 0.9s ease-in-out, transform 0.9s ease-in-out'
+      }}>
       <section style={{ height: '100vh', position: 'relative', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <div style={{ position: 'absolute', inset: 0, overflow: 'hidden' }}>
           <video
@@ -321,10 +383,11 @@ export default function Athletes() {
           </div>
         </div>
 
-        <div style={{ position: 'absolute', bottom: '36px', left: '50%', transform: 'translateX(-50%)', zIndex: 2, animation: 'bounce 2s ease-in-out infinite' }}>
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="rgba(255,255,255,0.7)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+        <div style={{ position: 'absolute', bottom: '36px', left: '50%', transform: 'translateX(-50%)', zIndex: 2 }}>
+          <svg className="bounce" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="rgba(255,255,255,0.7)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
         </div>
       </section>
+      </div>
 
       {/* ===== MISSION / À PROPOS ===== */}
       <section id="a-propos" style={{ padding: '120px 60px', background: '#ffffff', scrollMarginTop: '72px' }}>
@@ -555,9 +618,16 @@ export default function Athletes() {
           to { opacity: 1; transform: translateY(0); }
         }
         @keyframes bounce {
-          0%, 100% { transform: translateX(-50%) translateY(0); }
-          50% { transform: translateX(-50%) translateY(10px); }
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(8px); }
         }
+        @keyframes fadeInLogo {
+          from { opacity: 0; transform: translateY(12px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .splash-logo { animation: fadeInLogo 0.8s ease forwards; }
+        .splash-explore { animation: fadeInLogo 0.8s ease 0.4s both; }
+        .bounce { animation: bounce 1.4s ease-in-out infinite; }
         .hero-label { opacity: 0; animation: fadeInUp 0.8s ease 0.2s forwards; }
         .hero-title { opacity: 0; animation: fadeInUp 0.8s ease 0.2s forwards; }
         .hero-subtitle { opacity: 0; animation: fadeInUp 0.8s ease 0.5s forwards; }
