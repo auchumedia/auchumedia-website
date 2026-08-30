@@ -234,7 +234,7 @@ export default function Athletes() {
   ];
 
   return (
-    <div style={{ background: '#ffffff', minHeight: '100vh', marginTop: 0, paddingTop: 0 }}>
+    <div style={{ background: '#080808', minHeight: '100vh' }}>
       <Helmet>
         <title>{fr ? 'Athlètes | AuchuMedia — Building Athletes Brands' : 'Athletes | AuchuMedia — Building Athletes Brands'}</title>
         <meta name="description" content={fr ? "J'aide les joueurs de hockey de haut niveau à bâtir leur marque personnelle sur et hors glace. Personal branding, production vidéo et partenariats." : "I help elite hockey players build their personal brand on and off the ice. Personal branding, video production and brand partnerships."} />
@@ -492,22 +492,23 @@ export default function Athletes() {
           {fr ? 'POURQUOI AUCHUMEDIA ?' : 'WHY AUCHUMEDIA?'}
         </h2>
 
-        <div style={{ position: 'relative' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0px', position: 'relative' }}>
           {pourquoiItems.map((item, i) => (
             <div
               key={i}
               className="pourquoi-card"
               style={{
                 position: 'sticky',
-                top: `${80 + i * 30}px`,
-                '--pq-top-mobile': `${64 + i * 20}px`,
+                top: `${64 + i * 24}px`,
+                '--pq-top-mobile': `${64 + i * 16}px`,
                 zIndex: i + 1,
                 height: '520px',
                 maxWidth: '900px',
-                margin: '0 auto 0',
+                width: '100%',
+                margin: '0 auto',
                 borderRadius: '20px',
                 overflow: 'hidden',
-                boxShadow: '0 20px 60px rgba(0,0,0,0.8)'
+                boxShadow: 'none'
               }}
             >
               {item.image ? (
