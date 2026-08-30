@@ -49,13 +49,6 @@ a { text-decoration: none; color: inherit; }
     gap: 24px !important;
   }
 
-  /* Nav sticky section — scrollable */
-  div[style*="position: sticky"][style*="top: 68px"] {
-    justify-content: flex-start !important;
-    padding: 0 12px !important;
-    overflow-x: auto !important;
-  }
-
   /* Case study metrics — wrap nicely */
   div[style*="gap: 32px"][style*="flex-wrap: wrap"] {
     gap: 20px !important;
