@@ -490,69 +490,64 @@ export default function Athletes() {
       </section>
 
       {/* ===== POURQUOI ===== */}
-      <section id="pourquoi" style={{ background: '#050505', padding: '100px 60px 300px' }}>
+      <section id="pourquoi" style={{ background: '#050505', padding: '100px 60px 0' }}>
         <h2 style={{ color: '#fff', textAlign: 'center', fontFamily: "'Bebas Neue'", fontSize: 'clamp(40px,5vw,64px)', marginBottom: '80px', letterSpacing: '0.02em' }}>
           {fr ? 'POURQUOI AUCHUMEDIA ?' : 'WHY AUCHUMEDIA?'}
         </h2>
-
-        <div style={{ position: 'relative' }}>
+        <div style={{ height: '300vh', position: 'relative' }}>
           {[
             {
-              bg: '#1a0a2a',
               image: null,
+              gradient: 'linear-gradient(135deg, #1a0a2a, #2a1a3a)',
               titreFr: 'CONTRÔLE DE TON IMAGE',
               titreEn: 'CONTROL YOUR NARRATIVE',
-              descFr: "Plutôt qu'être défini par les médias ou tes performances du moment, tu deviens maître de ton histoire et de la façon dont le monde te perçoit.",
-              descEn: "Rather than being defined by media or your on-ice performances, you become the author of your story and how the world perceives you.",
+              descFr: "Plutôt qu'être défini par les médias, tu deviens maître de ton histoire.",
+              descEn: "Rather than being defined by media, you become the author of your story.",
             },
             {
-              bg: null,
               image: 'https://res.cloudinary.com/dr0kwuqqa/image/upload/v1788118137/Capture_d_%C3%A9cran_le_2026-08-30_%C3%A0_15.28.22_wwxod5.png',
+              gradient: null,
               titreFr: 'REVENUS DIVERSIFIÉS',
               titreEn: 'DIVERSIFIED REVENUE',
-              descFr: "Collaborations commerciales, placements de produits, contenu monétisé. Un bon branding ouvre des portes financières bien au-delà du sport.",
-              descEn: "Brand collaborations, product placements, monetized content. Strong branding opens financial doors well beyond the sport itself.",
+              descFr: "Collaborations, placements de produits, contenu monétisé. Le branding ouvre des portes hors-glace.",
+              descEn: "Collaborations, product placements, monetized content. Branding opens doors off the ice.",
             },
             {
-              bg: null,
               image: 'https://res.cloudinary.com/dr0kwuqqa/image/upload/v1788122678/Capture_d_%C3%A9cran_le_2026-08-30_%C3%A0_16.43.54_qlkahx.png',
+              gradient: null,
               titreFr: "PRÉPARER L'APRÈS-CARRIÈRE",
               titreEn: 'POST-CAREER PREPARATION',
-              descFr: "Un branding fort te garde visible et pertinent même après avoir raccroché les patins — que ce soit pour lancer une entreprise, devenir analyste ou mentor.",
-              descEn: "A strong personal brand keeps you visible and relevant even after you hang up the skates — whether to launch a business, become an analyst or a mentor.",
+              descFr: "Un branding fort te garde visible même après avoir raccroché les patins.",
+              descEn: "A strong brand keeps you visible even after you hang up the skates.",
             },
-          ].map((item, i, arr) => (
-            <div
-              key={i}
-              style={{
-                position: 'sticky',
-                top: `${80 + i * 30}px`,
-                zIndex: i + 1,
-                height: '520px',
-                maxWidth: '900px',
-                width: '100%',
-                margin: '0 auto',
-                marginBottom: i < arr.length - 1 ? '100vh' : '0',
-                borderRadius: '20px',
-                overflow: 'hidden',
-              }}
-            >
+          ].map((item, i) => (
+            <div key={i} style={{
+              position: 'sticky',
+              top: `${i * 30}px`,
+              zIndex: i + 1,
+              height: '90vh',
+              maxWidth: '900px',
+              width: '100%',
+              margin: '0 auto',
+              borderRadius: '20px',
+              overflow: 'hidden',
+            }}>
               {item.image
                 ? <img src={item.image} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
-                : <div style={{ position: 'absolute', inset: 0, background: item.bg }} />
+                : <div style={{ position: 'absolute', inset: 0, background: item.gradient }} />
               }
-              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.2) 100%)' }} />
+              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.5) 60%, rgba(0,0,0,0.1) 100%)' }} />
               <div style={{ position: 'absolute', bottom: '48px', left: '48px', maxWidth: '440px', zIndex: 2 }}>
                 <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#003DA5', marginBottom: '12px' }}>
                   {fr ? 'POURQUOI AUCHUMEDIA' : 'WHY AUCHUMEDIA'}
                 </div>
-                <div style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(32px, 4vw, 48px)', color: '#fff', marginBottom: '16px', lineHeight: 1.1 }}>
+                <div style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(32px,4vw,48px)', color: '#fff', marginBottom: '16px', lineHeight: 1.1 }}>
                   {fr ? item.titreFr : item.titreEn}
                 </div>
                 <p style={{ fontSize: '15px', color: 'rgba(255,255,255,0.65)', lineHeight: 1.75, margin: 0 }}>
                   {fr ? item.descFr : item.descEn}
                 </p>
-                <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.3)', marginTop: '24px', letterSpacing: '0.1em' }}>
+                <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.3)', marginTop: '24px' }}>
                   0{i + 1} / 03
                 </div>
               </div>
