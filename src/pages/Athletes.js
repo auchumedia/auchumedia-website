@@ -455,8 +455,15 @@ export default function Athletes() {
 
       {/* ===== POURQUOI (sticky scroll) ===== */}
       <section id="pourquoi" style={{ padding: '100px 60px', background: '#080808' }}>
-        <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(40px, 5vw, 64px)', color: '#ffffff', lineHeight: 1, letterSpacing: '0.01em', marginBottom: '80px' }}>
-          {fr ? <>POURQUOI<br />AUCHUMEDIA ?</> : <>WHY<br />AUCHUMEDIA?</>}
+        <h2 style={{
+          fontFamily: "'Bebas Neue'",
+          fontSize: 'clamp(40px, 5vw, 64px)',
+          color: '#003DA5',
+          textAlign: 'center',
+          marginBottom: '80px',
+          letterSpacing: '0.02em'
+        }}>
+          {fr ? 'POURQUOI AUCHUMEDIA ?' : 'WHY AUCHUMEDIA?'}
         </h2>
         <div className="pourquoi-flex" style={{ position: 'relative', maxWidth: '1100px', margin: '0 auto', height: `${pourquoiCards.length * 600}px`, display: 'flex' }}>
           <div className="pourquoi-sticky-left" style={{ position: 'sticky', top: '120px', width: '45%', height: 'fit-content' }}>
