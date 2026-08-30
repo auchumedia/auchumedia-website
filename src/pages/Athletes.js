@@ -119,8 +119,8 @@ export default function Athletes() {
   };
 
   useEffect(() => {
-    document.body.style.overflow = showSplash ? 'hidden' : 'auto';
-    return () => { document.body.style.overflow = 'auto'; };
+    document.body.style.overflow = showSplash ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
   }, [showSplash]);
 
   useEffect(() => {
