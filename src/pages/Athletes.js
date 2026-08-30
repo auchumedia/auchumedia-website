@@ -179,7 +179,7 @@ export default function Athletes() {
         fr: "Plutôt qu'être défini par les médias ou tes performances du moment, tu deviens maître de ton histoire et de la façon dont le monde te perçoit.",
         en: "Rather than being defined by media or your on-ice performances, you become the author of your story and how the world perceives you.",
       },
-      gradient: 'linear-gradient(135deg, #1a0a2a, #2a1a3a)',
+      image: 'https://res.cloudinary.com/dr0kwuqqa/image/upload/v1788130636/Capture_d_%C3%A9cran_le_2026-08-30_%C3%A0_18.56.49_l2loxw.png',
     },
     {
       titre: { fr: 'Revenus diversifiés', en: 'Diversified revenue' },
