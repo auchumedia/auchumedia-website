@@ -503,7 +503,6 @@ export default function Athletes() {
               style={{
                 position: 'sticky',
                 top: `${64 + i * 24}px`,
-                '--pq-top-mobile': `${64 + i * 16}px`,
                 zIndex: i + 1,
                 height: '520px',
                 maxWidth: '900px',
@@ -661,12 +660,7 @@ export default function Athletes() {
           .clients-grid { grid-template-columns: 1fr !important; }
           .nav-right button:not(.hamburger-btn) { padding: 9px 14px !important; font-size: 10px !important; }
           .hero-content { bottom: 40px !important; left: 24px !important; right: 24px !important; }
-          .pourquoi-card {
-            position: -webkit-sticky !important;
-            position: sticky !important;
-            top: var(--pq-top-mobile) !important;
-            height: 420px !important;
-          }
+          .pourquoi-card { height: 420px !important; }
           .pourquoi-card-text { bottom: 28px !important; left: 24px !important; right: 24px !important; }
           .pourquoi-card-title { font-size: 30px !important; }
           .pourquoi-card-desc { font-size: 13px !important; }
