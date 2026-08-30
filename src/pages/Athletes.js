@@ -24,6 +24,51 @@ function FadeIn({ children, delay = 0, direction = 'up' }) {
   );
 }
 
+function TimelineItem({ item, index, fr }) {
+  const [ref, inView] = useInView(0.3);
+  const isLeft = index % 2 === 0;
+  return (
+    <div ref={ref} className="timeline-item" style={{ position: 'relative', padding: '48px 0', minHeight: '140px' }}>
+      <div className={`timeline-dot${inView ? ' visible' : ''}`} style={{
+        position: 'absolute', left: '50%', top: '48px', transform: 'translate(-50%, -50%)',
+        width: '12px', height: '12px', borderRadius: '50%', background: '#fff', border: `2px solid ${BLUE}`, zIndex: 2
+      }} />
+      <div className={`timeline-connector timeline-connector-${isLeft ? 'left' : 'right'}`} style={{
+        position: 'absolute', top: '48px', transform: 'translateY(-50%)',
+        height: '1px', background: BLUE, width: inView ? '60px' : '0px', transition: 'width 0.6s ease',
+        ...(isLeft ? { right: '50%' } : { left: '50%' })
+      }} />
+      <div className={`timeline-content timeline-content-${isLeft ? 'left' : 'right'}${inView ? ' in-view' : ''}`} style={{
+        position: 'relative',
+        width: 'calc(50% - 60px)',
+        marginLeft: isLeft ? 0 : 'calc(50% + 60px)',
+        textAlign: isLeft ? 'right' : 'left',
+        opacity: inView ? 1 : 0,
+        transform: inView ? 'translateX(0)' : `translateX(${isLeft ? '-40px' : '40px'})`,
+        transition: 'opacity 0.7s ease, transform 0.7s ease'
+      }}>
+        <span className="timeline-number" style={{
+          position: 'absolute', top: '-36px', [isLeft ? 'left' : 'right']: '-10px',
+          fontFamily: "'Bebas Neue'", fontSize: '80px', color: 'rgba(255,255,255,0.06)', lineHeight: 1, zIndex: 0
+        }}>
+          0{index + 1}
+        </span>
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE, marginBottom: '10px' }}>
+            {fr ? 'POURQUOI AUCHUMEDIA' : 'WHY AUCHUMEDIA'}
+          </div>
+          <div style={{ fontFamily: "'Bebas Neue'", fontSize: '36px', color: '#fff', marginBottom: '14px', lineHeight: 1.1 }}>
+            {fr ? item.titre.fr : item.titre.en}
+          </div>
+          <p style={{ fontSize: '15px', color: 'rgba(255,255,255,0.6)', lineHeight: 1.75, margin: 0, fontFamily: "'DM Sans'" }}>
+            {fr ? item.desc.fr : item.desc.en}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 const navLinks = [
   { id: 'a-propos', labelFr: 'À propos', labelEn: 'About' },
   { id: 'services', labelFr: 'Services', labelEn: 'Services' },
@@ -513,42 +558,18 @@ export default function Athletes() {
       </section>
 
       {/* ===== POURQUOI ===== */}
-      <section id="pourquoi" style={{ background: '#050505', padding: '100px 60px' }}>
-        <h2 style={{ color: '#fff', textAlign: 'center', fontFamily: "'Bebas Neue'", fontSize: 'clamp(40px,5vw,64px)', marginBottom: '80px', letterSpacing: '0.02em' }}>
+      <section id="pourquoi" style={{ background: '#080808', padding: '100px 60px' }}>
+        <h2 style={{ color: '#fff', textAlign: 'center', fontFamily: "'Bebas Neue'", fontSize: 'clamp(40px,5vw,64px)', marginBottom: '100px', letterSpacing: '0.02em' }}>
           {fr ? 'POURQUOI AUCHUMEDIA ?' : 'WHY AUCHUMEDIA?'}
         </h2>
-        {pourquoiItems.map((item, i) => (
-          <div key={i} style={{
-            height: '520px',
-            maxWidth: '900px',
-            width: '100%',
-            margin: '0 auto',
-            marginBottom: '32px',
-            borderRadius: '20px',
-            overflow: 'hidden',
-            position: 'relative',
-          }}>
-            {item.image
-              ? <img src={item.image} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
-              : <div style={{ position: 'absolute', inset: 0, background: item.gradient }} />
-            }
-            <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.5) 60%, rgba(0,0,0,0.1) 100%)' }} />
-            <div style={{ position: 'absolute', bottom: '48px', left: '48px', maxWidth: '440px', zIndex: 2 }}>
-              <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#003DA5', marginBottom: '12px' }}>
-                {fr ? 'POURQUOI AUCHUMEDIA' : 'WHY AUCHUMEDIA'}
-              </div>
-              <div style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(32px,4vw,48px)', color: '#fff', marginBottom: '16px', lineHeight: 1.1 }}>
-                {fr ? item.titre.fr : item.titre.en}
-              </div>
-              <p style={{ fontSize: '15px', color: 'rgba(255,255,255,0.65)', lineHeight: 1.75, margin: 0 }}>
-                {fr ? item.desc.fr : item.desc.en}
-              </p>
-              <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.3)', marginTop: '24px' }}>
-                0{i + 1} / 0{pourquoiItems.length}
-              </div>
-            </div>
-          </div>
-        ))}
+
+        <div style={{ maxWidth: '800px', margin: '0 auto', position: 'relative' }}>
+          <div className="timeline-track" style={{ position: 'absolute', left: '50%', top: 0, bottom: 0, width: '1px', background: 'rgba(255,255,255,0.1)', transform: 'translateX(-50%)' }} />
+
+          {pourquoiItems.map((item, i) => (
+            <TimelineItem key={i} item={item} index={i} fr={fr} />
+          ))}
+        </div>
       </section>
 
       {/* ===== CLIENTS ===== */}
@@ -647,6 +668,15 @@ export default function Athletes() {
         .hero-title { opacity: 0; animation: fadeInUp 0.8s ease 0.2s forwards; }
         .hero-cta { opacity: 0; animation: fadeInUp 0.8s ease 0.8s forwards; }
         .hamburger-btn { display: flex !important; }
+        @keyframes pulse {
+          0%, 100% { box-shadow: 0 0 0 0 rgba(0,61,165,0.4); }
+          50% { box-shadow: 0 0 0 8px rgba(0,61,165,0); }
+        }
+        .timeline-dot.visible { animation: pulse 2s ease infinite; }
+        @keyframes drawLine {
+          from { width: 0; }
+          to { width: 60px; }
+        }
 
         html, body {
           overflow-x: hidden;
@@ -669,9 +699,17 @@ export default function Athletes() {
           .clients-grid { grid-template-columns: 1fr !important; }
           .nav-right button:not(.hamburger-btn) { padding: 9px 14px !important; font-size: 10px !important; }
           .hero-content { bottom: 40px !important; left: 24px !important; right: 24px !important; }
-          .pourquoi-card-text { bottom: 28px !important; left: 24px !important; right: 24px !important; }
-          .pourquoi-card-title { font-size: 30px !important; }
-          .pourquoi-card-desc { font-size: 13px !important; }
+          .timeline-track { left: 24px !important; }
+          .timeline-dot { left: 24px !important; }
+          .timeline-connector { display: none !important; }
+          .timeline-content {
+            width: calc(100% - 60px) !important;
+            margin-left: 60px !important;
+            text-align: left !important;
+            transform: translateX(40px) !important;
+          }
+          .timeline-content.in-view { transform: translateX(0) !important; }
+          .timeline-number { left: -10px !important; right: auto !important; }
         }
 
         @media (max-width: 480px) {
