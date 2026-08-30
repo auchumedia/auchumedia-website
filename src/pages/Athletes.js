@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 
 const BLUE = '#003DA5';
@@ -145,12 +144,22 @@ export default function Athletes() {
 
   const scrollTo = (id) => { const el = document.getElementById(id); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); };
 
+  const replaySplash = () => {
+    window.scrollTo(0, 0);
+    document.body.style.overflow = 'hidden';
+    setSplashLeaving(false);
+    setShowSplash(true);
+  };
+
   useEffect(() => {
     document.body.style.overflow = showSplash ? 'hidden' : 'auto';
     return () => { document.body.style.overflow = 'auto'; };
   }, [showSplash]);
 
   useEffect(() => {
+    if (!showSplash) return;
+    splashTriggered.current = false;
+
     const triggerSplashExit = () => {
       if (splashTriggered.current) return;
       splashTriggered.current = true;
@@ -179,7 +188,7 @@ export default function Athletes() {
       window.removeEventListener('touchmove', onTouchMove);
       window.removeEventListener('wheel', triggerSplashExit);
     };
-  }, []);
+  }, [showSplash]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -296,9 +305,9 @@ export default function Athletes() {
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         padding: '0 60px', height: '72px', gap: '16px'
       }}>
-        <Link to="/" style={{ flexShrink: 0, display: 'flex', alignItems: 'center' }}>
+        <button onClick={replaySplash} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, flexShrink: 0, display: 'flex', alignItems: 'center' }}>
           <img src="/Copie de AUCHU.png.png" alt="AuchuMedia" style={{ height: '22px', width: 'auto', filter: 'brightness(0) invert(1)' }} />
-        </Link>
+        </button>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '2px', flex: 1, justifyContent: 'center' }} className="nav-links">
           {navLinks.map(link => (
