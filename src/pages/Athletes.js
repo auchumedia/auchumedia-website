@@ -487,6 +487,16 @@ export default function Athletes() {
                     <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.5)' }} />
                   </>
                 )}
+                {(s.title === 'Production YouTube & Mini-docs' || s.title === 'YouTube & Mini-doc Production') && (
+                  <>
+                    <img
+                      src="https://res.cloudinary.com/dr0kwuqqa/image/upload/v1788132498/Capture_d_%C3%A9cran_le_2026-08-30_%C3%A0_19.27.24_p9dffe.png"
+                      alt="Production"
+                      style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0 }}
+                    />
+                    <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.5)' }} />
+                  </>
+                )}
                 <span style={{ position: 'absolute', top: '12px', right: '20px', fontFamily: "'Bebas Neue'", fontSize: '90px', color: 'rgba(255,255,255,0.05)', lineHeight: 1 }}>
                   0{i + 1}
                 </span>
