@@ -119,8 +119,8 @@ export default function Athletes() {
   };
 
   useEffect(() => {
-    document.body.style.overflow = showSplash ? 'hidden' : 'auto';
-    return () => { document.body.style.overflow = 'auto'; };
+    document.body.style.overflow = showSplash ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
   }, [showSplash]);
 
   useEffect(() => {
@@ -160,7 +160,6 @@ export default function Athletes() {
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
-      setScrollY(window.scrollY);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
