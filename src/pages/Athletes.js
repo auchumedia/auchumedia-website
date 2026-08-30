@@ -24,15 +24,6 @@ function FadeIn({ children, delay = 0, direction = 'up' }) {
   );
 }
 
-function PourquoiCard({ children, delay = 0 }) {
-  const [ref, inView] = useInView(0.15);
-  return (
-    <div ref={ref} style={{ opacity: inView ? 1 : 0, transform: inView ? 'translateY(0)' : 'translateY(60px)', transition: `opacity 0.7s ease ${delay}s, transform 0.7s ease ${delay}s` }}>
-      {children}
-    </div>
-  );
-}
-
 const navLinks = [
   { id: 'a-propos', labelFr: 'À propos', labelEn: 'About' },
   { id: 'services', labelFr: 'Services', labelEn: 'Services' },
@@ -182,18 +173,52 @@ export default function Athletes() {
     }
   }, []);
 
-  const pourquoiCards = fr ? [
-    { title: 'Partenariats mieux rémunérés', desc: "Les marques veulent s'associer à une image forte, des valeurs, une communauté engagée. Un bon branding t'ouvre des portes que le talent seul ne peut pas ouvrir." },
-    { title: 'Communauté fidèle', desc: "Une audience bien construite sur les réseaux sociaux devient un véritable actif. Elle te suit dans les hauts, les bas, et reste au-delà de ta carrière." },
-    { title: 'Revenus diversifiés', desc: "Collaborations commerciales, placements de produits, contenu monétisé. Un bon branding ouvre des portes financières bien au-delà du sport." },
-    { title: 'Contrôle de ton image', desc: "Plutôt qu'être défini par les médias ou tes performances du moment, tu deviens maître de ton histoire et de la façon dont le monde te perçoit." },
-    { title: "Préparer l'après-carrière", desc: "Un branding fort te garde visible et pertinent même après avoir raccroché les patins — que ce soit pour lancer une entreprise, devenir analyste ou mentor." },
-  ] : [
-    { title: 'Better brand deals', desc: "Brands want to associate with a strong image, values and an engaged community. Good branding opens doors that talent alone cannot." },
-    { title: 'Loyal community', desc: "A well-built social media audience becomes a real asset. It follows you through the highs and lows, and stays with you beyond your playing career." },
-    { title: 'Diversified revenue', desc: "Brand collaborations, product placements, monetized content. Strong branding opens financial doors well beyond the sport itself." },
-    { title: 'Control your narrative', desc: "Rather than being defined by media or your on-ice performances, you become the author of your story and how the world perceives you." },
-    { title: 'Post-career preparation', desc: "A strong personal brand keeps you visible and relevant even after you hang up the skates — whether to launch a business, become an analyst or a mentor." },
+  const cardRefs = useRef([]);
+  const [visibleCards, setVisibleCards] = useState({});
+
+  useEffect(() => {
+    const observers = cardRefs.current.map((ref, i) => {
+      if (!ref) return null;
+      const obs = new IntersectionObserver(
+        ([entry]) => { if (entry.isIntersecting) setVisibleCards(v => ({ ...v, [i]: true })); },
+        { threshold: 0.15 }
+      );
+      obs.observe(ref);
+      return obs;
+    });
+    return () => observers.forEach(obs => obs && obs.disconnect());
+  }, []);
+
+  const pourquoiItems = [
+    {
+      titre: { fr: 'Communauté fidèle', en: 'Loyal community' },
+      desc: {
+        fr: "Une audience bien construite sur les réseaux sociaux devient un véritable actif. Elle te suit dans les hauts, les bas, et reste au-delà de ta carrière.",
+        en: "A well-built social media audience becomes a real asset. It follows you through the highs and lows, and stays with you beyond your playing career.",
+      },
+    },
+    {
+      titre: { fr: 'Revenus diversifiés', en: 'Diversified revenue' },
+      desc: {
+        fr: "Collaborations commerciales, placements de produits, contenu monétisé. Un bon branding ouvre des portes financières bien au-delà du sport.",
+        en: "Brand collaborations, product placements, monetized content. Strong branding opens financial doors well beyond the sport itself.",
+      },
+      image: 'https://res.cloudinary.com/dr0kwuqqa/image/upload/v1788118137/Capture_d_%C3%A9cran_le_2026-08-30_%C3%A0_15.28.22_wwxod5.png',
+    },
+    {
+      titre: { fr: 'Contrôle de ton image', en: 'Control your narrative' },
+      desc: {
+        fr: "Plutôt qu'être défini par les médias ou tes performances du moment, tu deviens maître de ton histoire et de la façon dont le monde te perçoit.",
+        en: "Rather than being defined by media or your on-ice performances, you become the author of your story and how the world perceives you.",
+      },
+    },
+    {
+      titre: { fr: "Préparer l'après-carrière", en: 'Post-career preparation' },
+      desc: {
+        fr: "Un branding fort te garde visible et pertinent même après avoir raccroché les patins — que ce soit pour lancer une entreprise, devenir analyste ou mentor.",
+        en: "A strong personal brand keeps you visible and relevant even after you hang up the skates — whether to launch a business, become an analyst or a mentor.",
+      },
+    },
   ];
 
   const services = fr ? [
@@ -448,7 +473,7 @@ export default function Athletes() {
       </section>
 
       {/* ===== POURQUOI ===== */}
-      <section id="pourquoi" style={{ position: 'relative', background: '#050505', padding: '100px 60px' }}>
+      <section id="pourquoi" style={{ position: 'relative', background: '#050505', padding: '100px 60px 0' }}>
         <h2 style={{
           fontFamily: "'Bebas Neue'",
           fontSize: 'clamp(40px, 5vw, 64px)',
@@ -460,49 +485,55 @@ export default function Athletes() {
           {fr ? 'POURQUOI AUCHUMEDIA ?' : 'WHY AUCHUMEDIA?'}
         </h2>
 
-        <div style={{ position: 'relative', height: `${pourquoiCards.length * 700}px` }}>
+        <div style={{ position: 'relative', height: `${pourquoiItems.length * 700}px` }}>
           <div style={{
             position: 'sticky', top: 0, height: '100vh', zIndex: 0,
-            background: '#080808',
-            backgroundImage: 'radial-gradient(ellipse at 50% 50%, #111111 0%, #050505 100%)'
+            background: 'radial-gradient(ellipse at 50% 50%, #111111 0%, #050505 100%)',
+            marginBottom: '-100vh'
           }} />
 
-          <div style={{ position: 'absolute', top: 0, left: 0, right: 0, zIndex: 1 }}>
-            {pourquoiCards.map((card, i) => (
-              <PourquoiCard key={i} delay={i * 0.1}>
-                <div className="pourquoi-card" style={{
+          <div style={{ position: 'relative', zIndex: 1, paddingTop: '80px' }}>
+            {pourquoiItems.map((item, i) => (
+              <div
+                key={i}
+                ref={el => { cardRefs.current[i] = el; }}
+                className="pourquoi-card"
+                style={{
                   height: '560px', width: '100%', maxWidth: '900px', margin: '0 auto 40px',
-                  borderRadius: '20px', overflow: 'hidden', position: 'relative'
-                }}>
-                  {i === 0 ? (
-                    <img
-                      src="https://res.cloudinary.com/dr0kwuqqa/image/upload/v1788118137/Capture_d_%C3%A9cran_le_2026-08-30_%C3%A0_15.28.22_wwxod5.png"
-                      alt={card.title}
-                      style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
-                    />
-                  ) : (
-                    <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, #111111 0%, #1a1a1a 100%)' }} />
-                  )}
-                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.88) 45%, rgba(0,0,0,0.25) 100%)' }} />
-                  <span style={{ position: 'absolute', top: '24px', right: '32px', fontFamily: "'Bebas Neue'", fontSize: '140px', color: 'rgba(255,255,255,0.05)', lineHeight: 1 }}>
-                    0{i + 1}
-                  </span>
-                  <div className="pourquoi-card-text" style={{ position: 'absolute', bottom: '48px', left: '48px', maxWidth: '440px' }}>
-                    <span style={{ display: 'block', fontSize: '10px', fontWeight: 700, color: BLUE, letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '12px' }}>
-                      {fr ? 'POURQUOI AUCHUMEDIA' : 'WHY AUCHUMEDIA'}
-                    </span>
-                    <h3 className="pourquoi-card-title" style={{ margin: '0 0 12px', fontFamily: "'Bebas Neue'", fontSize: '44px', color: '#ffffff', letterSpacing: '0.01em', lineHeight: 1.05 }}>
-                      {card.title}
-                    </h3>
-                    <p className="pourquoi-card-desc" style={{ fontSize: '15px', color: 'rgba(255,255,255,0.6)', lineHeight: 1.7, fontWeight: 300, margin: '0 0 16px', fontFamily: "'DM Sans'" }}>
-                      {card.desc}
-                    </p>
-                    <span style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', letterSpacing: '0.05em', fontFamily: "'DM Sans'" }}>
-                      0{i + 1} / 0{pourquoiCards.length}
-                    </span>
+                  borderRadius: '20px', overflow: 'hidden', position: 'relative',
+                  opacity: visibleCards[i] ? 1 : 0,
+                  transform: visibleCards[i] ? 'translateY(0)' : 'translateY(60px)',
+                  transition: `opacity 0.7s ease ${i * 0.1}s, transform 0.7s ease ${i * 0.1}s`
+                }}
+              >
+                {item.image ? (
+                  <img
+                    src={item.image}
+                    alt={item.titre.fr}
+                    style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
+                  />
+                ) : (
+                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, #111111 0%, #1a1a1a 100%)' }} />
+                )}
+                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.88) 45%, rgba(0,0,0,0.25) 100%)' }} />
+                <div style={{ position: 'absolute', top: '20px', right: '32px', fontFamily: "'Bebas Neue'", fontSize: '140px', color: 'rgba(255,255,255,0.05)', lineHeight: 1 }}>
+                  0{i + 1}
+                </div>
+                <div className="pourquoi-card-text" style={{ position: 'absolute', bottom: '48px', left: '48px', maxWidth: '440px' }}>
+                  <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE, marginBottom: '12px' }}>
+                    {fr ? 'POURQUOI AUCHUMEDIA' : 'WHY AUCHUMEDIA'}
+                  </div>
+                  <div className="pourquoi-card-title" style={{ fontFamily: "'Bebas Neue'", fontSize: '44px', color: '#ffffff', marginBottom: '16px', lineHeight: 1.1 }}>
+                    {fr ? item.titre.fr : item.titre.en}
+                  </div>
+                  <p className="pourquoi-card-desc" style={{ fontSize: '15px', color: 'rgba(255,255,255,0.65)', lineHeight: 1.75, margin: 0, fontFamily: "'DM Sans'" }}>
+                    {fr ? item.desc.fr : item.desc.en}
+                  </p>
+                  <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.3)', marginTop: '24px', letterSpacing: '0.1em', fontFamily: "'DM Sans'" }}>
+                    0{i + 1} / 0{pourquoiItems.length}
                   </div>
                 </div>
-              </PourquoiCard>
+              </div>
             ))}
           </div>
         </div>
