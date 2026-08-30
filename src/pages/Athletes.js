@@ -521,7 +521,7 @@ export default function Athletes() {
               descFr: "Un branding fort te garde visible et pertinent même après avoir raccroché les patins — que ce soit pour lancer une entreprise, devenir analyste ou mentor.",
               descEn: "A strong personal brand keeps you visible and relevant even after you hang up the skates — whether to launch a business, become an analyst or a mentor.",
             },
-          ].map((item, i) => (
+          ].map((item, i, arr) => (
             <div
               key={i}
               style={{
@@ -532,6 +532,7 @@ export default function Athletes() {
                 maxWidth: '900px',
                 width: '100%',
                 margin: '0 auto',
+                marginBottom: i < arr.length - 1 ? '100vh' : '0',
                 borderRadius: '20px',
                 overflow: 'hidden',
               }}
