@@ -492,7 +492,7 @@ export default function Athletes() {
           {fr ? 'POURQUOI AUCHUMEDIA ?' : 'WHY AUCHUMEDIA?'}
         </h2>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0px', position: 'relative' }}>
+        <div style={{ position: 'relative' }}>
           {pourquoiItems.map((item, i) => (
             <div
               key={i}
