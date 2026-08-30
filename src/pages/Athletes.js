@@ -495,22 +495,23 @@ export default function Athletes() {
           {fr ? 'POURQUOI AUCHUMEDIA ?' : 'WHY AUCHUMEDIA?'}
         </h2>
 
-        <div style={{ position: 'relative' }}>
+        <div>
           {pourquoiItems.map((item, i) => (
             <div
               key={i}
               className="pourquoi-card"
               style={{
                 position: 'sticky',
-                top: `${64 + i * 24}px`,
+                top: `${80 + i * 30}px`,
                 zIndex: i + 1,
-                height: '520px',
+                height: '500px',
                 maxWidth: '900px',
-                width: '100%',
                 margin: '0 auto',
                 borderRadius: '20px',
                 overflow: 'hidden',
-                boxShadow: 'none'
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
               }}
             >
               {item.image ? (
