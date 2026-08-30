@@ -103,7 +103,7 @@ export default function Athletes() {
   const [lang, setLang] = useState('fr');
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [scrollY, setScrollY] = useState(0);
+  const videoRef = useRef(null);
   const [showSplash, setShowSplash] = useState(true);
   const [splashLeaving, setSplashLeaving] = useState(false);
   const splashTriggered = useRef(false);
@@ -160,9 +160,11 @@ export default function Athletes() {
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
-      setScrollY(window.scrollY);
+      if (videoRef.current) {
+        videoRef.current.style.transform = `translateY(${Math.min(window.scrollY * 0.15, 100)}px)`;
+      }
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -350,8 +352,9 @@ export default function Athletes() {
       <section style={{ height: '100vh', marginTop: 0, paddingTop: 0, position: 'relative', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <div style={{ position: 'absolute', inset: 0, overflow: 'hidden' }}>
           <video
+            ref={videoRef}
             autoPlay muted loop playsInline crossOrigin="anonymous"
-            style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '116%', objectFit: 'cover', transform: `translateY(${Math.min(scrollY * 0.15, 100)}px)` }}
+            style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '116%', objectFit: 'cover' }}
           >
             <source src="https://res.cloudinary.com/dr0kwuqqa/video/upload/v1788114759/edit_playoff-3_zidax5.mp4" type="video/mp4" />
             <source src="https://res.cloudinary.com/dr0kwuqqa/video/upload/v1788114759/edit_playoff-3_zidax5.mov" type="video/quicktime" />
