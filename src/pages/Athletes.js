@@ -375,7 +375,7 @@ export default function Athletes() {
             autoPlay muted loop playsInline crossOrigin="anonymous"
             style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '116%', objectFit: 'cover', transform: `translateY(${Math.min(scrollY * 0.15, 100)}px)` }}
           >
-            <source src="https://res.cloudinary.com/dr0kwuqqa/video/upload/v1780793140/Video_hero_li3pom.mp4" type="video/mp4" />
+            <source src="https://res.cloudinary.com/dr0kwuqqa/video/upload/v1788114759/edit_playoff-3_zidax5.mp4" type="video/mp4" />
           </video>
         </div>
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 100%)' }} />
