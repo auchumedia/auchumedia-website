@@ -3,27 +3,6 @@ import { Helmet } from 'react-helmet-async';
 
 const BLUE = '#003DA5';
 
-const items = [
-  {
-    titreFr: 'CONTRÔLE DE TON IMAGE',
-    titreEn: 'CONTROL YOUR NARRATIVE',
-    bg: 'linear-gradient(135deg, #1a0a2a, #2a1a3a)',
-    image: null
-  },
-  {
-    titreFr: 'REVENUS DIVERSIFIÉS',
-    titreEn: 'DIVERSIFIED REVENUE',
-    bg: null,
-    image: 'https://res.cloudinary.com/dr0kwuqqa/image/upload/v1788118137/Capture_d_%C3%A9cran_le_2026-08-30_%C3%A0_15.28.22_wwxod5.png'
-  },
-  {
-    titreFr: "PRÉPARER L'APRÈS-CARRIÈRE",
-    titreEn: 'POST-CAREER PREPARATION',
-    bg: null,
-    image: 'https://res.cloudinary.com/dr0kwuqqa/image/upload/v1788122678/Capture_d_%C3%A9cran_le_2026-08-30_%C3%A0_16.43.54_qlkahx.png'
-  },
-];
-
 function useInView(threshold = 0.1) {
   const ref = useRef(null);
   const [inView, setInView] = useState(false);
@@ -124,7 +103,7 @@ export default function Athletes() {
   const [lang, setLang] = useState('fr');
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const videoRef = useRef(null);
+  const [scrollY, setScrollY] = useState(0);
   const [showSplash, setShowSplash] = useState(true);
   const [splashLeaving, setSplashLeaving] = useState(false);
   const splashTriggered = useRef(false);
@@ -140,8 +119,8 @@ export default function Athletes() {
   };
 
   useEffect(() => {
-    document.body.style.overflow = showSplash ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
+    document.body.style.overflow = showSplash ? 'hidden' : 'auto';
+    return () => { document.body.style.overflow = 'auto'; };
   }, [showSplash]);
 
   useEffect(() => {
@@ -181,11 +160,9 @@ export default function Athletes() {
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
-      if (videoRef.current) {
-        videoRef.current.style.transform = `translateY(${Math.min(window.scrollY * 0.15, 100)}px)`;
-      }
+      setScrollY(window.scrollY);
     };
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -373,9 +350,8 @@ export default function Athletes() {
       <section style={{ height: '100vh', marginTop: 0, paddingTop: 0, position: 'relative', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <div style={{ position: 'absolute', inset: 0, overflow: 'hidden' }}>
           <video
-            ref={videoRef}
             autoPlay muted loop playsInline crossOrigin="anonymous"
-            style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '116%', objectFit: 'cover' }}
+            style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '116%', objectFit: 'cover', transform: `translateY(${Math.min(scrollY * 0.15, 100)}px)` }}
           >
             <source src="https://res.cloudinary.com/dr0kwuqqa/video/upload/v1788114759/edit_playoff-3_zidax5.mp4" type="video/mp4" />
             <source src="https://res.cloudinary.com/dr0kwuqqa/video/upload/v1788114759/edit_playoff-3_zidax5.mov" type="video/quicktime" />
@@ -510,34 +486,55 @@ export default function Athletes() {
         </div>
       </section>
 
-      <div style={{ background: '#050505', minHeight: '100vh' }}>
-        <div style={{ padding: '100px 60px 300px' }}>
-          {items.map((item, i) => (
+      {/* ===== POURQUOI ===== */}
+      <section id="pourquoi" style={{ background: '#050505', padding: '100px 60px 200px' }}>
+        <h2 style={{ color: '#fff', textAlign: 'center', fontFamily: "'Bebas Neue'", fontSize: 'clamp(40px,5vw,64px)', marginBottom: '80px', letterSpacing: '0.02em' }}>
+          {fr ? 'POURQUOI AUCHUMEDIA ?' : 'WHY AUCHUMEDIA?'}
+        </h2>
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0px', position: 'relative' }}>
+          {pourquoiItems.map((item, i) => (
             <div
               key={i}
+              className="pourquoi-card"
               style={{
                 position: 'sticky',
-                top: `${80 + i * 30}px`,
+                top: `${64 + i * 24}px`,
+                '--pq-top-mobile': `${64 + i * 16}px`,
                 zIndex: i + 1,
-                height: '500px',
+                height: '520px',
                 maxWidth: '900px',
+                width: '100%',
                 margin: '0 auto',
                 borderRadius: '20px',
                 overflow: 'hidden',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
+                boxShadow: 'none'
               }}
             >
-              {item.image
-                ? <img src={item.image} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
-                : <div style={{ position: 'absolute', inset: 0, background: item.bg }} />
-              }
-              <h2 style={{ position: 'relative', zIndex: 1, color: '#fff', fontFamily: 'sans-serif', fontSize: '48px', textAlign: 'center', padding: '0 24px' }}>{fr ? item.titreFr : item.titreEn}</h2>
+              {item.image ? (
+                <img src={item.image} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+              ) : (
+                <div style={{ position: 'absolute', inset: 0, background: item.gradient }} />
+              )}
+              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.2) 100%)' }} />
+              <div className="pourquoi-card-text" style={{ position: 'absolute', bottom: '48px', left: '48px', maxWidth: '440px', zIndex: 2 }}>
+                <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#003DA5', marginBottom: '12px' }}>
+                  {fr ? 'POURQUOI AUCHUMEDIA' : 'WHY AUCHUMEDIA'}
+                </div>
+                <div className="pourquoi-card-title" style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(32px, 4vw, 48px)', color: '#fff', marginBottom: '16px', lineHeight: 1.1 }}>
+                  {fr ? item.titre.fr : item.titre.en}
+                </div>
+                <p className="pourquoi-card-desc" style={{ fontSize: '15px', color: 'rgba(255,255,255,0.65)', lineHeight: 1.75, margin: 0 }}>
+                  {fr ? item.desc.fr : item.desc.en}
+                </p>
+                <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.3)', marginTop: '24px', letterSpacing: '0.1em' }}>
+                  0{i + 1} / 0{pourquoiItems.length}
+                </div>
+              </div>
             </div>
           ))}
         </div>
-      </div>
+      </section>
 
       {/* ===== CLIENTS ===== */}
       <section id="clients" style={{ padding: '120px 60px', background: '#ffffff', scrollMarginTop: '72px' }}>
@@ -661,7 +658,12 @@ export default function Athletes() {
           .clients-grid { grid-template-columns: 1fr !important; }
           .nav-right button:not(.hamburger-btn) { padding: 9px 14px !important; font-size: 10px !important; }
           .hero-content { bottom: 40px !important; left: 24px !important; right: 24px !important; }
-          .pourquoi-card { height: 420px !important; }
+          .pourquoi-card {
+            position: -webkit-sticky !important;
+            position: sticky !important;
+            top: var(--pq-top-mobile) !important;
+            height: 420px !important;
+          }
           .pourquoi-card-text { bottom: 28px !important; left: 24px !important; right: 24px !important; }
           .pourquoi-card-title { font-size: 30px !important; }
           .pourquoi-card-desc { font-size: 13px !important; }
