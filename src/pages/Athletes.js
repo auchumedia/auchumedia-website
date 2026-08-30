@@ -471,6 +471,22 @@ export default function Athletes() {
                 onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.02)'; e.currentTarget.style.borderColor = BLUE; e.currentTarget.style.boxShadow = '0 10px 40px rgba(0,61,165,0.25)'; }}
                 onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.07)'; e.currentTarget.style.boxShadow = 'none'; }}
               >
+                {s.title === 'Highlights & Clips' && (
+                  <>
+                    <video
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      crossOrigin="anonymous"
+                      style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0 }}
+                    >
+                      <source src="https://res.cloudinary.com/dr0kwuqqa/video/upload/v1788131184/Batail2_l0vfaq.mp4" type="video/mp4" />
+                      <source src="https://res.cloudinary.com/dr0kwuqqa/video/upload/v1788131184/Batail2_l0vfaq.mov" type="video/quicktime" />
+                    </video>
+                    <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.5)' }} />
+                  </>
+                )}
                 <span style={{ position: 'absolute', top: '12px', right: '20px', fontFamily: "'Bebas Neue'", fontSize: '90px', color: 'rgba(255,255,255,0.05)', lineHeight: 1 }}>
                   0{i + 1}
                 </span>
