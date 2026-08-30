@@ -494,7 +494,7 @@ export default function Athletes() {
         <h2 style={{ color: '#fff', textAlign: 'center', fontFamily: "'Bebas Neue'", fontSize: 'clamp(40px,5vw,64px)', marginBottom: '80px', letterSpacing: '0.02em' }}>
           {fr ? 'POURQUOI AUCHUMEDIA ?' : 'WHY AUCHUMEDIA?'}
         </h2>
-        <div style={{ height: '300vh', position: 'relative' }}>
+        <div style={{ height: 'calc(100vh * 3 + 520px * 3)', position: 'relative' }}>
           {[
             {
               image: null,
@@ -525,7 +525,7 @@ export default function Athletes() {
               position: 'sticky',
               top: `${i * 30}px`,
               zIndex: i + 1,
-              height: '90vh',
+              height: '520px',
               maxWidth: '900px',
               width: '100%',
               margin: '0 auto',
