@@ -202,6 +202,7 @@ export default function Athletes() {
         fr: "Un branding fort te garde visible et pertinent même après avoir raccroché les patins — que ce soit pour lancer une entreprise, devenir analyste ou mentor.",
         en: "A strong personal brand keeps you visible and relevant even after you hang up the skates — whether to launch a business, become an analyst or a mentor.",
       },
+      image: 'https://res.cloudinary.com/dr0kwuqqa/image/upload/v1788122678/Capture_d_%C3%A9cran_le_2026-08-30_%C3%A0_16.43.54_qlkahx.png',
     },
   ];
 
