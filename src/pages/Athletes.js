@@ -173,22 +173,6 @@ export default function Athletes() {
     }
   }, []);
 
-  const cardRefs = useRef([]);
-  const [visibleCards, setVisibleCards] = useState({});
-
-  useEffect(() => {
-    const observers = cardRefs.current.map((ref, i) => {
-      if (!ref) return null;
-      const obs = new IntersectionObserver(
-        ([entry]) => { if (entry.isIntersecting) setVisibleCards(v => ({ ...v, [i]: true })); },
-        { threshold: 0.15 }
-      );
-      obs.observe(ref);
-      return obs;
-    });
-    return () => observers.forEach(obs => obs && obs.disconnect());
-  }, []);
-
   const pourquoiItems = [
     {
       titre: { fr: 'Communauté fidèle', en: 'Loyal community' },
@@ -485,57 +469,52 @@ export default function Athletes() {
           {fr ? 'POURQUOI AUCHUMEDIA ?' : 'WHY AUCHUMEDIA?'}
         </h2>
 
-        <div style={{ position: 'relative', height: `${pourquoiItems.length * 700}px` }}>
-          <div style={{
-            position: 'sticky', top: 0, height: '100vh', zIndex: 0,
-            background: 'radial-gradient(ellipse at 50% 50%, #111111 0%, #050505 100%)',
-            marginBottom: '-100vh'
-          }} />
-
-          <div style={{ position: 'relative', zIndex: 1, paddingTop: '80px' }}>
-            {pourquoiItems.map((item, i) => (
-              <div
-                key={i}
-                ref={el => { cardRefs.current[i] = el; }}
-                className="pourquoi-card"
-                style={{
-                  height: '560px', width: '100%', maxWidth: '900px', margin: '0 auto 40px',
-                  borderRadius: '20px', overflow: 'hidden', position: 'relative',
-                  opacity: visibleCards[i] ? 1 : 0,
-                  transform: visibleCards[i] ? 'translateY(0)' : 'translateY(60px)',
-                  transition: `opacity 0.7s ease ${i * 0.1}s, transform 0.7s ease ${i * 0.1}s`
-                }}
-              >
-                {item.image ? (
-                  <img
-                    src={item.image}
-                    alt={item.titre.fr}
-                    style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
-                  />
-                ) : (
-                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, #111111 0%, #1a1a1a 100%)' }} />
-                )}
-                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.88) 45%, rgba(0,0,0,0.25) 100%)' }} />
-                <div style={{ position: 'absolute', top: '20px', right: '32px', fontFamily: "'Bebas Neue'", fontSize: '140px', color: 'rgba(255,255,255,0.05)', lineHeight: 1 }}>
-                  0{i + 1}
+        <div className="pourquoi-stack" style={{ height: 'auto', display: 'flex', flexDirection: 'column', gap: 0 }}>
+          {pourquoiItems.map((item, i) => (
+            <div
+              key={i}
+              className="pourquoi-card"
+              style={{
+                position: 'sticky',
+                top: `${80 + i * 20}px`,
+                zIndex: i + 1,
+                marginBottom: '24px',
+                height: '500px',
+                maxWidth: '900px',
+                width: '100%',
+                margin: '0 auto',
+                borderRadius: '20px',
+                overflow: 'hidden',
+                boxShadow: '0 20px 60px rgba(0,0,0,0.5)',
+                transform: `scale(${1 - (pourquoiItems.length - 1 - i) * 0.02})`
+              }}
+            >
+              {item.image ? (
+                <img
+                  src={item.image}
+                  alt={item.titre.fr}
+                  style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
+                />
+              ) : (
+                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, #111111 0%, #1a1a1a 100%)' }} />
+              )}
+              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.88) 45%, rgba(0,0,0,0.25) 100%)' }} />
+              <div className="pourquoi-card-text" style={{ position: 'absolute', bottom: '48px', left: '48px', maxWidth: '440px' }}>
+                <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE, marginBottom: '12px' }}>
+                  {fr ? 'POURQUOI AUCHUMEDIA' : 'WHY AUCHUMEDIA'}
                 </div>
-                <div className="pourquoi-card-text" style={{ position: 'absolute', bottom: '48px', left: '48px', maxWidth: '440px' }}>
-                  <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE, marginBottom: '12px' }}>
-                    {fr ? 'POURQUOI AUCHUMEDIA' : 'WHY AUCHUMEDIA'}
-                  </div>
-                  <div className="pourquoi-card-title" style={{ fontFamily: "'Bebas Neue'", fontSize: '44px', color: '#ffffff', marginBottom: '16px', lineHeight: 1.1 }}>
-                    {fr ? item.titre.fr : item.titre.en}
-                  </div>
-                  <p className="pourquoi-card-desc" style={{ fontSize: '15px', color: 'rgba(255,255,255,0.65)', lineHeight: 1.75, margin: 0, fontFamily: "'DM Sans'" }}>
-                    {fr ? item.desc.fr : item.desc.en}
-                  </p>
-                  <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.3)', marginTop: '24px', letterSpacing: '0.1em', fontFamily: "'DM Sans'" }}>
-                    0{i + 1} / 0{pourquoiItems.length}
-                  </div>
+                <div className="pourquoi-card-title" style={{ fontFamily: "'Bebas Neue'", fontSize: '44px', color: '#ffffff', marginBottom: '16px', lineHeight: 1.1 }}>
+                  {fr ? item.titre.fr : item.titre.en}
+                </div>
+                <p className="pourquoi-card-desc" style={{ fontSize: '15px', color: 'rgba(255,255,255,0.65)', lineHeight: 1.75, margin: 0, fontFamily: "'DM Sans'" }}>
+                  {fr ? item.desc.fr : item.desc.en}
+                </p>
+                <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.3)', marginTop: '24px', letterSpacing: '0.1em', fontFamily: "'DM Sans'" }}>
+                  0{i + 1} / 0{pourquoiItems.length}
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -591,7 +570,6 @@ export default function Athletes() {
                 onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.querySelector('.client-overlay').style.opacity = 0; }}
               >
                 <div style={{ flex: 1, position: 'relative', background: c.gradient, display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
-                  <span style={{ position: 'absolute', fontFamily: "'Bebas Neue'", fontSize: '120px', color: 'rgba(255,255,255,0.06)', lineHeight: 1 }}>0{i + 1}</span>
                   <span style={{ position: 'absolute', bottom: '12px', left: '50%', transform: 'translateX(-50%)', fontSize: '9px', color: 'rgba(255,255,255,0.35)', letterSpacing: '0.08em', textTransform: 'uppercase', fontFamily: "'DM Sans'" }}>
                     {fr ? 'Photo/vidéo à venir' : 'Photo/video coming soon'}
                   </span>
