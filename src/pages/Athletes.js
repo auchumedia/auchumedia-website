@@ -381,27 +381,24 @@ export default function Athletes() {
         </div>
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 100%)' }} />
 
-        <div style={{ position: 'relative', zIndex: 2, maxWidth: '900px', textAlign: 'center', padding: '0 24px' }}>
-          <div className="hero-label" style={{ fontSize: '12px', fontWeight: 700, color: BLUE, letterSpacing: '0.3em', textTransform: 'uppercase', marginBottom: '24px' }}>
+        <div className="hero-content" style={{ position: 'absolute', bottom: '60px', left: '60px', right: '40%', zIndex: 2 }}>
+          <div className="hero-label" style={{ fontSize: '10px', fontWeight: 700, color: 'rgba(255,255,255,0.5)', letterSpacing: '0.25em', textTransform: 'uppercase', marginBottom: '16px' }}>
             {fr ? 'BUILDING ATHLETES BRANDS' : 'BUILDING ATHLETES BRANDS'}
           </div>
-          <h1 className="hero-title" style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(64px, 9vw, 130px)', lineHeight: 0.88, color: '#ffffff', marginBottom: '28px', letterSpacing: '0.01em' }}>
-            {fr ? <>TON HISTOIRE.<br />NOTRE CAMÉRA.</> : <>YOUR STORY.<br />OUR CAMERA.</>}
+          <h1 className="hero-title" style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(36px, 4.5vw, 64px)', lineHeight: 1, color: '#ffffff', marginBottom: '32px', letterSpacing: '0.01em' }}>
+            {fr ? <>TA CARRIÈRE.<br />TON IMAGE.<br />TON HÉRITAGE.</> : <>YOUR CAREER.<br />YOUR IMAGE.<br />YOUR LEGACY.</>}
           </h1>
-          <p className="hero-subtitle" style={{ fontSize: '18px', color: 'rgba(255,255,255,0.7)', lineHeight: 1.8, maxWidth: '600px', margin: '0 auto 40px', fontFamily: "'DM Sans'" }}>
-            {fr ? "On aide les joueurs de hockey de haut niveau à bâtir leur marque personnelle sur et hors glace." : "We help elite hockey players build their personal brand on and off the ice."}
-          </p>
           <div className="hero-cta">
-            <button onClick={() => scrollTo('contact')} style={{ fontSize: '12px', fontWeight: 700, color: '#fff', background: BLUE, padding: '16px 36px', borderRadius: '4px', letterSpacing: '0.1em', textTransform: 'uppercase', border: 'none', cursor: 'pointer', fontFamily: "'DM Sans'", boxShadow: '0 0 30px rgba(0,61,165,0.35)', transition: 'all 0.3s ease' }}
-              onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 10px 30px rgba(0,61,165,0.5)'; }}
-              onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = '0 0 30px rgba(0,61,165,0.35)'; }}
+            <button onClick={() => scrollTo('contact')} style={{ fontSize: '11px', fontWeight: 700, color: '#fff', background: 'transparent', padding: '10px 24px', borderRadius: '4px', letterSpacing: '0.1em', textTransform: 'uppercase', border: '1.5px solid rgba(255,255,255,0.8)', cursor: 'pointer', fontFamily: "'DM Sans'", transition: 'all 0.3s ease' }}
+              onMouseEnter={e => { e.currentTarget.style.background = '#ffffff'; e.currentTarget.style.color = '#0a0a0a'; }}
+              onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#ffffff'; }}
             >
               {fr ? 'Travailler avec nous →' : 'Work with us →'}
             </button>
           </div>
         </div>
 
-        <div style={{ position: 'absolute', bottom: '36px', left: '50%', transform: 'translateX(-50%)', zIndex: 2 }}>
+        <div style={{ position: 'absolute', bottom: '32px', left: '50%', transform: 'translateX(-50%)', zIndex: 2 }}>
           <svg className="bounce" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="rgba(255,255,255,0.7)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
         </div>
       </section>
@@ -653,7 +650,6 @@ export default function Athletes() {
         .bounce { animation: bounce 1.4s ease-in-out infinite; }
         .hero-label { opacity: 0; animation: fadeInUp 0.8s ease 0.2s forwards; }
         .hero-title { opacity: 0; animation: fadeInUp 0.8s ease 0.2s forwards; }
-        .hero-subtitle { opacity: 0; animation: fadeInUp 0.8s ease 0.5s forwards; }
         .hero-cta { opacity: 0; animation: fadeInUp 0.8s ease 0.8s forwards; }
         .hamburger-btn { display: flex !important; }
 
@@ -675,6 +671,7 @@ export default function Athletes() {
           .stats-row { flex-direction: column !important; gap: 32px !important; }
           .stats-divider { display: none !important; }
           .nav-right button:not(.hamburger-btn) { padding: 9px 14px !important; font-size: 10px !important; }
+          .hero-content { bottom: 40px !important; left: 24px !important; right: 24px !important; }
         }
 
         @media (max-width: 480px) {
