@@ -175,12 +175,12 @@ export default function Athletes() {
 
   const pourquoiItems = [
     {
-      titre: { fr: 'Communauté fidèle', en: 'Loyal community' },
+      titre: { fr: 'Contrôle de ton image', en: 'Control your narrative' },
       desc: {
-        fr: "Une audience bien construite sur les réseaux sociaux devient un véritable actif. Elle te suit dans les hauts, les bas, et reste au-delà de ta carrière.",
-        en: "A well-built social media audience becomes a real asset. It follows you through the highs and lows, and stays with you beyond your playing career.",
+        fr: "Plutôt qu'être défini par les médias ou tes performances du moment, tu deviens maître de ton histoire et de la façon dont le monde te perçoit.",
+        en: "Rather than being defined by media or your on-ice performances, you become the author of your story and how the world perceives you.",
       },
-      gradient: 'linear-gradient(135deg, #0a1628, #1a2a4a)',
+      gradient: 'linear-gradient(135deg, #1a0a2a, #2a1a3a)',
     },
     {
       titre: { fr: 'Revenus diversifiés', en: 'Diversified revenue' },
@@ -189,14 +189,6 @@ export default function Athletes() {
         en: "Brand collaborations, product placements, monetized content. Strong branding opens financial doors well beyond the sport itself.",
       },
       image: 'https://res.cloudinary.com/dr0kwuqqa/image/upload/v1788118137/Capture_d_%C3%A9cran_le_2026-08-30_%C3%A0_15.28.22_wwxod5.png',
-    },
-    {
-      titre: { fr: 'Contrôle de ton image', en: 'Control your narrative' },
-      desc: {
-        fr: "Plutôt qu'être défini par les médias ou tes performances du moment, tu deviens maître de ton histoire et de la façon dont le monde te perçoit.",
-        en: "Rather than being defined by media or your on-ice performances, you become the author of your story and how the world perceives you.",
-      },
-      gradient: 'linear-gradient(135deg, #1a0a2a, #2a1a3a)',
     },
     {
       titre: { fr: "Préparer l'après-carrière", en: 'Post-career preparation' },
@@ -495,59 +487,46 @@ export default function Athletes() {
       </section>
 
       {/* ===== POURQUOI ===== */}
-      <section id="pourquoi" style={{ background: '#050505', padding: '100px 60px 0' }}>
-        <h2 style={{
-          fontFamily: "'Bebas Neue'",
-          fontSize: 'clamp(40px, 5vw, 64px)',
-          color: '#ffffff',
-          textAlign: 'center',
-          marginBottom: '80px',
-          letterSpacing: '0.02em'
-        }}>
+      <section id="pourquoi" style={{ background: '#050505', padding: '100px 60px 200px' }}>
+        <h2 style={{ color: '#fff', textAlign: 'center', fontFamily: "'Bebas Neue'", fontSize: 'clamp(40px,5vw,64px)', marginBottom: '80px', letterSpacing: '0.02em' }}>
           {fr ? 'POURQUOI AUCHUMEDIA ?' : 'WHY AUCHUMEDIA?'}
         </h2>
 
-        <div style={{ position: 'relative', paddingBottom: '120px' }}>
+        <div style={{ position: 'relative' }}>
           {pourquoiItems.map((item, i) => (
             <div
               key={i}
               className="pourquoi-card"
               style={{
                 position: 'sticky',
-                top: `${64 + i * 24}px`,
-                '--pq-top-mobile': `${64 + i * 16}px`,
+                top: `${80 + i * 30}px`,
+                '--pq-top-mobile': `${64 + i * 20}px`,
                 zIndex: i + 1,
                 height: '520px',
                 maxWidth: '900px',
-                width: '100%',
-                margin: '0 auto',
-                marginBottom: '0px',
+                margin: '0 auto 0',
                 borderRadius: '20px',
                 overflow: 'hidden',
-                boxShadow: '0 -8px 40px rgba(0,0,0,0.6)'
+                boxShadow: '0 20px 60px rgba(0,0,0,0.8)'
               }}
             >
               {item.image ? (
-                <img
-                  src={item.image}
-                  alt={item.titre.fr}
-                  style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
-                />
+                <img src={item.image} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
               ) : (
                 <div style={{ position: 'absolute', inset: 0, background: item.gradient }} />
               )}
-              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.88) 45%, rgba(0,0,0,0.25) 100%)' }} />
-              <div className="pourquoi-card-text" style={{ position: 'absolute', bottom: '48px', left: '48px', maxWidth: '440px' }}>
-                <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE, marginBottom: '12px' }}>
+              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.2) 100%)' }} />
+              <div className="pourquoi-card-text" style={{ position: 'absolute', bottom: '48px', left: '48px', maxWidth: '440px', zIndex: 2 }}>
+                <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#003DA5', marginBottom: '12px' }}>
                   {fr ? 'POURQUOI AUCHUMEDIA' : 'WHY AUCHUMEDIA'}
                 </div>
-                <div className="pourquoi-card-title" style={{ fontFamily: "'Bebas Neue'", fontSize: '44px', color: '#ffffff', marginBottom: '16px', lineHeight: 1.1 }}>
+                <div className="pourquoi-card-title" style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(32px, 4vw, 48px)', color: '#fff', marginBottom: '16px', lineHeight: 1.1 }}>
                   {fr ? item.titre.fr : item.titre.en}
                 </div>
-                <p className="pourquoi-card-desc" style={{ fontSize: '15px', color: 'rgba(255,255,255,0.65)', lineHeight: 1.75, margin: 0, fontFamily: "'DM Sans'" }}>
+                <p className="pourquoi-card-desc" style={{ fontSize: '15px', color: 'rgba(255,255,255,0.65)', lineHeight: 1.75, margin: 0 }}>
                   {fr ? item.desc.fr : item.desc.en}
                 </p>
-                <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.3)', marginTop: '24px', letterSpacing: '0.1em', fontFamily: "'DM Sans'" }}>
+                <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.3)', marginTop: '24px', letterSpacing: '0.1em' }}>
                   0{i + 1} / 0{pourquoiItems.length}
                 </div>
               </div>
