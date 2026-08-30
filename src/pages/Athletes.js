@@ -24,46 +24,34 @@ function FadeIn({ children, delay = 0, direction = 'up' }) {
   );
 }
 
-function TimelineItem({ item, index, fr }) {
-  const [ref, inView] = useInView(0.3);
-  const isLeft = index % 2 === 0;
+function RoadmapItem({ item, index, isLast, fr }) {
+  const [ref, inView] = useInView(0.4);
   return (
-    <div ref={ref} className="timeline-item" style={{ position: 'relative', padding: '48px 0', minHeight: '140px' }}>
-      <div className={`timeline-dot${inView ? ' visible' : ''}`} style={{
-        position: 'absolute', left: '50%', top: '48px', transform: 'translate(-50%, -50%)',
-        width: '12px', height: '12px', borderRadius: '50%', background: '#fff', border: `2px solid ${BLUE}`, zIndex: 2
+    <div ref={ref} className="roadmap-item" style={{ position: 'relative', paddingLeft: '56px', paddingBottom: isLast ? 0 : '64px' }}>
+      <div className="roadmap-track" style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: '2px', background: 'rgba(255,255,255,0.12)' }} />
+      <div className="roadmap-fill" style={{
+        position: 'absolute', left: 0, top: 0, width: '2px',
+        height: inView ? '100%' : '0%', background: BLUE,
+        transition: 'height 0.8s ease'
       }} />
-      <div className={`timeline-connector timeline-connector-${isLeft ? 'left' : 'right'}`} style={{
-        position: 'absolute', top: '48px', transform: 'translateY(-50%)',
-        height: '1px', background: BLUE, width: inView ? '60px' : '0px', transition: 'width 0.6s ease',
-        ...(isLeft ? { right: '50%' } : { left: '50%' })
+      <div className={`roadmap-dot${inView ? ' visible' : ''}`} style={{
+        position: 'absolute', left: '-6px', top: '4px', width: '14px', height: '14px', borderRadius: '50%',
+        background: inView ? BLUE : '#080808',
+        border: `2px solid ${inView ? BLUE : 'rgba(255,255,255,0.2)'}`,
+        transform: inView ? 'scale(1)' : 'scale(0.7)',
+        transition: 'all 0.5s ease', zIndex: 2
       }} />
-      <div className={`timeline-content timeline-content-${isLeft ? 'left' : 'right'}${inView ? ' in-view' : ''}`} style={{
-        position: 'relative',
-        width: 'calc(50% - 60px)',
-        marginLeft: isLeft ? 0 : 'calc(50% + 60px)',
-        textAlign: isLeft ? 'right' : 'left',
+      <div className="roadmap-content" style={{
         opacity: inView ? 1 : 0,
-        transform: inView ? 'translateX(0)' : `translateX(${isLeft ? '-40px' : '40px'})`,
+        transform: inView ? 'translateY(0)' : 'translateY(30px)',
         transition: 'opacity 0.7s ease, transform 0.7s ease'
       }}>
-        <span className="timeline-number" style={{
-          position: 'absolute', top: '-36px', [isLeft ? 'left' : 'right']: '-10px',
-          fontFamily: "'Bebas Neue'", fontSize: '80px', color: 'rgba(255,255,255,0.06)', lineHeight: 1, zIndex: 0
-        }}>
-          0{index + 1}
-        </span>
-        <div style={{ position: 'relative', zIndex: 1 }}>
-          <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE, marginBottom: '10px' }}>
-            {fr ? 'POURQUOI AUCHUMEDIA' : 'WHY AUCHUMEDIA'}
-          </div>
-          <div style={{ fontFamily: "'Bebas Neue'", fontSize: '36px', color: '#fff', marginBottom: '14px', lineHeight: 1.1 }}>
-            {fr ? item.titre.fr : item.titre.en}
-          </div>
-          <p style={{ fontSize: '15px', color: 'rgba(255,255,255,0.6)', lineHeight: 1.75, margin: 0, fontFamily: "'DM Sans'" }}>
-            {fr ? item.desc.fr : item.desc.en}
-          </p>
+        <div style={{ fontFamily: "'Bebas Neue'", fontSize: '36px', color: '#fff', marginBottom: '14px', lineHeight: 1.1 }}>
+          {fr ? item.titre.fr : item.titre.en}
         </div>
+        <p style={{ fontSize: '15px', color: 'rgba(255,255,255,0.6)', lineHeight: 1.75, margin: 0, fontFamily: "'DM Sans'" }}>
+          {fr ? item.desc.fr : item.desc.en}
+        </p>
       </div>
     </div>
   );
@@ -563,11 +551,9 @@ export default function Athletes() {
           {fr ? 'POURQUOI AUCHUMEDIA ?' : 'WHY AUCHUMEDIA?'}
         </h2>
 
-        <div style={{ maxWidth: '800px', margin: '0 auto', position: 'relative' }}>
-          <div className="timeline-track" style={{ position: 'absolute', left: '50%', top: 0, bottom: 0, width: '1px', background: 'rgba(255,255,255,0.1)', transform: 'translateX(-50%)' }} />
-
+        <div style={{ maxWidth: '700px', margin: '0 auto' }}>
           {pourquoiItems.map((item, i) => (
-            <TimelineItem key={i} item={item} index={i} fr={fr} />
+            <RoadmapItem key={i} item={item} index={i} isLast={i === pourquoiItems.length - 1} fr={fr} />
           ))}
         </div>
       </section>
@@ -668,15 +654,6 @@ export default function Athletes() {
         .hero-title { opacity: 0; animation: fadeInUp 0.8s ease 0.2s forwards; }
         .hero-cta { opacity: 0; animation: fadeInUp 0.8s ease 0.8s forwards; }
         .hamburger-btn { display: flex !important; }
-        @keyframes pulse {
-          0%, 100% { box-shadow: 0 0 0 0 rgba(0,61,165,0.4); }
-          50% { box-shadow: 0 0 0 8px rgba(0,61,165,0); }
-        }
-        .timeline-dot.visible { animation: pulse 2s ease infinite; }
-        @keyframes drawLine {
-          from { width: 0; }
-          to { width: 60px; }
-        }
 
         html, body {
           overflow-x: hidden;
@@ -699,17 +676,6 @@ export default function Athletes() {
           .clients-grid { grid-template-columns: 1fr !important; }
           .nav-right button:not(.hamburger-btn) { padding: 9px 14px !important; font-size: 10px !important; }
           .hero-content { bottom: 40px !important; left: 24px !important; right: 24px !important; }
-          .timeline-track { left: 24px !important; }
-          .timeline-dot { left: 24px !important; }
-          .timeline-connector { display: none !important; }
-          .timeline-content {
-            width: calc(100% - 60px) !important;
-            margin-left: 60px !important;
-            text-align: left !important;
-            transform: translateX(40px) !important;
-          }
-          .timeline-content.in-view { transform: translateX(0) !important; }
-          .timeline-number { left: -10px !important; right: auto !important; }
         }
 
         @media (max-width: 480px) {
