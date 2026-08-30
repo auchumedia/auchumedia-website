@@ -512,6 +512,7 @@ export default function Athletes() {
               style={{
                 position: 'sticky',
                 top: `${80 + i * 20}px`,
+                '--pq-top-mobile': `${64 + i * 16}px`,
                 zIndex: i + 1,
                 marginBottom: '24px',
                 height: '500px',
@@ -520,6 +521,7 @@ export default function Athletes() {
                 margin: '0 auto',
                 borderRadius: '20px',
                 overflow: 'hidden',
+                WebkitOverflowScrolling: 'touch',
                 boxShadow: '0 20px 60px rgba(0,0,0,0.5)',
                 transform: `scale(${1 - (pourquoiItems.length - 1 - i) * 0.02})`
               }}
@@ -650,6 +652,15 @@ export default function Athletes() {
         .hero-cta { opacity: 0; animation: fadeInUp 0.8s ease 0.8s forwards; }
         .hamburger-btn { display: flex !important; }
 
+        html, body {
+          overflow-x: hidden;
+          -webkit-overflow-scrolling: touch;
+        }
+        .pourquoi-card {
+          position: -webkit-sticky;
+          position: sticky;
+        }
+
         @media (max-width: 900px) {
           .nav-links { display: none !important; }
         }
@@ -666,7 +677,12 @@ export default function Athletes() {
           .clients-grid { grid-template-columns: 1fr !important; }
           .nav-right button:not(.hamburger-btn) { padding: 9px 14px !important; font-size: 10px !important; }
           .hero-content { bottom: 40px !important; left: 24px !important; right: 24px !important; }
-          .pourquoi-card { height: 400px !important; }
+          .pourquoi-card {
+            position: -webkit-sticky !important;
+            position: sticky !important;
+            top: var(--pq-top-mobile) !important;
+            height: 400px !important;
+          }
           .pourquoi-card-text { bottom: 28px !important; left: 24px !important; right: 24px !important; }
           .pourquoi-card-title { font-size: 30px !important; }
           .pourquoi-card-desc { font-size: 13px !important; }
