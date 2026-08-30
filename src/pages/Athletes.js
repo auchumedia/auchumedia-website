@@ -457,7 +457,7 @@ export default function Athletes() {
       </section>
 
       {/* ===== POURQUOI ===== */}
-      <section id="pourquoi" style={{ position: 'relative', background: '#050505', padding: '100px 60px 0' }}>
+      <section id="pourquoi" style={{ position: 'relative', background: '#050505', padding: '100px 60px 0', paddingBottom: '120px' }}>
         <h2 style={{
           fontFamily: "'Bebas Neue'",
           fontSize: 'clamp(40px, 5vw, 64px)',
