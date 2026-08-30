@@ -260,7 +260,7 @@ export default function Athletes() {
           <div className="splash-logo" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <img src="/Copie de AUCHU.png.png" alt="AuchuMedia" style={{ height: '36px', width: 'auto', filter: 'brightness(0) invert(1)' }} />
             <p style={{ fontSize: '11px', letterSpacing: '0.3em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginTop: '16px', fontFamily: "'DM Sans'", textAlign: 'center' }}>
-              {fr ? 'Building Athletes Brands' : 'Building Athletes Brands'}
+              {fr ? "On boost l'attention. On génère l'impact." : 'We boost attention. We generate impact.'}
             </p>
           </div>
           <div className="splash-explore" style={{ position: 'absolute', bottom: '48px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
@@ -595,7 +595,7 @@ export default function Athletes() {
       <footer style={{ background: '#080808', padding: '48px 60px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px' }}>
         <img src="/Copie de AUCHU.png.png" alt="AuchuMedia" style={{ height: '22px', filter: 'brightness(0) invert(1)' }} />
         <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.45)', letterSpacing: '0.1em', textTransform: 'uppercase', fontFamily: "'DM Sans'" }}>
-          {fr ? 'Building Athletes Brands' : 'Building Athletes Brands'}
+          {fr ? "On boost l'attention. On génère l'impact." : 'We boost attention. We generate impact.'}
         </div>
         <div style={{ display: 'flex', gap: '20px', margin: '8px 0' }}>
           <a href="https://instagram.com/auchumedia" target="_blank" rel="noreferrer" style={{ transition: 'opacity 0.3s ease', display: 'flex' }}
