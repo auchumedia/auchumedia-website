@@ -24,6 +24,15 @@ function FadeIn({ children, delay = 0, direction = 'up' }) {
   );
 }
 
+function PourquoiCard({ children, delay = 0 }) {
+  const [ref, inView] = useInView(0.15);
+  return (
+    <div ref={ref} style={{ opacity: inView ? 1 : 0, transform: inView ? 'translateY(0)' : 'translateY(60px)', transition: `opacity 0.7s ease ${delay}s, transform 0.7s ease ${delay}s` }}>
+      {children}
+    </div>
+  );
+}
+
 const navLinks = [
   { id: 'a-propos', labelFr: 'À propos', labelEn: 'About' },
   { id: 'services', labelFr: 'Services', labelEn: 'Services' },
@@ -171,21 +180,6 @@ export default function Athletes() {
       const id = window.location.hash.slice(1);
       setTimeout(() => scrollTo(id), 100);
     }
-  }, []);
-
-  const itemRefs = useRef([]);
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  useEffect(() => {
-    const observers = itemRefs.current.map((ref, i) => {
-      const obs = new IntersectionObserver(
-        ([entry]) => { if (entry.isIntersecting) setActiveIndex(i); },
-        { threshold: 0.5, rootMargin: '-20% 0px -20% 0px' }
-      );
-      if (ref) obs.observe(ref);
-      return obs;
-    });
-    return () => observers.forEach(obs => obs.disconnect());
   }, []);
 
   const pourquoiCards = fr ? [
@@ -453,8 +447,8 @@ export default function Athletes() {
         </div>
       </section>
 
-      {/* ===== POURQUOI (sticky scroll) ===== */}
-      <section id="pourquoi" style={{ padding: '100px 60px', background: '#080808' }}>
+      {/* ===== POURQUOI ===== */}
+      <section id="pourquoi" style={{ position: 'relative', background: '#050505', padding: '100px 60px' }}>
         <h2 style={{
           fontFamily: "'Bebas Neue'",
           fontSize: 'clamp(40px, 5vw, 64px)',
@@ -465,61 +459,50 @@ export default function Athletes() {
         }}>
           {fr ? 'POURQUOI AUCHUMEDIA ?' : 'WHY AUCHUMEDIA?'}
         </h2>
-        <div className="pourquoi-flex" style={{ position: 'relative', maxWidth: '1100px', margin: '0 auto', height: `${pourquoiCards.length * 600}px`, display: 'flex' }}>
-          <div className="pourquoi-sticky-left" style={{ position: 'sticky', top: '120px', width: '45%', height: 'fit-content' }}>
-            <span style={{ display: 'block', fontSize: '10px', fontWeight: 700, color: BLUE, letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '24px' }}>
-              {fr ? 'POURQUOI AUCHUMEDIA' : 'WHY AUCHUMEDIA'}
-            </span>
-            <div style={{ position: 'relative' }}>
-              <span style={{ position: 'absolute', top: '-30px', left: 0, fontFamily: "'Bebas Neue'", fontSize: '100px', color: 'rgba(255,255,255,0.05)', lineHeight: 1, zIndex: 0 }}>
-                0{activeIndex + 1}
-              </span>
-              <h3 style={{ position: 'relative', zIndex: 1, margin: '0 0 20px', fontFamily: "'Bebas Neue'", fontSize: '48px', color: '#ffffff', letterSpacing: '0.01em', lineHeight: 1.05, transition: 'opacity 0.4s ease, transform 0.4s ease' }}>
-                {pourquoiCards[activeIndex].title}
-              </h3>
-              <p style={{ position: 'relative', zIndex: 1, fontSize: '15px', color: 'rgba(255,255,255,0.6)', lineHeight: 1.8, fontWeight: 300, margin: 0, maxWidth: '420px', fontFamily: "'DM Sans'", transition: 'opacity 0.4s ease, transform 0.4s ease' }}>
-                {pourquoiCards[activeIndex].desc}
-              </p>
-            </div>
-            <div style={{ marginTop: '32px', fontSize: '12px', color: 'rgba(255,255,255,0.4)', letterSpacing: '0.05em', fontFamily: "'DM Sans'" }}>
-              0{activeIndex + 1} / 0{pourquoiCards.length}
-            </div>
-          </div>
 
-          <div className="pourquoi-scroll-right" style={{ width: '55%' }}>
+        <div style={{ position: 'relative', height: `${pourquoiCards.length * 700}px` }}>
+          <div style={{
+            position: 'sticky', top: 0, height: '100vh', zIndex: 0,
+            background: '#080808',
+            backgroundImage: 'radial-gradient(ellipse at 50% 50%, #111111 0%, #050505 100%)'
+          }} />
+
+          <div style={{ position: 'absolute', top: 0, left: 0, right: 0, zIndex: 1 }}>
             {pourquoiCards.map((card, i) => (
-              <div
-                key={i}
-                ref={el => { itemRefs.current[i] = el; }}
-                className="pourquoi-item"
-                style={{ height: '600px', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px' }}
-              >
-                <FadeIn>
-                  <div className="pourquoi-mobile-text" style={{ display: 'none', marginBottom: '24px' }}>
-                    <h3 style={{ fontFamily: "'Bebas Neue'", fontSize: '36px', color: '#ffffff', marginBottom: '12px', lineHeight: 1.1 }}>{card.title}</h3>
-                    <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.6)', lineHeight: 1.7, fontWeight: 300, fontFamily: "'DM Sans'" }}>{card.desc}</p>
+              <PourquoiCard key={i} delay={i * 0.1}>
+                <div className="pourquoi-card" style={{
+                  height: '560px', width: '100%', maxWidth: '900px', margin: '0 auto 40px',
+                  borderRadius: '20px', overflow: 'hidden', position: 'relative'
+                }}>
+                  {i === 0 ? (
+                    <img
+                      src="https://res.cloudinary.com/dr0kwuqqa/image/upload/v1788118137/Capture_d_%C3%A9cran_le_2026-08-30_%C3%A0_15.28.22_wwxod5.png"
+                      alt={card.title}
+                      style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
+                    />
+                  ) : (
+                    <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, #111111 0%, #1a1a1a 100%)' }} />
+                  )}
+                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.88) 45%, rgba(0,0,0,0.25) 100%)' }} />
+                  <span style={{ position: 'absolute', top: '24px', right: '32px', fontFamily: "'Bebas Neue'", fontSize: '140px', color: 'rgba(255,255,255,0.05)', lineHeight: 1 }}>
+                    0{i + 1}
+                  </span>
+                  <div className="pourquoi-card-text" style={{ position: 'absolute', bottom: '48px', left: '48px', maxWidth: '440px' }}>
+                    <span style={{ display: 'block', fontSize: '10px', fontWeight: 700, color: BLUE, letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '12px' }}>
+                      {fr ? 'POURQUOI AUCHUMEDIA' : 'WHY AUCHUMEDIA'}
+                    </span>
+                    <h3 className="pourquoi-card-title" style={{ margin: '0 0 12px', fontFamily: "'Bebas Neue'", fontSize: '44px', color: '#ffffff', letterSpacing: '0.01em', lineHeight: 1.05 }}>
+                      {card.title}
+                    </h3>
+                    <p className="pourquoi-card-desc" style={{ fontSize: '15px', color: 'rgba(255,255,255,0.6)', lineHeight: 1.7, fontWeight: 300, margin: '0 0 16px', fontFamily: "'DM Sans'" }}>
+                      {card.desc}
+                    </p>
+                    <span style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', letterSpacing: '0.05em', fontFamily: "'DM Sans'" }}>
+                      0{i + 1} / 0{pourquoiCards.length}
+                    </span>
                   </div>
-                  <div className="pourquoi-visual" style={{
-                    width: '100%', height: '420px', background: '#111111', borderRadius: '12px', overflow: 'hidden',
-                    border: '0.5px solid rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    opacity: activeIndex === i ? 1 : 0.3,
-                    transform: activeIndex === i ? 'scale(1)' : 'scale(0.97)',
-                    transition: 'opacity 0.4s ease, transform 0.4s ease'
-                  }}>
-                    {i === 0 ? (
-                      <img
-                        src="https://res.cloudinary.com/dr0kwuqqa/image/upload/v1788118137/Capture_d_%C3%A9cran_le_2026-08-30_%C3%A0_15.28.22_wwxod5.png"
-                        alt="Partenariats"
-                        style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '12px' }}
-                      />
-                    ) : (
-                      <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.2)', letterSpacing: '0.1em', textTransform: 'uppercase', fontFamily: "'DM Sans'" }}>
-                        {fr ? 'Visuel à venir' : 'Visual coming soon'}
-                      </span>
-                    )}
-                  </div>
-                </FadeIn>
-              </div>
+                </div>
+              </PourquoiCard>
             ))}
           </div>
         </div>
@@ -674,12 +657,10 @@ export default function Athletes() {
           .clients-grid { grid-template-columns: 1fr !important; }
           .nav-right button:not(.hamburger-btn) { padding: 9px 14px !important; font-size: 10px !important; }
           .hero-content { bottom: 40px !important; left: 24px !important; right: 24px !important; }
-          .pourquoi-flex { flex-direction: column !important; height: auto !important; padding: 24px !important; }
-          .pourquoi-sticky-left { display: none !important; }
-          .pourquoi-scroll-right { width: 100% !important; }
-          .pourquoi-item { height: auto !important; padding: 24px 0 !important; }
-          .pourquoi-mobile-text { display: block !important; }
-          .pourquoi-visual { height: 280px !important; opacity: 1 !important; transform: none !important; }
+          .pourquoi-card { height: 400px !important; }
+          .pourquoi-card-text { bottom: 28px !important; left: 24px !important; right: 24px !important; }
+          .pourquoi-card-title { font-size: 30px !important; }
+          .pourquoi-card-desc { font-size: 13px !important; }
         }
 
         @media (max-width: 480px) {
