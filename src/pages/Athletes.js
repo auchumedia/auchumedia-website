@@ -382,7 +382,7 @@ export default function Athletes() {
       </div>
 
       {/* ===== MISSION / À PROPOS ===== */}
-      <section id="a-propos" style={{ padding: '120px 60px', background: '#ffffff', scrollMarginTop: '72px' }}>
+      <section id="a-propos" style={{ padding: '120px 60px', paddingBottom: '40px', background: '#ffffff', scrollMarginTop: '72px' }}>
         <div className="two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '80px', alignItems: 'center' }}>
           <FadeIn direction="left">
             <div>
@@ -415,7 +415,7 @@ export default function Athletes() {
       </section>
 
       {/* ===== FONDATEUR ===== */}
-      <section style={{ padding: '120px 60px', background: '#ffffff' }}>
+      <section style={{ padding: '120px 60px', paddingTop: '40px', background: '#ffffff' }}>
         <div className="two-col founder-grid" style={{ display: 'grid', gridTemplateColumns: '400px 1fr', gap: '80px', alignItems: 'center', maxWidth: '1100px', margin: '0 auto' }}>
           <FadeIn direction="left">
             <div style={{ width: '100%', maxWidth: '400px', height: '500px', margin: '0 auto' }}>
