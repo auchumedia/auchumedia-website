@@ -180,6 +180,7 @@ export default function Athletes() {
         fr: "Une audience bien construite sur les réseaux sociaux devient un véritable actif. Elle te suit dans les hauts, les bas, et reste au-delà de ta carrière.",
         en: "A well-built social media audience becomes a real asset. It follows you through the highs and lows, and stays with you beyond your playing career.",
       },
+      gradient: 'linear-gradient(135deg, #0a1628, #1a2a4a)',
     },
     {
       titre: { fr: 'Revenus diversifiés', en: 'Diversified revenue' },
@@ -195,6 +196,7 @@ export default function Athletes() {
         fr: "Plutôt qu'être défini par les médias ou tes performances du moment, tu deviens maître de ton histoire et de la façon dont le monde te perçoit.",
         en: "Rather than being defined by media or your on-ice performances, you become the author of your story and how the world perceives you.",
       },
+      gradient: 'linear-gradient(135deg, #1a0a2a, #2a1a3a)',
     },
     {
       titre: { fr: "Préparer l'après-carrière", en: 'Post-career preparation' },
@@ -493,7 +495,7 @@ export default function Athletes() {
       </section>
 
       {/* ===== POURQUOI ===== */}
-      <section id="pourquoi" style={{ position: 'relative', background: '#050505', padding: '100px 60px 0', paddingBottom: '120px' }}>
+      <section id="pourquoi" style={{ background: '#050505', padding: '100px 60px 0' }}>
         <h2 style={{
           fontFamily: "'Bebas Neue'",
           fontSize: 'clamp(40px, 5vw, 64px)',
@@ -505,26 +507,24 @@ export default function Athletes() {
           {fr ? 'POURQUOI AUCHUMEDIA ?' : 'WHY AUCHUMEDIA?'}
         </h2>
 
-        <div className="pourquoi-stack" style={{ height: 'auto', display: 'flex', flexDirection: 'column', gap: 0 }}>
+        <div style={{ position: 'relative', paddingBottom: '120px' }}>
           {pourquoiItems.map((item, i) => (
             <div
               key={i}
               className="pourquoi-card"
               style={{
                 position: 'sticky',
-                top: `${80 + i * 20}px`,
+                top: `${64 + i * 24}px`,
                 '--pq-top-mobile': `${64 + i * 16}px`,
                 zIndex: i + 1,
-                marginBottom: '24px',
-                height: '500px',
+                height: '520px',
                 maxWidth: '900px',
                 width: '100%',
                 margin: '0 auto',
+                marginBottom: '0px',
                 borderRadius: '20px',
                 overflow: 'hidden',
-                WebkitOverflowScrolling: 'touch',
-                boxShadow: '0 20px 60px rgba(0,0,0,0.5)',
-                transform: `scale(${1 - (pourquoiItems.length - 1 - i) * 0.02})`
+                boxShadow: '0 -8px 40px rgba(0,0,0,0.6)'
               }}
             >
               {item.image ? (
@@ -534,7 +534,7 @@ export default function Athletes() {
                   style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
                 />
               ) : (
-                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, #111111 0%, #1a1a1a 100%)' }} />
+                <div style={{ position: 'absolute', inset: 0, background: item.gradient }} />
               )}
               <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.88) 45%, rgba(0,0,0,0.25) 100%)' }} />
               <div className="pourquoi-card-text" style={{ position: 'absolute', bottom: '48px', left: '48px', maxWidth: '440px' }}>
@@ -682,7 +682,7 @@ export default function Athletes() {
             position: -webkit-sticky !important;
             position: sticky !important;
             top: var(--pq-top-mobile) !important;
-            height: 400px !important;
+            height: 420px !important;
           }
           .pourquoi-card-text { bottom: 28px !important; left: 24px !important; right: 24px !important; }
           .pourquoi-card-title { font-size: 30px !important; }
