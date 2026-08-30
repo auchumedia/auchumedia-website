@@ -24,39 +24,6 @@ function FadeIn({ children, delay = 0, direction = 'up' }) {
   );
 }
 
-function useCountUp(target, inView, duration = 2000) {
-  const [count, setCount] = useState(0);
-  useEffect(() => {
-    if (!inView) return;
-    let raf;
-    let start = null;
-    const step = (ts) => {
-      if (start === null) start = ts;
-      const progress = Math.min((ts - start) / duration, 1);
-      setCount(Math.floor(progress * target));
-      if (progress < 1) raf = requestAnimationFrame(step);
-      else setCount(target);
-    };
-    raf = requestAnimationFrame(step);
-    return () => cancelAnimationFrame(raf);
-  }, [inView, target, duration]);
-  return count;
-}
-
-function StatCount({ value, suffix, label, inView, delay }) {
-  const count = useCountUp(value, inView, 2000);
-  return (
-    <div style={{ textAlign: 'center', padding: '0 32px', flex: '1 1 0', minWidth: '160px' }}>
-      <div style={{ fontFamily: "'Bebas Neue'", fontSize: '80px', color: BLUE, lineHeight: 1, letterSpacing: '0.01em' }}>
-        {count}{suffix}
-      </div>
-      <div style={{ fontSize: '12px', color: '#ffffff', letterSpacing: '0.16em', textTransform: 'uppercase', marginTop: '10px', fontWeight: 500 }}>
-        {label}
-      </div>
-    </div>
-  );
-}
-
 const navLinks = [
   { id: 'a-propos', labelFr: 'À propos', labelEn: 'About' },
   { id: 'services', labelFr: 'Services', labelEn: 'Services' },
@@ -205,8 +172,6 @@ export default function Athletes() {
       setTimeout(() => scrollTo(id), 100);
     }
   }, []);
-
-  const [statsRef, statsInView] = useInView(0.3);
 
   const pourquoiCards = fr ? [
     { icon: '🎯', title: 'Partenariats mieux rémunérés', desc: "Les marques veulent s'associer à une image forte, des valeurs, une communauté engagée." },
@@ -437,41 +402,37 @@ export default function Athletes() {
         </div>
       </section>
 
-      {/* ===== STATS ===== */}
-      <section ref={statsRef} style={{ padding: '90px 60px', background: '#000000' }}>
-        <div className="stats-row" style={{ display: 'flex', maxWidth: '1000px', margin: '0 auto', position: 'relative' }}>
-          <StatCount value={5} suffix="M+" label={fr ? 'Vues générées' : 'Views generated'} inView={statsInView} />
-          <div className="stats-divider" style={{ width: '1px', background: 'rgba(255,255,255,0.15)', margin: '4px 0' }} />
-          <StatCount value={3} suffix="" label={fr ? 'Clients actifs' : 'Active clients'} inView={statsInView} />
-          <div className="stats-divider" style={{ width: '1px', background: 'rgba(255,255,255,0.15)', margin: '4px 0' }} />
-          <StatCount value={100} suffix="K+" label={fr ? 'Engagements' : 'Engagements'} inView={statsInView} />
-        </div>
-      </section>
-
       {/* ===== POURQUOI ===== */}
-      <section style={{ padding: '120px 60px', background: '#0a0a0a' }}>
+      <section id="pourquoi" style={{ padding: '120px 60px', background: '#0a0a0a' }}>
         <FadeIn>
-          <div style={{ textAlign: 'center', marginBottom: '64px' }}>
+          <div style={{ marginBottom: '72px' }}>
             <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(32px, 4.5vw, 56px)', color: '#ffffff', letterSpacing: '0.02em', marginBottom: '16px' }}>
               {fr ? 'POURQUOI AUCHUMEDIA ?' : 'WHY AUCHUMEDIA?'}
             </h2>
-            <p style={{ fontSize: '15px', color: 'rgba(255,255,255,0.55)', lineHeight: 1.8, maxWidth: '560px', margin: '0 auto', fontFamily: "'DM Sans'", fontWeight: 300 }}>
+            <p style={{ fontSize: '15px', color: 'rgba(255,255,255,0.55)', lineHeight: 1.8, maxWidth: '560px', fontFamily: "'DM Sans'", fontWeight: 300 }}>
               {fr ? "On combine le storytelling et la stratégie de marque pour livrer des résultats tangibles." : "We combine storytelling and brand strategy to deliver tangible results."}
             </p>
           </div>
         </FadeIn>
-        <div className="pourquoi-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px', maxWidth: '1040px', margin: '0 auto' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           {pourquoiCards.map((card, i) => (
-            <FadeIn key={i} delay={i * 0.08}>
+            <FadeIn key={i} delay={i * 0.1}>
               <div
-                className="pourquoi-card"
-                style={{ background: '#111111', border: '0.5px solid rgba(255,255,255,0.06)', borderRadius: '12px', padding: '28px', height: '100%', transition: 'all 0.3s ease', gridColumn: i >= 3 ? 'span 1' : 'auto' }}
-                onMouseEnter={e => { e.currentTarget.style.borderColor = BLUE; e.currentTarget.style.transform = 'translateY(-4px)'; }}
-                onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.06)'; e.currentTarget.style.transform = 'none'; }}
+                className="pourquoi-row"
+                style={{ display: 'grid', gridTemplateColumns: '80px 1fr 1fr', gap: '32px', alignItems: 'center', padding: '48px 0', borderTop: '0.5px solid rgba(255,255,255,0.08)', position: 'relative' }}
               >
-                <div style={{ fontSize: '30px', marginBottom: '16px' }}>{card.icon}</div>
-                <h3 style={{ margin: 0, fontSize: '14px', fontWeight: 700, color: '#ffffff', marginBottom: '10px', textTransform: 'uppercase', letterSpacing: '0.04em', fontFamily: "'DM Sans'" }}>{card.title}</h3>
-                <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.55)', lineHeight: 1.7, fontWeight: 300, margin: 0 }}>{card.desc}</p>
+                <span style={{ fontFamily: "'Bebas Neue'", fontSize: '15px', color: 'rgba(255,255,255,0.4)', letterSpacing: '0.05em' }}>
+                  0{i + 1}
+                </span>
+                <div>
+                  <h3 style={{ margin: '0 0 12px', fontFamily: "'Bebas Neue'", fontSize: '32px', color: '#ffffff', letterSpacing: '0.01em', lineHeight: 1.05 }}>{card.title}</h3>
+                  <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.55)', lineHeight: 1.7, fontWeight: 300, margin: 0, fontFamily: "'DM Sans'" }}>{card.desc}</p>
+                </div>
+                <div className="pourquoi-placeholder" style={{ height: '200px', background: '#1a1a1a', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <span style={{ fontSize: '10px', color: 'rgba(255,255,255,0.3)', letterSpacing: '0.1em', textTransform: 'uppercase', fontFamily: "'DM Sans'" }}>
+                    {fr ? 'Image à venir' : 'Image coming soon'}
+                  </span>
+                </div>
               </div>
             </FadeIn>
           ))}
@@ -491,9 +452,6 @@ export default function Athletes() {
           </FadeIn>
           <FadeIn direction="right" delay={0.15}>
             <div>
-              <span style={{ display: 'block', fontSize: '11px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE, marginBottom: '16px' }}>
-                {fr ? 'Fondateur' : 'Founder'}
-              </span>
               <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(36px, 4.5vw, 56px)', color: '#0a0a0a', letterSpacing: '0.02em', marginBottom: '10px' }}>
                 RAPHAËL AUCHU
               </h2>
@@ -665,11 +623,10 @@ export default function Athletes() {
           section { padding-left: 20px !important; padding-right: 20px !important; }
           .two-col { grid-template-columns: 1fr !important; gap: 40px !important; }
           .founder-grid { grid-template-columns: 1fr !important; }
-          .pourquoi-grid { grid-template-columns: 1fr !important; }
           .services-grid { grid-template-columns: 1fr !important; }
           .clients-grid { grid-template-columns: 1fr !important; }
-          .stats-row { flex-direction: column !important; gap: 32px !important; }
-          .stats-divider { display: none !important; }
+          .pourquoi-row { grid-template-columns: 1fr !important; gap: 16px !important; padding: 32px 0 !important; }
+          .pourquoi-placeholder { height: 160px !important; }
           .nav-right button:not(.hamburger-btn) { padding: 9px 14px !important; font-size: 10px !important; }
           .hero-content { bottom: 40px !important; left: 24px !important; right: 24px !important; }
         }
