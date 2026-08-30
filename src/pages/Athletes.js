@@ -3,6 +3,24 @@ import { Helmet } from 'react-helmet-async';
 
 const BLUE = '#003DA5';
 
+const items = [
+  {
+    title: 'CONTRÔLE DE TON IMAGE',
+    bg: 'linear-gradient(135deg, #1a0a2a, #2a1a3a)',
+    image: null
+  },
+  {
+    title: 'REVENUS DIVERSIFIÉS',
+    bg: null,
+    image: 'https://res.cloudinary.com/dr0kwuqqa/image/upload/v1788118137/Capture_d_%C3%A9cran_le_2026-08-30_%C3%A0_15.28.22_wwxod5.png'
+  },
+  {
+    title: "PRÉPARER L'APRÈS-CARRIÈRE",
+    bg: null,
+    image: 'https://res.cloudinary.com/dr0kwuqqa/image/upload/v1788122678/Capture_d_%C3%A9cran_le_2026-08-30_%C3%A0_16.43.54_qlkahx.png'
+  },
+];
+
 function useInView(threshold = 0.1) {
   const ref = useRef(null);
   const [inView, setInView] = useState(false);
@@ -489,72 +507,32 @@ export default function Athletes() {
         </div>
       </section>
 
-      {/* ===== POURQUOI ===== */}
-      <section id="pourquoi" style={{ background: '#050505' }}>
-        <div style={{ padding: '100px 60px 300px' }}>
-          <h2 style={{ color: '#fff', textAlign: 'center', fontFamily: "'Bebas Neue'", fontSize: 'clamp(40px,5vw,64px)', marginBottom: '80px', letterSpacing: '0.02em' }}>
-            {fr ? 'POURQUOI AUCHUMEDIA ?' : 'WHY AUCHUMEDIA?'}
-          </h2>
-          {[
-            {
-              image: null,
-              gradient: 'linear-gradient(135deg, #1a0a2a, #2a1a3a)',
-              titreFr: 'CONTRÔLE DE TON IMAGE',
-              titreEn: 'CONTROL YOUR NARRATIVE',
-              descFr: "Plutôt qu'être défini par les médias, tu deviens maître de ton histoire.",
-              descEn: "Rather than being defined by media, you become the author of your story.",
-            },
-            {
-              image: 'https://res.cloudinary.com/dr0kwuqqa/image/upload/v1788118137/Capture_d_%C3%A9cran_le_2026-08-30_%C3%A0_15.28.22_wwxod5.png',
-              gradient: null,
-              titreFr: 'REVENUS DIVERSIFIÉS',
-              titreEn: 'DIVERSIFIED REVENUE',
-              descFr: "Collaborations, placements de produits, contenu monétisé. Le branding ouvre des portes hors-glace.",
-              descEn: "Collaborations, product placements, monetized content. Branding opens doors off the ice.",
-            },
-            {
-              image: 'https://res.cloudinary.com/dr0kwuqqa/image/upload/v1788122678/Capture_d_%C3%A9cran_le_2026-08-30_%C3%A0_16.43.54_qlkahx.png',
-              gradient: null,
-              titreFr: "PRÉPARER L'APRÈS-CARRIÈRE",
-              titreEn: 'POST-CAREER PREPARATION',
-              descFr: "Un branding fort te garde visible même après avoir raccroché les patins.",
-              descEn: "A strong brand keeps you visible even after you hang up the skates.",
-            },
-          ].map((item, i) => (
-            <div key={i} style={{
+      <div style={{ padding: '100px 60px 300px' }}>
+        {items.map((item, i) => (
+          <div
+            key={i}
+            style={{
               position: 'sticky',
               top: `${80 + i * 30}px`,
               zIndex: i + 1,
-              height: '520px',
+              height: '500px',
               maxWidth: '900px',
-              width: '100%',
               margin: '0 auto',
               borderRadius: '20px',
               overflow: 'hidden',
-            }}>
-              {item.image
-                ? <img src={item.image} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
-                : <div style={{ position: 'absolute', inset: 0, background: item.gradient }} />
-              }
-              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.5) 60%, rgba(0,0,0,0.1) 100%)' }} />
-              <div style={{ position: 'absolute', bottom: '48px', left: '48px', maxWidth: '440px', zIndex: 2 }}>
-                <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#003DA5', marginBottom: '12px' }}>
-                  {fr ? 'POURQUOI AUCHUMEDIA' : 'WHY AUCHUMEDIA'}
-                </div>
-                <div style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(32px,4vw,48px)', color: '#fff', marginBottom: '16px', lineHeight: 1.1 }}>
-                  {fr ? item.titreFr : item.titreEn}
-                </div>
-                <p style={{ fontSize: '15px', color: 'rgba(255,255,255,0.65)', lineHeight: 1.75, margin: 0 }}>
-                  {fr ? item.descFr : item.descEn}
-                </p>
-                <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.3)', marginTop: '24px' }}>
-                  0{i + 1} / 03
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            {item.image
+              ? <img src={item.image} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+              : <div style={{ position: 'absolute', inset: 0, background: item.bg }} />
+            }
+            <h2 style={{ position: 'relative', zIndex: 1, color: '#fff', fontFamily: 'sans-serif', fontSize: '48px', textAlign: 'center', padding: '0 24px' }}>{item.title}</h2>
+          </div>
+        ))}
+      </div>
 
       {/* ===== CLIENTS ===== */}
       <section id="clients" style={{ padding: '120px 60px', background: '#ffffff', scrollMarginTop: '72px' }}>
