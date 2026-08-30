@@ -422,7 +422,7 @@ export default function Athletes() {
               <img
                 src="https://res.cloudinary.com/dr0kwuqqa/image/upload/v1788129784/att.NWd5Lxz4DebA3MChOrgQ6_fuagLyL-JCsBepIwjdOko_yx4tgj.jpg"
                 alt="Raphaël Auchu"
-                style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '12px' }}
+                style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 20%', borderRadius: '12px' }}
               />
             </div>
           </FadeIn>
