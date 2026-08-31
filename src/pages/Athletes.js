@@ -159,15 +159,15 @@ function ContactForm({ fr }) {
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0 14px' }}>
         <div>
           <label style={labelStyle}>{fr ? 'Prénom *' : 'First name *'}</label>
-          <input required type="text" value={form.prenom} onChange={e => set('prenom', e.target.value)} placeholder="Jean" style={inputStyle} />
+          <input required type="text" value={form.prenom} onChange={e => set('prenom', e.target.value)} style={inputStyle} />
         </div>
         <div>
           <label style={labelStyle}>{fr ? 'Nom *' : 'Last name *'}</label>
-          <input required type="text" value={form.nom} onChange={e => set('nom', e.target.value)} placeholder="Dupont" style={inputStyle} />
+          <input required type="text" value={form.nom} onChange={e => set('nom', e.target.value)} style={inputStyle} />
         </div>
       </div>
       <label style={labelStyle}>Email *</label>
-      <input required type="email" value={form.email} onChange={e => set('email', e.target.value)} placeholder="jean@courriel.com" style={inputStyle} />
+      <input required type="email" value={form.email} onChange={e => set('email', e.target.value)} style={inputStyle} />
       <label style={labelStyle}>{fr ? 'Ligue / Organisation' : 'League / Organization'}</label>
       <input type="text" value={form.organisation} onChange={e => set('organisation', e.target.value)} placeholder={fr ? 'Optionnel' : 'Optional'} style={inputStyle} />
       <label style={labelStyle}>{fr ? 'Message *' : 'Message *'}</label>
