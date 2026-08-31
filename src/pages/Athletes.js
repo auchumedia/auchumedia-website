@@ -531,10 +531,15 @@ export default function Athletes() {
 
       {/* ===== SERVICES ===== */}
       <section id="services" style={{ background: '#080808' }}>
-        <div style={{ padding: '100px 60px 300px' }}>
-          <h2 style={{ color: '#fff', fontFamily: "'Bebas Neue'", fontSize: 'clamp(40px,5vw,64px)', marginBottom: '80px', letterSpacing: '0.02em' }}>
-            {fr ? 'CE QUE JE FAIS.' : 'WHAT I DO.'}
-          </h2>
+        <div style={{ padding: '100px 60px 150px' }}>
+          <div style={{ textAlign: 'center', marginBottom: '80px' }}>
+            <div style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#003DA5', marginBottom: '12px' }}>
+              {fr ? 'MES SERVICES' : 'MY SERVICES'}
+            </div>
+            <h2 style={{ color: '#fff', fontFamily: "'Bebas Neue'", fontSize: 'clamp(40px,5vw,64px)', letterSpacing: '0.02em' }}>
+              {fr ? 'CE QUE JE FAIS.' : 'WHAT I DO.'}
+            </h2>
+          </div>
           {[
             {
               num: '01',
