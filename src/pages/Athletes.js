@@ -439,7 +439,7 @@ export default function Athletes() {
 
         <div className="hero-content" style={{ position: 'absolute', bottom: '60px', left: '60px', right: '40%', zIndex: 2 }}>
           <div className="hero-label" style={{ fontSize: '10px', fontWeight: 700, color: 'rgba(255,255,255,0.5)', letterSpacing: '0.25em', textTransform: 'uppercase', marginBottom: '16px' }}>
-            {fr ? 'BUILDING ATHLETES BRANDS' : 'BUILDING ATHLETES BRANDS'}
+            {fr ? "ON BOOST L'ATTENTION. ON GÉNÈRE L'IMPACT." : 'WE BOOST ATTENTION. WE GENERATE IMPACT.'}
           </div>
           <h1 className="hero-title" style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(36px, 4.5vw, 64px)', lineHeight: 1, color: '#ffffff', marginBottom: '32px', letterSpacing: '0.01em' }}>
             {fr ? <>TA CARRIÈRE.<br />TON IMAGE.<br />TON HÉRITAGE.</> : <>YOUR CAREER.<br />YOUR IMAGE.<br />YOUR LEGACY.</>}
@@ -541,14 +541,14 @@ export default function Athletes() {
             </h2>
           </div>
         </div>
-        <div style={{ padding: '0 60px 300px' }}>
+        <div className="services-wrapper" style={{ padding: '0 60px 300px' }}>
           {[
             { num: '01', bg: '#0a0a0a', video: 'https://res.cloudinary.com/dr0kwuqqa/video/upload/v1788131184/Batail2_l0vfaq.mp4', image: null, titreFr: 'HIGHLIGHTS & CLIPS', titreEn: 'HIGHLIGHTS & CLIPS', descFr: "Production de highlights et clips pour Instagram, TikTok et YouTube. Du contenu qui capte l'attention et fait grandir ton audience.", descEn: "Production of highlights and clips for Instagram, TikTok and YouTube. Content that captures attention and grows your audience." },
             { num: '02', bg: 'linear-gradient(135deg, #0a1628, #1a2a4a)', video: null, image: null, titreFr: 'PERSONAL BRANDING & STRATÉGIE', titreEn: 'PERSONAL BRANDING & STRATEGY', descFr: "Construction de ton identité de marque, ton positionnement et ta stratégie de contenu sur les réseaux sociaux.", descEn: "Building your brand identity, positioning and content strategy on social media." },
             { num: '03', bg: 'linear-gradient(135deg, #1a0a0a, #2a1a1a)', video: null, image: null, titreFr: 'BRAND PARTNERSHIPS', titreEn: 'BRAND PARTNERSHIPS', descFr: "Identification et développement de partenariats avec des marques alignées avec ton image et tes valeurs.", descEn: "Identifying and developing partnerships with brands aligned with your image and values." },
             { num: '04', bg: '#0a0a0a', video: null, image: 'https://res.cloudinary.com/dr0kwuqqa/image/upload/v1788132498/Capture_d_%C3%A9cran_le_2026-08-30_%C3%A0_19.27.24_p9dffe.png', titreFr: 'PRODUCTION YOUTUBE & MINI-DOCS', titreEn: 'YOUTUBE & MINI-DOC PRODUCTION', descFr: "Contenu longue durée : vlogs, mini-documentaires, behind the scenes pour bâtir une audience fidèle.", descEn: "Long-form content: vlogs, mini-documentaries, behind the scenes to build a loyal audience." },
           ].map((item, i) => (
-            <div key={i} style={{ position: 'sticky', top: `${80 + i * 30}px`, zIndex: i + 1, height: '500px', maxWidth: '900px', margin: '0 auto', borderRadius: '20px', overflow: 'hidden' }}>
+            <div key={i} className="sticky-service-card" style={{ position: 'sticky', top: `${80 + i * 30}px`, zIndex: i + 1, height: '500px', maxWidth: '900px', margin: '0 auto', borderRadius: '20px', overflow: 'hidden' }}>
               {item.video && <video autoPlay muted loop playsInline crossOrigin="anonymous" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}><source src={item.video} type="video/mp4" /></video>}
               {item.image && <img src={item.image} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />}
               {!item.video && !item.image && <div style={{ position: 'absolute', inset: 0, background: item.bg }} />}
@@ -696,6 +696,12 @@ export default function Athletes() {
           .hero-content { bottom: 40px !important; left: 24px !important; right: 24px !important; }
           .service-row { grid-template-columns: 1fr !important; gap: 24px !important; }
           .service-visual { height: 220px !important; order: -1; }
+          .sticky-service-card, .sticky-pourquoi-card {
+            height: 420px !important;
+            border-radius: 16px !important;
+          }
+          .services-wrapper { padding: 0 16px 200px !important; }
+          .pourquoi-wrapper { padding: 0 16px 200px !important; }
         }
 
         @media (max-width: 480px) {
