@@ -294,6 +294,7 @@ export default function Athletes() {
     {
       name: 'Bataillon de Saint-Hyacinthe',
       domaine: fr ? 'Hockey · LNAH' : 'Hockey · LNAH',
+      logo: 'https://res.cloudinary.com/dr0kwuqqa/image/upload/v1788140715/bataillon_hcvkkw.png',
       videoMp4: 'https://res.cloudinary.com/dr0kwuqqa/video/upload/v1788140312/38_fajvle.mp4',
       videoMov: 'https://res.cloudinary.com/dr0kwuqqa/video/upload/v1788140312/38_fajvle.mov',
       stats: fr ? '3M vues · 100K eng · 38 vidéos' : '3M views · 100K eng · 38 videos',
@@ -301,6 +302,7 @@ export default function Athletes() {
     {
       name: 'Sébastien Sylvestre',
       domaine: fr ? 'Hockey · LNAH' : 'Hockey · LNAH',
+      logo: null,
       videoMp4: 'https://res.cloudinary.com/dr0kwuqqa/video/upload/v1788140232/Sylvestre_1_ccnkde.mp4',
       videoMov: 'https://res.cloudinary.com/dr0kwuqqa/video/upload/v1788140232/Sylvestre_1_ccnkde.mov',
       stats: fr ? '2M vues · 26K eng · 7 vidéos' : '2M views · 26K eng · 7 videos',
@@ -308,6 +310,7 @@ export default function Athletes() {
     {
       name: 'Hockey Xtreme',
       domaine: fr ? 'Camps & Formation' : 'Camps & Training',
+      logo: 'https://res.cloudinary.com/dr0kwuqqa/image/upload/v1788140688/hockey_xteme_logo_s2o40w.png',
       videoMp4: 'https://res.cloudinary.com/dr0kwuqqa/video/upload/v1788139957/1_qyneex.mp4',
       videoMov: 'https://res.cloudinary.com/dr0kwuqqa/video/upload/v1788139957/1_qyneex.mov',
       stats: fr ? 'Camp élite · Pros NHL' : 'Elite camp · NHL pros',
@@ -582,11 +585,30 @@ export default function Athletes() {
             <FadeIn key={c.name} delay={i * 0.1}>
               <div
                 className="client-card"
-                style={{ background: '#0a0a0a', height: '360px', borderRadius: '16px', overflow: 'hidden', display: 'flex', flexDirection: 'column', position: 'relative', transition: 'transform 0.3s ease' }}
+                style={{ background: '#0a0a0a', height: '360px', borderRadius: '16px', overflow: 'visible', display: 'flex', flexDirection: 'column', position: 'relative', transition: 'transform 0.3s ease' }}
                 onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.015)'; e.currentTarget.querySelector('.client-overlay').style.opacity = 1; }}
                 onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.querySelector('.client-overlay').style.opacity = 0; }}
               >
-                <div style={{ flex: 1, position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+                {c.logo && (
+                  <div style={{
+                    position: 'absolute',
+                    top: '-20px',
+                    left: '24px',
+                    width: '56px',
+                    height: '56px',
+                    borderRadius: '50%',
+                    background: '#fff',
+                    border: '2px solid rgba(255,255,255,0.2)',
+                    overflow: 'hidden',
+                    zIndex: 3,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}>
+                    <img src={c.logo} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  </div>
+                )}
+                <div style={{ flex: 1, position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', borderRadius: '16px 16px 0 0' }}>
                   <video autoPlay muted loop playsInline crossOrigin="anonymous" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}>
                     <source src={c.videoMp4} type="video/mp4" />
                     <source src={c.videoMov} type="video/quicktime" />
