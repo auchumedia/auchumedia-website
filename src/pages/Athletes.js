@@ -531,7 +531,7 @@ export default function Athletes() {
 
       {/* ===== SERVICES ===== */}
       <section id="services" style={{ background: '#080808' }}>
-        <div style={{ padding: '100px 60px 150px' }}>
+        <div style={{ padding: '100px 60px 0' }}>
           <div style={{ textAlign: 'center', marginBottom: '80px' }}>
             <div style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#003DA5', marginBottom: '12px' }}>
               {fr ? 'MES SERVICES' : 'MY SERVICES'}
@@ -540,81 +540,23 @@ export default function Athletes() {
               {fr ? 'CE QUE JE FAIS.' : 'WHAT I DO.'}
             </h2>
           </div>
+        </div>
+        <div style={{ padding: '0 60px 300px' }}>
           {[
-            {
-              num: '01',
-              titreFr: 'HIGHLIGHTS & CLIPS',
-              titreEn: 'HIGHLIGHTS & CLIPS',
-              descFr: "Production de highlights et clips pour Instagram, TikTok et YouTube. Du contenu qui capte l'attention et fait grandir ton audience.",
-              descEn: "Production of highlights and clips for Instagram, TikTok and YouTube. Content that captures attention and grows your audience.",
-              video: 'https://res.cloudinary.com/dr0kwuqqa/video/upload/v1788131184/Batail2_l0vfaq.mp4',
-              image: null,
-              bg: null,
-            },
-            {
-              num: '02',
-              titreFr: 'PERSONAL BRANDING & STRATÉGIE',
-              titreEn: 'PERSONAL BRANDING & STRATEGY',
-              descFr: "Construction de ton identité de marque, ton positionnement et ta stratégie de contenu sur les réseaux sociaux.",
-              descEn: "Building your brand identity, positioning and content strategy on social media.",
-              video: null,
-              image: null,
-              bg: 'linear-gradient(135deg, #0a1628, #1a2a4a)',
-            },
-            {
-              num: '03',
-              titreFr: 'BRAND PARTNERSHIPS',
-              titreEn: 'BRAND PARTNERSHIPS',
-              descFr: "Identification et développement de partenariats avec des marques alignées avec ton image et tes valeurs.",
-              descEn: "Identifying and developing partnerships with brands aligned with your image and values.",
-              video: null,
-              image: null,
-              bg: 'linear-gradient(135deg, #1a0a0a, #2a1a1a)',
-            },
-            {
-              num: '04',
-              titreFr: 'PRODUCTION YOUTUBE & MINI-DOCS',
-              titreEn: 'YOUTUBE & MINI-DOC PRODUCTION',
-              descFr: "Contenu longue durée : vlogs, mini-documentaires, behind the scenes pour bâtir une audience fidèle.",
-              descEn: "Long-form content: vlogs, mini-documentaries, behind the scenes to build a loyal audience.",
-              video: null,
-              image: 'https://res.cloudinary.com/dr0kwuqqa/image/upload/v1788132498/Capture_d_%C3%A9cran_le_2026-08-30_%C3%A0_19.27.24_p9dffe.png',
-              bg: null,
-            },
+            { num: '01', bg: '#0a0a0a', video: 'https://res.cloudinary.com/dr0kwuqqa/video/upload/v1788131184/Batail2_l0vfaq.mp4', image: null, titreFr: 'HIGHLIGHTS & CLIPS', titreEn: 'HIGHLIGHTS & CLIPS', descFr: "Production de highlights et clips pour Instagram, TikTok et YouTube. Du contenu qui capte l'attention et fait grandir ton audience.", descEn: "Production of highlights and clips for Instagram, TikTok and YouTube. Content that captures attention and grows your audience." },
+            { num: '02', bg: 'linear-gradient(135deg, #0a1628, #1a2a4a)', video: null, image: null, titreFr: 'PERSONAL BRANDING & STRATÉGIE', titreEn: 'PERSONAL BRANDING & STRATEGY', descFr: "Construction de ton identité de marque, ton positionnement et ta stratégie de contenu sur les réseaux sociaux.", descEn: "Building your brand identity, positioning and content strategy on social media." },
+            { num: '03', bg: 'linear-gradient(135deg, #1a0a0a, #2a1a1a)', video: null, image: null, titreFr: 'BRAND PARTNERSHIPS', titreEn: 'BRAND PARTNERSHIPS', descFr: "Identification et développement de partenariats avec des marques alignées avec ton image et tes valeurs.", descEn: "Identifying and developing partnerships with brands aligned with your image and values." },
+            { num: '04', bg: '#0a0a0a', video: null, image: 'https://res.cloudinary.com/dr0kwuqqa/image/upload/v1788132498/Capture_d_%C3%A9cran_le_2026-08-30_%C3%A0_19.27.24_p9dffe.png', titreFr: 'PRODUCTION YOUTUBE & MINI-DOCS', titreEn: 'YOUTUBE & MINI-DOC PRODUCTION', descFr: "Contenu longue durée : vlogs, mini-documentaires, behind the scenes pour bâtir une audience fidèle.", descEn: "Long-form content: vlogs, mini-documentaries, behind the scenes to build a loyal audience." },
           ].map((item, i) => (
-            <div key={i} style={{
-              position: 'sticky',
-              top: `${80 + i * 30}px`,
-              zIndex: i + 1,
-              height: '520px',
-              maxWidth: '900px',
-              width: '100%',
-              margin: '0 auto',
-              borderRadius: '20px',
-              overflow: 'hidden',
-            }}>
-              {item.video && (
-                <video autoPlay muted loop playsInline crossOrigin="anonymous" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}>
-                  <source src={item.video} type="video/mp4" />
-                </video>
-              )}
-              {item.image && (
-                <img src={item.image} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
-              )}
-              {item.bg && (
-                <div style={{ position: 'absolute', inset: 0, background: item.bg }} />
-              )}
+            <div key={i} style={{ position: 'sticky', top: `${80 + i * 30}px`, zIndex: i + 1, height: '500px', maxWidth: '900px', margin: '0 auto', borderRadius: '20px', overflow: 'hidden' }}>
+              {item.video && <video autoPlay muted loop playsInline crossOrigin="anonymous" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}><source src={item.video} type="video/mp4" /></video>}
+              {item.image && <img src={item.image} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />}
+              {!item.video && !item.image && <div style={{ position: 'absolute', inset: 0, background: item.bg }} />}
               <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.5) 60%, rgba(0,0,0,0.1) 100%)' }} />
               <div style={{ position: 'absolute', bottom: '48px', left: '48px', maxWidth: '440px', zIndex: 2 }}>
-                <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#003DA5', marginBottom: '12px' }}>
-                  {item.num} / 04
-                </div>
-                <div style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(32px,4vw,48px)', color: '#fff', marginBottom: '16px', lineHeight: 1.1 }}>
-                  {fr ? item.titreFr : item.titreEn}
-                </div>
-                <p style={{ fontSize: '15px', color: 'rgba(255,255,255,0.65)', lineHeight: 1.75, margin: 0 }}>
-                  {fr ? item.descFr : item.descEn}
-                </p>
+                <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.2em', color: '#003DA5', marginBottom: '12px' }}>{item.num} / 04</div>
+                <div style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(28px,4vw,44px)', color: '#fff', marginBottom: '16px', lineHeight: 1.1 }}>{fr ? item.titreFr : item.titreEn}</div>
+                <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.65)', lineHeight: 1.75, margin: 0 }}>{fr ? item.descFr : item.descEn}</p>
               </div>
             </div>
           ))}
@@ -732,7 +674,8 @@ export default function Athletes() {
         .hamburger-btn { display: flex !important; }
 
         html, body {
-          overflow-x: hidden;
+          overflow-x: clip;
+          overflow-y: visible;
           -webkit-overflow-scrolling: touch;
         }
 
