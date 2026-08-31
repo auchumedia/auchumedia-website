@@ -471,8 +471,18 @@ export default function Athletes() {
               </span>
               <p style={{ fontSize: '16px', color: 'rgba(10,10,10,0.6)', lineHeight: 1.9, fontFamily: "'DM Sans'", fontWeight: 300 }}>
                 {fr
-                  ? "Dans plusieurs sports professionnels, l'image personnelle est devenue aussi importante que la performance elle-même. Au hockey, cette réalité reste encore trop souvent ignorée — je continue de voir des joueurs miser uniquement sur les statistiques, en oubliant que les marques et les partisans s'attachent d'abord à une histoire, une personnalité, une communauté. Les joueurs qui prennent le contrôle de leur récit — qui documentent leur parcours, partagent qui ils sont vraiment et bâtissent une audience fidèle — se positionnent différemment : plus visibles, plus attractifs pour les commanditaires, et mieux préparés pour l'après-carrière. Je crois que chaque joueur mérite cette opportunité, peu importe son niveau."
-                  : "In many professional sports, personal image has become just as important as performance itself. In hockey, that reality is still too often ignored — I keep seeing players rely only on stats, forgetting that brands and fans connect first with a story, a personality, a community. Players who take control of their narrative — documenting their journey, sharing who they truly are, and building a loyal audience — position themselves differently: more visible, more attractive to sponsors, and better prepared for life after their playing career. I believe every player deserves that opportunity, no matter their level."}
+                  ? "Dans le monde du sport — particulièrement aux États-Unis — des athlètes comme Cristiano Ronaldo, LeBron James ou Travis Kelce investissent dans leur image bien avant la fin de leur carrière. Au hockey, surtout au Canada, cette réalité reste encore trop peu exploitée."
+                  : "In the world of sport — particularly in the United States — athletes like Cristiano Ronaldo, LeBron James and Travis Kelce invest in their image long before the end of their career. In hockey, especially in Canada, this reality remains largely untapped."}
+              </p>
+              <p style={{ fontSize: '16px', color: 'rgba(10,10,10,0.6)', lineHeight: 1.9, fontFamily: "'DM Sans'", fontWeight: 300, marginTop: '24px' }}>
+                {fr
+                  ? "Pourtant, bâtir une présence forte sur les réseaux sociaux peut avoir un impact énorme sur la valeur perçue d'un athlète, ses opportunités commerciales et son rayonnement au-delà de la glace. Les joueurs qui prennent le contrôle de leur récit — qui documentent leur parcours et bâtissent une audience fidèle — se positionnent différemment : plus visibles, plus attractifs pour les commanditaires, et mieux préparés pour l'après-carrière."
+                  : "Yet building a strong social media presence can have an enormous impact on an athlete's perceived value, commercial opportunities and influence beyond the ice. Players who take control of their narrative — who document their journey and build a loyal audience — position themselves differently: more visible, more attractive to sponsors, and better prepared for life after hockey."}
+              </p>
+              <p style={{ fontSize: '16px', color: 'rgba(10,10,10,0.6)', lineHeight: 1.9, fontFamily: "'DM Sans'", fontWeight: 300, marginTop: '24px' }}>
+                {fr
+                  ? "Je crois que chaque joueur mérite cette opportunité, peu importe son niveau."
+                  : "I believe every player deserves this opportunity, regardless of their level."}
               </p>
             </div>
           </FadeIn>
@@ -513,13 +523,13 @@ export default function Athletes() {
               <div style={{ width: '100%', height: '1px', background: 'rgba(0,61,165,0.25)', marginBottom: '24px' }} />
               <p style={{ fontSize: '15px', color: 'rgba(10,10,10,0.65)', lineHeight: 1.9, fontFamily: "'DM Sans'", fontWeight: 300, marginBottom: '24px' }}>
                 {fr
-                  ? "Ancien gardien de but repêché dans la LHJMQ, Raphaël a vécu de l'intérieur les hauts et les bas du hockey junior — la pression de performer, la compétition pour une place, et l'incertitude de l'après-carrière. Cette expérience l'a convaincu qu'un joueur ne devrait jamais dépendre uniquement de ses statistiques pour être reconnu."
-                  : "A former QMJHL drafted goaltender, Raphaël experienced firsthand the highs and lows of junior hockey — the pressure to perform, the competition for a spot, and the uncertainty of life after the game. That experience convinced him that a player should never have to rely on stats alone to be recognized."}
+                  ? "Salut, moi c'est Raphaël, derrière AuchuMedia. Ancien gardien repêché dans la LHJMQ, j'ai grandi dans l'univers du hockey de haut niveau depuis mon enfance. Après ma carrière sur la glace, j'ai consacré les 5 dernières années à développer mon expertise comme stratège et spécialiste des médias sociaux pour différentes marques, en les aidant à bâtir leur présence et à se démarquer dans un environnement numérique saturé."
+                  : "Hi, I'm Raphaël, the person behind AuchuMedia. A former goalie drafted in the QMJHL, I grew up in the world of elite hockey from a very young age. After my playing career, I spent the last 5 years developing my expertise as a strategist and social media specialist for various brands, helping them build their presence and stand out in a saturated digital environment."}
               </p>
               <p style={{ fontSize: '15px', color: 'rgba(10,10,10,0.65)', lineHeight: 1.9, fontFamily: "'DM Sans'", fontWeight: 300, marginBottom: '32px' }}>
                 {fr
-                  ? "Il a fondé AuchuMedia pour donner aux athlètes les outils, la stratégie et la caméra nécessaires pour raconter leur propre histoire — et pour qu'ils gardent le contrôle de leur image, sur la glace comme en dehors."
-                  : "He founded AuchuMedia to give athletes the tools, strategy and camera they need to tell their own story — and to stay in control of their image, on the ice and off it."}
+                  ? "Aujourd'hui, j'ai décidé d'unir mes deux passions — le hockey et le branding — pour accompagner les athlètes et les organisations sportives à construire une identité forte, créer du contenu percutant et transformer leur visibilité en opportunités concrètes, que ce soit auprès des fans, des commanditaires ou des partenaires."
+                  : "Today, I've decided to combine my two passions — hockey and branding — to help athletes and sports organizations build a strong identity, create impactful content and turn their visibility into concrete opportunities, whether with fans, sponsors or partners."}
               </p>
             </div>
           </FadeIn>
@@ -580,7 +590,11 @@ export default function Athletes() {
             {fr ? 'ILS NOUS FONT CONFIANCE.' : 'THEY TRUST US.'}
           </h2>
         </FadeIn>
-        <div className="clients-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px', maxWidth: '1080px', margin: '0 auto' }}>
+        <div style={{ position: 'relative' }}>
+          <div className="clients-arrows" style={{ position: 'absolute', left: '8px', top: '50%', transform: 'translateY(-50%)', zIndex: 10, background: 'rgba(0,0,0,0.6)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '50%', width: '36px', height: '36px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2"><path d="M15 18l-6-6 6-6"/></svg>
+          </div>
+          <div className="clients-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px', maxWidth: '1080px', margin: '0 auto' }}>
           {clients.map((c, i) => (
             <FadeIn key={c.name} delay={i * 0.1}>
               <div
@@ -623,6 +637,10 @@ export default function Athletes() {
               </div>
             </FadeIn>
           ))}
+          </div>
+          <div className="clients-arrows" style={{ position: 'absolute', right: '8px', top: '50%', transform: 'translateY(-50%)', zIndex: 10, background: 'rgba(0,0,0,0.6)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '50%', width: '36px', height: '36px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2"><path d="M9 18l6-6-6-6"/></svg>
+          </div>
         </div>
       </section>
 
@@ -698,6 +716,9 @@ export default function Athletes() {
 
         @media (max-width: 900px) {
           .nav-links { display: none !important; }
+        }
+        @media (min-width: 769px) {
+          .clients-arrows { display: none !important; }
         }
         @media (min-width: 901px) {
           .hamburger-btn { display: none !important; }
