@@ -292,21 +292,24 @@ export default function Athletes() {
 
   const clients = [
     {
-      name: 'Bataillon',
+      name: 'Bataillon de Saint-Hyacinthe',
       domaine: fr ? 'Hockey · LNAH' : 'Hockey · LNAH',
-      gradient: 'linear-gradient(160deg, #1a2e1a 0%, #0a140a 100%)',
+      videoMp4: 'https://res.cloudinary.com/dr0kwuqqa/video/upload/v1788140312/38_fajvle.mp4',
+      videoMov: 'https://res.cloudinary.com/dr0kwuqqa/video/upload/v1788140312/38_fajvle.mov',
       stats: fr ? '3M vues · 100K eng · 38 vidéos' : '3M views · 100K eng · 38 videos',
     },
     {
-      name: 'Sylvestre',
+      name: 'Sébastien Sylvestre',
       domaine: fr ? 'Hockey · LNAH' : 'Hockey · LNAH',
-      gradient: 'linear-gradient(160deg, #0a1628 0%, #050a14 100%)',
+      videoMp4: 'https://res.cloudinary.com/dr0kwuqqa/video/upload/v1788140232/Sylvestre_1_ccnkde.mp4',
+      videoMov: 'https://res.cloudinary.com/dr0kwuqqa/video/upload/v1788140232/Sylvestre_1_ccnkde.mov',
       stats: fr ? '2M vues · 26K eng · 7 vidéos' : '2M views · 26K eng · 7 videos',
     },
     {
-      name: 'Hockey Extrême',
+      name: 'Hockey Xtreme',
       domaine: fr ? 'Camps & Formation' : 'Camps & Training',
-      gradient: 'linear-gradient(160deg, #1a1a1a 0%, #0a0a0a 100%)',
+      videoMp4: 'https://res.cloudinary.com/dr0kwuqqa/video/upload/v1788139957/1_qyneex.mp4',
+      videoMov: 'https://res.cloudinary.com/dr0kwuqqa/video/upload/v1788139957/1_qyneex.mov',
       stats: fr ? 'Camp élite · Pros NHL' : 'Elite camp · NHL pros',
     },
   ];
@@ -583,10 +586,12 @@ export default function Athletes() {
                 onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.015)'; e.currentTarget.querySelector('.client-overlay').style.opacity = 1; }}
                 onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.querySelector('.client-overlay').style.opacity = 0; }}
               >
-                <div style={{ flex: 1, position: 'relative', background: c.gradient, display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
-                  <span style={{ position: 'absolute', bottom: '12px', left: '50%', transform: 'translateX(-50%)', fontSize: '9px', color: 'rgba(255,255,255,0.35)', letterSpacing: '0.08em', textTransform: 'uppercase', fontFamily: "'DM Sans'" }}>
-                    {fr ? 'Photo/vidéo à venir' : 'Photo/video coming soon'}
-                  </span>
+                <div style={{ flex: 1, position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+                  <video autoPlay muted loop playsInline crossOrigin="anonymous" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}>
+                    <source src={c.videoMp4} type="video/mp4" />
+                    <source src={c.videoMov} type="video/quicktime" />
+                  </video>
+                  <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.4)' }} />
                   <div className="client-overlay" style={{ position: 'absolute', inset: 0, background: 'rgba(0,61,165,0.3)', opacity: 0, transition: 'opacity 0.3s ease' }} />
                 </div>
                 <div style={{ padding: '22px 24px' }}>
