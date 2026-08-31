@@ -297,7 +297,7 @@ export default function Athletes() {
       logo: 'https://res.cloudinary.com/dr0kwuqqa/image/upload/v1788140715/bataillon_hcvkkw.png',
       videoMp4: 'https://res.cloudinary.com/dr0kwuqqa/video/upload/v1788140312/38_fajvle.mp4',
       videoMov: 'https://res.cloudinary.com/dr0kwuqqa/video/upload/v1788140312/38_fajvle.mov',
-      stats: fr ? '3M vues · 100K eng · 38 vidéos' : '3M views · 100K eng · 38 videos',
+      stats: fr ? '30 vidéos · 3M vues' : '30 videos · 3M views',
     },
     {
       name: 'Sébastien Sylvestre',
@@ -305,7 +305,7 @@ export default function Athletes() {
       logo: null,
       videoMp4: 'https://res.cloudinary.com/dr0kwuqqa/video/upload/v1788140232/Sylvestre_1_ccnkde.mp4',
       videoMov: 'https://res.cloudinary.com/dr0kwuqqa/video/upload/v1788140232/Sylvestre_1_ccnkde.mov',
-      stats: fr ? '2M vues · 26K eng · 7 vidéos' : '2M views · 26K eng · 7 videos',
+      stats: fr ? '7 vidéos · 2M vues' : '7 videos · 2M views',
     },
     {
       name: 'Hockey Xtreme',
@@ -617,9 +617,8 @@ export default function Athletes() {
                   <div className="client-overlay" style={{ position: 'absolute', inset: 0, background: 'rgba(0,61,165,0.3)', opacity: 0, transition: 'opacity 0.3s ease' }} />
                 </div>
                 <div style={{ padding: '22px 24px' }}>
-                  <span style={{ display: 'block', fontSize: '10px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: BLUE, marginBottom: '6px' }}>{c.domaine}</span>
                   <div style={{ fontFamily: "'Bebas Neue'", fontSize: '26px', color: '#ffffff', marginBottom: '10px', letterSpacing: '0.02em' }}>{c.name}</div>
-                  <div style={{ fontSize: '11.5px', color: 'rgba(255,255,255,0.5)', fontFamily: "'DM Sans'" }}>{c.stats}</div>
+                  <div style={{ fontSize: '13px', color: 'rgba(255,255,255,0.6)', fontFamily: "'DM Sans'", whiteSpace: 'nowrap' }}>{c.stats}</div>
                 </div>
               </div>
             </FadeIn>
