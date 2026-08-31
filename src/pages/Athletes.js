@@ -391,12 +391,6 @@ export default function Athletes() {
               </button>
             ))}
           </div>
-          <button onClick={() => scrollTo('contact')} style={{ fontSize: '11px', fontWeight: 700, color: '#fff', background: BLUE, padding: '11px 22px', borderRadius: '4px', letterSpacing: '0.08em', textTransform: 'uppercase', border: 'none', cursor: 'pointer', fontFamily: "'DM Sans'", transition: 'all 0.3s ease', whiteSpace: 'nowrap' }}
-            onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-1px)'; e.currentTarget.style.boxShadow = '0 6px 20px rgba(0,61,165,0.4)'; }}
-            onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = 'none'; }}
-          >
-            {fr ? 'Travailler avec moi' : 'Work with me'}
-          </button>
           <button onClick={() => setMobileOpen(!mobileOpen)} className="hamburger-btn" style={{ display: 'none', flexDirection: 'column', gap: '5px', background: 'none', border: 'none', cursor: 'pointer', padding: '8px', flexShrink: 0 }}>
             <span style={{ width: '22px', height: '1.5px', background: '#fff', display: 'block', transition: 'all 0.25s', transform: mobileOpen ? 'translateY(6.5px) rotate(45deg)' : 'none' }} />
             <span style={{ width: '22px', height: '1.5px', background: '#fff', display: 'block', opacity: mobileOpen ? 0 : 1, transition: 'all 0.25s' }} />
@@ -469,9 +463,6 @@ export default function Athletes() {
               <span style={{ display: 'block', fontSize: '11px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE, marginBottom: '16px' }}>
                 {fr ? 'Ma mission' : 'My mission'}
               </span>
-              <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(40px, 5vw, 72px)', color: '#0a0a0a', lineHeight: 0.95, marginBottom: '28px', letterSpacing: '0.01em' }}>
-                {fr ? <>LE HOCKEY<br />MÉRITE MIEUX.</> : <>HOCKEY<br />DESERVES MORE.</>}
-              </h2>
               <p style={{ fontSize: '16px', color: 'rgba(10,10,10,0.6)', lineHeight: 1.9, fontFamily: "'DM Sans'", fontWeight: 300 }}>
                 {fr
                   ? "Dans plusieurs sports professionnels, l'image personnelle est devenue aussi importante que la performance elle-même. Au hockey, cette réalité reste encore trop souvent ignorée — je continue de voir des joueurs miser uniquement sur les statistiques, en oubliant que les marques et les partisans s'attachent d'abord à une histoire, une personnalité, une communauté. Les joueurs qui prennent le contrôle de leur récit — qui documentent leur parcours, partagent qui ils sont vraiment et bâtissent une audience fidèle — se positionnent différemment : plus visibles, plus attractifs pour les commanditaires, et mieux préparés pour l'après-carrière. Je crois que chaque joueur mérite cette opportunité, peu importe son niveau."
@@ -545,7 +536,7 @@ export default function Athletes() {
           {[
             { num: '01', video: null, image: 'https://res.cloudinary.com/dr0kwuqqa/image/upload/v1788122678/Capture_d_%C3%A9cran_le_2026-08-30_%C3%A0_16.43.54_qlkahx.png', titreFr: 'PERSONAL BRANDING & STRATÉGIE', titreEn: 'PERSONAL BRANDING & STRATEGY', descFr: "Construction de ton identité de marque, ton positionnement et ta stratégie de contenu sur les réseaux sociaux.", descEn: "Building your brand identity, positioning and content strategy on social media." },
             { num: '02', bg: '#0a0a0a', video: 'https://res.cloudinary.com/dr0kwuqqa/video/upload/v1788131184/Batail2_l0vfaq.mp4', image: null, titreFr: 'HIGHLIGHTS & CLIPS', titreEn: 'HIGHLIGHTS & CLIPS', descFr: "Production de highlights et clips pour Instagram, TikTok et YouTube. Du contenu qui capte l'attention et fait grandir ton audience.", descEn: "Production of highlights and clips for Instagram, TikTok and YouTube. Content that captures attention and grows your audience." },
-            { num: '03', video: null, image: 'https://res.cloudinary.com/dr0kwuqqa/image/upload/v1788129452/bdfd0b36-20a9-496e-aa89-b5951701ed46_nweexm.jpg', titreFr: 'VIDÉO COMMERCIALE', titreEn: 'COMMERCIAL VIDEO', descFr: "Vidéos produites pour tes commanditaires et partenariats. Du contenu premium qui reflète ton branding et maximise la valeur de chaque collaboration.", descEn: "Videos produced for your sponsors and partnerships. Premium content that reflects your brand and maximizes the value of every collaboration." },
+            { num: '03', video: null, image: 'https://res.cloudinary.com/dr0kwuqqa/image/upload/v1788138055/IMG_6614_v6u9pv.jpg', titreFr: 'VIDÉO COMMERCIALE', titreEn: 'COMMERCIAL VIDEO', descFr: "Vidéos produites pour tes commanditaires et partenariats. Du contenu premium qui reflète ton branding et maximise la valeur de chaque collaboration.", descEn: "Videos produced for your sponsors and partnerships. Premium content that reflects your brand and maximizes the value of every collaboration." },
             { num: '04', bg: '#0a0a0a', video: null, image: 'https://res.cloudinary.com/dr0kwuqqa/image/upload/v1788132498/Capture_d_%C3%A9cran_le_2026-08-30_%C3%A0_19.27.24_p9dffe.png', titreFr: 'PRODUCTION YOUTUBE', titreEn: 'YOUTUBE PRODUCTION', descFr: "Contenu longue durée : vlogs, mini-documentaires, behind the scenes pour bâtir une audience fidèle.", descEn: "Long-form content: vlogs, mini-documentaries, behind the scenes to build a loyal audience." },
           ].map((item, i) => (
             <div key={i} className="sticky-service-card" style={{ position: 'sticky', top: `${80 + i * 30}px`, zIndex: i + 1, height: '500px', maxWidth: '900px', margin: '0 auto', borderRadius: '20px', overflow: 'hidden' }}>
