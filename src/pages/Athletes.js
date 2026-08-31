@@ -114,6 +114,7 @@ function ContactForm({ fr }) {
   const [form, setForm] = useState({ prenom: '', nom: '', email: '', organisation: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
+  const [error, setError] = useState(false);
   const set = (k, v) => setForm(f => ({ ...f, [k]: v }));
   const inputStyle = { width: '100%', background: '#0a0a0a', border: '0.5px solid rgba(255,255,255,0.15)', borderRadius: '8px', padding: '13px 16px', color: '#ffffff', fontSize: '14px', outline: 'none', fontFamily: "'DM Sans'", marginBottom: '14px' };
   const labelStyle = { display: 'block', fontSize: '12px', fontWeight: 600, color: 'rgba(255,255,255,0.65)', marginBottom: '8px', letterSpacing: '0.02em' };
@@ -133,7 +134,7 @@ function ContactForm({ fr }) {
       });
       if (res.ok) setSubmitted(true);
     } catch (err) {
-      setSubmitted(true);
+      setError(true);
     } finally {
       setSending(false);
     }
@@ -174,6 +175,13 @@ function ContactForm({ fr }) {
       <button type="submit" disabled={sending} style={{ width: '100%', fontSize: '12px', fontWeight: 700, color: '#fff', background: BLUE, padding: '15px', borderRadius: '6px', letterSpacing: '0.1em', textTransform: 'uppercase', border: 'none', cursor: sending ? 'default' : 'pointer', fontFamily: "'DM Sans'", transition: 'opacity 0.3s ease', opacity: sending ? 0.6 : 1, marginTop: '4px' }}>
         {sending ? (fr ? 'Envoi...' : 'Sending...') : (fr ? 'Envoyer →' : 'Send →')}
       </button>
+      {error && (
+        <p style={{ color: '#ff4d4d', fontSize: '13px', marginTop: '14px', textAlign: 'center', fontFamily: "'DM Sans'" }}>
+          {fr
+            ? 'Une erreur est survenue. Réessaie ou écris-moi directement à raphael@auchumedia.com'
+            : 'An error occurred. Try again or email me directly at raphael@auchumedia.com'}
+        </p>
+      )}
     </form>
   );
 }
