@@ -461,7 +461,7 @@ export default function Athletes() {
             <div>
               <div style={{ width: '48px', height: '3px', background: BLUE, marginBottom: '20px' }} />
               <span style={{ display: 'block', fontSize: '11px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE, marginBottom: '16px' }}>
-                {fr ? 'Ma mission' : 'My mission'}
+                {fr ? 'Notre mission' : 'Our mission'}
               </span>
               <p style={{ fontSize: '16px', color: 'rgba(10,10,10,0.6)', lineHeight: 1.9, fontFamily: "'DM Sans'", fontWeight: 300 }}>
                 {fr
@@ -525,10 +525,10 @@ export default function Athletes() {
         <div style={{ padding: '100px 60px 0' }}>
           <div style={{ textAlign: 'center', marginBottom: '80px' }}>
             <div style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#003DA5', marginBottom: '12px' }}>
-              {fr ? 'MES SERVICES' : 'MY SERVICES'}
+              {fr ? 'NOS SERVICES' : 'OUR SERVICES'}
             </div>
             <h2 style={{ color: '#fff', fontFamily: "'Bebas Neue'", fontSize: 'clamp(40px,5vw,64px)', letterSpacing: '0.02em' }}>
-              {fr ? 'CE QUE JE FAIS.' : 'WHAT I DO.'}
+              {fr ? 'CE QUE NOUS FAISONS.' : 'WHAT WE DO.'}
             </h2>
           </div>
         </div>
@@ -544,7 +544,7 @@ export default function Athletes() {
               {item.image && <img src={item.image} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />}
               {!item.video && !item.image && <div style={{ position: 'absolute', inset: 0, background: item.bg }} />}
               <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.5) 60%, rgba(0,0,0,0.1) 100%)' }} />
-              <div style={{ position: 'absolute', bottom: '48px', left: '48px', maxWidth: '440px', zIndex: 2 }}>
+              <div className="card-text" style={{ position: 'absolute', bottom: '48px', left: '48px', maxWidth: '440px', zIndex: 2 }}>
                 <div style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(28px,4vw,44px)', color: '#fff', marginBottom: '16px', lineHeight: 1.1 }}>{fr ? item.titreFr : item.titreEn}</div>
                 <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.65)', lineHeight: 1.75, margin: 0 }}>{fr ? item.descFr : item.descEn}</p>
                 <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.2em', color: '#003DA5', marginTop: '24px' }}>{item.num} / 04</div>
@@ -571,7 +571,7 @@ export default function Athletes() {
       <section id="clients" style={{ padding: '120px 60px', background: '#ffffff', scrollMarginTop: '72px' }}>
         <FadeIn>
           <h2 style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(32px, 4.5vw, 56px)', color: '#0a0a0a', letterSpacing: '0.02em', textAlign: 'center', marginBottom: '64px' }}>
-            {fr ? 'ILS ME FONT CONFIANCE.' : 'THEY TRUST ME.'}
+            {fr ? 'ILS NOUS FONT CONFIANCE.' : 'THEY TRUST US.'}
           </h2>
         </FadeIn>
         <div className="clients-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px', maxWidth: '1080px', margin: '0 auto' }}>
@@ -682,7 +682,6 @@ export default function Athletes() {
           section { padding-left: 20px !important; padding-right: 20px !important; }
           .two-col { grid-template-columns: 1fr !important; gap: 40px !important; }
           .founder-grid { grid-template-columns: 1fr !important; }
-          .clients-grid { grid-template-columns: 1fr !important; }
           .nav-right button:not(.hamburger-btn) { padding: 9px 14px !important; font-size: 10px !important; }
           .hero-content { bottom: 40px !important; left: 24px !important; right: 24px !important; }
           .service-row { grid-template-columns: 1fr !important; gap: 24px !important; }
@@ -693,6 +692,25 @@ export default function Athletes() {
           }
           .services-wrapper { padding: 0 16px 200px !important; }
           .pourquoi-wrapper { padding: 0 16px 200px !important; }
+          .sticky-service-card .card-text {
+            left: 24px !important;
+            right: 24px !important;
+            bottom: 28px !important;
+          }
+          .clients-grid {
+            display: flex !important;
+            flex-direction: row !important;
+            overflow-x: auto !important;
+            scroll-snap-type: x mandatory !important;
+            gap: 16px !important;
+            padding-bottom: 16px !important;
+            -webkit-overflow-scrolling: touch !important;
+          }
+          .clients-grid > * {
+            flex-shrink: 0 !important;
+            width: 80vw !important;
+            scroll-snap-align: start !important;
+          }
         }
 
         @media (max-width: 480px) {
