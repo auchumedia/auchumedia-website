@@ -165,12 +165,8 @@ function Hero() {
   return (
     <section id="top" className="section-pad hero" style={{
       minHeight: '100vh', background: '#ffffff', display: 'flex', flexDirection: 'column',
-      alignItems: 'center', justifyContent: 'center', padding: '140px 60px 60px', textAlign: 'center',
+      alignItems: 'center', justifyContent: 'center', padding: '140px 60px 20px', textAlign: 'center',
     }}>
-      <div style={{ fontFamily: "'DM Sans'", fontSize: '12px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(10,10,10,0.45)', marginBottom: '28px' }}>
-        Studio de contenu vidéo · Montréal
-      </div>
-
       <h1 style={{ fontFamily: "'Bebas Neue'", color: BLACK, fontSize: 'clamp(64px, 8vw, 120px)', lineHeight: 0.9, textTransform: 'uppercase', margin: 0, maxWidth: '1200px' }}>
         <HeroTitleLine words={["L'ATTENTION", 'SE', 'MÉRITE.']} startIndex={0} />
         <HeroTitleLine words={['ON', 'SAIT', 'COMMENT', "L'OBTENIR."]} startIndex={3} />
@@ -224,52 +220,113 @@ const TRAVAUX = [
   { nom: 'Équipe Lemire Fillion', domaine: 'Courtières immobilières', bg: 'linear-gradient(135deg, #0a2a1a, #1a3a2a)', badge: 'BIENTÔT' },
 ];
 
+const CARD_WIDTH = 280;
+const CARD_GAP = 16;
+const CAROUSEL_STEP = CARD_WIDTH + CARD_GAP;
+
+function ClientCard({ t }) {
+  return (
+    <div className="travail-card" style={{
+      position: 'relative', width: `${CARD_WIDTH}px`, height: '480px', borderRadius: '20px',
+      overflow: 'hidden', flexShrink: 0, backgroundColor: '#111', scrollSnapAlign: 'start',
+    }}>
+      <div className="travail-img" style={{
+        position: 'absolute', inset: 0, background: t.bg, backgroundSize: 'cover', backgroundPosition: 'center',
+        objectFit: 'cover', transition: 'transform 0.3s ease',
+      }} />
+      <div className="travail-overlay" style={{
+        position: 'absolute', inset: 0,
+        background: 'linear-gradient(0deg, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.15) 55%, rgba(0,0,0,0) 100%)',
+        transition: 'background 0.3s ease',
+      }} />
+      <div style={{
+        position: 'absolute', top: '18px', right: '18px', fontSize: '10px', fontWeight: 700,
+        letterSpacing: '0.08em', textTransform: 'uppercase', padding: '5px 12px', borderRadius: '999px',
+        color: '#fff', background: t.badge === 'ACTIF' ? '#1a9b55' : '#e2873b',
+      }}>
+        {t.badge}
+      </div>
+      <div style={{ position: 'absolute', left: '24px', bottom: '22px', right: '24px' }}>
+        <div style={{ fontFamily: "'Bebas Neue'", fontSize: '22px', color: '#fff', letterSpacing: '0.02em' }}>{t.nom}</div>
+        <div style={{ fontFamily: "'DM Sans'", fontSize: '12px', color: 'rgba(255,255,255,0.7)', marginTop: '4px' }}>{t.domaine}</div>
+      </div>
+    </div>
+  );
+}
+
+function ClientsCarousel() {
+  const containerRef = useRef(null);
+  const [paused, setPaused] = useState(false);
+  const loopList = [...TRAVAUX, ...TRAVAUX];
+
+  const resetIfNeeded = (el) => {
+    if (el.scrollLeft >= CAROUSEL_STEP * TRAVAUX.length) {
+      el.scrollLeft -= CAROUSEL_STEP * TRAVAUX.length;
+    }
+  };
+
+  useEffect(() => {
+    if (paused) return undefined;
+    const interval = setInterval(() => {
+      const el = containerRef.current;
+      if (!el) return;
+      el.scrollBy({ left: CAROUSEL_STEP, behavior: 'smooth' });
+      setTimeout(() => resetIfNeeded(el), 520);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [paused]);
+
+  const scrollByStep = (dir) => {
+    const el = containerRef.current;
+    if (!el) return;
+    el.scrollBy({ left: dir * CAROUSEL_STEP, behavior: 'smooth' });
+    setTimeout(() => resetIfNeeded(el), 520);
+  };
+
+  const arrowStyle = {
+    position: 'absolute', top: '50%', transform: 'translateY(-50%)', width: '40px', height: '40px',
+    borderRadius: '50%', border: 'none', background: 'rgba(255,255,255,0.9)', boxShadow: '0 4px 16px rgba(0,0,0,0.12)',
+    display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', zIndex: 10,
+    fontSize: '18px', color: BLACK, opacity: 0.75, transition: 'opacity 0.2s',
+  };
+
+  return (
+    <div
+      style={{ position: 'relative' }}
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
+      <div ref={containerRef} className="clients-carousel" style={{
+        display: 'flex', overflowX: 'auto', scrollbarWidth: 'none', gap: `${CARD_GAP}px`,
+        padding: '0 60px', scrollSnapType: 'x mandatory',
+      }}>
+        {loopList.map((t, i) => <ClientCard key={i} t={t} />)}
+      </div>
+
+      <button onClick={() => scrollByStep(-1)} aria-label="Client précédent" style={{ ...arrowStyle, left: '20px' }}
+        onMouseEnter={e => e.currentTarget.style.opacity = '1'}
+        onMouseLeave={e => e.currentTarget.style.opacity = '0.75'}
+      >‹</button>
+      <button onClick={() => scrollByStep(1)} aria-label="Client suivant" style={{ ...arrowStyle, right: '20px' }}
+        onMouseEnter={e => e.currentTarget.style.opacity = '1'}
+        onMouseLeave={e => e.currentTarget.style.opacity = '0.75'}
+      >›</button>
+    </div>
+  );
+}
+
 function Clients() {
   return (
-    <section id="clients" className="section-pad" style={{ padding: '140px 60px', background: '#ffffff' }}>
-      <FadeIn>
-        <div style={{ fontFamily: "'DM Sans'", fontSize: '12px', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: BLUE, marginBottom: '16px' }}>
-          Nos clients actuels
-        </div>
-        <h2 style={{ fontFamily: "'Bebas Neue'", color: BLACK, fontSize: 'clamp(40px, 5vw, 64px)', margin: 0, textTransform: 'uppercase' }}>
-          Nos clients.
-        </h2>
-        <p style={{ fontFamily: "'DM Sans'", fontSize: '15px', color: 'rgba(10,10,10,0.5)', margin: '14px 0 56px', maxWidth: '560px' }}>
-          6 entreprises. 2 spots disponibles. On choisit nos clients par choix, pas par manque.
-        </p>
-      </FadeIn>
-
-      <div className="travaux-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px' }}>
-        {TRAVAUX.map((t, i) => (
-          <FadeIn key={t.nom} delay={0.05 * i}>
-            <div className="travail-card" style={{
-              position: 'relative', height: '380px', borderRadius: '16px', overflow: 'hidden',
-              backgroundColor: '#111',
-            }}>
-              <div className="travail-img" style={{
-                position: 'absolute', inset: 0, background: t.bg, backgroundSize: 'cover', backgroundPosition: 'center',
-                transition: 'transform 0.3s ease',
-              }} />
-              <div className="travail-overlay" style={{
-                position: 'absolute', inset: 0,
-                background: 'linear-gradient(0deg, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.15) 55%, rgba(0,0,0,0) 100%)',
-                transition: 'background 0.3s ease',
-              }} />
-              <div style={{
-                position: 'absolute', top: '18px', right: '18px', fontSize: '10px', fontWeight: 700,
-                letterSpacing: '0.08em', textTransform: 'uppercase', padding: '5px 12px', borderRadius: '999px',
-                color: '#fff', background: t.badge === 'ACTIF' ? '#1a9b55' : '#e2873b',
-              }}>
-                {t.badge}
-              </div>
-              <div style={{ position: 'absolute', left: '24px', bottom: '22px', right: '24px' }}>
-                <div style={{ fontFamily: "'Bebas Neue'", fontSize: '22px', color: '#fff', letterSpacing: '0.02em' }}>{t.nom}</div>
-                <div style={{ fontFamily: "'DM Sans'", fontSize: '12px', color: 'rgba(255,255,255,0.7)', marginTop: '4px' }}>{t.domaine}</div>
-              </div>
-            </div>
-          </FadeIn>
-        ))}
+    <section id="clients" style={{ padding: '20px 0 140px', background: '#ffffff' }}>
+      <div className="clients-header" style={{ padding: '0 60px', marginBottom: '32px' }}>
+        <FadeIn>
+          <div style={{ fontFamily: "'DM Sans'", fontSize: '13px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE }}>
+            Nos clients actuels
+          </div>
+        </FadeIn>
       </div>
+
+      <ClientsCarousel />
     </section>
   );
 }
@@ -524,6 +581,8 @@ export default function Home() {
         .travail-card:hover .travail-img { transform: scale(1.02); }
         .travail-card:hover .travail-overlay { background: linear-gradient(0deg, rgba(0,61,165,0.55) 0%, rgba(0,61,165,0.15) 55%, rgba(0,61,165,0) 100%); }
 
+        .clients-carousel::-webkit-scrollbar { display: none; }
+
         @keyframes ctaGradient {
           0% { background-position: 0% 50%; }
           50% { background-position: 100% 50%; }
@@ -539,8 +598,8 @@ export default function Home() {
 
         @media (max-width: 900px) {
           .section-pad { padding-left: 20px !important; padding-right: 20px !important; }
-          .hero { padding-top: 120px !important; padding-bottom: 60px !important; }
-          .travaux-grid { grid-template-columns: 1fr !important; }
+          .hero { padding-top: 120px !important; padding-bottom: 20px !important; }
+          .clients-header, .clients-carousel { padding-left: 20px !important; padding-right: 20px !important; }
           .approche-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
           .approche-sticky { position: static !important; }
           .pourquoi-grid { grid-template-columns: 1fr !important; gap: 36px !important; }
