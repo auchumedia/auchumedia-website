@@ -1,10 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import Nav from '../components/Nav';
-import Footer from '../components/Footer';
 
 const BLUE = '#003DA5';
 const BLACK = '#0a0a0a';
+const GRAY_BG = '#f8f8f8';
+
+/* ---------- Shared hooks / helpers ---------- */
 
 function useInView(threshold = 0.15) {
   const ref = useRef(null);
@@ -40,41 +40,438 @@ const scrollTo = (id) => {
   if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
 };
 
-const TRAVAUX = [
-  { slug: 'cardinal-asphalte', nom: 'Cardinal Asphalte', domaine: 'Construction & Asphalte', image: 'https://res.cloudinary.com/dr0kwuqqa/image/upload/v1784411817/Capture_d_e%CC%81cran_le_2026-07-18_a%CC%80_17.56.25_rfb74n.png' },
-  { slug: 'sexxxplus', nom: 'SexxxPlus', domaine: 'Boutique érotique', image: 'https://res.cloudinary.com/dr0kwuqqa/image/upload/v1784410803/A7505403_sfvtwp.jpg' },
-  { slug: 'nor-can', nom: 'Nor-Can', domaine: 'Chauffage & Climatisation', image: 'https://res.cloudinary.com/dr0kwuqqa/image/upload/v1784410798/Capture_d_e%CC%81cran_le_2025-10-03_a%CC%80_11.10.40_v5hyzr.png' },
-  { slug: 'famille-maher', nom: 'Famille Maher', domaine: 'Immobilier · RE/MAX', image: 'https://res.cloudinary.com/dr0kwuqqa/image/upload/v1784410790/Raf_Steve_ycvtgk.png' },
-  { slug: 'goconsigne', nom: 'GoConsigne', domaine: 'Technologie & Environnement', image: 'https://res.cloudinary.com/dr0kwuqqa/image/upload/v1784410466/A7504056_xfafya.jpg' },
-  { slug: 'lemire-automobiles', nom: 'Lemire Automobiles', domaine: 'Concessionnaire automobile', image: 'https://res.cloudinary.com/dr0kwuqqa/image/upload/v1784411565/Capture_d_e%CC%81cran_le_2026-07-18_a%CC%80_17.52.07_pyng1i.png' },
+/* ---------- Nav ---------- */
+
+const NAV_LINKS = [
+  { id: 'travaux', label: 'Travaux' },
+  { id: 'approche', label: 'Approche' },
+  { id: 'pourquoi', label: 'Pourquoi nous' },
+  { id: 'contact', label: 'Contact' },
 ];
 
-const FORFAITS = [
-  {
-    titre: 'FORFAIT ESSENTIEL',
-    sousTitre: '4 vidéos/mois',
-    prix: '2 000$/mois',
-    points: ['Stratégie & idéation', 'Préproduction & tournage', 'Montage & publication', 'Rapport mensuel'],
-    populaire: false,
-  },
-  {
-    titre: 'FORFAIT CROISSANCE',
-    sousTitre: '8 vidéos/mois',
-    prix: '3 500$/mois',
-    points: ['Stratégie & idéation', 'Préproduction & tournage', 'Montage & publication', 'Rapport mensuel', 'Gestion communauté incluse'],
-    populaire: true,
-  },
+function Nav() {
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  return (
+    <>
+      <nav className="nav-root" style={{
+        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 500,
+        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        padding: '0 60px', height: '76px',
+        background: scrolled ? 'rgba(255,255,255,0.88)' : '#ffffff',
+        backdropFilter: scrolled ? 'blur(12px)' : 'none',
+        WebkitBackdropFilter: scrolled ? 'blur(12px)' : 'none',
+        borderBottom: '1px solid rgba(0,0,0,0.08)',
+        transition: 'all 0.3s ease',
+      }}>
+        <a href="#top" style={{ display: 'flex', alignItems: 'center' }}>
+          <img src="/Copie de AUCHU.png.png" alt="AuchuMedia" style={{ height: '20px', width: 'auto', filter: 'invert(1)' }} />
+        </a>
+
+        <div className="nav-links" style={{ display: 'flex', alignItems: 'center', gap: '36px' }}>
+          {NAV_LINKS.map(l => (
+            <a key={l.id} href={`#${l.id}`} style={{
+              fontSize: '11px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase',
+              color: 'rgba(10,10,10,0.6)', transition: 'color 0.2s',
+            }}
+              onMouseEnter={e => e.currentTarget.style.color = BLACK}
+              onMouseLeave={e => e.currentTarget.style.color = 'rgba(10,10,10,0.6)'}
+            >
+              {l.label}
+            </a>
+          ))}
+          <button onClick={() => scrollTo('contact')} style={{
+            fontSize: '11px', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase',
+            color: '#fff', background: BLUE, border: 'none', padding: '11px 22px', borderRadius: '6px',
+            cursor: 'pointer', transition: 'opacity 0.2s',
+          }}
+            onMouseEnter={e => e.currentTarget.style.opacity = '0.85'}
+            onMouseLeave={e => e.currentTarget.style.opacity = '1'}
+          >
+            Planifier un appel
+          </button>
+        </div>
+
+        <button onClick={() => setMobileOpen(o => !o)} className="hamburger-btn" style={{ display: 'none', flexDirection: 'column', gap: '5px', background: 'none', border: 'none', cursor: 'pointer', padding: '8px' }}>
+          <span style={{ width: '22px', height: '1.5px', background: BLACK, display: 'block', transition: 'all 0.25s', transform: mobileOpen ? 'translateY(6.5px) rotate(45deg)' : 'none' }} />
+          <span style={{ width: '22px', height: '1.5px', background: BLACK, display: 'block', opacity: mobileOpen ? 0 : 1, transition: 'all 0.25s' }} />
+          <span style={{ width: '22px', height: '1.5px', background: BLACK, display: 'block', transition: 'all 0.25s', transform: mobileOpen ? 'translateY(-6.5px) rotate(-45deg)' : 'none' }} />
+        </button>
+      </nav>
+
+      <div style={{
+        position: 'fixed', top: '76px', left: 0, right: 0, zIndex: 400,
+        background: '#ffffff', borderBottom: '1px solid rgba(0,0,0,0.08)',
+        overflow: 'hidden', maxHeight: mobileOpen ? '320px' : '0',
+        transition: 'max-height 0.35s ease',
+      }}>
+        <div style={{ padding: '12px 20px 24px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+          {NAV_LINKS.map(l => (
+            <a key={l.id} href={`#${l.id}`} onClick={() => setMobileOpen(false)} style={{
+              fontSize: '13px', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase',
+              color: 'rgba(10,10,10,0.7)', padding: '14px 0', borderBottom: '1px solid rgba(0,0,0,0.06)',
+            }}>
+              {l.label}
+            </a>
+          ))}
+          <button onClick={() => { setMobileOpen(false); scrollTo('contact'); }} style={{
+            fontSize: '12px', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase',
+            color: '#fff', background: BLUE, border: 'none', padding: '14px', borderRadius: '6px',
+            cursor: 'pointer', marginTop: '14px',
+          }}>
+            Planifier un appel
+          </button>
+        </div>
+      </div>
+
+      <style>{`
+        @media (max-width: 900px) {
+          .nav-root { padding: 0 20px !important; }
+          .nav-links { display: none !important; }
+          .hamburger-btn { display: flex !important; }
+        }
+      `}</style>
+    </>
+  );
+}
+
+/* ---------- Hero ---------- */
+
+function HeroTitleLine({ words, startIndex }) {
+  return (
+    <div>
+      {words.map((w, i) => (
+        <span key={w + i} className="hero-word" style={{
+          display: 'inline-block', marginRight: '0.28em',
+          animationDelay: `${0.5 + (startIndex + i) * 0.1}s`,
+        }}>
+          {w}
+        </span>
+      ))}
+    </div>
+  );
+}
+
+function Hero() {
+  return (
+    <section id="top" className="section-pad hero" style={{
+      minHeight: '100vh', background: '#ffffff', display: 'flex', flexDirection: 'column',
+      alignItems: 'center', justifyContent: 'center', padding: '140px 60px 60px', textAlign: 'center',
+    }}>
+      <div style={{ fontFamily: "'DM Sans'", fontSize: '12px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(10,10,10,0.45)', marginBottom: '28px' }}>
+        Studio de contenu vidéo · Montréal
+      </div>
+
+      <h1 style={{ fontFamily: "'Bebas Neue'", color: BLACK, fontSize: 'clamp(64px, 8vw, 120px)', lineHeight: 0.9, textTransform: 'uppercase', margin: 0, maxWidth: '1200px' }}>
+        <HeroTitleLine words={["L'ATTENTION", 'SE', 'MÉRITE.']} startIndex={0} />
+        <HeroTitleLine words={['ON', 'SAIT', 'COMMENT', "L'OBTENIR."]} startIndex={3} />
+      </h1>
+
+      <p style={{ fontFamily: "'DM Sans'", fontSize: '18px', color: 'rgba(10,10,10,0.55)', maxWidth: '560px', lineHeight: 1.8, margin: '36px 0 40px' }}>
+        On produit du contenu vidéo stratégique pour les entreprises B2C qui veulent capter l'attention, bâtir leur autorité et convertir.
+      </p>
+
+      <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', justifyContent: 'center' }}>
+        <button onClick={() => scrollTo('travaux')} style={{
+          fontFamily: "'DM Sans'", fontSize: '12px', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase',
+          color: '#fff', background: BLACK, border: `1px solid ${BLACK}`, padding: '16px 32px', borderRadius: '6px',
+          cursor: 'pointer', transition: 'opacity 0.2s',
+        }}
+          onMouseEnter={e => e.currentTarget.style.opacity = '0.82'}
+          onMouseLeave={e => e.currentTarget.style.opacity = '1'}
+        >
+          Voir nos clients →
+        </button>
+        <button onClick={() => scrollTo('contact')} style={{
+          fontFamily: "'DM Sans'", fontSize: '12px', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase',
+          color: BLACK, background: 'transparent', border: `1px solid ${BLACK}`, padding: '16px 32px', borderRadius: '6px',
+          cursor: 'pointer', transition: 'all 0.2s',
+        }}
+          onMouseEnter={e => { e.currentTarget.style.background = BLACK; e.currentTarget.style.color = '#fff'; }}
+          onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = BLACK; }}
+        >
+          Planifier un appel
+        </button>
+      </div>
+
+      <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginTop: '56px' }}>
+        <span className="urgence-dot" style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#e23b3b' }} />
+        <span style={{ fontFamily: "'DM Sans'", fontSize: '11px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(10,10,10,0.5)' }}>
+          6 / 8 mandats actifs · 2 spots disponibles
+        </span>
+      </div>
+    </section>
+  );
+}
+
+/* ---------- Travaux ---------- */
+
+const TRAVAUX = [
+  { nom: 'Cardinal Asphalte', domaine: 'Construction & Asphalte', bg: 'url(https://res.cloudinary.com/dr0kwuqqa/image/upload/v1784411817/Capture_d_e%CC%81cran_le_2026-07-18_a%CC%80_17.56.25_rfb74n.png)', badge: 'ACTIF' },
+  { nom: 'Nor-Can', domaine: 'Chauffage & Climatisation', bg: 'url(https://res.cloudinary.com/dr0kwuqqa/image/upload/v1784410798/Capture_d_e%CC%81cran_le_2025-10-03_a%CC%80_11.10.40_v5hyzr.png)', badge: 'ACTIF' },
+  { nom: 'Famille Maher', domaine: 'Courtiers immobiliers RE/MAX', bg: 'url(https://res.cloudinary.com/dr0kwuqqa/image/upload/v1784410790/Raf_Steve_ycvtgk.png)', badge: 'ACTIF' },
+  { nom: 'Bâton Rouge', domaine: 'Restauration', bg: 'linear-gradient(135deg, #8B0000, #2a0a0a)', badge: 'ACTIF' },
+  { nom: 'Groupe DDC', domaine: 'Construction', bg: 'linear-gradient(135deg, #1a1a2e, #16213e)', badge: 'BIENTÔT' },
+  { nom: 'Équipe Lemire Fillion', domaine: 'Courtières immobilières', bg: 'linear-gradient(135deg, #0a2a1a, #1a3a2a)', badge: 'BIENTÔT' },
 ];
+
+function Travaux() {
+  return (
+    <section id="travaux" className="section-pad" style={{ padding: '140px 60px', background: '#ffffff' }}>
+      <FadeIn>
+        <div style={{ fontFamily: "'DM Sans'", fontSize: '12px', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: BLUE, marginBottom: '16px' }}>
+          Nos clients actuels
+        </div>
+        <h2 style={{ fontFamily: "'Bebas Neue'", color: BLACK, fontSize: 'clamp(40px, 5vw, 64px)', margin: 0, textTransform: 'uppercase' }}>
+          Ils nous font confiance.
+        </h2>
+        <p style={{ fontFamily: "'DM Sans'", fontSize: '15px', color: 'rgba(10,10,10,0.5)', margin: '14px 0 56px', maxWidth: '560px' }}>
+          6 entreprises. 2 spots disponibles. On choisit nos clients par choix, pas par manque.
+        </p>
+      </FadeIn>
+
+      <div className="travaux-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px' }}>
+        {TRAVAUX.map((t, i) => (
+          <FadeIn key={t.nom} delay={0.05 * i}>
+            <div className="travail-card" style={{
+              position: 'relative', height: '380px', borderRadius: '16px', overflow: 'hidden',
+              backgroundColor: '#111',
+            }}>
+              <div className="travail-img" style={{
+                position: 'absolute', inset: 0, background: t.bg, backgroundSize: 'cover', backgroundPosition: 'center',
+                transition: 'transform 0.3s ease',
+              }} />
+              <div className="travail-overlay" style={{
+                position: 'absolute', inset: 0,
+                background: 'linear-gradient(0deg, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.15) 55%, rgba(0,0,0,0) 100%)',
+                transition: 'background 0.3s ease',
+              }} />
+              <div style={{
+                position: 'absolute', top: '18px', right: '18px', fontSize: '10px', fontWeight: 700,
+                letterSpacing: '0.08em', textTransform: 'uppercase', padding: '5px 12px', borderRadius: '999px',
+                color: '#fff', background: t.badge === 'ACTIF' ? '#1a9b55' : '#e2873b',
+              }}>
+                {t.badge}
+              </div>
+              <div style={{ position: 'absolute', left: '24px', bottom: '22px', right: '24px' }}>
+                <div style={{ fontFamily: "'Bebas Neue'", fontSize: '22px', color: '#fff', letterSpacing: '0.02em' }}>{t.nom}</div>
+                <div style={{ fontFamily: "'DM Sans'", fontSize: '12px', color: 'rgba(255,255,255,0.7)', marginTop: '4px' }}>{t.domaine}</div>
+              </div>
+            </div>
+          </FadeIn>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+/* ---------- Approche ---------- */
+
+const APPROCHE_BLOCS = [
+  { titre: '8 CLIENTS MAX. PAR CHOIX.', texte: "On limite volontairement notre portefeuille à 8 mandats. Chaque client reçoit l'attention complète de notre équipe — pas un junior qui gère ton compte pendant que le senior vend." },
+  { titre: 'UNE ÉQUIPE. PAS UNE USINE.', texte: 'Raphael et Ben travaillent directement sur chaque mandat. Tu sais toujours à qui tu parles et qui produit ton contenu.' },
+  { titre: 'DU CONTENU QUI CONVERTIT.', texte: "On ne fait pas du contenu pour faire du contenu. Chaque vidéo a un but stratégique — capter l'attention, bâtir la confiance, générer des ventes." },
+];
+
+function Approche() {
+  return (
+    <section id="approche" className="section-pad" style={{ padding: '140px 60px', background: GRAY_BG }}>
+      <div className="approche-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1.4fr', gap: '64px', alignItems: 'start' }}>
+        <div className="approche-sticky" style={{ position: 'sticky', top: '120px' }}>
+          <FadeIn direction="left">
+            <div style={{ fontFamily: "'DM Sans'", fontSize: '12px', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: BLUE, marginBottom: '16px' }}>
+              Notre différence
+            </div>
+            <h2 style={{ fontFamily: "'Bebas Neue'", color: BLACK, fontSize: '52px', lineHeight: 1, margin: '0 0 32px', textTransform: 'uppercase' }}>
+              On ne travaille pas<br />avec tout le monde.
+            </h2>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '10px' }}>
+              {Array.from({ length: 8 }).map((_, i) => (
+                <div key={i} style={{
+                  width: '22px', height: '10px', borderRadius: '2px',
+                  background: i < 6 ? BLUE : 'transparent',
+                  border: i < 6 ? 'none' : `1px solid rgba(10,10,10,0.25)`,
+                }} />
+              ))}
+            </div>
+            <div style={{ fontFamily: "'DM Sans'", fontSize: '12px', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'rgba(10,10,10,0.5)' }}>
+              6/8 mandats
+            </div>
+          </FadeIn>
+        </div>
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '44px' }}>
+          {APPROCHE_BLOCS.map((b, i) => (
+            <FadeIn key={b.titre} delay={0.12 * i} direction="right">
+              <div style={{ borderLeft: `3px solid ${BLUE}`, paddingLeft: '28px' }}>
+                <div style={{ fontFamily: "'DM Sans'", fontSize: '16px', fontWeight: 700, color: BLACK, marginBottom: '12px', letterSpacing: '0.01em' }}>
+                  {b.titre}
+                </div>
+                <p style={{ fontFamily: "'DM Sans'", fontSize: '15px', color: 'rgba(10,10,10,0.6)', lineHeight: 1.75, margin: 0 }}>
+                  {b.texte}
+                </p>
+              </div>
+            </FadeIn>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------- Pourquoi ---------- */
+
+const POURQUOI_COLS = [
+  { icon: '🎯', titre: "STRATÉGIE D'ABORD", texte: "Chaque vidéo a un rôle précis dans ton funnel. Rien n'est publié par hasard." },
+  { icon: '🎬', titre: 'PRODUCTION PREMIUM', texte: 'Sony A7 IV, équipement pro, post-production soignée. Ton contenu reflète ton niveau.' },
+  { icon: '📈', titre: 'RÉSULTATS MESURÉS', texte: "On suit les métriques qui comptent : attention, engagement, conversions. Pas juste les vues." },
+];
+
+function Pourquoi() {
+  return (
+    <section id="pourquoi" className="section-pad" style={{ padding: '140px 60px', background: '#ffffff', textAlign: 'center' }}>
+      <FadeIn>
+        <div style={{ fontFamily: "'DM Sans'", fontSize: '12px', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: BLUE, marginBottom: '16px' }}>
+          Notre vision
+        </div>
+        <h2 style={{ fontFamily: "'Bebas Neue'", color: BLACK, fontSize: 'clamp(36px, 5vw, 64px)', lineHeight: 1.02, margin: '0 auto 28px', textTransform: 'uppercase' }}>
+          Le contenu viral<br />n'est pas un accident.<br />C'est une stratégie.
+        </h2>
+        <p style={{ fontFamily: "'DM Sans'", fontSize: '17px', color: 'rgba(10,10,10,0.55)', maxWidth: '680px', lineHeight: 1.8, margin: '0 auto 72px' }}>
+          On croit que chaque entreprise mérite une présence en ligne qui capte l'attention, inspire confiance et génère de vraies ventes — pas juste des likes. On comprend comment les gens découvrent les marques, comment l'attention se gagne, et comment la confiance se bâtit. On traduit ça en vidéos qui convertissent.
+        </p>
+      </FadeIn>
+
+      <div className="pourquoi-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '40px', textAlign: 'left' }}>
+        {POURQUOI_COLS.map((c, i) => (
+          <FadeIn key={c.titre} delay={0.1 * i}>
+            <div style={{ fontSize: '34px', marginBottom: '20px' }}>{c.icon}</div>
+            <div style={{ fontFamily: "'DM Sans'", fontSize: '15px', fontWeight: 700, color: BLACK, marginBottom: '12px', letterSpacing: '0.04em' }}>
+              {c.titre}
+            </div>
+            <p style={{ fontFamily: "'DM Sans'", fontSize: '14px', color: 'rgba(10,10,10,0.55)', lineHeight: 1.7, margin: 0 }}>
+              {c.texte}
+            </p>
+          </FadeIn>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+/* ---------- Témoignages ---------- */
+
+const TEMOIGNAGES = [
+  { texte: "AuchuMedia a complètement transformé notre présence sur les réseaux. En 3 mois, on a vu une augmentation significative de nos demandes de soumission.", nom: 'Jean-Philippe Tremblay', titre: 'Directeur général, Cardinal Asphalte' },
+  { texte: "Ce qui nous a le plus impressionné, c'est leur compréhension de notre industrie. Le contenu qu'ils créent résonne vraiment avec notre clientèle.", nom: 'Marie-Pier Gagnon', titre: 'Directrice marketing, Nor-Can' },
+  { texte: "On cherchait une équipe qui comprend les réseaux sociaux et le monde immobilier. AuchuMedia dépasse largement nos attentes.", nom: 'Steve Maher', titre: 'Courtier immobilier, RE/MAX' },
+];
+
+function Temoignages() {
+  const [active, setActive] = useState(0);
+
+  useEffect(() => {
+    const t = setInterval(() => setActive(a => (a + 1) % TEMOIGNAGES.length), 6000);
+    return () => clearInterval(t);
+  }, []);
+
+  const current = TEMOIGNAGES[active];
+
+  return (
+    <section className="section-pad" style={{ padding: '140px 60px', background: GRAY_BG, textAlign: 'center' }}>
+      <FadeIn>
+        <div style={{ fontFamily: "'DM Sans'", fontSize: '12px', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: BLUE, marginBottom: '16px' }}>
+          Ils parlent de nous
+        </div>
+        <h2 style={{ fontFamily: "'Bebas Neue'", color: BLACK, fontSize: 'clamp(36px, 5vw, 56px)', margin: '0 0 56px', textTransform: 'uppercase' }}>
+          Ce que nos clients disent.
+        </h2>
+      </FadeIn>
+
+      <div style={{ maxWidth: '640px', margin: '0 auto' }}>
+        <div key={active} className="testimonial-card" style={{
+          background: '#ffffff', border: '1px solid rgba(0,0,0,0.08)', borderRadius: '16px',
+          padding: '40px 36px', boxShadow: '0 12px 40px rgba(0,0,0,0.06)', textAlign: 'left',
+        }}>
+          <div style={{ color: '#f5b400', fontSize: '16px', marginBottom: '18px', letterSpacing: '2px' }}>★★★★★</div>
+          <p style={{ fontFamily: "'DM Sans'", fontSize: '16px', fontStyle: 'italic', color: 'rgba(10,10,10,0.7)', lineHeight: 1.75, margin: '0 0 24px' }}>
+            "{current.texte}"
+          </p>
+          <div style={{ fontFamily: "'DM Sans'", fontSize: '14px', fontWeight: 700, color: BLACK }}>{current.nom}</div>
+          <div style={{ fontFamily: "'DM Sans'", fontSize: '13px', color: 'rgba(10,10,10,0.5)', marginTop: '2px' }}>{current.titre}</div>
+        </div>
+
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', marginTop: '28px' }}>
+          {TEMOIGNAGES.map((_, i) => (
+            <button key={i} onClick={() => setActive(i)} aria-label={`Témoignage ${i + 1}`} style={{
+              width: i === active ? '24px' : '8px', height: '8px', borderRadius: '4px',
+              background: i === active ? BLUE : 'rgba(10,10,10,0.2)', border: 'none', cursor: 'pointer',
+              transition: 'all 0.3s ease', padding: 0,
+            }} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------- CTA finale ---------- */
+
+function CtaFinale() {
+  return (
+    <section className="cta-finale section-pad" style={{ padding: '140px 60px', textAlign: 'center' }}>
+      <FadeIn>
+        <h2 style={{ fontFamily: "'Bebas Neue'", color: '#fff', fontSize: 'clamp(36px, 6vw, 72px)', lineHeight: 1.05, margin: '0 0 24px', textTransform: 'uppercase' }}>
+          Prêts à transformer<br />votre marketing en revenus?
+        </h2>
+        <p style={{ fontFamily: "'DM Sans'", fontSize: '16px', color: 'rgba(255,255,255,0.8)', margin: '0 0 44px' }}>
+          2 spots disponibles. Les mandats se font rares.
+        </p>
+        <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', justifyContent: 'center' }}>
+          <button onClick={() => scrollTo('contact')} style={{
+            fontFamily: "'DM Sans'", fontSize: '12px', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase',
+            color: BLUE, background: '#fff', border: '1px solid #fff', padding: '16px 32px', borderRadius: '6px',
+            cursor: 'pointer', transition: 'opacity 0.2s',
+          }}
+            onMouseEnter={e => e.currentTarget.style.opacity = '0.85'}
+            onMouseLeave={e => e.currentTarget.style.opacity = '1'}
+          >
+            Planifier un appel →
+          </button>
+          <button onClick={() => scrollTo('travaux')} style={{
+            fontFamily: "'DM Sans'", fontSize: '12px', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase',
+            color: '#fff', background: 'transparent', border: '1px solid #fff', padding: '16px 32px', borderRadius: '6px',
+            cursor: 'pointer', transition: 'all 0.2s',
+          }}
+            onMouseEnter={e => { e.currentTarget.style.background = '#fff'; e.currentTarget.style.color = BLUE; }}
+            onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#fff'; }}
+          >
+            Voir nos clients →
+          </button>
+        </div>
+      </FadeIn>
+    </section>
+  );
+}
+
+/* ---------- Contact ---------- */
 
 function ContactForm() {
-  const [form, setForm] = useState({ nomComplet: '', email: '', entreprise: '', message: '' });
+  const [form, setForm] = useState({ prenom: '', nom: '', email: '', entreprise: '', message: '' });
   const [sending, setSending] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState(false);
   const set = (k, v) => setForm(f => ({ ...f, [k]: v }));
 
   const inputStyle = {
-    width: '100%', background: '#ffffff', border: '0.5px solid rgba(0,0,0,0.15)',
+    width: '100%', background: '#ffffff', border: '1px solid rgba(0,0,0,0.15)',
     borderRadius: '8px', padding: '13px 16px', color: BLACK, fontSize: '14px',
     outline: 'none', fontFamily: "'DM Sans'", marginBottom: '14px',
   };
@@ -88,8 +485,8 @@ function ContactForm() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify({
-          nom: form.nomComplet, email: form.email, entreprise: form.entreprise, message: form.message,
-          _subject: `Nouveau message — ${form.nomComplet} (${form.entreprise || 'sans entreprise'})`,
+          prenom: form.prenom, nom: form.nom, email: form.email, entreprise: form.entreprise, message: form.message,
+          _subject: `Nouveau message — ${form.prenom} ${form.nom} (${form.entreprise || 'sans entreprise'})`,
         }),
       });
       if (res.ok) setSubmitted(true);
@@ -103,10 +500,10 @@ function ContactForm() {
 
   if (submitted) {
     return (
-      <div style={{ padding: '48px 24px', textAlign: 'center', background: '#f5f5f5', borderRadius: '16px' }}>
+      <div className="form-success" style={{ padding: '48px 24px', textAlign: 'center', background: GRAY_BG, borderRadius: '16px' }}>
         <div style={{ fontFamily: "'Bebas Neue'", fontSize: '28px', color: BLACK, marginBottom: '12px' }}>MERCI.</div>
         <p style={{ fontFamily: "'DM Sans'", fontSize: '14px', color: 'rgba(10,10,10,0.6)' }}>
-          On te répond dans les plus brefs délais.
+          On te répond dans les 24h.
         </p>
       </div>
     );
@@ -114,8 +511,9 @@ function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 0, marginBottom: 0 }}>
-        <input required type="text" placeholder="Prénom et nom" value={form.nomComplet} onChange={e => set('nomComplet', e.target.value)} style={inputStyle} />
+      <div className="form-grid-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0 14px' }}>
+        <input required type="text" placeholder="Prénom" value={form.prenom} onChange={e => set('prenom', e.target.value)} style={inputStyle} />
+        <input required type="text" placeholder="Nom" value={form.nom} onChange={e => set('nom', e.target.value)} style={inputStyle} />
       </div>
       <input required type="email" placeholder="Email" value={form.email} onChange={e => set('email', e.target.value)} style={inputStyle} />
       <input type="text" placeholder="Entreprise" value={form.entreprise} onChange={e => set('entreprise', e.target.value)} style={inputStyle} />
@@ -137,234 +535,138 @@ function ContactForm() {
   );
 }
 
+function Contact() {
+  return (
+    <section id="contact" className="section-pad" style={{ padding: '140px 60px', background: '#ffffff' }}>
+      <FadeIn>
+        <h2 style={{ fontFamily: "'Bebas Neue'", color: BLACK, fontSize: 'clamp(40px, 6vw, 64px)', margin: 0, textTransform: 'uppercase' }}>
+          Parlons.
+        </h2>
+        <p style={{ fontFamily: "'DM Sans'", fontSize: '15px', color: 'rgba(10,10,10,0.5)', margin: '14px 0 56px' }}>
+          On répond dans les 24h.
+        </p>
+      </FadeIn>
+
+      <div className="contact-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '64px', alignItems: 'start' }}>
+        <FadeIn direction="left">
+          <div>
+            <a href="mailto:raphael@auchumedia.com" style={{ fontFamily: "'DM Sans'", fontSize: '16px', fontWeight: 700, color: BLACK, display: 'inline-block', marginBottom: '28px', borderBottom: `1px solid ${BLACK}` }}>
+              raphael@auchumedia.com
+            </a>
+            <div style={{ display: 'flex', gap: '16px' }}>
+              <a href="https://instagram.com/auchumedia" target="_blank" rel="noreferrer" style={{ transition: 'opacity 0.2s' }}
+                onMouseEnter={e => e.currentTarget.style.opacity = '0.65'}
+                onMouseLeave={e => e.currentTarget.style.opacity = '1'}
+              >
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                  <rect x="2" y="2" width="20" height="20" rx="5" stroke={BLUE} strokeWidth="2" />
+                  <circle cx="12" cy="12" r="4" stroke={BLUE} strokeWidth="2" />
+                  <circle cx="17.5" cy="6.5" r="1" fill={BLUE} />
+                </svg>
+              </a>
+              <a href="https://tiktok.com/@auchumedia" target="_blank" rel="noreferrer" style={{ transition: 'opacity 0.2s' }}
+                onMouseEnter={e => e.currentTarget.style.opacity = '0.65'}
+                onMouseLeave={e => e.currentTarget.style.opacity = '1'}
+              >
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                  <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" stroke={BLUE} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </FadeIn>
+
+        <FadeIn direction="right" delay={0.1}>
+          <ContactForm />
+        </FadeIn>
+      </div>
+    </section>
+  );
+}
+
+/* ---------- Footer ---------- */
+
+function Footer() {
+  return (
+    <footer style={{ background: BLACK, padding: '80px 20px 32px', textAlign: 'center' }}>
+      <img src="/Copie de AUCHU.png.png" alt="AuchuMedia" style={{ height: '24px', width: 'auto', margin: '0 auto 24px' }} />
+      <p style={{ fontFamily: "'DM Sans'", fontSize: '14px', color: 'rgba(255,255,255,0.55)', maxWidth: '420px', margin: '0 auto 32px', lineHeight: 1.6 }}>
+        L'attention se mérite. On sait comment l'obtenir.
+      </p>
+      <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', marginBottom: '32px' }}>
+        <a href="https://instagram.com/auchumedia" target="_blank" rel="noreferrer">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <rect x="2" y="2" width="20" height="20" rx="5" stroke={BLUE} strokeWidth="2" />
+            <circle cx="12" cy="12" r="4" stroke={BLUE} strokeWidth="2" />
+            <circle cx="17.5" cy="6.5" r="1" fill={BLUE} />
+          </svg>
+        </a>
+        <a href="https://tiktok.com/@auchumedia" target="_blank" rel="noreferrer">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" stroke={BLUE} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </a>
+      </div>
+      <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.3)', fontFamily: "'DM Sans'" }}>
+        © 2026 AuchuMedia Inc.
+      </div>
+    </footer>
+  );
+}
+
+/* ---------- Home ---------- */
+
 export default function Home() {
   return (
     <div style={{ background: '#ffffff', overflowX: 'clip' }}>
       <Nav />
-
-      {/* HERO */}
-      <section id="top" className="section-pad hero" style={{
-        minHeight: '100vh', background: '#ffffff', display: 'flex', flexDirection: 'column',
-        justifyContent: 'flex-end', padding: '0 60px 90px', position: 'relative',
-      }}>
-        <FadeIn>
-          <div style={{ fontFamily: "'DM Sans'", fontSize: '12px', fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(10,10,10,0.45)', marginBottom: '28px' }}>
-            Studio de contenu vidéo
-          </div>
-        </FadeIn>
-        <FadeIn delay={0.1}>
-          <h1 style={{
-            fontFamily: "'Bebas Neue'", color: BLACK, fontSize: 'clamp(64px, 9vw, 140px)',
-            lineHeight: 0.88, textTransform: 'uppercase', margin: 0, maxWidth: '1100px',
-          }}>
-            L'ATTENTION<br />SE MÉRITE.<br />ON SAIT COMMENT<br />L'OBTENIR.
-          </h1>
-        </FadeIn>
-        <FadeIn delay={0.2}>
-          <p style={{ fontFamily: "'DM Sans'", fontSize: '16px', color: 'rgba(10,10,10,0.55)', maxWidth: '480px', lineHeight: 1.7, margin: '32px 0 40px' }}>
-            On produit du contenu vidéo stratégique pour les entreprises B2C qui veulent capter l'attention, bâtir leur autorité et convertir.
-          </p>
-        </FadeIn>
-        <FadeIn delay={0.3}>
-          <button onClick={() => scrollTo('travaux')} style={{
-            fontFamily: "'DM Sans'", fontSize: '12px', fontWeight: 700, letterSpacing: '0.1em',
-            textTransform: 'uppercase', color: BLACK, background: 'transparent',
-            border: `1px solid ${BLACK}`, padding: '16px 32px', borderRadius: '6px',
-            cursor: 'pointer', transition: 'all 0.2s ease',
-          }}
-            onMouseEnter={e => { e.currentTarget.style.background = BLACK; e.currentTarget.style.color = '#fff'; }}
-            onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = BLACK; }}
-          >
-            Voir nos travaux →
-          </button>
-        </FadeIn>
-
-        <div style={{ position: 'absolute', bottom: '28px', left: '50%', transform: 'translateX(-50%)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-          <div className="scroll-indicator" style={{ width: '1px', height: '36px', background: 'rgba(10,10,10,0.25)' }} />
-        </div>
-      </section>
-
-      {/* TRAVAUX */}
-      <section id="travaux" className="section-pad" style={{ padding: '140px 60px', background: '#ffffff' }}>
-        <FadeIn>
-          <h2 style={{ fontFamily: "'Bebas Neue'", color: BLACK, fontSize: 'clamp(40px, 5vw, 64px)', margin: 0, textTransform: 'uppercase' }}>
-            Nos travaux.
-          </h2>
-        </FadeIn>
-        <FadeIn delay={0.1}>
-          <p style={{ fontFamily: "'DM Sans'", fontSize: '15px', color: 'rgba(10,10,10,0.5)', margin: '14px 0 56px' }}>
-            Des mandats choisis. Une qualité sans compromis.
-          </p>
-        </FadeIn>
-
-        <div className="travaux-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px' }}>
-          {TRAVAUX.map((t, i) => (
-            <FadeIn key={t.slug} delay={0.05 * i}>
-              <Link to={`/travaux/${t.slug}`} className="travail-card" style={{
-                position: 'relative', display: 'block', height: '400px', borderRadius: '12px',
-                overflow: 'hidden', backgroundColor: '#111',
-              }}>
-                <div className="travail-img" style={{
-                  position: 'absolute', inset: 0,
-                  backgroundImage: `url(${t.image})`, backgroundSize: 'cover', backgroundPosition: 'center',
-                  transition: 'transform 0.3s ease',
-                }} />
-                <div className="travail-overlay" style={{
-                  position: 'absolute', inset: 0,
-                  background: 'linear-gradient(0deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.1) 55%, rgba(0,0,0,0) 100%)',
-                  transition: 'opacity 0.3s ease',
-                }} />
-                <div style={{ position: 'absolute', left: '24px', bottom: '22px', right: '24px' }}>
-                  <div style={{ fontFamily: "'Bebas Neue'", fontSize: '22px', color: '#fff', letterSpacing: '0.02em' }}>{t.nom}</div>
-                  <div style={{ fontFamily: "'DM Sans'", fontSize: '12px', color: 'rgba(255,255,255,0.7)', marginTop: '4px' }}>{t.domaine}</div>
-                </div>
-              </Link>
-            </FadeIn>
-          ))}
-        </div>
-      </section>
-
-      {/* APPROCHE */}
-      <section id="approche" className="section-pad" style={{ padding: '140px 60px', background: BLACK }}>
-        <FadeIn>
-          <h2 style={{ fontFamily: "'Bebas Neue'", color: '#fff', fontSize: 'clamp(40px, 5vw, 64px)', margin: '0 0 56px', textTransform: 'uppercase' }}>
-            Notre approche.
-          </h2>
-        </FadeIn>
-
-        <div className="approche-grid" style={{ display: 'grid', gridTemplateColumns: '1.3fr 1fr', gap: '64px', alignItems: 'start' }}>
-          <FadeIn direction="left">
-            <div style={{ fontFamily: "'DM Sans'", fontSize: '20px', color: '#fff', lineHeight: 1.8, display: 'flex', flexDirection: 'column', gap: '28px' }}>
-              <p style={{ margin: 0 }}>On ne travaille pas avec tout le monde. On choisit 6 à 8 clients par année — par choix. Pas par manque de demande.</p>
-              <p style={{ margin: 0 }}>Chaque mandat reçoit l'attention complète de notre équipe. Pas de junior qui gère ton compte pendant que le senior vend. Nous.</p>
-              <p style={{ margin: 0 }}>Du contenu qui ressemble à ton entreprise, qui parle à ton audience, et qui génère de vraies résultats.</p>
-            </div>
-          </FadeIn>
-
-          <FadeIn direction="right" delay={0.15}>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '40px' }}>
-              {[
-                { chiffre: '6-8', label: 'clients par année' },
-                { chiffre: '100%', label: 'de notre attention sur chaque mandat' },
-                { chiffre: '0', label: 'contenu générique produit' },
-              ].map(stat => (
-                <div key={stat.label}>
-                  <div style={{ fontFamily: "'Bebas Neue'", fontSize: '56px', color: BLUE, lineHeight: 1 }}>{stat.chiffre}</div>
-                  <div style={{ fontFamily: "'DM Sans'", fontSize: '13px', color: 'rgba(255,255,255,0.55)', marginTop: '8px' }}>{stat.label}</div>
-                </div>
-              ))}
-            </div>
-          </FadeIn>
-        </div>
-      </section>
-
-      {/* SERVICES */}
-      <section id="services" className="section-pad" style={{ padding: '140px 60px', background: '#ffffff' }}>
-        <FadeIn>
-          <h2 style={{ fontFamily: "'Bebas Neue'", color: BLACK, fontSize: 'clamp(40px, 5vw, 64px)', margin: '0 0 56px', textTransform: 'uppercase' }}>
-            Ce qu'on fait.
-          </h2>
-        </FadeIn>
-
-        <div className="services-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '32px' }}>
-          {FORFAITS.map((f, i) => (
-            <FadeIn key={f.titre} delay={0.1 * i}>
-              <div style={{ position: 'relative', background: '#f5f5f5', borderRadius: '16px', padding: '48px', height: '100%' }}>
-                {f.populaire && (
-                  <div style={{
-                    position: 'absolute', top: '24px', right: '24px', background: BLUE, color: '#fff',
-                    fontSize: '10px', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase',
-                    padding: '5px 12px', borderRadius: '999px',
-                  }}>
-                    Populaire
-                  </div>
-                )}
-                <div style={{ fontFamily: "'Bebas Neue'", fontSize: '26px', color: BLACK, letterSpacing: '0.01em' }}>
-                  {f.titre} <span style={{ color: 'rgba(10,10,10,0.4)', fontSize: '18px' }}>({f.sousTitre})</span>
-                </div>
-                <div style={{ fontFamily: "'Bebas Neue'", fontSize: '40px', color: BLUE, margin: '18px 0 28px' }}>{f.prix}</div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-                  {f.points.map(p => (
-                    <div key={p} style={{ display: 'flex', alignItems: 'center', gap: '10px', fontFamily: "'DM Sans'", fontSize: '14px', color: 'rgba(10,10,10,0.7)' }}>
-                      <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: BLUE, flexShrink: 0 }} />
-                      {p}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </FadeIn>
-          ))}
-        </div>
-
-        <FadeIn delay={0.2}>
-          <p style={{ fontFamily: "'DM Sans'", fontSize: '14px', color: 'rgba(10,10,10,0.5)', fontStyle: 'italic', textAlign: 'center', margin: '48px 0 0' }}>
-            Chaque mandat est unique. Si tu cherches quelque chose de différent, parlons-en.
-          </p>
-        </FadeIn>
-      </section>
-
-      {/* CONTACT */}
-      <section id="contact" className="section-pad" style={{ padding: '140px 60px', background: '#ffffff' }}>
-        <div className="contact-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '64px', alignItems: 'start' }}>
-          <FadeIn direction="left">
-            <div>
-              <h2 style={{ fontFamily: "'Bebas Neue'", color: BLACK, fontSize: 'clamp(40px, 6vw, 72px)', lineHeight: 0.95, margin: '0 0 24px', textTransform: 'uppercase' }}>
-                TRAVAILLONS<br />ENSEMBLE.
-              </h2>
-              <p style={{ fontFamily: "'DM Sans'", fontSize: '15px', color: 'rgba(10,10,10,0.55)', maxWidth: '380px', lineHeight: 1.7, marginBottom: '28px' }}>
-                Une idée de projet, une question, ou simplement envie de jaser contenu vidéo ? Écris-nous.
-              </p>
-              <a href="mailto:raphael@auchumedia.com" style={{ fontFamily: "'DM Sans'", fontSize: '16px', fontWeight: 700, color: BLACK, display: 'inline-block', marginBottom: '28px', borderBottom: `1px solid ${BLACK}` }}>
-                raphael@auchumedia.com
-              </a>
-              <div style={{ display: 'flex', gap: '16px' }}>
-                <a href="https://instagram.com/auchumedia" target="_blank" rel="noreferrer" style={{ transition: 'opacity 0.2s' }}
-                  onMouseEnter={e => e.currentTarget.style.opacity = '0.65'}
-                  onMouseLeave={e => e.currentTarget.style.opacity = '1'}
-                >
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                    <rect x="2" y="2" width="20" height="20" rx="5" stroke={BLUE} strokeWidth="2" />
-                    <circle cx="12" cy="12" r="4" stroke={BLUE} strokeWidth="2" />
-                    <circle cx="17.5" cy="6.5" r="1" fill={BLUE} />
-                  </svg>
-                </a>
-                <a href="https://tiktok.com/@auchumedia" target="_blank" rel="noreferrer" style={{ transition: 'opacity 0.2s' }}
-                  onMouseEnter={e => e.currentTarget.style.opacity = '0.65'}
-                  onMouseLeave={e => e.currentTarget.style.opacity = '1'}
-                >
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                    <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" stroke={BLUE} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-          </FadeIn>
-
-          <FadeIn direction="right" delay={0.1}>
-            <ContactForm />
-          </FadeIn>
-        </div>
-      </section>
-
+      <Hero />
+      <Travaux />
+      <Approche />
+      <Pourquoi />
+      <Temoignages />
+      <CtaFinale />
+      <Contact />
       <Footer />
 
       <style>{`
-        @keyframes scrollBounce {
-          0%, 100% { transform: translateY(0); opacity: 0.6; }
-          50% { transform: translateY(10px); opacity: 1; }
+        @keyframes wordFadeIn {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
         }
-        .scroll-indicator { animation: scrollBounce 1.8s ease-in-out infinite; }
+        .hero-word { opacity: 0; animation: wordFadeIn 0.6s ease forwards; }
 
-        .travail-card:hover .travail-img { transform: scale(1.04); }
-        .travail-card:hover .travail-overlay { opacity: 0.85; }
+        @keyframes urgencePulse {
+          0%, 100% { opacity: 1; transform: scale(1); }
+          50% { opacity: 0.4; transform: scale(0.8); }
+        }
+        .urgence-dot { animation: urgencePulse 2s ease-in-out infinite; }
 
-        @media (max-width: 768px) {
+        .travail-card:hover .travail-img { transform: scale(1.02); }
+        .travail-card:hover .travail-overlay { background: linear-gradient(0deg, rgba(0,61,165,0.55) 0%, rgba(0,61,165,0.15) 55%, rgba(0,61,165,0) 100%); }
+
+        @keyframes ctaGradient {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        .cta-finale {
+          background: linear-gradient(120deg, #003DA5, #0050d6, #002d7a, #003DA5);
+          background-size: 300% 300%;
+          animation: ctaGradient 12s ease infinite;
+        }
+
+        .testimonial-card { animation: wordFadeIn 0.5s ease; }
+
+        @media (max-width: 900px) {
           .section-pad { padding-left: 20px !important; padding-right: 20px !important; }
-          .hero { padding-left: 20px !important; padding-right: 20px !important; padding-bottom: 60px !important; }
+          .hero { padding-top: 120px !important; padding-bottom: 60px !important; }
           .travaux-grid { grid-template-columns: 1fr !important; }
           .approche-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
-          .services-grid { grid-template-columns: 1fr !important; }
+          .approche-sticky { position: static !important; }
+          .pourquoi-grid { grid-template-columns: 1fr !important; gap: 36px !important; }
           .contact-grid { grid-template-columns: 1fr !important; gap: 48px !important; }
+          .form-grid-2 { grid-template-columns: 1fr !important; gap: 0 !important; }
         }
       `}</style>
     </div>
