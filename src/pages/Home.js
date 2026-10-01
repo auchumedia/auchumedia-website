@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const BLUE = '#003DA5';
 const BLACK = '#0a0a0a';
@@ -44,8 +44,8 @@ const scrollTo = (id) => {
 /* ---------- Nav ---------- */
 
 const NAV_LINKS = [
-  { id: 'clients', label: 'Clients' },
-  { id: 'approche', label: 'Approche' },
+  { id: 'clients', label: 'Nos clients' },
+  { id: 'approche', label: 'Notre approche' },
   { id: 'pourquoi', label: 'Pourquoi nous' },
 ];
 
@@ -72,9 +72,9 @@ export function Nav() {
         borderBottom: '1px solid rgba(0,0,0,0.08)',
         transition: 'all 0.3s ease',
       }}>
-        <a href="#top" style={{ display: 'flex', alignItems: 'center' }}>
+        <Link to="/" style={{ display: 'flex', alignItems: 'center' }}>
           <img src="/Copie de AUCHU.png.png" alt="AuchuMedia" style={{ height: '20px', width: 'auto', filter: 'invert(1)' }} />
-        </a>
+        </Link>
 
         <div className="nav-links" style={{ display: 'flex', alignItems: 'center', gap: '36px' }}>
           {NAV_LINKS.map(l => (

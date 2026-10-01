@@ -123,12 +123,19 @@ export default function PlanifierAppel() {
               </div>
               <div>
                 <div style={{ fontFamily: "'DM Sans'", fontSize: '13px', fontWeight: 700, color: BLACK }}>
-                  Tu échangeras avec Raphaël
+                  Tu échangeras avec Raphaël · Fondateur & Président
                 </div>
                 <div style={{ fontFamily: "'DM Sans'", fontSize: '12px', color: 'rgba(10,10,10,0.5)' }}>
-                  Répond généralement en 24h
+                  Répond généralement en 1 à 3 jours ouvrables
                 </div>
               </div>
+            </div>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '32px' }}>
+              <span style={{ color: '#f5b400', fontSize: '14px', letterSpacing: '1px' }}>★★★★★</span>
+              <span style={{ fontFamily: "'DM Sans'", fontSize: '12px', color: 'rgba(10,10,10,0.5)' }}>
+                4.9 · Avis Google
+              </span>
             </div>
 
             <ProgressBar step={step} />
