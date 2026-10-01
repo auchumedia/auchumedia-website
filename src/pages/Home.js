@@ -179,7 +179,7 @@ function Hero() {
       <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', justifyContent: 'center' }}>
         <button onClick={() => scrollTo('clients')} style={{
           fontFamily: "'DM Sans'", fontSize: '12px', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase',
-          color: '#fff', background: BLACK, border: `1px solid ${BLACK}`, padding: '16px 32px', borderRadius: '6px',
+          color: '#fff', background: BLUE, border: `1px solid ${BLUE}`, padding: '16px 32px', borderRadius: '6px',
           cursor: 'pointer', transition: 'opacity 0.2s',
         }}
           onMouseEnter={e => e.currentTarget.style.opacity = '0.82'}
@@ -523,29 +523,64 @@ function CtaFinale() {
 
 /* ---------- Footer ---------- */
 
+const FOOTER_NAV = [
+  { label: 'Nos clients', action: 'scroll', target: 'clients' },
+  { label: 'Notre approche', action: 'scroll', target: 'approche' },
+  { label: 'Pourquoi nous', action: 'scroll', target: 'pourquoi' },
+  { label: 'Planifier un appel', action: 'navigate', target: '/planifier-un-appel' },
+];
+
 function Footer() {
+  const navigate = useNavigate();
+
   return (
-    <footer style={{ background: BLACK, padding: '80px 20px 32px', textAlign: 'center' }}>
-      <img src="/Copie de AUCHU.png.png" alt="AuchuMedia" style={{ height: '24px', width: 'auto', margin: '0 auto 24px' }} />
-      <p style={{ fontFamily: "'DM Sans'", fontSize: '14px', color: 'rgba(255,255,255,0.55)', maxWidth: '420px', margin: '0 auto 32px', lineHeight: 1.6 }}>
-        L'attention se mérite. On sait comment l'obtenir.
-      </p>
-      <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', marginBottom: '32px' }}>
-        <a href="https://instagram.com/auchumedia" target="_blank" rel="noreferrer">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-            <rect x="2" y="2" width="20" height="20" rx="5" stroke={BLUE} strokeWidth="2" />
-            <circle cx="12" cy="12" r="4" stroke={BLUE} strokeWidth="2" />
-            <circle cx="17.5" cy="6.5" r="1" fill={BLUE} />
-          </svg>
-        </a>
-        <a href="https://tiktok.com/@auchumedia" target="_blank" rel="noreferrer">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-            <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" stroke={BLUE} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </a>
+    <footer style={{ background: '#0a0a0a', padding: '60px 60px 40px', marginTop: 0 }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '48px', flexWrap: 'wrap', gap: '32px' }}>
+        <div>
+          <img src="/Copie de AUCHU.png.png" alt="AuchuMedia" style={{ height: '24px', filter: 'brightness(0) invert(1)', marginBottom: '16px' }} />
+          <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.4)', maxWidth: '280px', lineHeight: 1.6 }}>
+            L'attention se mérite. On sait comment l'obtenir.
+          </p>
+        </div>
+
+        <div style={{ display: 'flex', gap: '40px', flexWrap: 'wrap' }}>
+          <div>
+            <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', marginBottom: '16px' }}>Navigation</div>
+            {FOOTER_NAV.map(link => (
+              <div
+                key={link.label}
+                onClick={() => link.action === 'scroll' ? scrollTo(link.target) : navigate(link.target)}
+                style={{ fontSize: '13px', color: 'rgba(255,255,255,0.6)', marginBottom: '10px', cursor: 'pointer' }}
+              >
+                {link.label}
+              </div>
+            ))}
+          </div>
+
+          <div>
+            <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', marginBottom: '16px' }}>Contact</div>
+            <a href="mailto:raphael@auchumedia.com" style={{ fontSize: '13px', color: 'rgba(255,255,255,0.6)', display: 'block', marginBottom: '10px', textDecoration: 'none' }}>raphael@auchumedia.com</a>
+            <div style={{ display: 'flex', gap: '12px', marginTop: '16px' }}>
+              <a href="https://instagram.com/auchumedia" target="_blank" rel="noreferrer">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                  <rect x="2" y="2" width="20" height="20" rx="5" stroke={BLUE} strokeWidth="2" />
+                  <circle cx="12" cy="12" r="4" stroke={BLUE} strokeWidth="2" />
+                  <circle cx="17.5" cy="6.5" r="1" fill={BLUE} />
+                </svg>
+              </a>
+              <a href="https://tiktok.com/@auchumedia" target="_blank" rel="noreferrer">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                  <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" stroke={BLUE} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
-      <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.3)', fontFamily: "'DM Sans'" }}>
-        © 2026 AuchuMedia Inc.
+
+      <div style={{ borderTop: '0.5px solid rgba(255,255,255,0.08)', paddingTop: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
+        <span style={{ fontSize: '12px', color: 'rgba(255,255,255,0.25)' }}>© 2026 AuchuMedia Inc. Tous droits réservés.</span>
+        <span style={{ fontSize: '12px', color: 'rgba(255,255,255,0.25)' }}>Montréal, Québec</span>
       </div>
     </footer>
   );
@@ -563,6 +598,16 @@ export default function Home() {
       <Pourquoi />
       <Temoignages />
       <CtaFinale />
+
+      <div style={{
+        height: '120px',
+        background: 'linear-gradient(to bottom, transparent, #ffffff)',
+        marginTop: '-120px',
+        position: 'relative',
+        zIndex: 1,
+        pointerEvents: 'none',
+      }} />
+
       <Footer />
 
       <style>{`
