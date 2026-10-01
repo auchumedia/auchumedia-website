@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const BLUE = '#003DA5';
 const BLACK = '#0a0a0a';
@@ -43,13 +44,13 @@ const scrollTo = (id) => {
 /* ---------- Nav ---------- */
 
 const NAV_LINKS = [
-  { id: 'travaux', label: 'Travaux' },
+  { id: 'clients', label: 'Clients' },
   { id: 'approche', label: 'Approche' },
   { id: 'pourquoi', label: 'Pourquoi nous' },
-  { id: 'contact', label: 'Contact' },
 ];
 
-function Nav() {
+export function Nav() {
+  const navigate = useNavigate();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -87,7 +88,7 @@ function Nav() {
               {l.label}
             </a>
           ))}
-          <button onClick={() => scrollTo('contact')} style={{
+          <button onClick={() => navigate('/planifier-un-appel')} style={{
             fontSize: '11px', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase',
             color: '#fff', background: BLUE, border: 'none', padding: '11px 22px', borderRadius: '6px',
             cursor: 'pointer', transition: 'opacity 0.2s',
@@ -121,7 +122,7 @@ function Nav() {
               {l.label}
             </a>
           ))}
-          <button onClick={() => { setMobileOpen(false); scrollTo('contact'); }} style={{
+          <button onClick={() => { setMobileOpen(false); navigate('/planifier-un-appel'); }} style={{
             fontSize: '12px', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase',
             color: '#fff', background: BLUE, border: 'none', padding: '14px', borderRadius: '6px',
             cursor: 'pointer', marginTop: '14px',
@@ -160,6 +161,7 @@ function HeroTitleLine({ words, startIndex }) {
 }
 
 function Hero() {
+  const navigate = useNavigate();
   return (
     <section id="top" className="section-pad hero" style={{
       minHeight: '100vh', background: '#ffffff', display: 'flex', flexDirection: 'column',
@@ -179,7 +181,7 @@ function Hero() {
       </p>
 
       <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', justifyContent: 'center' }}>
-        <button onClick={() => scrollTo('travaux')} style={{
+        <button onClick={() => scrollTo('clients')} style={{
           fontFamily: "'DM Sans'", fontSize: '12px', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase',
           color: '#fff', background: BLACK, border: `1px solid ${BLACK}`, padding: '16px 32px', borderRadius: '6px',
           cursor: 'pointer', transition: 'opacity 0.2s',
@@ -189,7 +191,7 @@ function Hero() {
         >
           Voir nos clients →
         </button>
-        <button onClick={() => scrollTo('contact')} style={{
+        <button onClick={() => navigate('/planifier-un-appel')} style={{
           fontFamily: "'DM Sans'", fontSize: '12px', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase',
           color: BLACK, background: 'transparent', border: `1px solid ${BLACK}`, padding: '16px 32px', borderRadius: '6px',
           cursor: 'pointer', transition: 'all 0.2s',
@@ -211,7 +213,7 @@ function Hero() {
   );
 }
 
-/* ---------- Travaux ---------- */
+/* ---------- Clients ---------- */
 
 const TRAVAUX = [
   { nom: 'Cardinal Asphalte', domaine: 'Construction & Asphalte', bg: 'url(https://res.cloudinary.com/dr0kwuqqa/image/upload/v1784411817/Capture_d_e%CC%81cran_le_2026-07-18_a%CC%80_17.56.25_rfb74n.png)', badge: 'ACTIF' },
@@ -222,15 +224,15 @@ const TRAVAUX = [
   { nom: 'Équipe Lemire Fillion', domaine: 'Courtières immobilières', bg: 'linear-gradient(135deg, #0a2a1a, #1a3a2a)', badge: 'BIENTÔT' },
 ];
 
-function Travaux() {
+function Clients() {
   return (
-    <section id="travaux" className="section-pad" style={{ padding: '140px 60px', background: '#ffffff' }}>
+    <section id="clients" className="section-pad" style={{ padding: '140px 60px', background: '#ffffff' }}>
       <FadeIn>
         <div style={{ fontFamily: "'DM Sans'", fontSize: '12px', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: BLUE, marginBottom: '16px' }}>
           Nos clients actuels
         </div>
         <h2 style={{ fontFamily: "'Bebas Neue'", color: BLACK, fontSize: 'clamp(40px, 5vw, 64px)', margin: 0, textTransform: 'uppercase' }}>
-          Ils nous font confiance.
+          Nos clients.
         </h2>
         <p style={{ fontFamily: "'DM Sans'", fontSize: '15px', color: 'rgba(10,10,10,0.5)', margin: '14px 0 56px', maxWidth: '560px' }}>
           6 entreprises. 2 spots disponibles. On choisit nos clients par choix, pas par manque.
@@ -425,6 +427,7 @@ function Temoignages() {
 /* ---------- CTA finale ---------- */
 
 function CtaFinale() {
+  const navigate = useNavigate();
   return (
     <section className="cta-finale section-pad" style={{ padding: '140px 60px', textAlign: 'center' }}>
       <FadeIn>
@@ -435,7 +438,7 @@ function CtaFinale() {
           2 spots disponibles. Les mandats se font rares.
         </p>
         <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', justifyContent: 'center' }}>
-          <button onClick={() => scrollTo('contact')} style={{
+          <button onClick={() => navigate('/planifier-un-appel')} style={{
             fontFamily: "'DM Sans'", fontSize: '12px', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase',
             color: BLUE, background: '#fff', border: '1px solid #fff', padding: '16px 32px', borderRadius: '6px',
             cursor: 'pointer', transition: 'opacity 0.2s',
@@ -445,7 +448,7 @@ function CtaFinale() {
           >
             Planifier un appel →
           </button>
-          <button onClick={() => scrollTo('travaux')} style={{
+          <button onClick={() => scrollTo('clients')} style={{
             fontFamily: "'DM Sans'", fontSize: '12px', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase',
             color: '#fff', background: 'transparent', border: '1px solid #fff', padding: '16px 32px', borderRadius: '6px',
             cursor: 'pointer', transition: 'all 0.2s',
@@ -457,129 +460,6 @@ function CtaFinale() {
           </button>
         </div>
       </FadeIn>
-    </section>
-  );
-}
-
-/* ---------- Contact ---------- */
-
-function ContactForm() {
-  const [form, setForm] = useState({ prenom: '', nom: '', email: '', entreprise: '', message: '' });
-  const [sending, setSending] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState(false);
-  const set = (k, v) => setForm(f => ({ ...f, [k]: v }));
-
-  const inputStyle = {
-    width: '100%', background: '#ffffff', border: '1px solid rgba(0,0,0,0.15)',
-    borderRadius: '8px', padding: '13px 16px', color: BLACK, fontSize: '14px',
-    outline: 'none', fontFamily: "'DM Sans'", marginBottom: '14px',
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setSending(true);
-    setError(false);
-    try {
-      const res = await fetch('https://formspree.io/f/xjgdjoer', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({
-          prenom: form.prenom, nom: form.nom, email: form.email, entreprise: form.entreprise, message: form.message,
-          _subject: `Nouveau message — ${form.prenom} ${form.nom} (${form.entreprise || 'sans entreprise'})`,
-        }),
-      });
-      if (res.ok) setSubmitted(true);
-      else setError(true);
-    } catch (err) {
-      setError(true);
-    } finally {
-      setSending(false);
-    }
-  };
-
-  if (submitted) {
-    return (
-      <div className="form-success" style={{ padding: '48px 24px', textAlign: 'center', background: GRAY_BG, borderRadius: '16px' }}>
-        <div style={{ fontFamily: "'Bebas Neue'", fontSize: '28px', color: BLACK, marginBottom: '12px' }}>MERCI.</div>
-        <p style={{ fontFamily: "'DM Sans'", fontSize: '14px', color: 'rgba(10,10,10,0.6)' }}>
-          On te répond dans les 24h.
-        </p>
-      </div>
-    );
-  }
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <div className="form-grid-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0 14px' }}>
-        <input required type="text" placeholder="Prénom" value={form.prenom} onChange={e => set('prenom', e.target.value)} style={inputStyle} />
-        <input required type="text" placeholder="Nom" value={form.nom} onChange={e => set('nom', e.target.value)} style={inputStyle} />
-      </div>
-      <input required type="email" placeholder="Email" value={form.email} onChange={e => set('email', e.target.value)} style={inputStyle} />
-      <input type="text" placeholder="Entreprise" value={form.entreprise} onChange={e => set('entreprise', e.target.value)} style={inputStyle} />
-      <textarea required placeholder="Message" value={form.message} onChange={e => set('message', e.target.value)} style={{ ...inputStyle, resize: 'vertical', minHeight: '120px' }} />
-      <button type="submit" disabled={sending} style={{
-        width: '100%', fontSize: '12px', fontWeight: 700, color: '#fff', background: BLACK,
-        padding: '16px', borderRadius: '8px', letterSpacing: '0.1em', textTransform: 'uppercase',
-        border: 'none', cursor: sending ? 'default' : 'pointer', fontFamily: "'DM Sans'",
-        transition: 'opacity 0.2s ease', opacity: sending ? 0.6 : 1,
-      }}>
-        {sending ? 'Envoi...' : 'Envoyer →'}
-      </button>
-      {error && (
-        <p style={{ color: '#d1343c', fontSize: '13px', marginTop: '14px', textAlign: 'center', fontFamily: "'DM Sans'" }}>
-          Une erreur est survenue. Réessaie ou écris-moi directement à raphael@auchumedia.com
-        </p>
-      )}
-    </form>
-  );
-}
-
-function Contact() {
-  return (
-    <section id="contact" className="section-pad" style={{ padding: '140px 60px', background: '#ffffff' }}>
-      <FadeIn>
-        <h2 style={{ fontFamily: "'Bebas Neue'", color: BLACK, fontSize: 'clamp(40px, 6vw, 64px)', margin: 0, textTransform: 'uppercase' }}>
-          Parlons.
-        </h2>
-        <p style={{ fontFamily: "'DM Sans'", fontSize: '15px', color: 'rgba(10,10,10,0.5)', margin: '14px 0 56px' }}>
-          On répond dans les 24h.
-        </p>
-      </FadeIn>
-
-      <div className="contact-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '64px', alignItems: 'start' }}>
-        <FadeIn direction="left">
-          <div>
-            <a href="mailto:raphael@auchumedia.com" style={{ fontFamily: "'DM Sans'", fontSize: '16px', fontWeight: 700, color: BLACK, display: 'inline-block', marginBottom: '28px', borderBottom: `1px solid ${BLACK}` }}>
-              raphael@auchumedia.com
-            </a>
-            <div style={{ display: 'flex', gap: '16px' }}>
-              <a href="https://instagram.com/auchumedia" target="_blank" rel="noreferrer" style={{ transition: 'opacity 0.2s' }}
-                onMouseEnter={e => e.currentTarget.style.opacity = '0.65'}
-                onMouseLeave={e => e.currentTarget.style.opacity = '1'}
-              >
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                  <rect x="2" y="2" width="20" height="20" rx="5" stroke={BLUE} strokeWidth="2" />
-                  <circle cx="12" cy="12" r="4" stroke={BLUE} strokeWidth="2" />
-                  <circle cx="17.5" cy="6.5" r="1" fill={BLUE} />
-                </svg>
-              </a>
-              <a href="https://tiktok.com/@auchumedia" target="_blank" rel="noreferrer" style={{ transition: 'opacity 0.2s' }}
-                onMouseEnter={e => e.currentTarget.style.opacity = '0.65'}
-                onMouseLeave={e => e.currentTarget.style.opacity = '1'}
-              >
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                  <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" stroke={BLUE} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </a>
-            </div>
-          </div>
-        </FadeIn>
-
-        <FadeIn direction="right" delay={0.1}>
-          <ContactForm />
-        </FadeIn>
-      </div>
     </section>
   );
 }
@@ -621,12 +501,11 @@ export default function Home() {
     <div style={{ background: '#ffffff', overflowX: 'clip' }}>
       <Nav />
       <Hero />
-      <Travaux />
+      <Clients />
       <Approche />
       <Pourquoi />
       <Temoignages />
       <CtaFinale />
-      <Contact />
       <Footer />
 
       <style>{`
@@ -665,8 +544,6 @@ export default function Home() {
           .approche-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
           .approche-sticky { position: static !important; }
           .pourquoi-grid { grid-template-columns: 1fr !important; gap: 36px !important; }
-          .contact-grid { grid-template-columns: 1fr !important; gap: 48px !important; }
-          .form-grid-2 { grid-template-columns: 1fr !important; gap: 0 !important; }
         }
       `}</style>
     </div>
