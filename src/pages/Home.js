@@ -145,18 +145,14 @@ export function Nav() {
 
 /* ---------- Hero ---------- */
 
-function HeroTitleLine({ words, startIndex }) {
+function HeroWord({ word, index }) {
   return (
-    <div>
-      {words.map((w, i) => (
-        <span key={w + i} className="hero-word" style={{
-          display: 'inline-block', marginRight: '0.28em',
-          animationDelay: `${0.5 + (startIndex + i) * 0.1}s`,
-        }}>
-          {w}
-        </span>
-      ))}
-    </div>
+    <span className="hero-word" style={{
+      display: 'inline-block', marginRight: '0.28em',
+      animationDelay: `${0.5 + index * 0.1}s`,
+    }}>
+      {word}
+    </span>
   );
 }
 
@@ -167,9 +163,12 @@ function Hero() {
       minHeight: '100vh', background: '#ffffff', display: 'flex', flexDirection: 'column',
       alignItems: 'center', justifyContent: 'center', padding: '140px 60px 40px', textAlign: 'center',
     }}>
-      <h1 style={{ fontFamily: "'Bebas Neue'", color: BLACK, fontSize: 'clamp(64px, 8vw, 120px)', lineHeight: 0.9, textTransform: 'uppercase', margin: 0, maxWidth: '1200px' }}>
-        <HeroTitleLine words={["L'ATTENTION", 'SE', 'MÉRITE.']} startIndex={0} />
-        <HeroTitleLine words={['ON', 'SAIT', 'COMMENT', "L'OBTENIR."]} startIndex={3} />
+      <h1 className="hero-title" style={{ fontFamily: "'Bebas Neue'", color: BLACK, fontSize: 'clamp(64px, 8vw, 120px)', lineHeight: 0.9, textTransform: 'uppercase', margin: 0, maxWidth: '1200px', textAlign: 'center' }}>
+        <HeroWord word="L'ATTENTION" index={0} /><br />
+        <HeroWord word="SE" index={1} /><HeroWord word="MÉRITE." index={2} /><br />
+        <HeroWord word="ON" index={3} /><HeroWord word="SAIT" index={4} /><br />
+        <HeroWord word="COMMENT" index={5} /><br />
+        <HeroWord word="L'OBTENIR." index={6} />
       </h1>
 
       <p style={{ fontFamily: "'DM Sans'", fontSize: '18px', color: 'rgba(10,10,10,0.55)', maxWidth: '560px', lineHeight: 1.8, margin: '36px 0 40px' }}>
@@ -559,6 +558,14 @@ export default function Home() {
           to { opacity: 1; transform: translateY(0); }
         }
         .hero-word { opacity: 0; animation: wordFadeIn 0.6s ease forwards; }
+
+        @media (min-width: 769px) {
+          .hero-title br { display: none; }
+          .hero-title { white-space: pre-wrap; }
+        }
+        @media (max-width: 768px) {
+          .hero-title { font-size: clamp(52px, 14vw, 80px) !important; line-height: 0.92 !important; }
+        }
 
         @keyframes urgencePulse {
           0%, 100% { opacity: 1; transform: scale(1); }
