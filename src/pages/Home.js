@@ -232,9 +232,9 @@ function ClientCard({ t }) {
       }} />
       <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.3)' }} />
       <div style={{
-        position: 'absolute', top: '20px', left: '20px', fontFamily: "'Bebas Neue'", fontSize: '36px',
-        color: '#fff', lineHeight: 1, writingMode: 'vertical-rl', transform: 'rotate(180deg)',
-        textShadow: '0 2px 8px rgba(0,0,0,0.6)', zIndex: 2,
+        position: 'absolute', top: '16px', left: '16px', fontFamily: "'Bebas Neue'", fontSize: '22px',
+        color: '#fff', lineHeight: 1, textShadow: '0 2px 8px rgba(0,0,0,0.6)', zIndex: 2,
+        letterSpacing: '0.05em',
       }}>
         {t.nom}
       </div>
@@ -264,11 +264,13 @@ function Clients() {
         </div>
       </div>
 
-      <div style={{
-        textAlign: 'center', marginTop: '32px', fontSize: '16px', color: 'rgba(0,0,0,0.4)',
-        fontStyle: 'italic', fontFamily: "'DM Sans'", letterSpacing: '0.05em',
-      }}>
-        Signé <span style={{ fontWeight: 700, color: '#0a0a0a', fontStyle: 'normal' }}>AuchuMedia</span>
+      <div style={{ textAlign: 'center', marginTop: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+        <span style={{ fontSize: '15px', color: 'rgba(0,0,0,0.4)', fontStyle: 'italic', fontFamily: "'DM Sans'" }}>Signé</span>
+        <img
+          src="/Copie de AUCHU.png.png"
+          alt="AuchuMedia"
+          style={{ height: '16px', width: 'auto', filter: 'invert(1) brightness(0)' }}
+        />
       </div>
     </section>
   );
