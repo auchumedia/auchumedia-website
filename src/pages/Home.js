@@ -232,14 +232,14 @@ function ClientCard({ t }) {
       }} />
       <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.3)' }} />
       <div style={{
-        position: 'absolute', top: '50%', right: '10px', transform: 'translateY(-50%) rotate(-90deg)',
-        transformOrigin: 'center center', fontFamily: "'Bebas Neue'", fontSize: '48px', color: '#fff',
-        whiteSpace: 'nowrap', lineHeight: 1, letterSpacing: '0.01em',
+        position: 'absolute', top: '20px', left: '20px', fontFamily: "'Bebas Neue'", fontSize: '36px',
+        color: '#fff', lineHeight: 1, writingMode: 'vertical-rl', transform: 'rotate(180deg)',
+        textShadow: '0 2px 8px rgba(0,0,0,0.6)', zIndex: 2,
       }}>
         {t.nom}
       </div>
       <div style={{
-        position: 'absolute', left: '16px', bottom: '16px', fontSize: '10px', fontWeight: 700,
+        position: 'absolute', bottom: '16px', right: '16px', zIndex: 2, fontSize: '10px', fontWeight: 700,
         letterSpacing: '0.08em', textTransform: 'uppercase', padding: '5px 12px', borderRadius: '999px',
         color: '#fff', background: t.badge === 'ACTIF' ? '#1a9b55' : '#e2873b',
       }}>
@@ -251,9 +251,9 @@ function ClientCard({ t }) {
 
 function Clients() {
   return (
-    <section id="clients" style={{ background: BLACK, padding: '100px 0' }}>
+    <section id="clients" style={{ background: '#ffffff', padding: '100px 0' }}>
       <FadeIn>
-        <h2 style={{ fontFamily: "'Bebas Neue'", color: '#fff', fontSize: 'clamp(40px, 6vw, 72px)', textAlign: 'center', margin: '0 0 56px', textTransform: 'uppercase' }}>
+        <h2 style={{ fontFamily: "'Bebas Neue'", color: BLUE, fontSize: 'clamp(40px, 6vw, 72px)', textAlign: 'center', margin: '0 0 56px', textTransform: 'uppercase' }}>
           Nos clients actuels
         </h2>
       </FadeIn>
@@ -262,6 +262,13 @@ function Clients() {
         <div className="carousel-track">
           {[...TRAVAUX, ...TRAVAUX].map((t, i) => <ClientCard key={i} t={t} />)}
         </div>
+      </div>
+
+      <div style={{
+        textAlign: 'center', marginTop: '32px', fontSize: '16px', color: 'rgba(0,0,0,0.4)',
+        fontStyle: 'italic', fontFamily: "'DM Sans'", letterSpacing: '0.05em',
+      }}>
+        Signé <span style={{ fontWeight: 700, color: '#0a0a0a', fontStyle: 'normal' }}>AuchuMedia</span>
       </div>
     </section>
   );
