@@ -165,7 +165,7 @@ function Hero() {
   return (
     <section id="top" className="section-pad hero" style={{
       minHeight: '100vh', background: '#ffffff', display: 'flex', flexDirection: 'column',
-      alignItems: 'center', justifyContent: 'center', padding: '140px 60px 20px', textAlign: 'center',
+      alignItems: 'center', justifyContent: 'center', padding: '140px 60px 40px', textAlign: 'center',
     }}>
       <h1 style={{ fontFamily: "'Bebas Neue'", color: BLACK, fontSize: 'clamp(64px, 8vw, 120px)', lineHeight: 0.9, textTransform: 'uppercase', margin: 0, maxWidth: '1200px' }}>
         <HeroTitleLine words={["L'ATTENTION", 'SE', 'MÉRITE.']} startIndex={0} />
@@ -251,7 +251,7 @@ function ClientCard({ t }) {
 
 function Clients() {
   return (
-    <section id="clients" style={{ background: '#ffffff', padding: '100px 0' }}>
+    <section id="clients" style={{ background: '#ffffff', padding: '40px 0 100px' }}>
       <FadeIn>
         <h2 style={{ fontFamily: "'Bebas Neue'", color: BLUE, fontSize: 'clamp(40px, 6vw, 72px)', textAlign: 'center', margin: '0 0 56px', textTransform: 'uppercase' }}>
           Nos clients actuels
@@ -595,7 +595,7 @@ export default function Home() {
 
         @media (max-width: 900px) {
           .section-pad { padding-left: 20px !important; padding-right: 20px !important; }
-          .hero { padding-top: 120px !important; padding-bottom: 20px !important; }
+          .hero { padding-top: 120px !important; padding-bottom: 40px !important; }
           .approche-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
           .approche-sticky { position: static !important; }
           .pourquoi-grid { grid-template-columns: 1fr !important; gap: 36px !important; }
