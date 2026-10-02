@@ -265,7 +265,7 @@ function Clients() {
       </div>
 
       <div style={{ textAlign: 'center', marginTop: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
-        <span style={{ fontSize: '15px', color: 'rgba(0,0,0,0.4)', fontStyle: 'italic', fontFamily: "'DM Sans'" }}>Signé</span>
+        <span style={{ fontSize: '15px', color: BLUE, fontStyle: 'italic', fontFamily: "'DM Sans'" }}>Signé</span>
         <img
           src="/Copie de AUCHU.png.png"
           alt="AuchuMedia"
