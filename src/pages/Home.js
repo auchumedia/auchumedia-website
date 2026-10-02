@@ -145,17 +145,6 @@ export function Nav() {
 
 /* ---------- Hero ---------- */
 
-function HeroWord({ word, index }) {
-  return (
-    <span className="hero-word" style={{
-      display: 'inline-block', marginRight: '0.28em',
-      animationDelay: `${0.5 + index * 0.1}s`,
-    }}>
-      {word}
-    </span>
-  );
-}
-
 function Hero() {
   const navigate = useNavigate();
   return (
@@ -163,12 +152,10 @@ function Hero() {
       minHeight: '100vh', background: '#ffffff', display: 'flex', flexDirection: 'column',
       alignItems: 'center', justifyContent: 'center', padding: '140px 60px 40px', textAlign: 'center',
     }}>
-      <h1 className="hero-title" style={{ fontFamily: "'Bebas Neue'", color: BLACK, fontSize: 'clamp(64px, 8vw, 120px)', lineHeight: 0.9, textTransform: 'uppercase', margin: 0, maxWidth: '1200px', textAlign: 'center' }}>
-        <HeroWord word="L'ATTENTION" index={0} /><br />
-        <HeroWord word="SE" index={1} /><HeroWord word="MÉRITE." index={2} /><br />
-        <HeroWord word="ON" index={3} /><HeroWord word="SAIT" index={4} /><br />
-        <HeroWord word="COMMENT" index={5} /><br />
-        <HeroWord word="L'OBTENIR." index={6} />
+      <h1 className="hero-title" style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(64px, 7vw, 110px)', lineHeight: 0.92, color: BLACK, textAlign: 'center', textTransform: 'uppercase', margin: 0, maxWidth: '1200px' }}>
+        <span className="desktop-line">L'ATTENTION SE MÉRITE.</span>
+        <span className="desktop-line"><br />ON SAIT COMMENT L'OBTENIR.</span>
+        <span className="mobile-only">L'ATTENTION<br />SE MÉRITE.<br />ON SAIT<br />COMMENT<br />L'OBTENIR.</span>
       </h1>
 
       <p style={{ fontFamily: "'DM Sans'", fontSize: '18px', color: 'rgba(10,10,10,0.55)', maxWidth: '560px', lineHeight: 1.8, margin: '36px 0 40px' }}>
@@ -557,14 +544,13 @@ export default function Home() {
           from { opacity: 0; transform: translateY(20px); }
           to { opacity: 1; transform: translateY(0); }
         }
-        .hero-word { opacity: 0; animation: wordFadeIn 0.6s ease forwards; }
-
         @media (min-width: 769px) {
-          .hero-title br { display: none; }
-          .hero-title { white-space: pre-wrap; }
+          .mobile-only { display: none; }
+          .desktop-line { display: inline; }
         }
         @media (max-width: 768px) {
-          .hero-title { font-size: clamp(52px, 14vw, 80px) !important; line-height: 0.92 !important; }
+          .desktop-line { display: none; }
+          .mobile-only { display: block; font-size: clamp(52px, 14vw, 80px); }
         }
 
         @keyframes urgencePulse {
