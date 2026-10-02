@@ -212,121 +212,57 @@ function Hero() {
 /* ---------- Clients ---------- */
 
 const TRAVAUX = [
-  { nom: 'Cardinal Asphalte', domaine: 'Construction & Asphalte', bg: 'url(https://res.cloudinary.com/dr0kwuqqa/image/upload/v1784411817/Capture_d_e%CC%81cran_le_2026-07-18_a%CC%80_17.56.25_rfb74n.png)', badge: 'ACTIF' },
-  { nom: 'Nor-Can', domaine: 'Chauffage & Climatisation', bg: 'url(https://res.cloudinary.com/dr0kwuqqa/image/upload/v1784410798/Capture_d_e%CC%81cran_le_2025-10-03_a%CC%80_11.10.40_v5hyzr.png)', badge: 'ACTIF' },
-  { nom: 'Famille Maher', domaine: 'Courtiers immobiliers RE/MAX', bg: 'url(https://res.cloudinary.com/dr0kwuqqa/image/upload/v1784410790/Raf_Steve_ycvtgk.png)', badge: 'ACTIF' },
-  { nom: 'Bâton Rouge', domaine: 'Restauration', bg: 'linear-gradient(135deg, #8B0000, #2a0a0a)', badge: 'ACTIF' },
-  { nom: 'Groupe DDC', domaine: 'Construction', bg: 'linear-gradient(135deg, #1a1a2e, #16213e)', badge: 'BIENTÔT' },
-  { nom: 'Équipe Lemire Fillion', domaine: 'Courtières immobilières', bg: 'linear-gradient(135deg, #0a2a1a, #1a3a2a)', badge: 'BIENTÔT' },
+  { nom: 'Cardinal Asphalte', bg: 'url(https://res.cloudinary.com/dr0kwuqqa/image/upload/v1784411817/Capture_d_e%CC%81cran_le_2026-07-18_a%CC%80_17.56.25_rfb74n.png)', badge: 'ACTIF' },
+  { nom: 'Nor-Can', bg: 'url(https://res.cloudinary.com/dr0kwuqqa/image/upload/v1784410798/Capture_d_e%CC%81cran_le_2025-10-03_a%CC%80_11.10.40_v5hyzr.png)', badge: 'ACTIF' },
+  { nom: 'Famille Maher', bg: 'url(https://res.cloudinary.com/dr0kwuqqa/image/upload/v1784410790/Raf_Steve_ycvtgk.png)', badge: 'ACTIF' },
+  { nom: 'Bâton Rouge', bg: 'linear-gradient(135deg, #8B0000, #2a0a0a)', badge: 'ACTIF' },
+  { nom: 'Groupe DDC', bg: 'linear-gradient(135deg, #1a1a2e, #16213e)', badge: 'BIENTÔT' },
+  { nom: 'Équipe Lemire Fillion', bg: 'linear-gradient(135deg, #0a2a1a, #1a3a2a)', badge: 'BIENTÔT' },
 ];
-
-const CARD_WIDTH = 280;
-const CARD_GAP = 16;
-const CAROUSEL_STEP = CARD_WIDTH + CARD_GAP;
 
 function ClientCard({ t }) {
   return (
-    <div className="travail-card" style={{
-      position: 'relative', width: `${CARD_WIDTH}px`, height: '480px', borderRadius: '20px',
-      overflow: 'hidden', flexShrink: 0, backgroundColor: '#111', scrollSnapAlign: 'start',
+    <div style={{
+      position: 'relative', width: '280px', height: '380px', borderRadius: '16px',
+      overflow: 'hidden', flexShrink: 0, backgroundColor: '#111', transform: 'rotate(-3deg)',
     }}>
-      <div className="travail-img" style={{
-        position: 'absolute', inset: 0, background: t.bg, backgroundSize: 'cover', backgroundPosition: 'center',
-        objectFit: 'cover', transition: 'transform 0.3s ease',
-      }} />
-      <div className="travail-overlay" style={{
-        position: 'absolute', inset: 0,
-        background: 'linear-gradient(0deg, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.15) 55%, rgba(0,0,0,0) 100%)',
-        transition: 'background 0.3s ease',
-      }} />
       <div style={{
-        position: 'absolute', top: '18px', right: '18px', fontSize: '10px', fontWeight: 700,
+        position: 'absolute', inset: 0, background: t.bg, backgroundSize: 'cover', backgroundPosition: 'center',
+        objectFit: 'cover',
+      }} />
+      <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.3)' }} />
+      <div style={{
+        position: 'absolute', top: '50%', right: '10px', transform: 'translateY(-50%) rotate(-90deg)',
+        transformOrigin: 'center center', fontFamily: "'Bebas Neue'", fontSize: '48px', color: '#fff',
+        whiteSpace: 'nowrap', lineHeight: 1, letterSpacing: '0.01em',
+      }}>
+        {t.nom}
+      </div>
+      <div style={{
+        position: 'absolute', left: '16px', bottom: '16px', fontSize: '10px', fontWeight: 700,
         letterSpacing: '0.08em', textTransform: 'uppercase', padding: '5px 12px', borderRadius: '999px',
         color: '#fff', background: t.badge === 'ACTIF' ? '#1a9b55' : '#e2873b',
       }}>
         {t.badge}
       </div>
-      <div style={{ position: 'absolute', left: '24px', bottom: '22px', right: '24px' }}>
-        <div style={{ fontFamily: "'Bebas Neue'", fontSize: '22px', color: '#fff', letterSpacing: '0.02em' }}>{t.nom}</div>
-        <div style={{ fontFamily: "'DM Sans'", fontSize: '12px', color: 'rgba(255,255,255,0.7)', marginTop: '4px' }}>{t.domaine}</div>
-      </div>
-    </div>
-  );
-}
-
-function ClientsCarousel() {
-  const containerRef = useRef(null);
-  const [paused, setPaused] = useState(false);
-  const loopList = [...TRAVAUX, ...TRAVAUX];
-
-  const resetIfNeeded = (el) => {
-    if (el.scrollLeft >= CAROUSEL_STEP * TRAVAUX.length) {
-      el.scrollLeft -= CAROUSEL_STEP * TRAVAUX.length;
-    }
-  };
-
-  useEffect(() => {
-    if (paused) return undefined;
-    const interval = setInterval(() => {
-      const el = containerRef.current;
-      if (!el) return;
-      el.scrollBy({ left: CAROUSEL_STEP, behavior: 'smooth' });
-      setTimeout(() => resetIfNeeded(el), 520);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, [paused]);
-
-  const scrollByStep = (dir) => {
-    const el = containerRef.current;
-    if (!el) return;
-    el.scrollBy({ left: dir * CAROUSEL_STEP, behavior: 'smooth' });
-    setTimeout(() => resetIfNeeded(el), 520);
-  };
-
-  const arrowStyle = {
-    position: 'absolute', top: '50%', transform: 'translateY(-50%)', width: '40px', height: '40px',
-    borderRadius: '50%', border: 'none', background: 'rgba(255,255,255,0.9)', boxShadow: '0 4px 16px rgba(0,0,0,0.12)',
-    display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', zIndex: 10,
-    fontSize: '18px', color: BLACK, opacity: 0.75, transition: 'opacity 0.2s',
-  };
-
-  return (
-    <div
-      style={{ position: 'relative' }}
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-    >
-      <div ref={containerRef} className="clients-carousel" style={{
-        display: 'flex', overflowX: 'auto', scrollbarWidth: 'none', gap: `${CARD_GAP}px`,
-        padding: '0 60px', scrollSnapType: 'x mandatory',
-      }}>
-        {loopList.map((t, i) => <ClientCard key={i} t={t} />)}
-      </div>
-
-      <button onClick={() => scrollByStep(-1)} aria-label="Client précédent" style={{ ...arrowStyle, left: '20px' }}
-        onMouseEnter={e => e.currentTarget.style.opacity = '1'}
-        onMouseLeave={e => e.currentTarget.style.opacity = '0.75'}
-      >‹</button>
-      <button onClick={() => scrollByStep(1)} aria-label="Client suivant" style={{ ...arrowStyle, right: '20px' }}
-        onMouseEnter={e => e.currentTarget.style.opacity = '1'}
-        onMouseLeave={e => e.currentTarget.style.opacity = '0.75'}
-      >›</button>
     </div>
   );
 }
 
 function Clients() {
   return (
-    <section id="clients" style={{ padding: '20px 0 140px', background: '#ffffff' }}>
-      <div className="clients-header" style={{ padding: '0 60px', marginBottom: '32px' }}>
-        <FadeIn>
-          <div style={{ fontFamily: "'DM Sans'", fontSize: '13px', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: BLUE }}>
-            Nos clients actuels
-          </div>
-        </FadeIn>
-      </div>
+    <section id="clients" style={{ background: BLACK, padding: '100px 0' }}>
+      <FadeIn>
+        <h2 style={{ fontFamily: "'Bebas Neue'", color: '#fff', fontSize: 'clamp(40px, 6vw, 72px)', textAlign: 'center', margin: '0 0 56px', textTransform: 'uppercase' }}>
+          Nos clients actuels
+        </h2>
+      </FadeIn>
 
-      <ClientsCarousel />
+      <div className="carousel-container" style={{ overflow: 'hidden', padding: '80px 0' }}>
+        <div className="carousel-track">
+          {[...TRAVAUX, ...TRAVAUX].map((t, i) => <ClientCard key={i} t={t} />)}
+        </div>
+      </div>
     </section>
   );
 }
@@ -621,10 +557,19 @@ export default function Home() {
         }
         .urgence-dot { animation: urgencePulse 2s ease-in-out infinite; }
 
-        .travail-card:hover .travail-img { transform: scale(1.02); }
-        .travail-card:hover .travail-overlay { background: linear-gradient(0deg, rgba(0,61,165,0.55) 0%, rgba(0,61,165,0.15) 55%, rgba(0,61,165,0) 100%); }
-
-        .clients-carousel::-webkit-scrollbar { display: none; }
+        @keyframes scrollLeft {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .carousel-track {
+          display: flex;
+          gap: 20px;
+          animation: scrollLeft 20s linear infinite;
+          width: max-content;
+        }
+        .carousel-track:hover {
+          animation-play-state: paused;
+        }
 
         @keyframes ctaGradient {
           0% { background-position: 0% 50%; }
@@ -642,7 +587,6 @@ export default function Home() {
         @media (max-width: 900px) {
           .section-pad { padding-left: 20px !important; padding-right: 20px !important; }
           .hero { padding-top: 120px !important; padding-bottom: 20px !important; }
-          .clients-header, .clients-carousel { padding-left: 20px !important; padding-right: 20px !important; }
           .approche-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
           .approche-sticky { position: static !important; }
           .pourquoi-grid { grid-template-columns: 1fr !important; gap: 36px !important; }
