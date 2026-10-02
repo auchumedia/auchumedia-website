@@ -486,7 +486,7 @@ function Temoignages() {
 function CtaFinale() {
   const navigate = useNavigate();
   return (
-    <section className="cta-finale section-pad" style={{ padding: '140px 60px', textAlign: 'center' }}>
+    <section className="cta-finale section-pad" style={{ padding: '140px 60px', paddingBottom: '100px', textAlign: 'center', position: 'relative' }}>
       <FadeIn>
         <h2 style={{ fontFamily: "'Bebas Neue'", color: '#fff', fontSize: 'clamp(36px, 6vw, 72px)', lineHeight: 1.05, margin: '0 0 24px', textTransform: 'uppercase' }}>
           Prêts à transformer<br />votre marketing en revenus?
@@ -517,6 +517,14 @@ function CtaFinale() {
           </button>
         </div>
       </FadeIn>
+
+      <div style={{
+        position: 'absolute',
+        bottom: 0, left: 0, right: 0,
+        height: '150px',
+        background: 'linear-gradient(to bottom, transparent, #ffffff)',
+        pointerEvents: 'none',
+      }} />
     </section>
   );
 }
@@ -534,23 +542,23 @@ function Footer() {
   const navigate = useNavigate();
 
   return (
-    <footer style={{ background: '#0a0a0a', padding: '60px 60px 40px', marginTop: 0 }}>
+    <footer style={{ background: '#ffffff', padding: '60px 60px 40px', marginTop: 0 }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '48px', flexWrap: 'wrap', gap: '32px' }}>
         <div>
-          <img src="/Copie de AUCHU.png.png" alt="AuchuMedia" style={{ height: '24px', filter: 'brightness(0) invert(1)', marginBottom: '16px' }} />
-          <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.4)', maxWidth: '280px', lineHeight: 1.6 }}>
+          <img src="/Copie de AUCHU.png.png" alt="AuchuMedia" style={{ height: '24px', filter: 'invert(1)', marginBottom: '16px' }} />
+          <p style={{ fontSize: '13px', color: '#0a0a0a', maxWidth: '280px', lineHeight: 1.6 }}>
             L'attention se mérite. On sait comment l'obtenir.
           </p>
         </div>
 
         <div style={{ display: 'flex', gap: '40px', flexWrap: 'wrap' }}>
           <div>
-            <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', marginBottom: '16px' }}>Navigation</div>
+            <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#0a0a0a', marginBottom: '16px' }}>Navigation</div>
             {FOOTER_NAV.map(link => (
               <div
                 key={link.label}
                 onClick={() => link.action === 'scroll' ? scrollTo(link.target) : navigate(link.target)}
-                style={{ fontSize: '13px', color: 'rgba(255,255,255,0.6)', marginBottom: '10px', cursor: 'pointer' }}
+                style={{ fontSize: '13px', color: 'rgba(0,0,0,0.5)', marginBottom: '10px', cursor: 'pointer' }}
               >
                 {link.label}
               </div>
@@ -558,8 +566,8 @@ function Footer() {
           </div>
 
           <div>
-            <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', marginBottom: '16px' }}>Contact</div>
-            <a href="mailto:raphael@auchumedia.com" style={{ fontSize: '13px', color: 'rgba(255,255,255,0.6)', display: 'block', marginBottom: '10px', textDecoration: 'none' }}>raphael@auchumedia.com</a>
+            <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#0a0a0a', marginBottom: '16px' }}>Contact</div>
+            <a href="mailto:raphael@auchumedia.com" style={{ fontSize: '13px', color: 'rgba(0,0,0,0.5)', display: 'block', marginBottom: '10px', textDecoration: 'none' }}>raphael@auchumedia.com</a>
             <div style={{ display: 'flex', gap: '12px', marginTop: '16px' }}>
               <a href="https://instagram.com/auchumedia" target="_blank" rel="noreferrer">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
@@ -578,9 +586,9 @@ function Footer() {
         </div>
       </div>
 
-      <div style={{ borderTop: '0.5px solid rgba(255,255,255,0.08)', paddingTop: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
-        <span style={{ fontSize: '12px', color: 'rgba(255,255,255,0.25)' }}>© 2026 AuchuMedia Inc. Tous droits réservés.</span>
-        <span style={{ fontSize: '12px', color: 'rgba(255,255,255,0.25)' }}>Montréal, Québec</span>
+      <div style={{ borderTop: '0.5px solid rgba(0,0,0,0.08)', paddingTop: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
+        <span style={{ fontSize: '12px', color: 'rgba(0,0,0,0.5)' }}>© 2026 AuchuMedia Inc. Tous droits réservés.</span>
+        <span style={{ fontSize: '12px', color: 'rgba(0,0,0,0.5)' }}>Montréal, Québec</span>
       </div>
     </footer>
   );
@@ -598,16 +606,6 @@ export default function Home() {
       <Pourquoi />
       <Temoignages />
       <CtaFinale />
-
-      <div style={{
-        height: '120px',
-        background: 'linear-gradient(to bottom, transparent, #ffffff)',
-        marginTop: '-120px',
-        position: 'relative',
-        zIndex: 1,
-        pointerEvents: 'none',
-      }} />
-
       <Footer />
 
       <style>{`
