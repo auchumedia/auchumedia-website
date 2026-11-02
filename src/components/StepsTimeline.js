@@ -24,11 +24,6 @@ function StepRow({ step, index, reversed, dotRef, numRef, imageInnerRef }) {
       <div ref={numRef} className="step-num">{step.num}</div>
       <div className="step-titre">{step.titre}</div>
       <p className="step-texte">{step.texte}</p>
-      <div className="step-tags">
-        {step.tags.map((t, ti) => (
-          <span key={t} className="step-tag" style={{ transitionDelay: `${0.3 + ti * 0.08}s` }}>{t}</span>
-        ))}
-      </div>
     </div>
   );
 
@@ -50,7 +45,6 @@ function StepRow({ step, index, reversed, dotRef, numRef, imageInnerRef }) {
             </div>
           </div>
         </div>
-        <div className="step-badge">{step.num} · {step.titre}</div>
       </div>
     </div>
   );
@@ -300,28 +294,9 @@ export default function StepsTimeline() {
           font-size: 15px;
           color: rgba(10,10,10,0.6);
           line-height: 1.75;
-          margin: 0 0 20px;
+          margin: 0;
           max-width: 400px;
         }
-        .step-tags {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 8px;
-        }
-        .step-tag {
-          display: inline-block;
-          background: #ffffff;
-          border: 1px solid #e3e6f0;
-          color: #0a0a0a;
-          font-family: 'DM Sans';
-          font-size: 12px;
-          padding: 6px 14px;
-          border-radius: 999px;
-          opacity: 0;
-          transform: translateY(10px);
-          transition: opacity 0.5s ease, transform 0.5s ease;
-        }
-        .step-row.is-revealed .step-tag { opacity: 1; transform: translateY(0); }
 
         .step-col-visual {
           opacity: 0;
@@ -400,26 +375,6 @@ export default function StepsTimeline() {
           color: transparent;
         }
 
-        .step-badge {
-          position: absolute;
-          left: 16px;
-          bottom: 16px;
-          z-index: 2;
-          background: rgba(10,10,10,0.72);
-          backdrop-filter: blur(6px);
-          color: #fff;
-          font-family: 'DM Sans';
-          font-size: 11px;
-          font-weight: 700;
-          letter-spacing: 0.04em;
-          text-transform: uppercase;
-          padding: 8px 14px;
-          border-radius: 999px;
-          opacity: 0;
-          transition: opacity 0.6s ease 0.5s;
-        }
-        .step-row.is-revealed .step-badge { opacity: 1; }
-
         @media (max-width: 768px) {
           .steps-header { margin-bottom: 56px; }
           .steps-line-track { left: 18px; transform: none; }
@@ -433,7 +388,7 @@ export default function StepsTimeline() {
           .step-texte { max-width: none; }
         }
         @media (prefers-reduced-motion: reduce) {
-          .step-col-text, .step-tag, .step-col-visual, .step-badge {
+          .step-col-text, .step-col-visual {
             opacity: 1 !important; transform: none !important; transition: none !important;
           }
           .step-image-wipe { clip-path: inset(0 0 0 0) !important; }

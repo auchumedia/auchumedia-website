@@ -4,7 +4,7 @@ import { useNavigate, Link } from 'react-router-dom';
 const BLUE = '#003DA5';
 
 const NAV_LINKS = [
-  { id: 'clients', label: 'Clients' },
+  { id: 'clients', label: 'Nos clients' },
   { id: 'approche', label: 'Notre approche' },
 ];
 

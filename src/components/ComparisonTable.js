@@ -4,12 +4,11 @@ const BLUE = '#003DA5';
 const BLACK = '#0a0a0a';
 
 const ROWS = [
-  { critere: 'VOLUME', classique: '20 à 30 vidéos par mois, produites à la chaîne', auchu: '4 vidéos par mois par client : 1 par semaine, pensée une à une' },
-  { critere: 'CONTENU', classique: 'Contenu générique, recopié sur les tendances', auchu: 'Storytelling propre à ta marque et à ton histoire' },
-  { critere: 'FORMAT', classique: 'Vidéos isolées, sans fil conducteur', auchu: "Séries d'épisodes qui font revenir ton audience" },
-  { critere: 'OBJECTIF', classique: 'Publier pour publier', auchu: "Chaque vidéo a un but : capter l'attention, bâtir la confiance, convertir" },
-  { critere: 'MESURE', classique: "Vues et mentions j'aime", auchu: 'Attention, engagement, abonnés et demandes entrantes' },
-  { critere: 'ÉQUIPE', classique: 'Un junior sur ton compte, un interlocuteur qui change', auchu: 'Raphaël et Benjamin directement sur ton mandat' },
+  { critere: 'Volume', classique: '20 à 30 vidéos par mois, produites à la chaîne', auchu: '4 vidéos par mois par client : 1 par semaine, pensée une à une' },
+  { critere: 'Contenu', classique: 'Contenu générique, recopié sur les tendances', auchu: 'Storytelling propre à ta marque et à ton histoire' },
+  { critere: 'Format', classique: 'Vidéos isolées, sans fil conducteur', auchu: "Séries d'épisodes qui font revenir ton audience" },
+  { critere: 'Objectif', classique: 'Publier pour publier', auchu: "Chaque vidéo a un but : capter l'attention, bâtir la confiance, convertir" },
+  { critere: 'Équipe', classique: 'Un junior sur ton compte, un interlocuteur qui change', auchu: 'Raphaël et Benjamin directement sur ton mandat' },
 ];
 
 function Check() {
@@ -86,6 +85,7 @@ export default function ComparisonTable() {
               <Cross />
               <span>{r.classique}</span>
             </div>
+            <div className="ct-card-sep" />
             <div className="ct-card-line ct-card-auchu">
               <Check />
               <span>{r.auchu}</span>
@@ -156,28 +156,37 @@ export default function ComparisonTable() {
 
         @media (max-width: 768px) {
           .ct-table { display: none; }
-          .ct-mobile { display: flex; flex-direction: column; gap: 14px; }
+          .ct-mobile { display: flex; flex-direction: column; gap: 12px; }
           .ct-card {
             background: #fff;
-            border-radius: 16px;
-            padding: 18px 18px 20px;
-            border: 1px solid rgba(0,0,0,0.07);
+            border-radius: 22px;
+            padding: 20px;
+            border: 1px solid #e6e8f0;
+            box-shadow: 0 8px 24px rgba(10,10,20,0.05);
             opacity: 0;
-            transform: translateY(18px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
+            transform: translateY(24px);
+            transition: opacity 0.6s cubic-bezier(.22,1,.36,1), transform 0.6s cubic-bezier(.22,1,.36,1);
           }
           .ct-mobile.ct-revealed .ct-card { opacity: 1; transform: translateY(0); }
           .ct-card-title {
-            font-family: 'DM Sans'; font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
-            color: rgba(10,10,10,0.4); text-transform: uppercase; margin-bottom: 12px;
+            font-family: 'DM Sans'; font-size: 15px; font-weight: 600;
+            color: #5a5f70; margin-bottom: 14px;
           }
-          .ct-card-line { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 8px; }
-          .ct-card-line:last-child { margin-bottom: 0; }
+          .ct-card-line { display: flex; align-items: flex-start; gap: 12px; }
+          .ct-card-sep { height: 1px; background: #eceef4; margin: 14px 0; }
+          .ct-card-classique .ct-cross {
+            width: 24px; height: 24px; font-size: 12px;
+            background: #eef0f5; color: #9aa0b2;
+          }
           .ct-card-classique span {
-            font-family: 'DM Sans'; font-size: 13px; color: rgba(10,10,10,0.42); line-height: 1.5;
-            text-decoration: line-through; text-decoration-color: rgba(10,10,10,0.22);
+            font-family: 'DM Sans'; font-size: 15px; color: #8b90a0; line-height: 1.4;
+            padding-top: 2px;
           }
-          .ct-card-auchu span { font-family: 'DM Sans'; font-size: 13px; font-weight: 700; color: ${BLACK}; line-height: 1.5; }
+          .ct-card-auchu .ct-check { width: 24px; height: 24px; }
+          .ct-card-auchu span {
+            font-family: 'DM Sans'; font-size: 16px; font-weight: 600; color: ${BLACK}; line-height: 1.4;
+            padding-top: 2px;
+          }
         }
         @media (prefers-reduced-motion: reduce) {
           .ct-row:not(.ct-header), .ct-check, .ct-card { opacity: 1 !important; transform: none !important; transition: none !important; }

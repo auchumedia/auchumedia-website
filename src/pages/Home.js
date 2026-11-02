@@ -136,7 +136,7 @@ function NotreApproche() {
       </FadeIn>
       <FadeIn delay={0.14}>
         <p style={{ fontFamily: "'DM Sans'", textAlign: 'center', fontSize: '16px', color: 'rgba(10,10,10,0.55)', maxWidth: '620px', margin: '0 auto 72px', lineHeight: 1.8 }}>
-          La plupart des agences publient beaucoup pour publier. Nous, on choisit moins de vidéos, mais chacune a une histoire, un rôle et un objectif.
+          Beaucoup d'agences misent sur le volume : des dizaines de vidéos, peu d'impact. Nous, on choisit moins de vidéos, mais chacune a une histoire, un rôle et un objectif.
         </p>
       </FadeIn>
 
