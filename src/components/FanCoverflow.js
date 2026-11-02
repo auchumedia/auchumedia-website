@@ -278,7 +278,7 @@ export default function FanCoverflow({ fan, sectionRef }) {
         .fan-coverflow {
           position: relative;
           overflow: clip;
-          padding: 24px 0 70px;
+          padding: 24px 0 100px;
         }
         .fan-coverflow-track {
           position: relative;

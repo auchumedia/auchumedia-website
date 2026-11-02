@@ -116,8 +116,11 @@ export default function StatsBlock() {
           padding: 0 20px;
         }
         .stats-block {
+          position: relative;
+          z-index: 5;
           max-width: 820px;
           margin: 0 auto;
+          margin-bottom: -93px;
           background: #0a0a0a;
           border-radius: 20px;
           display: flex;
@@ -161,7 +164,7 @@ export default function StatsBlock() {
         }
         @media (max-width: 768px) {
           .stats-wrap { padding: 0 12px; }
-          .stats-block { padding: 28px 10px; }
+          .stats-block { padding: 28px 10px; margin-bottom: -58px; }
           .stats-col { padding: 0 8px; }
           .stats-value { font-size: clamp(28px, 8vw, 40px); }
           .stats-label { font-size: 11px; margin-top: 8px; }

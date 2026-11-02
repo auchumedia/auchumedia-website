@@ -7,7 +7,6 @@ import PresentationVideo from '../components/PresentationVideo';
 import FanShowcase from '../components/FanShowcase';
 import StatsBlock from '../components/StatsBlock';
 import ComparisonTable from '../components/ComparisonTable';
-import RhythmBand from '../components/RhythmBand';
 import StepsTimeline from '../components/StepsTimeline';
 
 const BLUE = '#003DA5';
@@ -123,7 +122,7 @@ function Hero() {
 function NotreApproche() {
   const navigate = useNavigate();
   return (
-    <section id="approche" className="section-pad" style={{ padding: '140px 60px', background: '#f8f8fa' }}>
+    <section id="approche" className="section-pad notre-approche" style={{ paddingTop: '320px', paddingBottom: '140px', paddingLeft: '60px', paddingRight: '60px', background: '#f8f8fa' }}>
       <FadeIn>
         <div style={{ textAlign: 'center', fontFamily: "'DM Sans'", fontSize: '12px', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: BLUE, marginBottom: '20px' }}>
           Notre approche
@@ -142,14 +141,8 @@ function NotreApproche() {
       </FadeIn>
 
       <ComparisonTable />
-      <RhythmBand />
 
       <div style={{ marginTop: '140px' }}>
-        <FadeIn>
-          <h3 style={{ fontFamily: "'Bebas Neue'", textAlign: 'center', fontSize: 'clamp(32px, 4.5vw, 52px)', margin: '0 0 72px', textTransform: 'uppercase', color: BLACK }}>
-            De l'idée à l'attention.
-          </h3>
-        </FadeIn>
         <StepsTimeline />
       </div>
 
@@ -364,6 +357,7 @@ export default function Home() {
           .mobile-only { display: block; font-size: min(13vw, 58px); }
           .subtitle-mobile-only { display: block; font-size: min(4.1vw, 17.5px); }
           .mobile-line { display: block; white-space: nowrap; }
+          .notre-approche { padding-top: 180px !important; }
         }
 
         .hero-gradient-line {

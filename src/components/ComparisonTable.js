@@ -9,7 +9,7 @@ const ROWS = [
   { critere: 'FORMAT', classique: 'Vidéos isolées, sans fil conducteur', auchu: "Séries d'épisodes qui font revenir ton audience" },
   { critere: 'OBJECTIF', classique: 'Publier pour publier', auchu: "Chaque vidéo a un but : capter l'attention, bâtir la confiance, convertir" },
   { critere: 'MESURE', classique: "Vues et mentions j'aime", auchu: 'Attention, engagement, abonnés et demandes entrantes' },
-  { critere: 'ÉQUIPE', classique: 'Un junior sur ton compte, un interlocuteur qui change', auchu: 'Raphaël et Ben directement sur ton mandat' },
+  { critere: 'ÉQUIPE', classique: 'Un junior sur ton compte, un interlocuteur qui change', auchu: 'Raphaël et Benjamin directement sur ton mandat' },
 ];
 
 function Check() {
