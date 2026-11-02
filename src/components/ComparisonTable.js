@@ -58,13 +58,13 @@ export default function ComparisonTable() {
           return (
             <React.Fragment key={r.critere}>
               <div
-                className="ct2-label ct2-row-cell"
+                className={`ct2-label ct2-row-cell ${isLast ? '' : 'ct2-sep'}`}
                 style={{ gridColumn: 1, gridRow: i + 2, transitionDelay: `${rowDelay(i)}s` }}
               >
                 {r.critere}
               </div>
               <div
-                className="ct2-classique ct2-row-cell"
+                className={`ct2-classique ct2-row-cell ${isLast ? '' : 'ct2-sep'}`}
                 style={{ gridColumn: 2, gridRow: i + 2, transitionDelay: `${rowDelay(i)}s` }}
               >
                 <Cross />
@@ -185,6 +185,7 @@ export default function ComparisonTable() {
           font-family: 'DM Sans'; font-size: 16px; font-weight: 600; color: ${BLACK}; line-height: 1.5;
         }
         .ct2-auchu-last { padding-bottom: 40px; }
+        .ct2-sep { border-bottom: 1px solid #eceef4; }
 
         /* ---- mobile stacked cards ---- */
         .ct-mobile { display: none; }

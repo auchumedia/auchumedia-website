@@ -84,8 +84,8 @@ function Hero() {
             <span className="desktop-line">L'ATTENTION SE MÉRITE.</span>
             <span className="desktop-line hero-gradient-line"><br />ON SAIT COMMENT L'OBTENIR.</span>
             <span className="mobile-only">
-              <span className="mobile-line">L'ATTENTION SE</span>
-              <span className="mobile-line">MÉRITE. <span className="hero-gradient-line">ON SAIT</span></span>
+              <span className="mobile-line">L'ATTENTION</span>
+              <span className="mobile-line">SE MÉRITE. <span className="hero-gradient-line">ON SAIT</span></span>
               <span className="mobile-line hero-gradient-line">COMMENT L'OBTENIR.</span>
             </span>
           </h1>
@@ -123,7 +123,7 @@ function NotreApproche() {
     <section
       id="approche"
       className="section-pad notre-approche"
-      style={{ paddingTop: '320px', paddingBottom: '140px', paddingLeft: '60px', paddingRight: '60px', background: '#f8f8fa', scrollMarginTop: '90px' }}
+      style={{ paddingTop: '210px', paddingBottom: '140px', paddingLeft: '60px', paddingRight: '60px', background: '#f8f8fa', scrollMarginTop: '90px' }}
     >
       <FadeIn>
         <h2 style={{ fontFamily: "'Bebas Neue'", textAlign: 'center', fontSize: 'clamp(36px, 5.5vw, 64px)', lineHeight: 1.05, margin: '0 auto 24px', textTransform: 'uppercase', maxWidth: '760px' }}>
@@ -132,8 +132,10 @@ function NotreApproche() {
         </h2>
       </FadeIn>
       <FadeIn delay={0.08}>
-        <p style={{ fontFamily: "'DM Sans'", textAlign: 'center', fontSize: '16px', color: 'rgba(10,10,10,0.55)', maxWidth: '620px', margin: '0 auto 72px', lineHeight: 1.8, textWrap: 'balance' }}>
-          Beaucoup d'agences misent sur le volume : 20 à 30 vidéos par mois, mais peu d'impact. Nous, on choisit moins de vidéos, mais chacune a une histoire, <span style={{ whiteSpace: 'nowrap' }}>un rôle et un objectif.</span>
+        <p className="approche-intro" style={{ fontFamily: "'DM Sans'", textAlign: 'center', fontSize: '16px', color: 'rgba(10,10,10,0.55)', margin: '0 auto', lineHeight: 1.8 }}>
+          <span className="approche-intro-line approche-intro-line1">Beaucoup d'agences misent sur le volume : 20 à 30 vidéos par mois, mais peu d'impact.</span>
+          <span className="approche-intro-line approche-intro-line2">Nous, on choisit moins de vidéos,</span>
+          <span className="approche-intro-line approche-intro-line3">mais chacune a une histoire, <span style={{ whiteSpace: 'nowrap' }}>un rôle et un objectif.</span></span>
         </p>
       </FadeIn>
 
@@ -336,10 +338,20 @@ export default function Home() {
         }
         @media (max-width: 768px) {
           .desktop-line { display: none; }
-          .mobile-only { display: block; font-size: min(13vw, 58px); }
+          .mobile-only { display: block; font-size: min(12.5vw, 64px); }
           .subtitle-mobile-only { display: block; font-size: min(4.1vw, 17.5px); }
           .mobile-line { display: block; white-space: nowrap; }
-          .notre-approche { padding-top: 180px !important; }
+          .notre-approche { padding-top: 130px !important; }
+        }
+
+        .approche-intro { margin-bottom: 110px; }
+        .approche-intro-line { display: block; white-space: nowrap; }
+        @media (min-width: 769px) and (max-width: 900px) {
+          .approche-intro { font-size: 14.5px !important; }
+        }
+        @media (max-width: 768px) {
+          .approche-intro { margin-bottom: 64px; font-size: 15px !important; }
+          .approche-intro-line1, .approche-intro-line3 { white-space: normal; text-wrap: balance; }
         }
 
         .hero-gradient-line {
