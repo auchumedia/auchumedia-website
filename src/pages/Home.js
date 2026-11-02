@@ -7,7 +7,6 @@ import PresentationVideo from '../components/PresentationVideo';
 import FanShowcase from '../components/FanShowcase';
 import StatsBlock from '../components/StatsBlock';
 import ComparisonTable from '../components/ComparisonTable';
-import StepsTimeline from '../components/StepsTimeline';
 
 const BLUE = '#003DA5';
 const BLACK = '#0a0a0a';
@@ -120,42 +119,25 @@ function Hero() {
 /* ---------- Notre approche ---------- */
 
 function NotreApproche() {
-  const navigate = useNavigate();
   return (
-    <section id="approche" className="section-pad notre-approche" style={{ paddingTop: '320px', paddingBottom: '140px', paddingLeft: '60px', paddingRight: '60px', background: '#f8f8fa' }}>
+    <section
+      id="approche"
+      className="section-pad notre-approche"
+      style={{ paddingTop: '320px', paddingBottom: '140px', paddingLeft: '60px', paddingRight: '60px', background: '#f8f8fa', scrollMarginTop: '90px' }}
+    >
       <FadeIn>
-        <div style={{ textAlign: 'center', fontFamily: "'DM Sans'", fontSize: '12px', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: BLUE, marginBottom: '20px' }}>
-          Notre approche
-        </div>
-      </FadeIn>
-      <FadeIn delay={0.08}>
         <h2 style={{ fontFamily: "'Bebas Neue'", textAlign: 'center', fontSize: 'clamp(36px, 5.5vw, 64px)', lineHeight: 1.05, margin: '0 auto 24px', textTransform: 'uppercase', maxWidth: '760px' }}>
           <span style={{ color: BLACK }}>Pas du contenu de masse.</span><br />
           <span style={{ color: BLUE }}>Du contenu qui marque.</span>
         </h2>
       </FadeIn>
-      <FadeIn delay={0.14}>
+      <FadeIn delay={0.08}>
         <p style={{ fontFamily: "'DM Sans'", textAlign: 'center', fontSize: '16px', color: 'rgba(10,10,10,0.55)', maxWidth: '620px', margin: '0 auto 72px', lineHeight: 1.8 }}>
-          Beaucoup d'agences misent sur le volume : des dizaines de vidéos, peu d'impact. Nous, on choisit moins de vidéos, mais chacune a une histoire, un rôle et un objectif.
+          Beaucoup d'agences misent sur le volume : 20 à 30 vidéos par mois, mais peu d'impact. Nous, on choisit moins de vidéos, mais chacune a une histoire, un rôle et un objectif.
         </p>
       </FadeIn>
 
       <ComparisonTable />
-
-      <div style={{ marginTop: '140px' }}>
-        <StepsTimeline />
-      </div>
-
-      <FadeIn>
-        <div style={{ textAlign: 'center', marginTop: '120px' }}>
-          <p style={{ fontFamily: "'DM Sans'", fontSize: '16px', color: 'rgba(10,10,10,0.55)', marginBottom: '28px' }}>
-            Prêt à créer du contenu qui marque ?
-          </p>
-          <ArrowButton lift onClick={() => navigate('/planifier-un-appel')} style={{ fontSize: '12px' }}>
-            Planifier un appel
-          </ArrowButton>
-        </div>
-      </FadeIn>
     </section>
   );
 }
