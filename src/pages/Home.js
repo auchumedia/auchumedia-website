@@ -4,7 +4,8 @@ import { Nav } from '../components/Nav';
 import ArrowButton from '../components/ArrowButton';
 import VideoWall from '../components/VideoWall';
 import PresentationVideo from '../components/PresentationVideo';
-import LogoBand from '../components/LogoBand';
+import FanShowcase from '../components/FanShowcase';
+import StatsBlock from '../components/StatsBlock';
 
 const BLUE = '#003DA5';
 const BLACK = '#0a0a0a';
@@ -78,13 +79,6 @@ function Hero() {
 
       <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
         <Reveal delay={0}>
-          <div className="hero-badge">
-            <span className="hero-badge-dot" />
-            <span>6 / 8 MANDATS ACTIFS · 2 SPOTS DISPONIBLES</span>
-          </div>
-        </Reveal>
-
-        <Reveal delay={0.12} style={{ marginTop: '22px' }}>
           <h1 className="hero-title" style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(64px, 7vw, 110px)', lineHeight: 0.92, color: BLACK, textAlign: 'center', textTransform: 'uppercase', margin: 0, maxWidth: '1200px' }}>
             <span className="desktop-line">L'ATTENTION SE MÉRITE.</span>
             <span className="desktop-line hero-gradient-line"><br />ON SAIT COMMENT L'OBTENIR.</span>
@@ -95,17 +89,17 @@ function Hero() {
           </h1>
         </Reveal>
 
-        <Reveal delay={0.24} style={{ marginTop: '36px' }}>
+        <Reveal delay={0.12} style={{ marginTop: '36px' }}>
           <p style={{ fontFamily: "'DM Sans'", fontSize: '18px', color: 'rgba(10,10,10,0.55)', maxWidth: '560px', lineHeight: 1.8, margin: 0 }}>
             On produit du contenu vidéo stratégique pour les entreprises B2C qui veulent capter l'attention, bâtir leur autorité et convertir.
           </p>
         </Reveal>
 
-        <Reveal delay={0.36} style={{ marginTop: '48px', width: '100%' }}>
+        <Reveal delay={0.24} style={{ marginTop: '48px', width: '100%' }}>
           <PresentationVideo />
         </Reveal>
 
-        <Reveal delay={0.48} style={{ marginTop: '40px' }}>
+        <Reveal delay={0.36} style={{ marginTop: '40px' }}>
           <ArrowButton lift onClick={() => navigate('/planifier-un-appel')} style={{ fontSize: '13px', padding: '8px 8px 8px 28px' }}>
             Réserver mon appel stratégique
           </ArrowButton>
@@ -452,7 +446,8 @@ export default function Home() {
     <div style={{ background: '#ffffff', overflowX: 'clip' }}>
       <Nav />
       <Hero />
-      <LogoBand />
+      <FanShowcase />
+      <StatsBlock />
       <Clients />
       <Approche />
       <Pourquoi />
@@ -472,33 +467,6 @@ export default function Home() {
         @media (max-width: 768px) {
           .desktop-line { display: none; }
           .mobile-only { display: block; font-size: clamp(52px, 14vw, 80px); }
-        }
-
-        .hero-badge {
-          display: inline-flex;
-          align-items: center;
-          gap: 10px;
-          padding: 9px 18px;
-          border-radius: 999px;
-          background: rgba(0,61,165,0.06);
-          border: 1px solid rgba(0,61,165,0.2);
-          font-family: 'DM Sans', sans-serif;
-          font-size: 11px;
-          font-weight: 700;
-          letter-spacing: 0.1em;
-          text-transform: uppercase;
-          color: #003DA5;
-        }
-        .hero-badge-dot {
-          width: 7px;
-          height: 7px;
-          border-radius: 50%;
-          background: #003DA5;
-          animation: heroPulse 2s ease-in-out infinite;
-        }
-        @keyframes heroPulse {
-          0%, 100% { opacity: 1; transform: scale(1); }
-          50% { opacity: 0.4; transform: scale(0.75); }
         }
 
         .hero-gradient-line {
