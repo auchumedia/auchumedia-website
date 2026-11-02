@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Nav } from './Home';
+import { Nav } from '../components/Nav';
 
 const BLUE = '#003DA5';
 const BLACK = '#0a0a0a';

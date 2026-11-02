@@ -1,5 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { Nav } from '../components/Nav';
+import ArrowButton from '../components/ArrowButton';
+import VideoWall from '../components/VideoWall';
+import PresentationVideo from '../components/PresentationVideo';
+import LogoBand from '../components/LogoBand';
 
 const BLUE = '#003DA5';
 const BLACK = '#0a0a0a';
@@ -41,155 +46,70 @@ const scrollTo = (id) => {
   if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
 };
 
-/* ---------- Nav ---------- */
+/* ---------- Hero ---------- */
 
-const NAV_LINKS = [
-  { id: 'clients', label: 'Nos clients' },
-  { id: 'approche', label: 'Notre approche' },
-  { id: 'pourquoi', label: 'Pourquoi nous' },
-];
-
-export function Nav() {
-  const navigate = useNavigate();
-  const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
-
+function Reveal({ children, delay = 0, style = {} }) {
+  const [show, setShow] = useState(false);
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
+    const t = setTimeout(() => setShow(true), 20);
+    return () => clearTimeout(t);
   }, []);
-
   return (
-    <>
-      <nav className="nav-root" style={{
-        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 500,
-        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        padding: '0 60px', height: '76px',
-        background: scrolled ? 'rgba(255,255,255,0.88)' : '#ffffff',
-        backdropFilter: scrolled ? 'blur(12px)' : 'none',
-        WebkitBackdropFilter: scrolled ? 'blur(12px)' : 'none',
-        borderBottom: '1px solid rgba(0,0,0,0.08)',
-        transition: 'all 0.3s ease',
-      }}>
-        <Link to="/" style={{ display: 'flex', alignItems: 'center' }}>
-          <img src="/Copie de AUCHU.png.png" alt="AuchuMedia" style={{ height: '20px', width: 'auto', filter: 'invert(1)' }} />
-        </Link>
-
-        <div className="nav-links" style={{ display: 'flex', alignItems: 'center', gap: '36px' }}>
-          {NAV_LINKS.map(l => (
-            <a key={l.id} href={`#${l.id}`} style={{
-              fontSize: '11px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase',
-              color: 'rgba(10,10,10,0.6)', transition: 'color 0.2s',
-            }}
-              onMouseEnter={e => e.currentTarget.style.color = BLACK}
-              onMouseLeave={e => e.currentTarget.style.color = 'rgba(10,10,10,0.6)'}
-            >
-              {l.label}
-            </a>
-          ))}
-          <button onClick={() => navigate('/planifier-un-appel')} style={{
-            fontSize: '11px', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase',
-            color: '#fff', background: BLUE, border: 'none', padding: '11px 22px', borderRadius: '6px',
-            cursor: 'pointer', transition: 'opacity 0.2s',
-          }}
-            onMouseEnter={e => e.currentTarget.style.opacity = '0.85'}
-            onMouseLeave={e => e.currentTarget.style.opacity = '1'}
-          >
-            Planifier un appel
-          </button>
-        </div>
-
-        <button onClick={() => setMobileOpen(o => !o)} className="hamburger-btn" style={{ display: 'none', flexDirection: 'column', gap: '5px', background: 'none', border: 'none', cursor: 'pointer', padding: '8px' }}>
-          <span style={{ width: '22px', height: '1.5px', background: BLACK, display: 'block', transition: 'all 0.25s', transform: mobileOpen ? 'translateY(6.5px) rotate(45deg)' : 'none' }} />
-          <span style={{ width: '22px', height: '1.5px', background: BLACK, display: 'block', opacity: mobileOpen ? 0 : 1, transition: 'all 0.25s' }} />
-          <span style={{ width: '22px', height: '1.5px', background: BLACK, display: 'block', transition: 'all 0.25s', transform: mobileOpen ? 'translateY(-6.5px) rotate(-45deg)' : 'none' }} />
-        </button>
-      </nav>
-
-      <div style={{
-        position: 'fixed', top: '76px', left: 0, right: 0, zIndex: 400,
-        background: '#ffffff', borderBottom: '1px solid rgba(0,0,0,0.08)',
-        overflow: 'hidden', maxHeight: mobileOpen ? '320px' : '0',
-        transition: 'max-height 0.35s ease',
-      }}>
-        <div style={{ padding: '12px 20px 24px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
-          {NAV_LINKS.map(l => (
-            <a key={l.id} href={`#${l.id}`} onClick={() => setMobileOpen(false)} style={{
-              fontSize: '13px', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase',
-              color: 'rgba(10,10,10,0.7)', padding: '14px 0', borderBottom: '1px solid rgba(0,0,0,0.06)',
-            }}>
-              {l.label}
-            </a>
-          ))}
-          <button onClick={() => { setMobileOpen(false); navigate('/planifier-un-appel'); }} style={{
-            fontSize: '12px', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase',
-            color: '#fff', background: BLUE, border: 'none', padding: '14px', borderRadius: '6px',
-            cursor: 'pointer', marginTop: '14px',
-          }}>
-            Planifier un appel
-          </button>
-        </div>
-      </div>
-
-      <style>{`
-        @media (max-width: 900px) {
-          .nav-root { padding: 0 20px !important; }
-          .nav-links { display: none !important; }
-          .hamburger-btn { display: flex !important; }
-        }
-      `}</style>
-    </>
+    <div style={{
+      opacity: show ? 1 : 0,
+      transform: show ? 'translateY(0)' : 'translateY(24px)',
+      transition: `opacity 0.8s cubic-bezier(.22,1,.36,1) ${delay}s, transform 0.8s cubic-bezier(.22,1,.36,1) ${delay}s`,
+      ...style,
+    }}>
+      {children}
+    </div>
   );
 }
-
-/* ---------- Hero ---------- */
 
 function Hero() {
   const navigate = useNavigate();
   return (
     <section id="top" className="section-pad hero" style={{
-      minHeight: '100vh', background: '#ffffff', display: 'flex', flexDirection: 'column',
-      alignItems: 'center', justifyContent: 'center', padding: '140px 60px 40px', textAlign: 'center',
+      position: 'relative', minHeight: '100vh', background: '#ffffff', overflow: 'hidden',
+      display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+      padding: '140px 60px 64px', textAlign: 'center',
     }}>
-      <h1 className="hero-title" style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(64px, 7vw, 110px)', lineHeight: 0.92, color: BLACK, textAlign: 'center', textTransform: 'uppercase', margin: 0, maxWidth: '1200px' }}>
-        <span className="desktop-line">L'ATTENTION SE MÉRITE.</span>
-        <span className="desktop-line"><br />ON SAIT COMMENT L'OBTENIR.</span>
-        <span className="mobile-only">L'ATTENTION<br />SE MÉRITE.<br />ON SAIT<br />COMMENT<br />L'OBTENIR.</span>
-      </h1>
+      <VideoWall />
 
-      <p style={{ fontFamily: "'DM Sans'", fontSize: '18px', color: 'rgba(10,10,10,0.55)', maxWidth: '560px', lineHeight: 1.8, margin: '36px 0 40px' }}>
-        On produit du contenu vidéo stratégique pour les entreprises B2C qui veulent capter l'attention, bâtir leur autorité et convertir.
-      </p>
+      <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
+        <Reveal delay={0}>
+          <div className="hero-badge">
+            <span className="hero-badge-dot" />
+            <span>6 / 8 MANDATS ACTIFS · 2 SPOTS DISPONIBLES</span>
+          </div>
+        </Reveal>
 
-      <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', justifyContent: 'center' }}>
-        <button onClick={() => scrollTo('clients')} style={{
-          fontFamily: "'DM Sans'", fontSize: '12px', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase',
-          color: '#fff', background: BLUE, border: `1px solid ${BLUE}`, padding: '16px 32px', borderRadius: '6px',
-          cursor: 'pointer', transition: 'opacity 0.2s',
-        }}
-          onMouseEnter={e => e.currentTarget.style.opacity = '0.82'}
-          onMouseLeave={e => e.currentTarget.style.opacity = '1'}
-        >
-          Voir nos clients →
-        </button>
-        <button onClick={() => navigate('/planifier-un-appel')} style={{
-          fontFamily: "'DM Sans'", fontSize: '12px', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase',
-          color: BLACK, background: 'transparent', border: `1px solid ${BLACK}`, padding: '16px 32px', borderRadius: '6px',
-          cursor: 'pointer', transition: 'all 0.2s',
-        }}
-          onMouseEnter={e => { e.currentTarget.style.background = BLACK; e.currentTarget.style.color = '#fff'; }}
-          onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = BLACK; }}
-        >
-          Planifier un appel
-        </button>
-      </div>
+        <Reveal delay={0.12} style={{ marginTop: '22px' }}>
+          <h1 className="hero-title" style={{ fontFamily: "'Bebas Neue'", fontSize: 'clamp(64px, 7vw, 110px)', lineHeight: 0.92, color: BLACK, textAlign: 'center', textTransform: 'uppercase', margin: 0, maxWidth: '1200px' }}>
+            <span className="desktop-line">L'ATTENTION SE MÉRITE.</span>
+            <span className="desktop-line hero-gradient-line"><br />ON SAIT COMMENT L'OBTENIR.</span>
+            <span className="mobile-only">
+              L'ATTENTION<br />SE MÉRITE.<br />
+              <span className="hero-gradient-line">ON SAIT<br />COMMENT<br />L'OBTENIR.</span>
+            </span>
+          </h1>
+        </Reveal>
 
-      <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginTop: '56px' }}>
-        <span className="urgence-dot" style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#e23b3b' }} />
-        <span style={{ fontFamily: "'DM Sans'", fontSize: '11px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(10,10,10,0.5)' }}>
-          6 / 8 mandats actifs · 2 spots disponibles
-        </span>
+        <Reveal delay={0.24} style={{ marginTop: '36px' }}>
+          <p style={{ fontFamily: "'DM Sans'", fontSize: '18px', color: 'rgba(10,10,10,0.55)', maxWidth: '560px', lineHeight: 1.8, margin: 0 }}>
+            On produit du contenu vidéo stratégique pour les entreprises B2C qui veulent capter l'attention, bâtir leur autorité et convertir.
+          </p>
+        </Reveal>
+
+        <Reveal delay={0.36} style={{ marginTop: '48px', width: '100%' }}>
+          <PresentationVideo />
+        </Reveal>
+
+        <Reveal delay={0.48} style={{ marginTop: '40px' }}>
+          <ArrowButton lift onClick={() => navigate('/planifier-un-appel')} style={{ fontSize: '13px', padding: '8px 8px 8px 28px' }}>
+            Réserver mon appel stratégique
+          </ArrowButton>
+        </Reveal>
       </div>
     </section>
   );
@@ -532,6 +452,7 @@ export default function Home() {
     <div style={{ background: '#ffffff', overflowX: 'clip' }}>
       <Nav />
       <Hero />
+      <LogoBand />
       <Clients />
       <Approche />
       <Pourquoi />
@@ -553,11 +474,46 @@ export default function Home() {
           .mobile-only { display: block; font-size: clamp(52px, 14vw, 80px); }
         }
 
-        @keyframes urgencePulse {
-          0%, 100% { opacity: 1; transform: scale(1); }
-          50% { opacity: 0.4; transform: scale(0.8); }
+        .hero-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          padding: 9px 18px;
+          border-radius: 999px;
+          background: rgba(0,61,165,0.06);
+          border: 1px solid rgba(0,61,165,0.2);
+          font-family: 'DM Sans', sans-serif;
+          font-size: 11px;
+          font-weight: 700;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          color: #003DA5;
         }
-        .urgence-dot { animation: urgencePulse 2s ease-in-out infinite; }
+        .hero-badge-dot {
+          width: 7px;
+          height: 7px;
+          border-radius: 50%;
+          background: #003DA5;
+          animation: heroPulse 2s ease-in-out infinite;
+        }
+        @keyframes heroPulse {
+          0%, 100% { opacity: 1; transform: scale(1); }
+          50% { opacity: 0.4; transform: scale(0.75); }
+        }
+
+        .hero-gradient-line {
+          background: linear-gradient(100deg, #003DA5 0%, #2f6fe0 50%, #003DA5 100%);
+          background-size: 200% 100%;
+          -webkit-background-clip: text;
+          background-clip: text;
+          color: transparent;
+          animation: heroReflet 6s ease-in-out infinite;
+        }
+        @keyframes heroReflet {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
 
         @keyframes scrollLeft {
           0% { transform: translateX(0); }
@@ -588,7 +544,7 @@ export default function Home() {
 
         @media (max-width: 900px) {
           .section-pad { padding-left: 20px !important; padding-right: 20px !important; }
-          .hero { padding-top: 120px !important; padding-bottom: 40px !important; }
+          .hero { padding-top: 104px !important; padding-bottom: 48px !important; }
           .approche-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
           .approche-sticky { position: static !important; }
           .pourquoi-grid { grid-template-columns: 1fr !important; gap: 36px !important; }

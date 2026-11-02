@@ -30,3 +30,22 @@ button { font-family: inherit; }
 
 input, textarea { font-family: inherit; }
 input:focus, textarea:focus { border-color: #003DA5 !important; }
+
+/* Shared arrow CTA button (Nav + Hero) */
+.arrow-btn {
+  transition: opacity 0.2s ease, transform 0.25s cubic-bezier(.22,1,.36,1), box-shadow 0.25s cubic-bezier(.22,1,.36,1);
+}
+.arrow-btn .arrow-btn-arrow {
+  transition: transform 0.25s cubic-bezier(.22,1,.36,1);
+}
+.arrow-btn:hover {
+  opacity: 0.92;
+}
+.arrow-btn:hover .arrow-btn-arrow {
+  transform: translateX(3px);
+}
+.arrow-btn-lift:hover {
+  opacity: 1;
+  transform: translateY(-3px);
+  box-shadow: 0 16px 36px rgba(0,61,165,0.35);
+}
