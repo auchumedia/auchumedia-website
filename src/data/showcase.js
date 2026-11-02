@@ -7,10 +7,10 @@ const CLOUDINARY = {
 // img vide → placeholder en dégradé avec le nom du client en grand.
 // views/videos null → rien n'est affiché sous le nom.
 export const fan = [
-  { name: 'Nor-Can', img: CLOUDINARY.norcan, views: '+7M vues', videos: '+200 vidéos' },
   { name: 'Bâton Rouge', img: '', gradient: 'linear-gradient(135deg, #8B0000, #2a0a0a)', views: '+100K vues', videos: '8 vidéos' },
   { name: 'Équipe Lemire Fillion', img: '/clients/lemire-fillion.jpg', views: '30K vues', videos: '2 vidéos' },
   { name: 'Équipe Maher', img: '/clients/maher.jpg', views: '+1M vues', videos: '+50 vidéos' },
+  { name: 'Nor-Can', img: CLOUDINARY.norcan, views: '+7M vues', videos: '+200 vidéos' },
   { name: 'Cardinal Asphalte', img: CLOUDINARY.cardinal, views: '+600K vues', videos: '+30 vidéos' },
   { name: 'Groupe DDC', img: '', gradient: 'linear-gradient(135deg, #1a1a2e, #16213e)', views: null, videos: null },
 ];

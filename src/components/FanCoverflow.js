@@ -23,12 +23,10 @@ function getConfig(isMobile) {
   return { step: 210, rotatePer: 6, rotateMax: 20, dragPxPerCard: 200 };
 }
 
+const INITIAL_POS = 3;
+
 function isMobileViewport() {
   return typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches;
-}
-
-function defaultPos(isMobile) {
-  return isMobile ? 0 : 2;
 }
 
 export default function FanCoverflow({ fan, sectionRef }) {
@@ -36,18 +34,17 @@ export default function FanCoverflow({ fan, sectionRef }) {
   const cardRefs = useRef([]);
   const maxIndex = fan.length - 1;
 
-  const initialMobile = isMobileViewport();
-  const posRef = useRef(defaultPos(initialMobile));
+  const posRef = useRef(INITIAL_POS);
   const sRef = useRef(0);
   const reducedRef = useRef(false);
-  const isMobileRef = useRef(initialMobile);
-  const activeIndexRef = useRef(defaultPos(initialMobile));
+  const isMobileRef = useRef(isMobileViewport());
+  const activeIndexRef = useRef(INITIAL_POS);
 
   const dragRef = useRef({ active: false, startX: 0, startPos: 0, lastX: 0, lastT: 0, velocity: 0, moved: false });
   const snapRafRef = useRef(null);
   const scrollRafRef = useRef(null);
 
-  const [activeIndex, setActiveIndex] = useState(defaultPos(initialMobile));
+  const [activeIndex, setActiveIndex] = useState(INITIAL_POS);
   const [hintVisible, setHintVisible] = useState(true);
 
   const applyCard = (i, pos, s) => {
@@ -151,7 +148,7 @@ export default function FanCoverflow({ fan, sectionRef }) {
 
     const onMobileChange = (e) => {
       isMobileRef.current = e.matches;
-      animateTo(defaultPos(e.matches));
+      render();
     };
     const onReducedChange = (e) => {
       reducedRef.current = e.matches;

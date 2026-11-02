@@ -83,18 +83,21 @@ function Hero() {
             <span className="desktop-line">L'ATTENTION SE MÉRITE.</span>
             <span className="desktop-line hero-gradient-line"><br />ON SAIT COMMENT L'OBTENIR.</span>
             <span className="mobile-only">
-              <span className="mobile-line">L'ATTENTION SE MÉRITE.</span>
-              <span className="hero-gradient-line mobile-gradient-wrap">
-                <span className="mobile-line">ON SAIT</span>
-                <span className="mobile-line">COMMENT L'OBTENIR.</span>
-              </span>
+              <span className="mobile-line">L'ATTENTION SE</span>
+              <span className="mobile-line">MÉRITE. <span className="hero-gradient-line">ON SAIT</span></span>
+              <span className="mobile-line hero-gradient-line">COMMENT L'OBTENIR.</span>
             </span>
           </h1>
         </Reveal>
 
         <Reveal delay={0.12} style={{ marginTop: '36px' }}>
-          <p style={{ fontFamily: "'DM Sans'", fontSize: '18px', color: 'rgba(10,10,10,0.55)', maxWidth: '560px', lineHeight: 1.8, margin: 0 }}>
-            On produit du contenu vidéo stratégique pour les entreprises B2C qui veulent capter l'attention, bâtir leur autorité et convertir.
+          <p className="hero-subtitle" style={{ fontFamily: "'DM Sans'", fontSize: '18px', color: 'rgba(10,10,10,0.55)', maxWidth: '560px', lineHeight: 1.8, margin: 0 }}>
+            <span className="desktop-line">On produit du contenu vidéo stratégique pour les entreprises B2C qui veulent capter l'attention, bâtir leur autorité et convertir.</span>
+            <span className="subtitle-mobile-only">
+              <span className="mobile-line">On produit du contenu vidéo stratégique</span>
+              <span className="mobile-line">pour les entreprises B2C qui veulent capter</span>
+              <span className="mobile-line">l'attention, bâtir leur autorité et convertir.</span>
+            </span>
           </p>
         </Reveal>
 
@@ -397,13 +400,14 @@ export default function Home() {
         }
         @media (min-width: 769px) {
           .mobile-only { display: none; }
+          .subtitle-mobile-only { display: none; }
           .desktop-line { display: inline; }
         }
         @media (max-width: 768px) {
           .desktop-line { display: none; }
-          .mobile-only { display: block; font-size: min(11.2vw, 50px); }
+          .mobile-only { display: block; font-size: min(13vw, 58px); }
+          .subtitle-mobile-only { display: block; font-size: min(4.1vw, 17.5px); }
           .mobile-line { display: block; white-space: nowrap; }
-          .mobile-gradient-wrap { display: block; }
         }
 
         .hero-gradient-line {
