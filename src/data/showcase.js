@@ -7,17 +7,17 @@ const CLOUDINARY = {
 // img vide → placeholder en dégradé avec le nom du client en grand.
 // views/videos null → rien n'est affiché sous le nom.
 export const fan = [
-  { name: 'Nor-Can', img: CLOUDINARY.norcan, views: '+7 M vues', videos: '+200 vidéos' },
-  { name: 'Équipe Maher', img: '/clients/maher.jpg', views: '+1 M vues', videos: '+50 vidéos' },
-  { name: 'Équipe Lemire Fillion', img: '/clients/lemire-fillion.jpg', views: '30 K vues', videos: '2 vidéos' },
-  { name: 'Bâton Rouge', img: '', gradient: 'linear-gradient(135deg, #8B0000, #2a0a0a)', views: '+100 K vues', videos: '8 vidéos' },
-  { name: 'Cardinal Asphalte', img: CLOUDINARY.cardinal, views: '+600 K vues', videos: '+30 vidéos' },
+  { name: 'Nor-Can', img: CLOUDINARY.norcan, views: '+7M vues', videos: '+200 vidéos' },
+  { name: 'Bâton Rouge', img: '', gradient: 'linear-gradient(135deg, #8B0000, #2a0a0a)', views: '+100K vues', videos: '8 vidéos' },
+  { name: 'Équipe Lemire Fillion', img: '/clients/lemire-fillion.jpg', views: '30K vues', videos: '2 vidéos' },
+  { name: 'Équipe Maher', img: '/clients/maher.jpg', views: '+1M vues', videos: '+50 vidéos' },
+  { name: 'Cardinal Asphalte', img: CLOUDINARY.cardinal, views: '+600K vues', videos: '+30 vidéos' },
   { name: 'Groupe DDC', img: '', gradient: 'linear-gradient(135deg, #1a1a2e, #16213e)', views: null, videos: null },
 ];
 
 // Bloc de stats noir — chiffres cumulés de l'agence (pas de ventes/$).
 export const stats = [
-  { prefix: '+', value: 40, suffix: ' M', label: 'de vues générées' },
-  { prefix: '+', value: 2, suffix: ' M', label: "d'engagements" },
-  { prefix: '+', value: 100, suffix: ' K', label: 'abonnés cumulés' },
+  { prefix: '+', value: 40, suffix: 'M', label: 'de vues générées' },
+  { prefix: '+', value: 2, suffix: 'M', label: "d'engagements" },
+  { prefix: '+', value: 100, suffix: 'K', label: 'abonnés cumulés' },
 ];

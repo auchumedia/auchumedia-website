@@ -23,22 +23,31 @@ function getConfig(isMobile) {
   return { step: 210, rotatePer: 6, rotateMax: 20, dragPxPerCard: 200 };
 }
 
+function isMobileViewport() {
+  return typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches;
+}
+
+function defaultPos(isMobile) {
+  return isMobile ? 0 : 2;
+}
+
 export default function FanCoverflow({ fan, sectionRef }) {
   const trackRef = useRef(null);
   const cardRefs = useRef([]);
   const maxIndex = fan.length - 1;
 
-  const posRef = useRef(2);
+  const initialMobile = isMobileViewport();
+  const posRef = useRef(defaultPos(initialMobile));
   const sRef = useRef(0);
   const reducedRef = useRef(false);
-  const isMobileRef = useRef(false);
-  const activeIndexRef = useRef(2);
+  const isMobileRef = useRef(initialMobile);
+  const activeIndexRef = useRef(defaultPos(initialMobile));
 
   const dragRef = useRef({ active: false, startX: 0, startPos: 0, lastX: 0, lastT: 0, velocity: 0, moved: false });
   const snapRafRef = useRef(null);
   const scrollRafRef = useRef(null);
 
-  const [activeIndex, setActiveIndex] = useState(2);
+  const [activeIndex, setActiveIndex] = useState(defaultPos(initialMobile));
   const [hintVisible, setHintVisible] = useState(true);
 
   const applyCard = (i, pos, s) => {
@@ -137,17 +146,23 @@ export default function FanCoverflow({ fan, sectionRef }) {
   useEffect(() => {
     const mq = window.matchMedia('(max-width: 768px)');
     const rmq = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const update = () => {
-      isMobileRef.current = mq.matches;
-      reducedRef.current = rmq.matches;
+    reducedRef.current = rmq.matches;
+    render();
+
+    const onMobileChange = (e) => {
+      isMobileRef.current = e.matches;
+      animateTo(defaultPos(e.matches));
+    };
+    const onReducedChange = (e) => {
+      reducedRef.current = e.matches;
       render();
     };
-    update();
-    mq.addEventListener('change', update);
-    rmq.addEventListener('change', update);
+
+    mq.addEventListener('change', onMobileChange);
+    rmq.addEventListener('change', onReducedChange);
     return () => {
-      mq.removeEventListener('change', update);
-      rmq.removeEventListener('change', update);
+      mq.removeEventListener('change', onMobileChange);
+      rmq.removeEventListener('change', onReducedChange);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
