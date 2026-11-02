@@ -46,7 +46,7 @@ export function Nav() {
         transition: 'padding 0.3s ease',
       }}>
         <Link to="/" onClick={() => setMobileOpen(false)} style={{ display: 'flex', alignItems: 'center', flexShrink: 0 }}>
-          <img src="/Copie de AUCHU.png.png" alt="AuchuMedia" style={{ height: '20px', width: 'auto', filter: 'invert(1)' }} />
+          <img src="/Copie de AUCHU.png.png" alt="AuchuMedia" style={{ height: '20px', width: 'auto' }} />
         </Link>
 
         <div className="pill-nav-center" style={{

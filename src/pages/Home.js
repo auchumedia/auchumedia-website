@@ -109,73 +109,6 @@ function Hero() {
   );
 }
 
-/* ---------- Clients ---------- */
-
-const TRAVAUX = [
-  { nom: 'Cardinal Asphalte', bg: 'url(https://res.cloudinary.com/dr0kwuqqa/image/upload/v1784411817/Capture_d_e%CC%81cran_le_2026-07-18_a%CC%80_17.56.25_rfb74n.png)', badge: 'ACTIF' },
-  { nom: 'Nor-Can', bg: 'url(https://res.cloudinary.com/dr0kwuqqa/image/upload/v1784410798/Capture_d_e%CC%81cran_le_2025-10-03_a%CC%80_11.10.40_v5hyzr.png)', badge: 'ACTIF' },
-  { nom: 'Famille Maher', bg: 'url(https://res.cloudinary.com/dr0kwuqqa/image/upload/v1784410790/Raf_Steve_ycvtgk.png)', badge: 'ACTIF' },
-  { nom: 'Bâton Rouge', bg: 'linear-gradient(135deg, #8B0000, #2a0a0a)', badge: 'ACTIF' },
-  { nom: 'Groupe DDC', bg: 'linear-gradient(135deg, #1a1a2e, #16213e)', badge: 'BIENTÔT' },
-  { nom: 'Équipe Lemire Fillion', bg: 'linear-gradient(135deg, #0a2a1a, #1a3a2a)', badge: 'BIENTÔT' },
-];
-
-function ClientCard({ t }) {
-  return (
-    <div style={{
-      position: 'relative', width: '280px', height: '380px', borderRadius: '16px',
-      overflow: 'hidden', flexShrink: 0, backgroundColor: '#111', transform: 'rotate(-3deg)',
-    }}>
-      <div style={{
-        position: 'absolute', inset: 0, background: t.bg, backgroundSize: 'cover', backgroundPosition: 'center',
-        objectFit: 'cover',
-      }} />
-      <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.3)' }} />
-      <div style={{
-        position: 'absolute', top: '16px', left: '16px', fontFamily: "'Bebas Neue'", fontSize: '22px',
-        color: '#fff', lineHeight: 1, textShadow: '0 2px 8px rgba(0,0,0,0.6)', zIndex: 2,
-        letterSpacing: '0.05em',
-      }}>
-        {t.nom}
-      </div>
-      <div style={{
-        position: 'absolute', bottom: '16px', right: '16px', zIndex: 2, fontSize: '10px', fontWeight: 700,
-        letterSpacing: '0.08em', textTransform: 'uppercase', padding: '5px 12px', borderRadius: '999px',
-        color: '#fff', background: t.badge === 'ACTIF' ? '#1a9b55' : '#e2873b',
-      }}>
-        {t.badge}
-      </div>
-    </div>
-  );
-}
-
-function Clients() {
-  return (
-    <section id="clients" style={{ background: '#ffffff', padding: '40px 0 100px' }}>
-      <FadeIn>
-        <h2 style={{ fontFamily: "'Bebas Neue'", color: BLUE, fontSize: 'clamp(40px, 6vw, 72px)', textAlign: 'center', margin: '0 0 56px', textTransform: 'uppercase' }}>
-          Nos clients actuels
-        </h2>
-      </FadeIn>
-
-      <div className="carousel-container" style={{ overflow: 'hidden', padding: '80px 0' }}>
-        <div className="carousel-track">
-          {[...TRAVAUX, ...TRAVAUX].map((t, i) => <ClientCard key={i} t={t} />)}
-        </div>
-      </div>
-
-      <div style={{ textAlign: 'center', marginTop: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
-        <span style={{ fontSize: '15px', color: BLUE, fontStyle: 'italic', fontFamily: "'DM Sans'" }}>Signé</span>
-        <img
-          src="/Copie de AUCHU.png.png"
-          alt="AuchuMedia"
-          style={{ height: '16px', width: 'auto', filter: 'invert(1) brightness(0)' }}
-        />
-      </div>
-    </section>
-  );
-}
-
 /* ---------- Approche ---------- */
 
 const APPROCHE_BLOCS = [
@@ -448,7 +381,6 @@ export default function Home() {
       <Hero />
       <FanShowcase />
       <StatsBlock />
-      <Clients />
       <Approche />
       <Pourquoi />
       <Temoignages />
@@ -481,20 +413,6 @@ export default function Home() {
           0% { background-position: 0% 50%; }
           50% { background-position: 100% 50%; }
           100% { background-position: 0% 50%; }
-        }
-
-        @keyframes scrollLeft {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-        .carousel-track {
-          display: flex;
-          gap: 20px;
-          animation: scrollLeft 20s linear infinite;
-          width: max-content;
-        }
-        .carousel-track:hover {
-          animation-play-state: paused;
         }
 
         @keyframes ctaGradient {

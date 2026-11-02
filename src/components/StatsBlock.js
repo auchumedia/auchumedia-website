@@ -1,34 +1,79 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { stats } from '../data/showcase';
+
+const SEP = ' ';
 
 function easeOutExpo(x) {
   return x === 1 ? 1 : 1 - Math.pow(2, -10 * x);
 }
 
-function StatColumn({ stat, active }) {
-  const [value, setValue] = useState(0);
+function toGroupedTokens(n) {
+  const digits = String(n).split('');
+  const tokens = [];
+  let count = 0;
+  for (let i = digits.length - 1; i >= 0; i -= 1) {
+    tokens.unshift(digits[i]);
+    count += 1;
+    if (count % 3 === 0 && i !== 0) tokens.unshift(SEP);
+  }
+  return tokens;
+}
+
+function OdometerDigit({ digit, active, delayMs }) {
+  const trackRef = useRef(null);
   const startedRef = useRef(false);
 
   useEffect(() => {
     if (!active || startedRef.current) return;
     startedRef.current = true;
-    const duration = 1800;
-    const start = performance.now();
+    const track = trackRef.current;
+    if (!track) return undefined;
+    const rowHeight = track.parentElement.clientHeight;
+    const duration = 2000;
+    const startTime = performance.now();
     let raf;
     const tick = (now) => {
-      const t = Math.min(1, (now - start) / duration);
-      setValue(Math.round(stat.value * easeOutExpo(t)));
+      const elapsed = now - startTime - delayMs;
+      if (elapsed < 0) { raf = requestAnimationFrame(tick); return; }
+      const t = Math.min(1, elapsed / duration);
+      const eased = easeOutExpo(t);
+      track.style.transform = `translate3d(0, ${(-digit * rowHeight * eased).toFixed(2)}px, 0)`;
       if (t < 1) raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
     return () => { if (raf) cancelAnimationFrame(raf); };
-  }, [active, stat.value]);
+  }, [active, digit, delayMs]);
 
   return (
-    <div className="stats-col">
-      <div className="stats-value">{value.toLocaleString('fr-CA')}{stat.suffix}</div>
-      <div className="stats-label">{stat.label}</div>
-      <div className="stats-client"><span className="stats-dash" />{stat.client.toUpperCase()}</div>
+    <span className="odo-digit" aria-hidden="true">
+      <span className="odo-track" ref={trackRef}>
+        {'0123456789'.split('').map((d) => <span key={d} className="odo-row">{d}</span>)}
+      </span>
+    </span>
+  );
+}
+
+function StatValue({ stat, active, reduced }) {
+  const tokens = useMemo(() => toGroupedTokens(stat.value), [stat.value]);
+
+  if (reduced) {
+    return (
+      <div className="stats-value">
+        {stat.prefix}{stat.value.toLocaleString('fr-CA')}{stat.suffix}
+      </div>
+    );
+  }
+
+  let digitIndex = -1;
+  return (
+    <div className="stats-value" aria-label={`${stat.prefix}${stat.value.toLocaleString('fr-CA')}${stat.suffix}`}>
+      {stat.prefix && <span className="stats-fixed">{stat.prefix}</span>}
+      {tokens.map((tok, idx) => {
+        if (tok === SEP) return <span key={idx} className="odo-sep">{SEP}</span>;
+        digitIndex += 1;
+        return <OdometerDigit key={idx} digit={Number(tok)} active={active} delayMs={digitIndex * 120} />;
+      })}
+      {stat.suffix && <span className="stats-fixed">{stat.suffix}</span>}
     </div>
   );
 }
@@ -36,6 +81,11 @@ function StatColumn({ stat, active }) {
 export default function StatsBlock() {
   const ref = useRef(null);
   const [active, setActive] = useState(false);
+  const [reduced, setReduced] = useState(false);
+
+  useEffect(() => {
+    setReduced(window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  }, []);
 
   useEffect(() => {
     const el = ref.current;
@@ -50,10 +100,15 @@ export default function StatsBlock() {
   return (
     <div className="stats-wrap">
       <div ref={ref} className="stats-block">
-        {stats.map(s => <StatColumn key={s.client} stat={s} active={active} />)}
+        {stats.map((s) => (
+          <div className="stats-col" key={s.client || s.label}>
+            <StatValue stat={s} active={active} reduced={reduced} />
+            <div className="stats-label">{s.label}</div>
+          </div>
+        ))}
       </div>
       <p className="stats-disclaimer">
-        Résultats de nos clients sur leurs comptes. Les performances varient selon l'offre, le marché et la constance de publication.
+        Résultats cumulés de l'agence au fil des années. Les performances varient selon l'offre, le marché et la constance de publication.
       </p>
 
       <style>{`
@@ -64,53 +119,48 @@ export default function StatsBlock() {
           padding: 0 20px;
         }
         .stats-block {
-          max-width: 1000px;
+          max-width: 820px;
           margin: 0 auto;
           background: #0a0a0a;
           border-radius: 20px;
           display: flex;
-          padding: 48px 40px;
+          padding: 40px 32px;
         }
         .stats-col {
           flex: 1;
-          padding: 0 32px;
+          padding: 0 24px;
           border-left: 1px solid rgba(255,255,255,0.12);
           text-align: center;
         }
         .stats-col:first-child { border-left: none; }
+
         .stats-value {
+          display: flex;
+          align-items: baseline;
+          justify-content: center;
           font-family: 'Bebas Neue';
-          font-size: clamp(44px, 6vw, 76px);
+          font-size: clamp(44px, 6vw, 72px);
           line-height: 1;
-          background: linear-gradient(100deg, #bcd4ff, #ffffff);
-          -webkit-background-clip: text;
-          background-clip: text;
-          color: transparent;
+          color: #cfe0ff;
         }
+        .stats-fixed { display: inline-block; }
+        .odo-digit {
+          display: inline-block;
+          overflow: hidden;
+          height: 1em;
+          line-height: 1;
+          vertical-align: top;
+        }
+        .odo-track { display: block; will-change: transform; }
+        .odo-row { display: block; height: 1em; line-height: 1; }
+        .odo-sep { display: inline-block; width: 0.28em; }
+
         .stats-label {
           font-family: 'DM Sans';
           font-size: 14px;
           color: #fff;
           margin-top: 12px;
           line-height: 1.5;
-        }
-        .stats-client {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 8px;
-          margin-top: 18px;
-          font-family: 'DM Sans';
-          font-size: 11px;
-          font-weight: 700;
-          letter-spacing: 0.12em;
-          color: rgba(255,255,255,0.5);
-        }
-        .stats-dash {
-          width: 14px;
-          height: 1px;
-          background: #4d8bff;
-          display: inline-block;
         }
         .stats-disclaimer {
           max-width: 560px;
@@ -122,9 +172,11 @@ export default function StatsBlock() {
           line-height: 1.6;
         }
         @media (max-width: 768px) {
-          .stats-block { flex-direction: column; padding: 36px 28px; gap: 28px; }
-          .stats-col { border-left: none; border-top: 1px solid rgba(255,255,255,0.12); padding: 24px 0 0; }
-          .stats-col:first-child { border-top: none; padding-top: 0; }
+          .stats-wrap { padding: 0 12px; }
+          .stats-block { padding: 28px 10px; }
+          .stats-col { padding: 0 8px; }
+          .stats-value { font-size: clamp(28px, 8vw, 40px); }
+          .stats-label { font-size: 11px; margin-top: 8px; }
         }
       `}</style>
     </div>
