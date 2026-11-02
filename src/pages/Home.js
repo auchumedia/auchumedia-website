@@ -6,6 +6,9 @@ import VideoWall from '../components/VideoWall';
 import PresentationVideo from '../components/PresentationVideo';
 import FanShowcase from '../components/FanShowcase';
 import StatsBlock from '../components/StatsBlock';
+import ComparisonTable from '../components/ComparisonTable';
+import RhythmBand from '../components/RhythmBand';
+import StepsTimeline from '../components/StepsTimeline';
 
 const BLUE = '#003DA5';
 const BLACK = '#0a0a0a';
@@ -115,96 +118,51 @@ function Hero() {
   );
 }
 
-/* ---------- Approche ---------- */
+/* ---------- Notre approche ---------- */
 
-const APPROCHE_BLOCS = [
-  { titre: '8 CLIENTS MAX. PAR CHOIX.', texte: "On limite volontairement notre portefeuille à 8 mandats. Chaque client reçoit l'attention complète de notre équipe — pas un junior qui gère ton compte pendant que le senior vend." },
-  { titre: 'UNE ÉQUIPE. PAS UNE USINE.', texte: 'Raphael et Ben travaillent directement sur chaque mandat. Tu sais toujours à qui tu parles et qui produit ton contenu.' },
-  { titre: 'DU CONTENU QUI CONVERTIT.', texte: "On ne fait pas du contenu pour faire du contenu. Chaque vidéo a un but stratégique — capter l'attention, bâtir la confiance, générer des ventes." },
-];
-
-function Approche() {
+function NotreApproche() {
+  const navigate = useNavigate();
   return (
-    <section id="approche" className="section-pad" style={{ padding: '140px 60px', background: GRAY_BG }}>
-      <div className="approche-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1.4fr', gap: '64px', alignItems: 'start' }}>
-        <div className="approche-sticky" style={{ position: 'sticky', top: '120px' }}>
-          <FadeIn direction="left">
-            <div style={{ fontFamily: "'DM Sans'", fontSize: '12px', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: BLUE, marginBottom: '16px' }}>
-              Notre différence
-            </div>
-            <h2 style={{ fontFamily: "'Bebas Neue'", color: BLACK, fontSize: '52px', lineHeight: 1, margin: '0 0 32px', textTransform: 'uppercase' }}>
-              On ne travaille pas<br />avec tout le monde.
-            </h2>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '10px' }}>
-              {Array.from({ length: 8 }).map((_, i) => (
-                <div key={i} style={{
-                  width: '22px', height: '10px', borderRadius: '2px',
-                  background: i < 6 ? BLUE : 'transparent',
-                  border: i < 6 ? 'none' : `1px solid rgba(10,10,10,0.25)`,
-                }} />
-              ))}
-            </div>
-            <div style={{ fontFamily: "'DM Sans'", fontSize: '12px', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'rgba(10,10,10,0.5)' }}>
-              6/8 mandats
-            </div>
-          </FadeIn>
-        </div>
-
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '44px' }}>
-          {APPROCHE_BLOCS.map((b, i) => (
-            <FadeIn key={b.titre} delay={0.12 * i} direction="right">
-              <div style={{ borderLeft: `3px solid ${BLUE}`, paddingLeft: '28px' }}>
-                <div style={{ fontFamily: "'DM Sans'", fontSize: '16px', fontWeight: 700, color: BLACK, marginBottom: '12px', letterSpacing: '0.01em' }}>
-                  {b.titre}
-                </div>
-                <p style={{ fontFamily: "'DM Sans'", fontSize: '15px', color: 'rgba(10,10,10,0.6)', lineHeight: 1.75, margin: 0 }}>
-                  {b.texte}
-                </p>
-              </div>
-            </FadeIn>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ---------- Pourquoi ---------- */
-
-const POURQUOI_COLS = [
-  { icon: '🎯', titre: "STRATÉGIE D'ABORD", texte: "Chaque vidéo a un rôle précis dans ton funnel. Rien n'est publié par hasard." },
-  { icon: '🎬', titre: 'PRODUCTION PREMIUM', texte: 'Sony A7 IV, équipement pro, post-production soignée. Ton contenu reflète ton niveau.' },
-  { icon: '📈', titre: 'RÉSULTATS MESURÉS', texte: "On suit les métriques qui comptent : attention, engagement, conversions. Pas juste les vues." },
-];
-
-function Pourquoi() {
-  return (
-    <section id="pourquoi" className="section-pad" style={{ padding: '140px 60px', background: '#ffffff', textAlign: 'center' }}>
+    <section id="approche" className="section-pad" style={{ padding: '140px 60px', background: '#f8f8fa' }}>
       <FadeIn>
-        <div style={{ fontFamily: "'DM Sans'", fontSize: '12px', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: BLUE, marginBottom: '16px' }}>
-          Notre vision
+        <div style={{ textAlign: 'center', fontFamily: "'DM Sans'", fontSize: '12px', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: BLUE, marginBottom: '20px' }}>
+          Notre approche
         </div>
-        <h2 style={{ fontFamily: "'Bebas Neue'", color: BLACK, fontSize: 'clamp(36px, 5vw, 64px)', lineHeight: 1.02, margin: '0 auto 28px', textTransform: 'uppercase' }}>
-          Le contenu viral<br />n'est pas un accident.<br />C'est une stratégie.
+      </FadeIn>
+      <FadeIn delay={0.08}>
+        <h2 style={{ fontFamily: "'Bebas Neue'", textAlign: 'center', fontSize: 'clamp(36px, 5.5vw, 64px)', lineHeight: 1.05, margin: '0 auto 24px', textTransform: 'uppercase', maxWidth: '760px' }}>
+          <span style={{ color: BLACK }}>Pas du contenu de masse.</span><br />
+          <span style={{ color: BLUE }}>Du contenu qui marque.</span>
         </h2>
-        <p style={{ fontFamily: "'DM Sans'", fontSize: '17px', color: 'rgba(10,10,10,0.55)', maxWidth: '680px', lineHeight: 1.8, margin: '0 auto 72px' }}>
-          On croit que chaque entreprise mérite une présence en ligne qui capte l'attention, inspire confiance et génère de vraies ventes — pas juste des likes. On comprend comment les gens découvrent les marques, comment l'attention se gagne, et comment la confiance se bâtit. On traduit ça en vidéos qui convertissent.
+      </FadeIn>
+      <FadeIn delay={0.14}>
+        <p style={{ fontFamily: "'DM Sans'", textAlign: 'center', fontSize: '16px', color: 'rgba(10,10,10,0.55)', maxWidth: '620px', margin: '0 auto 72px', lineHeight: 1.8 }}>
+          La plupart des agences publient beaucoup pour publier. Nous, on choisit moins de vidéos, mais chacune a une histoire, un rôle et un objectif.
         </p>
       </FadeIn>
 
-      <div className="pourquoi-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '40px', textAlign: 'left' }}>
-        {POURQUOI_COLS.map((c, i) => (
-          <FadeIn key={c.titre} delay={0.1 * i}>
-            <div style={{ fontSize: '34px', marginBottom: '20px' }}>{c.icon}</div>
-            <div style={{ fontFamily: "'DM Sans'", fontSize: '15px', fontWeight: 700, color: BLACK, marginBottom: '12px', letterSpacing: '0.04em' }}>
-              {c.titre}
-            </div>
-            <p style={{ fontFamily: "'DM Sans'", fontSize: '14px', color: 'rgba(10,10,10,0.55)', lineHeight: 1.7, margin: 0 }}>
-              {c.texte}
-            </p>
-          </FadeIn>
-        ))}
+      <ComparisonTable />
+      <RhythmBand />
+
+      <div style={{ marginTop: '140px' }}>
+        <FadeIn>
+          <h3 style={{ fontFamily: "'Bebas Neue'", textAlign: 'center', fontSize: 'clamp(32px, 4.5vw, 52px)', margin: '0 0 72px', textTransform: 'uppercase', color: BLACK }}>
+            De l'idée à l'attention.
+          </h3>
+        </FadeIn>
+        <StepsTimeline />
       </div>
+
+      <FadeIn>
+        <div style={{ textAlign: 'center', marginTop: '120px' }}>
+          <p style={{ fontFamily: "'DM Sans'", fontSize: '16px', color: 'rgba(10,10,10,0.55)', marginBottom: '28px' }}>
+            Prêt à créer du contenu qui marque ?
+          </p>
+          <ArrowButton lift onClick={() => navigate('/planifier-un-appel')} style={{ fontSize: '12px' }}>
+            Planifier un appel
+          </ArrowButton>
+        </div>
+      </FadeIn>
     </section>
   );
 }
@@ -318,7 +276,6 @@ function CtaFinale() {
 const FOOTER_NAV = [
   { label: 'Nos clients', action: 'scroll', target: 'clients' },
   { label: 'Notre approche', action: 'scroll', target: 'approche' },
-  { label: 'Pourquoi nous', action: 'scroll', target: 'pourquoi' },
   { label: 'Planifier un appel', action: 'navigate', target: '/planifier-un-appel' },
 ];
 
@@ -387,8 +344,7 @@ export default function Home() {
       <Hero />
       <FanShowcase />
       <StatsBlock />
-      <Approche />
-      <Pourquoi />
+      <NotreApproche />
       <Temoignages />
       <CtaFinale />
       <Footer />
@@ -440,9 +396,6 @@ export default function Home() {
         @media (max-width: 900px) {
           .section-pad { padding-left: 20px !important; padding-right: 20px !important; }
           .hero { padding-top: 104px !important; padding-bottom: 48px !important; }
-          .approche-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
-          .approche-sticky { position: static !important; }
-          .pourquoi-grid { grid-template-columns: 1fr !important; gap: 36px !important; }
         }
       `}</style>
     </div>

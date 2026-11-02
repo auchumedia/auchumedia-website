@@ -6,7 +6,6 @@ const BLUE = '#003DA5';
 const NAV_LINKS = [
   { id: 'clients', label: 'Clients' },
   { id: 'approche', label: 'Approche' },
-  { id: 'pourquoi', label: 'Pourquoi nous' },
 ];
 
 export function Nav() {
