@@ -1,6 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import ArrowButton from './ArrowButton';
 
 const BLUE = '#003DA5';
 const BLACK = '#0a0a0a';
@@ -28,7 +26,6 @@ function Cross() {
 }
 
 export default function ComparisonTable() {
-  const navigate = useNavigate();
   const ref = useRef(null);
   const [inView, setInView] = useState(false);
 
@@ -48,46 +45,41 @@ export default function ComparisonTable() {
     <div ref={ref} className="ct-wrap">
       {/* Desktop / iPad: 3 columns, AuchuMedia in a tall overlay card */}
       <div className={`ct2-table ${inView ? 'revealed' : ''}`}>
-        <div className="ct2-card-bg" style={{ gridColumn: 3, gridRow: '1 / 8' }} />
+        <div className="ct2-card-bg" style={{ gridColumn: 3, gridRow: '1 / 7' }} />
 
         <div style={{ gridColumn: 1, gridRow: 1 }} />
         <div className="ct2-header-classique" style={{ gridColumn: 2, gridRow: 1 }}>Une agence classique</div>
         <div className="ct2-header-auchu" style={{ gridColumn: 3, gridRow: 1 }}>
-          <span className="ct2-auchu-name">AuchuMedia</span>
+          <img src="/Copie de AUCHU.png.png" alt="AuchuMedia" className="ct2-auchu-logo" />
         </div>
 
-        {ROWS.map((r, i) => (
-          <React.Fragment key={r.critere}>
-            <div
-              className={`ct2-label ${i > 0 ? 'ct2-bordered' : ''} ct2-row-cell`}
-              style={{ gridColumn: 1, gridRow: i + 2, transitionDelay: `${rowDelay(i)}s` }}
-            >
-              {r.critere}
-            </div>
-            <div
-              className={`ct2-classique ${i > 0 ? 'ct2-bordered' : ''} ct2-row-cell`}
-              style={{ gridColumn: 2, gridRow: i + 2, transitionDelay: `${rowDelay(i)}s` }}
-            >
-              <Cross />
-              <span>{r.classique}</span>
-            </div>
-            <div
-              className={`ct2-auchu ${i > 0 ? 'ct2-bordered' : ''} ct2-row-cell`}
-              style={{ gridColumn: 3, gridRow: i + 2, transitionDelay: `${rowDelay(i)}s` }}
-            >
-              <Check delay={rowDelay(i) + 0.15} />
-              <span>{r.auchu}</span>
-            </div>
-          </React.Fragment>
-        ))}
-
-        <div style={{ gridColumn: 1, gridRow: 7 }} />
-        <div style={{ gridColumn: 2, gridRow: 7 }} />
-        <div className="ct2-footer-cta" style={{ gridColumn: 3, gridRow: 7 }}>
-          <ArrowButton lift onClick={() => navigate('/planifier-un-appel')} style={{ width: '100%', justifyContent: 'center', fontSize: '12px' }}>
-            Planifier un appel
-          </ArrowButton>
-        </div>
+        {ROWS.map((r, i) => {
+          const isLast = i === ROWS.length - 1;
+          return (
+            <React.Fragment key={r.critere}>
+              <div
+                className="ct2-label ct2-row-cell"
+                style={{ gridColumn: 1, gridRow: i + 2, transitionDelay: `${rowDelay(i)}s` }}
+              >
+                {r.critere}
+              </div>
+              <div
+                className="ct2-classique ct2-row-cell"
+                style={{ gridColumn: 2, gridRow: i + 2, transitionDelay: `${rowDelay(i)}s` }}
+              >
+                <Cross />
+                <span>{r.classique}</span>
+              </div>
+              <div
+                className={`ct2-auchu ct2-row-cell ${isLast ? 'ct2-auchu-last' : ''}`}
+                style={{ gridColumn: 3, gridRow: i + 2, transitionDelay: `${rowDelay(i)}s` }}
+              >
+                <Check delay={rowDelay(i) + 0.15} />
+                <span>{r.auchu}</span>
+              </div>
+            </React.Fragment>
+          );
+        })}
       </div>
 
       {/* Mobile: stacked cards */}
@@ -106,12 +98,6 @@ export default function ComparisonTable() {
             </div>
           </div>
         ))}
-
-        <div className="ct-mobile-cta">
-          <ArrowButton lift onClick={() => navigate('/planifier-un-appel')}>
-            Planifier un appel
-          </ArrowButton>
-        </div>
       </div>
 
       <style>{`
@@ -162,9 +148,10 @@ export default function ComparisonTable() {
           align-self: end;
           padding: 40px 32px 22px;
         }
-        .ct2-auchu-name {
-          font-family: 'Bebas Neue'; font-size: 26px; letter-spacing: 0.04em;
-          color: ${BLUE}; text-transform: uppercase;
+        .ct2-auchu-logo {
+          height: 26px;
+          width: auto;
+          filter: brightness(0);
         }
 
         .ct2-row-cell {
@@ -173,7 +160,6 @@ export default function ComparisonTable() {
           transition: opacity 0.6s ease, transform 0.6s ease;
         }
         .ct2-table.revealed .ct2-row-cell { opacity: 1; transform: translateY(0); }
-        .ct2-bordered { border-top: 1px solid #eceef4; }
 
         .ct2-label {
           position: relative; z-index: 2;
@@ -184,24 +170,21 @@ export default function ComparisonTable() {
         }
         .ct2-classique {
           position: relative; z-index: 2;
-          display: flex; align-items: flex-start; gap: 12px;
+          display: flex; align-items: center; gap: 12px;
           padding: 22px 24px;
         }
         .ct2-classique span {
-          font-family: 'DM Sans'; font-size: 14px; color: #8b90a0; line-height: 1.5; padding-top: 1px;
+          font-family: 'DM Sans'; font-size: 14px; color: #8b90a0; line-height: 1.5;
         }
         .ct2-auchu {
           position: relative; z-index: 2;
-          display: flex; align-items: flex-start; gap: 12px;
+          display: flex; align-items: center; gap: 12px;
           padding: 22px 32px;
         }
         .ct2-auchu span {
-          font-family: 'DM Sans'; font-size: 16px; font-weight: 600; color: ${BLACK}; line-height: 1.5; padding-top: 1px;
+          font-family: 'DM Sans'; font-size: 16px; font-weight: 600; color: ${BLACK}; line-height: 1.5;
         }
-        .ct2-footer-cta {
-          position: relative; z-index: 2;
-          padding: 20px 32px 36px;
-        }
+        .ct2-auchu-last { padding-bottom: 40px; }
 
         /* ---- mobile stacked cards ---- */
         .ct-mobile { display: none; }
@@ -238,7 +221,6 @@ export default function ComparisonTable() {
             font-family: 'DM Sans'; font-size: 16px; font-weight: 600; color: ${BLACK}; line-height: 1.4;
             padding-top: 2px;
           }
-          .ct-mobile-cta { display: flex; justify-content: center; margin-top: 8px; }
         }
 
         /* ---- iPad: same layout, tighter sizing ---- */
@@ -250,9 +232,9 @@ export default function ComparisonTable() {
           .ct2-classique span { font-size: 13px; }
           .ct2-auchu { padding: 18px 22px; }
           .ct2-auchu span { font-size: 14px; }
+          .ct2-auchu-last { padding-bottom: 28px; }
           .ct2-header-auchu { padding: 28px 22px 16px; }
-          .ct2-auchu-name { font-size: 21px; }
-          .ct2-footer-cta { padding: 16px 22px 26px; }
+          .ct2-auchu-logo { height: 22px; }
         }
 
         @media (prefers-reduced-motion: reduce) {

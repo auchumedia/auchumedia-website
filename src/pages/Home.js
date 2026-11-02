@@ -132,8 +132,8 @@ function NotreApproche() {
         </h2>
       </FadeIn>
       <FadeIn delay={0.08}>
-        <p style={{ fontFamily: "'DM Sans'", textAlign: 'center', fontSize: '16px', color: 'rgba(10,10,10,0.55)', maxWidth: '620px', margin: '0 auto 72px', lineHeight: 1.8 }}>
-          Beaucoup d'agences misent sur le volume : 20 à 30 vidéos par mois, mais peu d'impact. Nous, on choisit moins de vidéos, mais chacune a une histoire, un rôle et un objectif.
+        <p style={{ fontFamily: "'DM Sans'", textAlign: 'center', fontSize: '16px', color: 'rgba(10,10,10,0.55)', maxWidth: '620px', margin: '0 auto 72px', lineHeight: 1.8, textWrap: 'balance' }}>
+          Beaucoup d'agences misent sur le volume : 20 à 30 vidéos par mois, mais peu d'impact. Nous, on choisit moins de vidéos, mais chacune a une histoire, <span style={{ whiteSpace: 'nowrap' }}>un rôle et un objectif.</span>
         </p>
       </FadeIn>
 
