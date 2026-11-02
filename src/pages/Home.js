@@ -107,8 +107,8 @@ function Hero() {
         </Reveal>
 
         <Reveal delay={0.36} style={{ marginTop: '40px' }}>
-          <ArrowButton lift onClick={() => navigate('/planifier-un-appel')} style={{ fontSize: '13px', padding: '8px 8px 8px 28px' }}>
-            Réserver mon appel stratégique
+          <ArrowButton lift onClick={() => navigate('/planifier-un-appel')} className="hero-cta" style={{ fontSize: '13px', padding: '8px 8px 8px 28px' }}>
+            Réserver mon appel découverte
           </ArrowButton>
         </Reveal>
       </div>
@@ -361,6 +361,9 @@ export default function Home() {
           .approche-desktop-lines { display: none; }
           .approche-mobile-lines { display: block; }
           .approche-intro { font-size: 14.5px !important; }
+        }
+        @media (max-width: 400px) {
+          .hero-cta { font-size: 11px !important; }
         }
 
         .hero-gradient-line {

@@ -18,6 +18,6 @@ export const fan = [
 // Bloc de stats noir — chiffres cumulés de l'agence (pas de ventes/$).
 export const stats = [
   { prefix: '+', value: 40, suffix: 'M', label: 'de vues générées' },
-  { prefix: '+', value: 2, suffix: 'M', label: "d'engagements" },
+  { prefix: '+', value: 5, suffix: 'M', label: "d'engagements" },
   { prefix: '+', value: 100, suffix: 'K', label: 'abonnés cumulés' },
 ];
