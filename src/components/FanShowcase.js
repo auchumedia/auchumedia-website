@@ -1,32 +1,19 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import { fan } from '../data/showcase';
-import FanArc from './FanArc';
-import FanMobileSlider from './FanMobileSlider';
+import FanCarousel from './FanCarousel';
 
 export default function FanShowcase() {
-  const sectionRef = useRef(null);
-  const [isMobile, setIsMobile] = useState(() => (
-    typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches
-  ));
-
-  useEffect(() => {
-    const mq = window.matchMedia('(max-width: 768px)');
-    const update = () => setIsMobile(mq.matches);
-    mq.addEventListener('change', update);
-    return () => mq.removeEventListener('change', update);
-  }, []);
-
   return (
-    <section ref={sectionRef} id="clients" className="fan-section" aria-label="Nos clients actuels">
+    <section id="clients" className="fan-section" aria-label="Nos clients actuels">
       <h2 className="fan-title">Nos clients actuels</h2>
 
-      {isMobile ? <FanMobileSlider fan={fan} /> : <FanArc fan={fan} sectionRef={sectionRef} />}
+      <FanCarousel fan={fan} />
 
       <style>{`
         .fan-section {
           position: relative;
           background: #ffffff;
-          padding: 40px 20px 0;
+          padding: 40px 0 0;
           overflow: clip;
         }
         .fan-title {
@@ -34,14 +21,15 @@ export default function FanShowcase() {
           color: #003DA5;
           font-size: clamp(40px, 6vw, 72px);
           text-align: center;
-          margin: 0 0 56px;
+          margin: 0 0 48px;
           text-transform: uppercase;
+          padding: 0 20px;
         }
 
         .fan-card {
           position: relative;
           width: 100%;
-          aspect-ratio: 9 / 16;
+          aspect-ratio: 9 / 14;
           border-radius: 22px;
           overflow: hidden;
           box-shadow: 0 20px 44px rgba(0,0,0,0.18);
@@ -63,7 +51,7 @@ export default function FanShowcase() {
         .fan-card-overlay {
           position: absolute;
           inset: 0;
-          background: linear-gradient(to bottom, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 40%);
+          background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 44%);
         }
         .fan-card-text {
           position: absolute;
@@ -78,14 +66,29 @@ export default function FanShowcase() {
           font-weight: 700;
           color: #fff;
           text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+          margin-bottom: 6px;
+        }
+        .fan-card-views {
+          font-family: 'Bebas Neue';
+          font-size: 22px;
+          line-height: 1;
+          color: #bcd4ff;
+          text-transform: uppercase;
+          text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+        }
+        .fan-card-videos {
+          font-family: 'DM Sans';
+          font-size: 11px;
+          color: rgba(255,255,255,0.75);
+          margin-top: 3px;
         }
 
         @media (max-width: 768px) {
-          .fan-section { padding: 28px 0 0; }
-          .fan-title { margin: 0 20px 32px; font-size: clamp(32px, 9vw, 48px); }
-          .fan-card { aspect-ratio: 9 / 14; border-radius: 18px; }
+          .fan-title { font-size: clamp(32px, 9vw, 48px); margin: 0 0 32px; }
           .fan-card-text { top: 10px; left: 10px; right: 10px; }
           .fan-card-name { font-size: 11px; }
+          .fan-card-views { font-size: 17px; }
+          .fan-card-videos { font-size: 10px; }
           .fan-card-placeholder-name { font-size: 16px; }
         }
       `}</style>

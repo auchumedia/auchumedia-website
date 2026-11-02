@@ -107,9 +107,6 @@ export default function StatsBlock() {
           </div>
         ))}
       </div>
-      <p className="stats-disclaimer">
-        Résultats cumulés de l'agence au fil des années. Les performances varient selon l'offre, le marché et la constance de publication.
-      </p>
 
       <style>{`
         .stats-wrap {
@@ -161,15 +158,6 @@ export default function StatsBlock() {
           color: #fff;
           margin-top: 12px;
           line-height: 1.5;
-        }
-        .stats-disclaimer {
-          max-width: 560px;
-          margin: 24px auto 0;
-          text-align: center;
-          font-family: 'DM Sans';
-          font-size: 12px;
-          color: rgba(10,10,10,0.45);
-          line-height: 1.6;
         }
         @media (max-width: 768px) {
           .stats-wrap { padding: 0 12px; }

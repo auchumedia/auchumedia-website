@@ -14,6 +14,12 @@ export default function FanCard({ item }) {
       <div className="fan-card-overlay" />
       <div className="fan-card-text">
         <div className="fan-card-name">{item.name}</div>
+        {item.views && (
+          <>
+            <div className="fan-card-views">{item.views}</div>
+            {item.videos && <div className="fan-card-videos">{item.videos}</div>}
+          </>
+        )}
       </div>
     </div>
   );

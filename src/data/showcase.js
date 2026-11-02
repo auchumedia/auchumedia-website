@@ -6,13 +6,14 @@ const CLOUDINARY = {
 
 // Éventail de clients affiché sous le hero (section id="clients").
 // img vide → placeholder en dégradé avec le nom du client en grand.
+// views/videos null → rien n'est affiché sous le nom.
 export const fan = [
-  { name: 'Nor-Can', img: CLOUDINARY.norcan },
-  { name: 'Équipe Maher', img: CLOUDINARY.maher },
-  { name: 'Équipe Lemire Fillion', img: '', gradient: 'linear-gradient(135deg, #0a2a1a, #1a3a2a)' },
-  { name: 'Bâton Rouge', img: '', gradient: 'linear-gradient(135deg, #8B0000, #2a0a0a)' },
-  { name: 'Cardinal Asphalte', img: CLOUDINARY.cardinal },
-  { name: 'Groupe DDC', img: '', gradient: 'linear-gradient(135deg, #1a1a2e, #16213e)' },
+  { name: 'Nor-Can', img: CLOUDINARY.norcan, views: '6 M vues', videos: '172 vidéos' },
+  { name: 'Équipe Maher', img: CLOUDINARY.maher, views: '700 K vues', videos: '30 vidéos' },
+  { name: 'Équipe Lemire Fillion', img: '', gradient: 'linear-gradient(135deg, #0a2a1a, #1a3a2a)', views: '60 K vues', videos: '4 vidéos' },
+  { name: 'Bâton Rouge', img: '', gradient: 'linear-gradient(135deg, #8B0000, #2a0a0a)', views: null, videos: null },
+  { name: 'Cardinal Asphalte', img: CLOUDINARY.cardinal, views: '250 K vues', videos: '10 vidéos' },
+  { name: 'Groupe DDC', img: '', gradient: 'linear-gradient(135deg, #1a1a2e, #16213e)', views: null, videos: null },
 ];
 
 // Bloc de stats noir — chiffres cumulés de l'agence (pas de ventes/$).
