@@ -101,7 +101,7 @@ export default function ComparisonTable() {
       </div>
 
       <style>{`
-        .ct-wrap { max-width: 1100px; margin: 0 auto; }
+        .ct-wrap { max-width: 1100px; margin: 0 auto; padding-top: 118px; }
 
         /* ---- shared check / cross ---- */
         .ct-cross {
@@ -190,6 +190,7 @@ export default function ComparisonTable() {
         /* ---- mobile stacked cards ---- */
         .ct-mobile { display: none; }
         @media (max-width: 768px) {
+          .ct-wrap { padding-top: 44px; }
           .ct2-table { display: none; }
           .ct-mobile { display: flex; flex-direction: column; gap: 12px; }
           .ct-card {
@@ -226,6 +227,7 @@ export default function ComparisonTable() {
 
         /* ---- iPad: same layout, tighter sizing ---- */
         @media (min-width: 769px) and (max-width: 1024px) {
+          .ct-wrap { padding-top: 108px; }
           .ct2-table { grid-template-columns: 140px 1fr 1fr; }
           .ct2-card-bg { margin: -18px 0; border-radius: 22px; }
           .ct2-label { padding: 18px 14px 18px 0; font-size: 13px; }

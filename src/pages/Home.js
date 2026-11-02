@@ -132,10 +132,18 @@ function NotreApproche() {
         </h2>
       </FadeIn>
       <FadeIn delay={0.08}>
-        <p className="approche-intro" style={{ fontFamily: "'DM Sans'", textAlign: 'center', fontSize: '16px', color: 'rgba(10,10,10,0.55)', margin: '0 auto', lineHeight: 1.8 }}>
-          <span className="approche-intro-line approche-intro-line1">Beaucoup d'agences misent sur le volume : 20 à 30 vidéos par mois, mais peu d'impact.</span>
-          <span className="approche-intro-line approche-intro-line2">Nous, on choisit moins de vidéos,</span>
-          <span className="approche-intro-line approche-intro-line3">mais chacune a une histoire, <span style={{ whiteSpace: 'nowrap' }}>un rôle et un objectif.</span></span>
+        <p className="approche-intro" style={{ fontFamily: "'DM Sans'", textAlign: 'center', fontSize: '16px', color: 'rgba(10,10,10,0.55)', margin: 0, lineHeight: 1.8 }}>
+          <span className="approche-desktop-lines">
+            <span className="approche-line">Beaucoup d'agences misent sur le volume : 20 à 30 vidéos par mois,</span>
+            <span className="approche-line">mais peu d'impact. Nous, on choisit moins de vidéos,</span>
+            <span className="approche-line">mais chacune a une histoire, un rôle et un objectif.</span>
+          </span>
+          <span className="approche-mobile-lines">
+            <span className="approche-line">Beaucoup d'agences misent sur le volume :</span>
+            <span className="approche-line">20 à 30 vidéos par mois, mais peu d'impact.</span>
+            <span className="approche-line">Nous, on choisit moins de vidéos, mais</span>
+            <span className="approche-line">chacune a une histoire, un rôle et un objectif.</span>
+          </span>
         </p>
       </FadeIn>
 
@@ -344,14 +352,15 @@ export default function Home() {
           .notre-approche { padding-top: 130px !important; }
         }
 
-        .approche-intro { margin-bottom: 110px; }
-        .approche-intro-line { display: block; white-space: nowrap; }
+        .approche-line { display: block; white-space: nowrap; }
+        .approche-mobile-lines { display: none; }
         @media (min-width: 769px) and (max-width: 900px) {
           .approche-intro { font-size: 14.5px !important; }
         }
         @media (max-width: 768px) {
-          .approche-intro { margin-bottom: 64px; font-size: 15px !important; }
-          .approche-intro-line1, .approche-intro-line3 { white-space: normal; text-wrap: balance; }
+          .approche-desktop-lines { display: none; }
+          .approche-mobile-lines { display: block; }
+          .approche-intro { font-size: 14.5px !important; }
         }
 
         .hero-gradient-line {
