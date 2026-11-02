@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { fan } from '../data/showcase';
-import FanCarousel from './FanCarousel';
+import FanCoverflow from './FanCoverflow';
 
 export default function FanShowcase() {
+  const sectionRef = useRef(null);
   return (
-    <section id="clients" className="fan-section" aria-label="Nos clients actuels">
+    <section ref={sectionRef} id="clients" className="fan-section" aria-label="Nos clients actuels">
       <h2 className="fan-title">Nos clients actuels</h2>
 
-      <FanCarousel fan={fan} />
+      <FanCoverflow fan={fan} sectionRef={sectionRef} />
 
       <style>{`
         .fan-section {

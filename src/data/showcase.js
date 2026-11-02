@@ -1,6 +1,5 @@
 const CLOUDINARY = {
   norcan: 'https://res.cloudinary.com/dr0kwuqqa/image/upload/v1784410798/Capture_d_e%CC%81cran_le_2025-10-03_a%CC%80_11.10.40_v5hyzr.png',
-  maher: 'https://res.cloudinary.com/dr0kwuqqa/image/upload/v1784410790/Raf_Steve_ycvtgk.png',
   cardinal: 'https://res.cloudinary.com/dr0kwuqqa/image/upload/v1784411817/Capture_d_e%CC%81cran_le_2026-07-18_a%CC%80_17.56.25_rfb74n.png',
 };
 
@@ -9,8 +8,8 @@ const CLOUDINARY = {
 // views/videos null → rien n'est affiché sous le nom.
 export const fan = [
   { name: 'Nor-Can', img: CLOUDINARY.norcan, views: '6 M vues', videos: '172 vidéos' },
-  { name: 'Équipe Maher', img: CLOUDINARY.maher, views: '700 K vues', videos: '30 vidéos' },
-  { name: 'Équipe Lemire Fillion', img: '', gradient: 'linear-gradient(135deg, #0a2a1a, #1a3a2a)', views: '60 K vues', videos: '4 vidéos' },
+  { name: 'Équipe Maher', img: '/clients/maher.jpg', views: '700 K vues', videos: '30 vidéos' },
+  { name: 'Équipe Lemire Fillion', img: '/clients/lemire-fillion.jpg', views: '60 K vues', videos: '4 vidéos' },
   { name: 'Bâton Rouge', img: '', gradient: 'linear-gradient(135deg, #8B0000, #2a0a0a)', views: null, videos: null },
   { name: 'Cardinal Asphalte', img: CLOUDINARY.cardinal, views: '250 K vues', videos: '10 vidéos' },
   { name: 'Groupe DDC', img: '', gradient: 'linear-gradient(135deg, #1a1a2e, #16213e)', views: null, videos: null },

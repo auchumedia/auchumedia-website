@@ -4,10 +4,13 @@ export default function FanCard({ item }) {
   return (
     <div
       className="fan-card"
-      style={{
-        background: item.img
-          ? `url(${item.img}) center / cover no-repeat`
-          : (item.gradient || 'linear-gradient(135deg, #14161d, #050506)'),
+      style={item.img ? {
+        backgroundImage: `url(${item.img})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center 35%',
+        backgroundRepeat: 'no-repeat',
+      } : {
+        background: item.gradient || 'linear-gradient(135deg, #14161d, #050506)',
       }}
     >
       {!item.img && <span className="fan-card-placeholder-name">{item.name}</span>}
