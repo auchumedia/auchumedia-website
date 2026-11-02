@@ -83,8 +83,10 @@ function Hero() {
             <span className="desktop-line">L'ATTENTION SE MÉRITE.</span>
             <span className="desktop-line hero-gradient-line"><br />ON SAIT COMMENT L'OBTENIR.</span>
             <span className="mobile-only">
-              L'ATTENTION<br />SE MÉRITE.<br />
-              <span className="hero-gradient-line">ON SAIT<br />COMMENT<br />L'OBTENIR.</span>
+              <span className="mobile-line">L'ATTENTION</span>
+              <span className="mobile-line">SE MÉRITE.</span>
+              <span className="mobile-line hero-gradient-line">ON SAIT COMMENT</span>
+              <span className="mobile-line hero-gradient-line">L'OBTENIR.</span>
             </span>
           </h1>
         </Reveal>
@@ -398,7 +400,8 @@ export default function Home() {
         }
         @media (max-width: 768px) {
           .desktop-line { display: none; }
-          .mobile-only { display: block; font-size: clamp(52px, 14vw, 80px); }
+          .mobile-only { display: block; font-size: min(13.5vw, 64px); }
+          .mobile-line { display: block; white-space: nowrap; }
         }
 
         .hero-gradient-line {
