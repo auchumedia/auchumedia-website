@@ -7,6 +7,7 @@ import PresentationVideo from '../components/PresentationVideo';
 import FanShowcase from '../components/FanShowcase';
 import StatsBlock from '../components/StatsBlock';
 import ComparisonTable from '../components/ComparisonTable';
+import WhyVideos from '../components/WhyVideos';
 import Testimonials from '../components/Testimonials';
 
 const BLUE = '#003DA5';
@@ -271,12 +272,13 @@ function Footer() {
 
 export default function Home() {
   return (
-    <div style={{ background: '#ffffff', overflowX: 'clip' }}>
+    <div style={{ background: '#ffffff', overflowX: 'clip', overflowY: 'visible' }}>
       <Nav />
       <Hero />
       <FanShowcase />
       <StatsBlock />
       <NotreApproche />
+      <WhyVideos />
       <Testimonials />
       <CtaFinale />
       <Footer />
