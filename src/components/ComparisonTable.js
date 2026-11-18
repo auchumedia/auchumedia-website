@@ -4,7 +4,7 @@ const BLUE = '#003DA5';
 const BLACK = '#0a0a0a';
 
 const ROWS = [
-  { critere: 'Le volume', classique: '20 à 30 vidéos par mois, produites à la chaîne', auchu: '4 vidéos/mois par client, pensées une à une' },
+  { critere: 'Le volume', classique: '10 à 20 vidéos par mois, produites à la chaîne', auchu: '4 vidéos/mois par client, pensées une à une' },
   { critere: 'Le contenu', classique: 'Contenu générique, recopié sur les tendances', auchu: 'Storytelling propre à ta marque et à ton histoire' },
   { critere: 'Le format', classique: 'Vidéos isolées, sans fil conducteur', auchu: "Séries d'épisodes qui font revenir ton audience" },
   { critere: "L'objectif", classique: 'Publier pour publier', auchu: "Chaque vidéo a un but : capter l'attention, bâtir la confiance, convertir" },

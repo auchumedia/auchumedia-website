@@ -134,13 +134,13 @@ function NotreApproche() {
       <FadeIn delay={0.08}>
         <p className="approche-intro" style={{ fontFamily: "'DM Sans'", textAlign: 'center', fontSize: '16px', color: 'rgba(10,10,10,0.55)', margin: 0, lineHeight: 1.8 }}>
           <span className="approche-desktop-lines">
-            <span className="approche-line">Beaucoup d'agences misent sur le volume : 20 à 30 vidéos par mois,</span>
+            <span className="approche-line">Beaucoup d'agences misent sur le volume : 10 à 20 vidéos par mois,</span>
             <span className="approche-line">mais peu d'impact. Nous, on choisit moins de vidéos,</span>
             <span className="approche-line">mais chacune a une histoire, un rôle et un objectif.</span>
           </span>
           <span className="approche-mobile-lines">
             <span className="approche-line">Beaucoup d'agences misent sur le volume :</span>
-            <span className="approche-line">20 à 30 vidéos par mois, mais peu d'impact.</span>
+            <span className="approche-line">10 à 20 vidéos par mois, mais peu d'impact.</span>
             <span className="approche-line">Nous, on choisit moins de vidéos, mais</span>
             <span className="approche-line">chacune a une histoire, un rôle et un objectif.</span>
           </span>

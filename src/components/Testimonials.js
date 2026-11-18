@@ -1,6 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import ArrowButton from './ArrowButton';
 import { testimonials } from '../data/testimonials';
 
 function initials(nom) {
@@ -75,7 +73,6 @@ function TestimonialCard({ t, index, reveal, reduced, isPlaying, onPlay }) {
 }
 
 export default function Testimonials() {
-  const navigate = useNavigate();
   const headerRef = useRef(null);
   const trackRef = useRef(null);
   const dragRef = useRef({ dragging: false, startX: 0, scrollLeft: 0, moved: false });
@@ -159,66 +156,67 @@ export default function Testimonials() {
   return (
     <section id="temoignages" className="section-pad testi-section">
       <div className="testi-halo" aria-hidden="true" />
-      <div className="testi-topline" aria-hidden="true" />
 
-      <div ref={headerRef} className={`testi-header ${headerIn || reduced ? 'is-in' : ''}`}>
-        <div className="testi-label">Ils parlent de nous</div>
-        <h2 className="testi-title">
-          <span className="testi-title-white">Ce que nos clients</span><br />
-          <span className="testi-gradient-line">Disent.</span>
-        </h2>
-      </div>
+      <div className="testi-inner">
+        <div ref={headerRef} className={`testi-header ${headerIn || reduced ? 'is-in' : ''}`}>
+          <div className="testi-label">Ils parlent de nous</div>
+          <h2 className="testi-title">
+            <span className="testi-title-white">Ce que nos clients </span>
+            <span className="testi-gradient-line">Disent.</span>
+          </h2>
+        </div>
 
-      <div
-        ref={trackRef}
-        className="testi-track"
-        onPointerDown={onPointerDown}
-        onPointerMove={onPointerMove}
-        onPointerUp={endDrag}
-        onPointerLeave={endDrag}
-        onPointerCancel={endDrag}
-      >
-        {testimonials.map((t, i) => (
-          <TestimonialCard
-            key={t.id}
-            t={t}
-            index={i}
-            reveal={cardsIn}
-            reduced={reduced}
-            isPlaying={playingId === t.id}
-            onPlay={() => handlePlay(t.id)}
-          />
-        ))}
-      </div>
+        <div
+          ref={trackRef}
+          className="testi-track"
+          onPointerDown={onPointerDown}
+          onPointerMove={onPointerMove}
+          onPointerUp={endDrag}
+          onPointerLeave={endDrag}
+          onPointerCancel={endDrag}
+        >
+          {testimonials.map((t, i) => (
+            <TestimonialCard
+              key={t.id}
+              t={t}
+              index={i}
+              reveal={cardsIn}
+              reduced={reduced}
+              isPlaying={playingId === t.id}
+              onPlay={() => handlePlay(t.id)}
+            />
+          ))}
+        </div>
 
-      <div className="testi-dots">
-        {testimonials.map((_, i) => (
-          <button
-            key={i}
-            type="button"
-            className={`testi-dot ${i === activeIndex ? 'is-active' : ''}`}
-            onClick={() => scrollToIndex(i)}
-            aria-label={`Témoignage ${i + 1}`}
-          />
-        ))}
-      </div>
-
-      <div className="testi-cta">
-        <ArrowButton lift onClick={() => navigate('/planifier-un-appel')}>
-          Planifier un appel
-        </ArrowButton>
+        <div className="testi-dots">
+          {testimonials.map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              className={`testi-dot ${i === activeIndex ? 'is-active' : ''}`}
+              onClick={() => scrollToIndex(i)}
+              aria-label={`Témoignage ${i + 1}`}
+            />
+          ))}
+        </div>
       </div>
 
       <style>{`
         .testi-section {
           position: relative;
-          z-index: 2;
-          margin-top: -40px;
-          border-radius: 40px 40px 0 0;
           background: #0a0a0a;
           overflow: clip;
-          padding: 160px 60px 140px;
+          padding: 170px 60px 72px;
           text-align: center;
+        }
+        .testi-section::before {
+          content: '';
+          position: absolute;
+          top: 0; left: 0; right: 0;
+          height: 140px;
+          background: linear-gradient(#f8f8fa, #0a0a0a);
+          pointer-events: none;
+          z-index: 0;
         }
 
         .testi-halo {
@@ -240,23 +238,14 @@ export default function Testimonials() {
           50% { transform: translate(-46%, 4%) scale(1.08); opacity: 1; }
         }
 
-        .testi-topline {
-          position: absolute;
-          top: 0; left: 0; right: 0;
-          height: 2px;
-          background: linear-gradient(90deg, transparent, #3f78e8, #6fa0ff, #3f78e8, transparent);
-          background-size: 200% 100%;
-          animation: testiLineSlide 8s linear infinite;
-          z-index: 1;
-        }
-        @keyframes testiLineSlide {
-          0% { background-position: 0% 0; }
-          100% { background-position: 200% 0; }
+        .testi-inner {
+          position: relative;
+          z-index: 2;
+          max-width: 960px;
+          margin: 0 auto;
         }
 
         .testi-header {
-          position: relative;
-          z-index: 2;
           opacity: 0;
           transform: translateY(24px);
           transition: opacity 0.7s cubic-bezier(.22,1,.36,1), transform 0.7s cubic-bezier(.22,1,.36,1);
@@ -270,14 +259,15 @@ export default function Testimonials() {
           letter-spacing: 0.15em;
           text-transform: uppercase;
           color: #8fb4ff;
-          margin-bottom: 16px;
+          margin-bottom: 14px;
         }
         .testi-title {
           font-family: 'Bebas Neue';
-          font-size: clamp(36px, 5.5vw, 64px);
+          font-size: clamp(40px, 6vw, 84px);
           line-height: 1.05;
           text-transform: uppercase;
-          margin: 0 0 56px;
+          white-space: nowrap;
+          margin: 0 0 40px;
         }
         .testi-title-white { color: #fff; }
         .testi-gradient-line {
@@ -295,15 +285,12 @@ export default function Testimonials() {
         }
 
         .testi-track {
-          --card-w: 420px;
-          position: relative;
-          z-index: 2;
+          --card-w: 320px;
           display: flex;
-          gap: 24px;
+          gap: 20px;
           overflow-x: auto;
           scroll-snap-type: x mandatory;
-          padding: 8px max(60px, calc(50% - var(--card-w) / 2)) 24px;
-          margin: 0 -60px;
+          padding: 4px 4px 20px;
           cursor: grab;
           touch-action: pan-y;
           user-select: none;
@@ -318,11 +305,11 @@ export default function Testimonials() {
           position: relative;
           flex: 0 0 var(--card-w);
           width: var(--card-w);
-          scroll-snap-align: center;
+          scroll-snap-align: start;
           background: rgba(255,255,255,0.05);
           border: 1px solid rgba(255,255,255,0.10);
-          border-radius: 26px;
-          padding: 32px;
+          border-radius: 22px;
+          padding: 24px;
           backdrop-filter: blur(6px);
           -webkit-backdrop-filter: blur(6px);
           display: flex;
@@ -346,9 +333,9 @@ export default function Testimonials() {
           position: relative;
           width: 100%;
           aspect-ratio: 9 / 16;
-          border-radius: 18px;
+          border-radius: 16px;
           overflow: hidden;
-          margin-bottom: 20px;
+          margin-bottom: 16px;
           background: #000;
         }
         .testi-video {
@@ -374,12 +361,12 @@ export default function Testimonials() {
           justify-content: center;
         }
         .testi-play-btn {
-          width: 56px;
-          height: 56px;
+          width: 48px;
+          height: 48px;
           border-radius: 50%;
           background: #003DA5;
           color: #fff;
-          font-size: 18px;
+          font-size: 16px;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -387,55 +374,53 @@ export default function Testimonials() {
 
         .testi-quote-mark {
           font-family: 'Bebas Neue';
-          font-size: 64px;
+          font-size: 48px;
           line-height: 1;
           color: rgba(63,120,232,0.35);
-          margin-bottom: -18px;
+          margin-bottom: -12px;
         }
         .testi-stars {
           color: #f5b301;
-          font-size: 15px;
+          font-size: 13px;
           letter-spacing: 2px;
-          margin-bottom: 14px;
+          margin-bottom: 12px;
         }
         .testi-texte {
           font-family: 'DM Sans';
-          font-size: 18px;
+          font-size: 16px;
           color: #fff;
-          line-height: 1.6;
-          margin: 0 0 28px;
+          line-height: 1.55;
+          margin: 0 0 22px;
           flex: 1;
         }
         .testi-footer {
           display: flex;
           align-items: center;
-          gap: 14px;
+          gap: 12px;
           margin-top: auto;
         }
         .testi-avatar {
           flex-shrink: 0;
-          width: 44px;
-          height: 44px;
+          width: 40px;
+          height: 40px;
           border-radius: 50%;
           background: #003DA5;
           color: #fff;
           font-family: 'DM Sans';
           font-weight: 700;
-          font-size: 14px;
+          font-size: 13px;
           display: flex;
           align-items: center;
           justify-content: center;
         }
-        .testi-nom { font-family: 'DM Sans'; font-weight: 700; color: #fff; font-size: 14px; }
-        .testi-role { font-family: 'DM Sans'; color: rgba(255,255,255,0.6); font-size: 13px; margin-top: 2px; }
+        .testi-nom { font-family: 'DM Sans'; font-weight: 700; color: #fff; font-size: 13px; }
+        .testi-role { font-family: 'DM Sans'; color: rgba(255,255,255,0.6); font-size: 12px; margin-top: 2px; }
 
         .testi-dots {
-          position: relative;
-          z-index: 2;
           display: flex;
           justify-content: center;
           gap: 10px;
-          margin-top: 32px;
+          margin-top: 24px;
         }
         .testi-dot {
           width: 8px;
@@ -449,29 +434,21 @@ export default function Testimonials() {
         }
         .testi-dot.is-active { width: 24px; background: #6fa0ff; }
 
-        .testi-cta {
-          position: relative;
-          z-index: 2;
-          display: flex;
-          justify-content: center;
-          margin-top: 48px;
-        }
-
-        @media (max-width: 1100px) {
-          .testi-track { --card-w: 360px; }
+        @media (max-width: 1024px) {
+          .testi-track { --card-w: 300px; }
         }
         @media (max-width: 900px) {
           .testi-section { padding-left: 20px; padding-right: 20px; }
-          .testi-track { margin: 0 -20px; padding: 8px max(20px, calc(50% - var(--card-w) / 2)) 24px; }
         }
         @media (max-width: 768px) {
-          .testi-section { padding-top: 120px; padding-bottom: 110px; border-radius: 28px 28px 0 0; }
-          .testi-track { --card-w: 85vw; gap: 16px; }
-          .testi-title { margin-bottom: 44px; }
+          .testi-section { padding-top: 120px; padding-bottom: 60px; }
+          .testi-section::before { height: 90px; }
+          .testi-title { font-size: min(9.5vw, 56px); margin-bottom: 32px; }
+          .testi-track { --card-w: 78vw; gap: 14px; }
         }
 
         @media (prefers-reduced-motion: reduce) {
-          .testi-halo, .testi-topline, .testi-gradient-line { animation: none !important; }
+          .testi-halo, .testi-gradient-line { animation: none !important; }
           .testi-header, .testi-card { opacity: 1 !important; transform: none !important; transition: none !important; }
         }
       `}</style>
