@@ -5,34 +5,37 @@ import MediaPlaceholder from './MediaPlaceholder';
 const STEPS = whyVideos.length;
 const HYSTERESIS = 0.03; // ±3% of p around a step boundary, to stop flicker when p hovers near it
 
-/* Generates the 5x5 attribute-selector rules that drive the sticky scene
-   purely from the single `data-etape` attribute — no per-frame React state. */
+/* Generates the NxN attribute-selector rules that drive the sticky scene
+   purely from the single `data-etape` attribute — no per-frame React state.
+   Opacity only: no translateY/scale, so switching steps never moves anything. */
 function buildPanelCSS() {
   const rows = [];
   for (let etape = 0; etape < STEPS; etape += 1) {
     for (let idx = 0; idx < STEPS; idx += 1) {
       const sel = `.wv-stage[data-etape="${etape}"] .wv-panel[data-index="${idx}"]`;
       if (idx === etape) {
-        rows.push(`${sel} { opacity: 1; transform: translateY(0); pointer-events: auto; }`);
-        rows.push(`${sel} .wv-frame { transform: translateZ(0) scale(1); }`);
+        rows.push(`${sel} { opacity: 1; pointer-events: auto; }`);
         rows.push(`${sel} .wv-media-kenburns { animation: wvKenburns 8s ease-out forwards; }`);
       } else {
-        const dir = idx < etape ? -16 : 16;
-        rows.push(`${sel} { opacity: 0; transform: translateY(${dir}px); pointer-events: none; }`);
+        rows.push(`${sel} { opacity: 0; pointer-events: none; }`);
       }
     }
   }
   return rows.join('\n');
 }
 
+/* Segment fill: binary full/empty states are plain attribute-selector CSS
+   (cheap, only recomputed when data-etape actually changes). The ACTIVE
+   segment's continuous progress is written directly to that one element's
+   transform via a ref, every frame — never through a CSS custom property
+   on the stage (which would restyle the whole subtree each frame). */
 function buildSegmentCSS() {
   const rows = [];
   for (let etape = 0; etape < STEPS; etape += 1) {
     for (let idx = 0; idx < STEPS; idx += 1) {
       const sel = `.wv-stage[data-etape="${etape}"] .wv-seg[data-index="${idx}"] .wv-seg-fill`;
-      if (idx < etape) rows.push(`${sel} { width: 100%; }`);
-      else if (idx === etape) rows.push(`${sel} { width: calc(var(--step-p, 0) * 100%); }`);
-      else rows.push(`${sel} { width: 0%; }`);
+      if (idx < etape) rows.push(`${sel} { transform: scaleX(1); }`);
+      else if (idx > etape) rows.push(`${sel} { transform: scaleX(0); }`);
     }
   }
   return rows.join('\n');
@@ -71,7 +74,10 @@ function useVisualActive(ref, stepIndex) {
   return active;
 }
 
-/* ---------- the central frame: real photo/video, "photo à venir" otherwise ---------- */
+/* ---------- the central frame: real photo/video, "photo à venir" otherwise.
+   Fixed size always (set by the parent .wv-frame box); the media/placeholder
+   itself is absolutely positioned inset:0 so it can never influence that
+   size, whatever its own content or caption length. ---------- */
 
 function MediaFrame({ media, caption, stepIndex, label }) {
   const wrapRef = useRef(null);
@@ -121,7 +127,9 @@ function MediaFrame({ media, caption, stepIndex, label }) {
             {caption && <span className="wv-media-caption">{caption}</span>}
           </>
         ) : (
-          <MediaPlaceholder label="Photo à venir" caption={caption} bordered={false} />
+          <div className="wv-frame-fill">
+            <MediaPlaceholder label="Photo à venir" caption={caption} bordered={false} />
+          </div>
         )}
       </div>
     </div>
@@ -189,6 +197,7 @@ export default function WhyVideos() {
   const pisteRef = useRef(null);
   const stageRef = useRef(null);
   const panelRefs = useRef([]);
+  const segFillRefs = useRef([]);
   const lastEtapeRef = useRef(-1);
   const [reduced, setReduced] = useState(false);
 
@@ -204,7 +213,7 @@ export default function WhyVideos() {
       if (!el) return;
       el.classList.add('wv-will-change');
       clearTimeout(el.__wcTimer);
-      el.__wcTimer = setTimeout(() => el.classList.remove('wv-will-change'), 600);
+      el.__wcTimer = setTimeout(() => el.classList.remove('wv-will-change'), 450);
     };
 
     let scrollStopTimer = null;
@@ -222,8 +231,11 @@ export default function WhyVideos() {
       const piste = pisteRef.current;
       const stage = stageRef.current;
       if (!piste || !stage) return;
+      // Use stage.offsetHeight (stable, tied to 100svh) rather than
+      // window.innerHeight, which iOS Safari changes mid-scroll as its
+      // address bar collapses — that mismatch was feeding a jittery p.
       const rect = piste.getBoundingClientRect();
-      const scrollable = piste.offsetHeight - window.innerHeight;
+      const scrollable = piste.offsetHeight - stage.offsetHeight;
       const p = scrollable > 0 ? Math.min(1, Math.max(0, -rect.top / scrollable)) : 0;
       const rawIdx = Math.min(STEPS - 1, Math.floor(p * STEPS));
 
@@ -239,7 +251,8 @@ export default function WhyVideos() {
       }
 
       const stepP = Math.min(1, Math.max(0, p * STEPS - idx));
-      stage.style.setProperty('--step-p', stepP.toFixed(4));
+      const activeFill = segFillRefs.current[idx];
+      if (activeFill) activeFill.style.transform = `scaleX(${stepP.toFixed(4)})`;
 
       if (idx !== lastEtapeRef.current) {
         const prevIdx = lastEtapeRef.current;
@@ -248,6 +261,11 @@ export default function WhyVideos() {
         panelRefs.current.forEach((el, i) => {
           if (el) el.setAttribute('aria-hidden', i === idx ? 'false' : 'true');
         });
+        // hand the previous segment's fill back to plain CSS (full/empty)
+        if (prevIdx >= 0) {
+          const prevFill = segFillRefs.current[prevIdx];
+          if (prevFill) prevFill.style.transform = '';
+        }
         if (prevIdx >= 0) markTransitioning(prevIdx);
         markTransitioning(idx);
       }
@@ -270,9 +288,10 @@ export default function WhyVideos() {
 
   const goToStep = (i) => {
     const piste = pisteRef.current;
-    if (!piste) return;
+    const stage = stageRef.current;
+    if (!piste || !stage) return;
     const top = piste.getBoundingClientRect().top + window.scrollY;
-    const scrollable = piste.offsetHeight - window.innerHeight;
+    const scrollable = piste.offsetHeight - stage.offsetHeight;
     const target = top + ((i + 0.5) / STEPS) * Math.max(0, scrollable);
     window.scrollTo({ top: target, behavior: reduced ? 'auto' : 'smooth' });
   };
@@ -312,7 +331,7 @@ export default function WhyVideos() {
                 aria-label={`Étape ${i + 1}`}
                 onClick={() => goToStep(i)}
               >
-                <span className="wv-seg-fill" />
+                <span className="wv-seg-fill" ref={(el) => { segFillRefs.current[i] = el; }} />
               </button>
             ))}
           </div>
@@ -324,6 +343,7 @@ export default function WhyVideos() {
           position: relative;
           background: #0a0a0a;
           overflow-x: clip;
+          overflow-anchor: none;
           padding: 52px 60px 48px;
         }
         .wv-halo {
@@ -384,10 +404,11 @@ export default function WhyVideos() {
         /* ---- sticky scene (same mechanic at every breakpoint) ---- */
         .wv-piste {
           position: relative;
-          height: 500vh;
+          height: 400vh;
+          overflow-anchor: none;
         }
         @supports (height: 100svh) {
-          .wv-piste { height: 500svh; }
+          .wv-piste { height: 400svh; }
         }
         .wv-stage {
           position: sticky;
@@ -399,6 +420,7 @@ export default function WhyVideos() {
           gap: 28px;
           padding-top: 5rem;
           z-index: 2;
+          overflow-anchor: none;
         }
         @supports (height: 100svh) {
           .wv-stage { height: 100svh; }
@@ -415,9 +437,9 @@ export default function WhyVideos() {
           grid-template-columns: minmax(0,1fr) minmax(0,520px) minmax(0,1fr);
           column-gap: 40px;
           row-gap: 16px;
-          transition: opacity 0.5s cubic-bezier(.22,1,.36,1), transform 0.5s cubic-bezier(.22,1,.36,1);
+          transition: opacity 0.35s ease;
         }
-        .wv-panel.wv-will-change { will-change: opacity, transform; }
+        .wv-panel.wv-will-change { will-change: opacity; }
 
         .wv-piece-numtitle { grid-column: 1; grid-row: 1; align-self: start; }
         .wv-piece-usual    { grid-column: 1; grid-row: 2; align-self: start; }
@@ -486,14 +508,15 @@ export default function WhyVideos() {
           margin: 0;
         }
 
-        /* ---- the central frame: photo/video, or "photo à venir" ---- */
+        /* ---- the central frame: fixed size at every step, content-independent.
+           Desktop: aspect-ratio box, max 520px wide. Mobile/iPad: fixed svh
+           height, set below. The media/placeholder inside is always
+           position:absolute; inset:0 so it can never affect this size. ---- */
         .wv-frame {
           position: relative;
           width: 100%;
           max-width: 520px;
           aspect-ratio: 5 / 4;
-          transform: translateZ(0) scale(0.985);
-          transition: transform 0.5s cubic-bezier(.22,1,.36,1);
         }
         .wv-frame-inner {
           position: relative;
@@ -502,9 +525,13 @@ export default function WhyVideos() {
           border-radius: 16px;
           overflow: hidden;
         }
+        .wv-frame-fill, .wv-media {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+        }
         .wv-media {
-          position: absolute; inset: 0;
-          width: 100%; height: 100%;
           object-fit: cover;
           transform: scale(1);
         }
@@ -531,7 +558,7 @@ export default function WhyVideos() {
           border-radius: 6px;
         }
 
-        /* ---- segments ---- */
+        /* ---- segments: fixed width, progress via transform: scaleX() only ---- */
         .wv-segments { position: relative; z-index: 2; display: flex; gap: 8px; }
         .wv-seg {
           width: 56px; height: 3px;
@@ -540,12 +567,20 @@ export default function WhyVideos() {
           padding: 0; cursor: pointer;
           overflow: hidden;
         }
-        .wv-seg-fill { display: block; height: 100%; background: #3f78e8; width: 0%; }
+        .wv-seg-fill {
+          display: block; width: 100%; height: 100%;
+          background: #3f78e8;
+          transform-origin: left;
+          transform: scaleX(0);
+        }
 
         ${PANEL_CSS}
         ${SEGMENT_CSS}
 
-        /* ---- <1024px: same scene, single-column reflow via CSS order ---- */
+        /* ---- <1024px: same scene, single-column reflow via CSS order.
+           Each piece gets align-self: stretch (overriding the desktop
+           grid's align-self: start) so none of them — especially the
+           frame — shrink-wraps to its own content width. ---- */
         @media (max-width: 1023px) {
           .wv-header { min-height: auto; }
           .wv-panels { width: min(720px, 100%); }
@@ -554,10 +589,11 @@ export default function WhyVideos() {
             flex-direction: column;
             gap: 10px;
           }
+          .wv-piece { align-self: stretch; }
           .wv-piece-frame    { order: 1; }
           .wv-piece-numtitle { order: 2; display: flex; align-items: baseline; gap: 12px; }
-          .wv-piece-withus   { order: 3; }
-          .wv-piece-usual    { order: 4; }
+          .wv-piece-usual    { order: 3; }
+          .wv-piece-withus   { order: 4; }
           .wv-piece-question { order: 5; }
 
           .wv-num { font-size: 44px; margin-bottom: 0; }
@@ -575,14 +611,22 @@ export default function WhyVideos() {
           .wv-question { padding-left: 10px; }
           .wv-question p { font-size: 12px; }
 
-          .wv-frame { max-width: none; aspect-ratio: auto; height: 36svh; }
-          @supports not (height: 1svh) {
-            .wv-frame { height: 36vh; }
-          }
+          .wv-frame { max-width: none; aspect-ratio: auto; }
 
           .wv-stage { padding-top: 4.5rem; gap: 14px; }
           .wv-panels { height: clamp(600px, 78svh, 740px); }
+          @supports not (height: 1svh) {
+            .wv-panels { height: clamp(600px, 78vh, 740px); }
+          }
           .wv-seg { width: 48px; }
+        }
+
+        /* iPad: 769–1023px — frame height per spec */
+        @media (min-width: 769px) and (max-width: 1023px) {
+          .wv-frame { height: clamp(260px, 36svh, 360px); }
+          @supports not (height: 1svh) {
+            .wv-frame { height: clamp(260px, 36vh, 360px); }
+          }
         }
 
         @media (max-width: 768px) {
@@ -591,25 +635,27 @@ export default function WhyVideos() {
           .wv-title { font-size: clamp(26px, 8vw, 40px); }
           .wv-subtitle { display: none; }
           .wv-stage { padding-top: 3.75rem; gap: 10px; }
-          .wv-frame { height: 28svh; max-height: 34svh; }
+          .wv-frame { height: clamp(190px, 30svh, 280px); }
           @supports not (height: 1svh) {
-            .wv-frame { height: 28vh; }
+            .wv-frame { height: clamp(190px, 30vh, 280px); }
           }
           .wv-panels { height: clamp(500px, 80svh, 630px); }
+          @supports not (height: 1svh) {
+            .wv-panels { height: clamp(500px, 80vh, 630px); }
+          }
           .wv-seg { width: 42px; }
         }
 
         @media (max-height: 700px) {
-          .wv-stage { padding-top: 3rem; gap: 8px; }
+          .wv-stage { align-content: start; padding-top: 4.4rem; gap: 8px; }
           .wv-header { min-height: auto; }
           .wv-title { margin-bottom: 4px; }
           .wv-subtitle { display: none; }
           .wv-piece-question { display: none; }
-          .wv-frame { height: 25svh; }
+          .wv-panels { height: clamp(360px, 70svh, 480px); }
           @supports not (height: 1svh) {
-            .wv-frame { height: 25vh; }
+            .wv-panels { height: clamp(360px, 70vh, 480px); }
           }
-          .wv-panels { height: clamp(360px, 78svh, 480px); }
         }
 
         /* ---- reduced motion: static stacked list, no scroll-jacking ---- */
@@ -634,7 +680,6 @@ export default function WhyVideos() {
         .wv-reduced .wv-panel {
           position: static;
           opacity: 1 !important;
-          transform: none !important;
           pointer-events: auto !important;
           display: flex;
           flex-direction: column;
@@ -644,15 +689,16 @@ export default function WhyVideos() {
           border-radius: 20px;
           padding: 20px;
         }
+        .wv-reduced .wv-piece { align-self: stretch; }
         .wv-reduced .wv-piece-frame    { order: 1; }
         .wv-reduced .wv-piece-numtitle { order: 2; display: flex; align-items: baseline; gap: 12px; }
-        .wv-reduced .wv-piece-withus   { order: 3; }
-        .wv-reduced .wv-piece-usual    { order: 4; }
+        .wv-reduced .wv-piece-usual    { order: 3; }
+        .wv-reduced .wv-piece-withus   { order: 4; }
         .wv-reduced .wv-piece-question { order: 5; display: block; }
         .wv-reduced .wv-num { font-size: 40px; margin-bottom: 0; }
         .wv-reduced .wv-step-title { font-size: 18px; margin: 0; }
         .wv-reduced .wv-card-usual p { display: block; -webkit-line-clamp: unset; overflow: visible; }
-        .wv-reduced .wv-frame { aspect-ratio: 5 / 4; max-width: none; height: auto; transform: none; }
+        .wv-reduced .wv-frame { aspect-ratio: 5 / 4; max-width: none; height: auto; }
         .wv-reduced .wv-segments { display: none; }
 
         @media (prefers-reduced-motion: reduce) {
