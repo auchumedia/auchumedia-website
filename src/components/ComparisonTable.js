@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 const BLUE = '#003DA5';
-const BLACK = '#0a0a0a';
 
 const ROWS = [
   { critere: 'Le volume', classique: '10 à 20 vidéos par mois, produites à la chaîne', auchu: '4 vidéos/mois par client, pensées une à une' },
@@ -58,7 +57,7 @@ export default function ComparisonTable() {
           return (
             <React.Fragment key={r.critere}>
               <div
-                className={`ct2-label ct2-row-cell ${isLast ? '' : 'ct2-sep'}`}
+                className="ct2-label ct2-row-cell"
                 style={{ gridColumn: 1, gridRow: i + 2, transitionDelay: `${rowDelay(i)}s` }}
               >
                 {r.critere}
@@ -107,7 +106,7 @@ export default function ComparisonTable() {
         .ct-cross {
           flex-shrink: 0; width: 20px; height: 20px; border-radius: 50%;
           display: inline-flex; align-items: center; justify-content: center;
-          color: rgba(10,10,10,0.32); font-size: 11px; background: rgba(10,10,10,0.06);
+          color: rgba(255,255,255,0.5); font-size: 11px; background: rgba(255,255,255,0.08);
         }
         .ct-check {
           flex-shrink: 0; width: 20px; height: 20px; border-radius: 50%;
@@ -127,10 +126,12 @@ export default function ComparisonTable() {
         }
         .ct2-card-bg {
           position: relative;
-          background: #ffffff;
-          border: 1.5px solid ${BLUE};
+          background: rgba(255,255,255,0.05);
+          border: 1.5px solid #3f78e8;
           border-radius: 28px;
-          box-shadow: 0 20px 60px rgba(0,61,165,0.15);
+          box-shadow: 0 20px 60px rgba(0,61,165,0.35);
+          backdrop-filter: blur(6px);
+          -webkit-backdrop-filter: blur(6px);
           margin: -28px 0;
           z-index: 1;
         }
@@ -140,7 +141,7 @@ export default function ComparisonTable() {
           align-self: end;
           padding-bottom: 20px;
           font-family: 'DM Sans'; font-size: 13px; font-weight: 600;
-          color: #8b90a0;
+          color: rgba(255,255,255,0.45);
         }
         .ct2-header-auchu {
           position: relative; z-index: 2;
@@ -151,7 +152,6 @@ export default function ComparisonTable() {
         .ct2-auchu-logo {
           height: 26px;
           width: auto;
-          filter: brightness(0);
         }
 
         .ct2-row-cell {
@@ -166,7 +166,7 @@ export default function ComparisonTable() {
           display: flex; align-items: center;
           padding: 22px 20px 22px 4px;
           font-family: 'DM Sans'; font-size: 14px; font-weight: 600;
-          color: #5a5f70;
+          color: rgba(255,255,255,0.85);
         }
         .ct2-classique {
           position: relative; z-index: 2;
@@ -174,7 +174,7 @@ export default function ComparisonTable() {
           padding: 22px 24px;
         }
         .ct2-classique span {
-          font-family: 'DM Sans'; font-size: 14px; color: #8b90a0; line-height: 1.5;
+          font-family: 'DM Sans'; font-size: 14px; color: rgba(255,255,255,0.45); line-height: 1.5;
         }
         .ct2-auchu {
           position: relative; z-index: 2;
@@ -182,10 +182,10 @@ export default function ComparisonTable() {
           padding: 22px 32px;
         }
         .ct2-auchu span {
-          font-family: 'DM Sans'; font-size: 16px; font-weight: 600; color: ${BLACK}; line-height: 1.5;
+          font-family: 'DM Sans'; font-size: 16px; font-weight: 600; color: #fff; line-height: 1.5;
         }
         .ct2-auchu-last { padding-bottom: 40px; }
-        .ct2-sep { border-bottom: 1px solid #eceef4; }
+        .ct2-sep { border-bottom: 1px solid rgba(255,255,255,0.10); }
 
         /* ---- mobile stacked cards ---- */
         .ct-mobile { display: none; }
@@ -194,11 +194,10 @@ export default function ComparisonTable() {
           .ct2-table { display: none; }
           .ct-mobile { display: flex; flex-direction: column; gap: 12px; }
           .ct-card {
-            background: #fff;
+            background: rgba(255,255,255,0.05);
             border-radius: 22px;
             padding: 20px;
-            border: 1px solid #e6e8f0;
-            box-shadow: 0 8px 24px rgba(10,10,20,0.05);
+            border: 1px solid rgba(255,255,255,0.10);
             opacity: 0;
             transform: translateY(24px);
             transition: opacity 0.6s cubic-bezier(.22,1,.36,1), transform 0.6s cubic-bezier(.22,1,.36,1);
@@ -206,21 +205,21 @@ export default function ComparisonTable() {
           .ct-mobile.revealed .ct-card { opacity: 1; transform: translateY(0); }
           .ct-card-title {
             font-family: 'DM Sans'; font-size: 15px; font-weight: 600;
-            color: #5a5f70; margin-bottom: 14px;
+            color: rgba(255,255,255,0.7); margin-bottom: 14px;
           }
           .ct-card-line { display: flex; align-items: flex-start; gap: 12px; }
-          .ct-card-sep { height: 1px; background: #eceef4; margin: 14px 0; }
+          .ct-card-sep { height: 1px; background: rgba(255,255,255,0.10); margin: 14px 0; }
           .ct-card-classique .ct-cross {
             width: 24px; height: 24px; font-size: 12px;
-            background: #eef0f5; color: #9aa0b2;
+            background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.5);
           }
           .ct-card-classique span {
-            font-family: 'DM Sans'; font-size: 15px; color: #8b90a0; line-height: 1.4;
+            font-family: 'DM Sans'; font-size: 15px; color: rgba(255,255,255,0.45); line-height: 1.4;
             padding-top: 2px;
           }
           .ct-card-auchu .ct-check { width: 24px; height: 24px; }
           .ct-card-auchu span {
-            font-family: 'DM Sans'; font-size: 16px; font-weight: 600; color: ${BLACK}; line-height: 1.4;
+            font-family: 'DM Sans'; font-size: 16px; font-weight: 600; color: #fff; line-height: 1.4;
             padding-top: 2px;
           }
         }

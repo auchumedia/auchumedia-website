@@ -122,6 +122,8 @@ export default function StatsBlock() {
           margin: 0 auto;
           margin-bottom: -93px;
           background: #0a0a0a;
+          border: 1px solid rgba(255,255,255,0.14);
+          box-shadow: 0 10px 40px rgba(0,61,165,0.30);
           border-radius: 20px;
           display: flex;
           padding: 40px 32px;

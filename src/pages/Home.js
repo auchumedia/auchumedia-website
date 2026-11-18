@@ -123,31 +123,34 @@ function NotreApproche() {
     <section
       id="approche"
       className="section-pad notre-approche"
-      style={{ paddingTop: '210px', paddingBottom: '140px', paddingLeft: '60px', paddingRight: '60px', background: '#f8f8fa', scrollMarginTop: '90px' }}
+      style={{ position: 'relative', overflow: 'clip', paddingTop: '210px', paddingBottom: '48px', paddingLeft: '60px', paddingRight: '60px', background: '#0a0a0a', scrollMarginTop: '90px' }}
     >
-      <FadeIn>
-        <h2 style={{ fontFamily: "'Bebas Neue'", textAlign: 'center', fontSize: 'clamp(36px, 5.5vw, 64px)', lineHeight: 1.05, margin: '0 auto 24px', textTransform: 'uppercase', maxWidth: '760px' }}>
-          <span style={{ color: BLACK }}>Pas du contenu de masse.</span><br />
-          <span style={{ color: BLUE }}>Du contenu qui marque.</span>
-        </h2>
-      </FadeIn>
-      <FadeIn delay={0.08}>
-        <p className="approche-intro" style={{ fontFamily: "'DM Sans'", textAlign: 'center', fontSize: '16px', color: 'rgba(10,10,10,0.55)', margin: 0, lineHeight: 1.8 }}>
-          <span className="approche-desktop-lines">
-            <span className="approche-line">Beaucoup d'agences misent sur le volume : 10 à 20 vidéos par mois,</span>
-            <span className="approche-line">mais peu d'impact. Nous, on choisit moins de vidéos,</span>
-            <span className="approche-line">mais chacune a une histoire, un rôle et un objectif.</span>
-          </span>
-          <span className="approche-mobile-lines">
-            <span className="approche-line">Beaucoup d'agences misent sur le volume :</span>
-            <span className="approche-line">10 à 20 vidéos par mois, mais peu d'impact.</span>
-            <span className="approche-line">Nous, on choisit moins de vidéos, mais</span>
-            <span className="approche-line">chacune a une histoire, un rôle et un objectif.</span>
-          </span>
-        </p>
-      </FadeIn>
+      <div className="approche-halo" aria-hidden="true" />
+      <div style={{ position: 'relative', zIndex: 2 }}>
+        <FadeIn>
+          <h2 style={{ fontFamily: "'Bebas Neue'", textAlign: 'center', fontSize: 'clamp(36px, 5.5vw, 64px)', lineHeight: 1.05, margin: '0 auto 24px', textTransform: 'uppercase', maxWidth: '760px' }}>
+            <span style={{ color: '#fff' }}>Pas du contenu de masse.</span><br />
+            <span className="approche-gradient-line">Du contenu qui marque.</span>
+          </h2>
+        </FadeIn>
+        <FadeIn delay={0.08}>
+          <p className="approche-intro" style={{ fontFamily: "'DM Sans'", textAlign: 'center', fontSize: '16px', color: 'rgba(255,255,255,0.65)', margin: 0, lineHeight: 1.8 }}>
+            <span className="approche-desktop-lines">
+              <span className="approche-line">Beaucoup d'agences misent sur le volume : 10 à 20 vidéos par mois,</span>
+              <span className="approche-line">mais peu d'impact. Nous, on choisit moins de vidéos,</span>
+              <span className="approche-line">mais chacune a une histoire, un rôle et un objectif.</span>
+            </span>
+            <span className="approche-mobile-lines">
+              <span className="approche-line">Beaucoup d'agences misent sur le volume :</span>
+              <span className="approche-line">10 à 20 vidéos par mois, mais peu d'impact.</span>
+              <span className="approche-line">Nous, on choisit moins de vidéos, mais</span>
+              <span className="approche-line">chacune a une histoire, un rôle et un objectif.</span>
+            </span>
+          </p>
+        </FadeIn>
 
-      <ComparisonTable />
+        <ComparisonTable />
+      </div>
     </section>
   );
 }
@@ -293,7 +296,7 @@ export default function Home() {
           .mobile-only { display: block; font-size: min(12.5vw, 64px); }
           .subtitle-mobile-only { display: block; font-size: min(4.1vw, 17.5px); }
           .mobile-line { display: block; white-space: nowrap; }
-          .notre-approche { padding-top: 130px !important; }
+          .notre-approche { padding-top: 130px !important; padding-bottom: 32px !important; }
         }
 
         .approche-line { display: block; white-space: nowrap; }
@@ -322,6 +325,41 @@ export default function Home() {
           0% { background-position: 0% 50%; }
           50% { background-position: 100% 50%; }
           100% { background-position: 0% 50%; }
+        }
+
+        .approche-halo {
+          position: absolute;
+          top: 0;
+          left: 50%;
+          width: 70vw;
+          max-width: 900px;
+          height: 900px;
+          transform: translate(-50%, 0);
+          background: radial-gradient(circle, rgba(0,61,165,0.25), transparent 70%);
+          filter: blur(40px);
+          pointer-events: none;
+          z-index: 0;
+          animation: testiHaloDrift 22s ease-in-out infinite;
+        }
+        .approche-gradient-line {
+          background: linear-gradient(100deg, #6fa0ff 0%, #3f78e8 50%, #6fa0ff 100%);
+          background-size: 200% 100%;
+          -webkit-background-clip: text;
+          background-clip: text;
+          color: transparent;
+          animation: approcheReflet 6s ease-in-out infinite;
+        }
+        @keyframes approcheReflet {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        @keyframes testiHaloDrift {
+          0%, 100% { transform: translate(-54%, -2%) scale(1); opacity: 0.9; }
+          50% { transform: translate(-46%, 4%) scale(1.08); opacity: 1; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .approche-halo, .approche-gradient-line { animation: none !important; }
         }
 
         @keyframes ctaGradient {

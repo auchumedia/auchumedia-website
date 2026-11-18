@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { testimonials } from '../data/testimonials';
 
+const FLICK_THRESHOLD = 0.35; // px/ms
+
 function initials(nom) {
   return nom
     .split(' ')
@@ -75,7 +77,10 @@ function TestimonialCard({ t, index, reveal, reduced, isPlaying, onPlay }) {
 export default function Testimonials() {
   const headerRef = useRef(null);
   const trackRef = useRef(null);
-  const dragRef = useRef({ dragging: false, startX: 0, scrollLeft: 0, moved: false });
+  const dragRef = useRef({
+    dragging: false, moved: false, suppressClick: false,
+    startX: 0, startScrollLeft: 0, lastX: 0, lastT: 0, velocity: 0,
+  });
 
   const [headerIn, setHeaderIn] = useState(false);
   const [cardsIn, setCardsIn] = useState(false);
@@ -121,35 +126,90 @@ export default function Testimonials() {
     return () => el.removeEventListener('scroll', onScroll);
   }, []);
 
+  const nearestIndex = () => {
+    const el = trackRef.current;
+    if (!el) return 0;
+    const center = el.scrollLeft + el.clientWidth / 2;
+    let closest = 0;
+    let closestDist = Infinity;
+    Array.from(el.children).forEach((child, i) => {
+      const childCenter = child.offsetLeft + child.offsetWidth / 2;
+      const dist = Math.abs(childCenter - center);
+      if (dist < closestDist) { closestDist = dist; closest = i; }
+    });
+    return closest;
+  };
+
   const scrollToIndex = (i) => {
     const el = trackRef.current;
     const child = el?.children[i];
     if (!el || !child) return;
-    el.scrollTo({ left: child.offsetLeft - (el.clientWidth - child.clientWidth) / 2, behavior: 'smooth' });
+    el.scrollTo({
+      left: child.offsetLeft - (el.clientWidth - child.clientWidth) / 2,
+      behavior: reduced ? 'auto' : 'smooth',
+    });
   };
 
+  // Mouse-only drag. Touch is left entirely to native scroll-snap scrolling.
   const onPointerDown = (e) => {
+    if (e.pointerType !== 'mouse') return;
     const el = trackRef.current;
     if (!el) return;
-    dragRef.current = { dragging: true, startX: e.clientX, scrollLeft: el.scrollLeft, moved: false };
+    e.preventDefault();
+    dragRef.current = {
+      dragging: true, moved: false, suppressClick: false,
+      startX: e.clientX, startScrollLeft: el.scrollLeft,
+      lastX: e.clientX, lastT: performance.now(), velocity: 0,
+    };
     el.setPointerCapture?.(e.pointerId);
-    el.classList.add('is-dragging');
+    el.classList.add('is-dragging', 'no-snap');
   };
+
   const onPointerMove = (e) => {
+    if (e.pointerType !== 'mouse') return;
     const st = dragRef.current;
     const el = trackRef.current;
     if (!st.dragging || !el) return;
     const dx = e.clientX - st.startX;
     if (Math.abs(dx) > 5) st.moved = true;
-    el.scrollLeft = st.scrollLeft - dx;
+    el.scrollLeft = st.startScrollLeft - dx;
+    const now = performance.now();
+    const dt = now - st.lastT;
+    if (dt > 0) st.velocity = (e.clientX - st.lastX) / dt;
+    st.lastX = e.clientX;
+    st.lastT = now;
   };
-  const endDrag = () => {
-    dragRef.current.dragging = false;
-    trackRef.current?.classList.remove('is-dragging');
+
+  const endDrag = (e) => {
+    if (e && e.pointerType && e.pointerType !== 'mouse') return;
+    const st = dragRef.current;
+    const el = trackRef.current;
+    if (!st.dragging) return;
+    st.dragging = false;
+    st.suppressClick = st.moved;
+    el?.classList.remove('is-dragging', 'no-snap');
+    if (!el) return;
+
+    let target = nearestIndex();
+    const count = testimonials.length;
+    if (Math.abs(st.velocity) > FLICK_THRESHOLD) {
+      if (st.velocity < 0 && target < count - 1) target += 1;
+      else if (st.velocity > 0 && target > 0) target -= 1;
+    }
+    scrollToIndex(target);
+  };
+
+  const onDragStart = (e) => e.preventDefault();
+
+  const onClickCapture = (e) => {
+    if (dragRef.current.suppressClick) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
   };
 
   const handlePlay = (id) => {
-    if (dragRef.current.moved) return;
+    if (dragRef.current.suppressClick) return;
     setPlayingId(id);
   };
 
@@ -174,6 +234,8 @@ export default function Testimonials() {
           onPointerUp={endDrag}
           onPointerLeave={endDrag}
           onPointerCancel={endDrag}
+          onDragStart={onDragStart}
+          onClickCapture={onClickCapture}
         >
           {testimonials.map((t, i) => (
             <TestimonialCard
@@ -206,17 +268,8 @@ export default function Testimonials() {
           position: relative;
           background: #0a0a0a;
           overflow: clip;
-          padding: 170px 60px 72px;
+          padding: 52px 60px 72px;
           text-align: center;
-        }
-        .testi-section::before {
-          content: '';
-          position: absolute;
-          top: 0; left: 0; right: 0;
-          height: 140px;
-          background: linear-gradient(#f8f8fa, #0a0a0a);
-          pointer-events: none;
-          z-index: 0;
         }
 
         .testi-halo {
@@ -289,23 +342,27 @@ export default function Testimonials() {
           display: flex;
           gap: 20px;
           overflow-x: auto;
+          overscroll-behavior-x: contain;
           scroll-snap-type: x mandatory;
+          scroll-behavior: auto;
+          -webkit-overflow-scrolling: touch;
+          touch-action: pan-x pan-y;
           padding: 4px 4px 20px;
           cursor: grab;
-          touch-action: pan-y;
           user-select: none;
           -webkit-user-select: none;
           scrollbar-width: none;
           -ms-overflow-style: none;
         }
         .testi-track::-webkit-scrollbar { display: none; }
-        .testi-track.is-dragging { cursor: grabbing; scroll-snap-type: none; }
+        .testi-track.is-dragging { cursor: grabbing; }
+        .testi-track.no-snap { scroll-snap-type: none; }
 
         .testi-card {
           position: relative;
           flex: 0 0 var(--card-w);
           width: var(--card-w);
-          scroll-snap-align: start;
+          scroll-snap-align: center;
           background: rgba(255,255,255,0.05);
           border: 1px solid rgba(255,255,255,0.10);
           border-radius: 22px;
@@ -441,8 +498,7 @@ export default function Testimonials() {
           .testi-section { padding-left: 20px; padding-right: 20px; }
         }
         @media (max-width: 768px) {
-          .testi-section { padding-top: 120px; padding-bottom: 60px; }
-          .testi-section::before { height: 90px; }
+          .testi-section { padding-top: 32px; padding-bottom: 60px; }
           .testi-title { font-size: min(9.5vw, 56px); margin-bottom: 32px; }
           .testi-track { --card-w: 78vw; gap: 14px; }
         }
