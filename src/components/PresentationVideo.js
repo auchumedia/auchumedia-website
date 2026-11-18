@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { presentationVideo } from '../data/videos';
+import MediaPlaceholder from './MediaPlaceholder';
 
 const BLUE = '#003DA5';
 const CLIP = 'polygon(0 0, calc(100% - 28px) 0, 100% 28px, 100% 100%, 28px 100%, 0 calc(100% - 28px))';
@@ -16,6 +17,14 @@ export default function PresentationVideo() {
   const hasSrc = !!src;
   const isYouTube = hasSrc && /youtube\.com|youtu\.be/.test(src);
 
+  if (!hasSrc) {
+    return (
+      <div style={{ width: '100%', maxWidth: '860px', margin: '0 auto', position: 'relative', aspectRatio: '16 / 9' }}>
+        <MediaPlaceholder label="Vidéo bientôt disponible" />
+      </div>
+    );
+  }
+
   return (
     <div style={{ width: '100%', maxWidth: '860px', margin: '0 auto' }}>
       <div style={{ padding: '2px', background: BLUE, clipPath: CLIP }}>
@@ -23,7 +32,7 @@ export default function PresentationVideo() {
           position: 'relative', width: '100%', aspectRatio: '16 / 9',
           background: '#0a0a0a', clipPath: CLIP, overflow: 'hidden',
         }}>
-          {playing && hasSrc ? (
+          {playing ? (
             isYouTube ? (
               <iframe
                 src={getYouTubeEmbedUrl(src)}
@@ -42,42 +51,30 @@ export default function PresentationVideo() {
             )
           ) : (
             <button
-              onClick={() => hasSrc && setPlaying(true)}
-              disabled={!hasSrc}
+              onClick={() => setPlaying(true)}
               style={{
                 position: 'absolute', inset: 0, width: '100%', height: '100%', border: 'none', padding: 0,
-                cursor: hasSrc ? 'pointer' : 'default',
+                cursor: 'pointer',
                 background: poster ? `url(${poster}) center / cover no-repeat` : 'linear-gradient(135deg, #0a0a0a, #0a1f4d)',
                 display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '16px',
               }}
             >
-              {hasSrc ? (
-                <>
-                  <span style={{
-                    width: '68px', height: '68px', borderRadius: '50%', background: BLUE,
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    boxShadow: '0 8px 28px rgba(0,61,165,0.5)',
-                  }}>
-                    <span style={{
-                      width: 0, height: 0, marginLeft: '4px',
-                      borderTop: '11px solid transparent', borderBottom: '11px solid transparent', borderLeft: '18px solid #fff',
-                    }} />
-                  </span>
-                  <span style={{
-                    fontFamily: "'DM Sans'", fontSize: '13px', fontWeight: 700, letterSpacing: '0.08em',
-                    textTransform: 'uppercase', color: '#fff',
-                  }}>
-                    Regarder la présentation{duration ? ` · ${duration}` : ''}
-                  </span>
-                </>
-              ) : (
+              <span style={{
+                width: '68px', height: '68px', borderRadius: '50%', background: BLUE,
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                boxShadow: '0 8px 28px rgba(0,61,165,0.5)',
+              }}>
                 <span style={{
-                  fontFamily: "'DM Sans'", fontSize: '13px', fontWeight: 700, letterSpacing: '0.08em',
-                  textTransform: 'uppercase', color: 'rgba(255,255,255,0.6)',
-                }}>
-                  Vidéo bientôt disponible
-                </span>
-              )}
+                  width: 0, height: 0, marginLeft: '4px',
+                  borderTop: '11px solid transparent', borderBottom: '11px solid transparent', borderLeft: '18px solid #fff',
+                }} />
+              </span>
+              <span style={{
+                fontFamily: "'DM Sans'", fontSize: '13px', fontWeight: 700, letterSpacing: '0.08em',
+                textTransform: 'uppercase', color: '#fff',
+              }}>
+                Regarder la présentation{duration ? ` · ${duration}` : ''}
+              </span>
             </button>
           )}
         </div>
