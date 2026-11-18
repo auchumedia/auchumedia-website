@@ -7,10 +7,10 @@ import PresentationVideo from '../components/PresentationVideo';
 import FanShowcase from '../components/FanShowcase';
 import StatsBlock from '../components/StatsBlock';
 import ComparisonTable from '../components/ComparisonTable';
+import Testimonials from '../components/Testimonials';
 
 const BLUE = '#003DA5';
 const BLACK = '#0a0a0a';
-const GRAY_BG = '#f8f8f8';
 
 /* ---------- Shared hooks / helpers ---------- */
 
@@ -152,62 +152,6 @@ function NotreApproche() {
   );
 }
 
-/* ---------- Témoignages ---------- */
-
-const TEMOIGNAGES = [
-  { texte: "AuchuMedia a complètement transformé notre présence sur les réseaux. En 3 mois, on a vu une augmentation significative de nos demandes de soumission.", nom: 'Jean-Philippe Tremblay', titre: 'Directeur général, Cardinal Asphalte' },
-  { texte: "Ce qui nous a le plus impressionné, c'est leur compréhension de notre industrie. Le contenu qu'ils créent résonne vraiment avec notre clientèle.", nom: 'Marie-Pier Gagnon', titre: 'Directrice marketing, Nor-Can' },
-  { texte: "On cherchait une équipe qui comprend les réseaux sociaux et le monde immobilier. AuchuMedia dépasse largement nos attentes.", nom: 'Steve Maher', titre: 'Courtier immobilier, RE/MAX' },
-];
-
-function Temoignages() {
-  const [active, setActive] = useState(0);
-
-  useEffect(() => {
-    const t = setInterval(() => setActive(a => (a + 1) % TEMOIGNAGES.length), 6000);
-    return () => clearInterval(t);
-  }, []);
-
-  const current = TEMOIGNAGES[active];
-
-  return (
-    <section className="section-pad" style={{ padding: '140px 60px', background: GRAY_BG, textAlign: 'center' }}>
-      <FadeIn>
-        <div style={{ fontFamily: "'DM Sans'", fontSize: '12px', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: BLUE, marginBottom: '16px' }}>
-          Ils parlent de nous
-        </div>
-        <h2 style={{ fontFamily: "'Bebas Neue'", color: BLACK, fontSize: 'clamp(36px, 5vw, 56px)', margin: '0 0 56px', textTransform: 'uppercase' }}>
-          Ce que nos clients disent.
-        </h2>
-      </FadeIn>
-
-      <div style={{ maxWidth: '640px', margin: '0 auto' }}>
-        <div key={active} className="testimonial-card" style={{
-          background: '#ffffff', border: '1px solid rgba(0,0,0,0.08)', borderRadius: '16px',
-          padding: '40px 36px', boxShadow: '0 12px 40px rgba(0,0,0,0.06)', textAlign: 'left',
-        }}>
-          <div style={{ color: '#f5b400', fontSize: '16px', marginBottom: '18px', letterSpacing: '2px' }}>★★★★★</div>
-          <p style={{ fontFamily: "'DM Sans'", fontSize: '16px', fontStyle: 'italic', color: 'rgba(10,10,10,0.7)', lineHeight: 1.75, margin: '0 0 24px' }}>
-            "{current.texte}"
-          </p>
-          <div style={{ fontFamily: "'DM Sans'", fontSize: '14px', fontWeight: 700, color: BLACK }}>{current.nom}</div>
-          <div style={{ fontFamily: "'DM Sans'", fontSize: '13px', color: 'rgba(10,10,10,0.5)', marginTop: '2px' }}>{current.titre}</div>
-        </div>
-
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', marginTop: '28px' }}>
-          {TEMOIGNAGES.map((_, i) => (
-            <button key={i} onClick={() => setActive(i)} aria-label={`Témoignage ${i + 1}`} style={{
-              width: i === active ? '24px' : '8px', height: '8px', borderRadius: '4px',
-              background: i === active ? BLUE : 'rgba(10,10,10,0.2)', border: 'none', cursor: 'pointer',
-              transition: 'all 0.3s ease', padding: 0,
-            }} />
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 /* ---------- CTA finale ---------- */
 
 function CtaFinale() {
@@ -330,7 +274,7 @@ export default function Home() {
       <FanShowcase />
       <StatsBlock />
       <NotreApproche />
-      <Temoignages />
+      <Testimonials />
       <CtaFinale />
       <Footer />
 
