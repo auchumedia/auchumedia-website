@@ -3,83 +3,80 @@ import { whyVideos } from '../data/whyVideos';
 import MediaPlaceholder from './MediaPlaceholder';
 
 const STEPS = whyVideos.length;
-const HYSTERESIS = 0.03; // ±3% of p around a step boundary, to stop flicker when p hovers near it
+const GRID_COLS = 'minmax(0,1fr) minmax(0,520px) minmax(0,1fr)';
 
-/* Generates the NxN attribute-selector rules that drive the sticky scene
-   purely from the single `data-etape` attribute — no per-frame React state.
-   Opacity only: no translateY/scale, so switching steps never moves anything. */
+/* Opacity-only, attribute-selector driven. No JS writes these per frame —
+   only the single `data-etape` attribute changes (via IntersectionObserver,
+   see useStickyScene below), and the browser handles the rest as a plain
+   CSS transition. */
 function buildPanelCSS() {
   const rows = [];
   for (let etape = 0; etape < STEPS; etape += 1) {
     for (let idx = 0; idx < STEPS; idx += 1) {
       const sel = `.wv-stage[data-etape="${etape}"] .wv-panel[data-index="${idx}"]`;
+      rows.push(`${sel} { opacity: ${idx === etape ? 1 : 0}; pointer-events: ${idx === etape ? 'auto' : 'none'}; }`);
+    }
+  }
+  return rows.join('\n');
+}
+
+/* Same idea for the media layers stacked inside the one persistent frame —
+   the frame chrome itself never animates, only the media crossfades. */
+function buildMediaCSS() {
+  const rows = [];
+  for (let etape = 0; etape < STEPS; etape += 1) {
+    for (let idx = 0; idx < STEPS; idx += 1) {
+      const sel = `.wv-stage[data-etape="${etape}"] .wv-media-layer[data-index="${idx}"]`;
       if (idx === etape) {
-        rows.push(`${sel} { opacity: 1; pointer-events: auto; }`);
+        rows.push(`${sel} { opacity: 1; }`);
         rows.push(`${sel} .wv-media-kenburns { animation: wvKenburns 8s ease-out forwards; }`);
       } else {
-        rows.push(`${sel} { opacity: 0; pointer-events: none; }`);
+        rows.push(`${sel} { opacity: 0; }`);
       }
     }
   }
   return rows.join('\n');
 }
 
-/* Segment fill: binary full/empty states are plain attribute-selector CSS
-   (cheap, only recomputed when data-etape actually changes). The ACTIVE
-   segment's continuous progress is written directly to that one element's
-   transform via a ref, every frame — never through a CSS custom property
-   on the stage (which would restyle the whole subtree each frame). */
+/* Segments: full/empty is a plain attribute-selector class of CSS (no JS),
+   and the only "animation" is a CSS transition on transform: scaleX(),
+   triggered purely by the data-etape attribute change — no continuous
+   scroll-linked value at all. */
 function buildSegmentCSS() {
   const rows = [];
   for (let etape = 0; etape < STEPS; etape += 1) {
     for (let idx = 0; idx < STEPS; idx += 1) {
       const sel = `.wv-stage[data-etape="${etape}"] .wv-seg[data-index="${idx}"] .wv-seg-fill`;
-      if (idx < etape) rows.push(`${sel} { transform: scaleX(1); }`);
-      else if (idx > etape) rows.push(`${sel} { transform: scaleX(0); }`);
+      rows.push(`${sel} { transform: scaleX(${idx <= etape ? 1 : 0}); }`);
     }
   }
   return rows.join('\n');
 }
 
 const PANEL_CSS = buildPanelCSS();
+const MEDIA_CSS = buildMediaCSS();
 const SEGMENT_CSS = buildSegmentCSS();
 
-/* Detects "is this step currently active?" without touching the scroll
-   handler. In the normal sticky scene it watches the ancestor .wv-stage's
-   data-etape attribute (MutationObserver). When reduced-motion forces the
-   static list, panels are laid out normally so a plain IntersectionObserver
-   on the element itself reports real, independent visibility. */
+/* Detects "is this media layer currently active?" for video play/pause and
+   the Ken Burns trigger, by watching the ancestor .wv-stage's data-etape
+   attribute via MutationObserver — never by reading layout during scroll. */
 function useVisualActive(ref, stepIndex) {
   const [active, setActive] = useState(false);
   useEffect(() => {
     const el = ref.current;
     if (!el) return undefined;
-    const section = el.closest('.wv-section');
     const stage = el.closest('.wv-stage');
-
-    if (section && section.classList.contains('wv-reduced')) {
-      const io = new IntersectionObserver(([entry]) => setActive(entry.isIntersecting), { threshold: 0.3 });
-      io.observe(el);
-      return () => io.disconnect();
-    }
-    if (stage) {
-      const check = () => setActive(stage.dataset.etape === String(stepIndex));
-      check();
-      const mo = new MutationObserver(check);
-      mo.observe(stage, { attributes: true, attributeFilter: ['data-etape'] });
-      return () => mo.disconnect();
-    }
-    return undefined;
+    if (!stage) { setActive(true); return undefined; }
+    const check = () => setActive(stage.dataset.etape === String(stepIndex));
+    check();
+    const mo = new MutationObserver(check);
+    mo.observe(stage, { attributes: true, attributeFilter: ['data-etape'] });
+    return () => mo.disconnect();
   }, [ref, stepIndex]);
   return active;
 }
 
-/* ---------- the central frame: real photo/video, "photo à venir" otherwise.
-   Fixed size always (set by the parent .wv-frame box); the media/placeholder
-   itself is absolutely positioned inset:0 so it can never influence that
-   size, whatever its own content or caption length. ---------- */
-
-function MediaFrame({ media, caption, stepIndex, label }) {
+function MediaLayer({ media, caption, stepIndex }) {
   const wrapRef = useRef(null);
   const videoRef = useRef(null);
   const [failed, setFailed] = useState(false);
@@ -96,76 +93,78 @@ function MediaFrame({ media, caption, stepIndex, label }) {
   }, [isActive, showMedia, media]);
 
   return (
-    <div className="wv-frame" ref={wrapRef} aria-label={label}>
-      <div className="wv-frame-inner">
-        {showMedia ? (
-          <>
-            {media.type === 'video' ? (
-              <video
-                ref={videoRef}
-                className="wv-media wv-media-kenburns"
-                src={media.src}
-                poster={media.poster || undefined}
-                style={{ objectPosition: media.position || 'center' }}
-                muted
-                loop
-                playsInline
-                preload="none"
-                crossOrigin="anonymous"
-                onError={() => setFailed(true)}
-              />
-            ) : (
-              <img
-                className="wv-media wv-media-kenburns"
-                src={media.src}
-                alt=""
-                style={{ objectPosition: media.position || 'center' }}
-                onError={() => setFailed(true)}
-              />
-            )}
-            <div className="wv-media-fade" aria-hidden="true" />
-            {caption && <span className="wv-media-caption">{caption}</span>}
-          </>
-        ) : (
-          <div className="wv-frame-fill">
-            <MediaPlaceholder label="Photo à venir" caption={caption} bordered={false} />
-          </div>
-        )}
+    <div className="wv-media-layer" data-index={stepIndex} ref={wrapRef}>
+      {showMedia ? (
+        <>
+          {media.type === 'video' ? (
+            <video
+              ref={videoRef}
+              className="wv-media wv-media-kenburns"
+              src={media.src}
+              poster={media.poster || undefined}
+              style={{ objectPosition: media.position || 'center' }}
+              muted
+              loop
+              playsInline
+              preload="none"
+              crossOrigin="anonymous"
+              onError={() => setFailed(true)}
+            />
+          ) : (
+            <img
+              className="wv-media wv-media-kenburns"
+              src={media.src}
+              alt=""
+              style={{ objectPosition: media.position || 'center' }}
+              onError={() => setFailed(true)}
+            />
+          )}
+          <div className="wv-media-fade" aria-hidden="true" />
+          {caption && <span className="wv-media-caption">{caption}</span>}
+        </>
+      ) : (
+        <div className="wv-frame-fill">
+          <MediaPlaceholder label="Photo à venir" caption={caption} bordered={false} />
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* The frame's border/cut-corners/background is a single, permanent element —
+   it is never part of any opacity transition. Only the media layers inside
+   it crossfade. */
+function FrameChrome() {
+  return (
+    <div className="wv-media-stack">
+      <div className="wv-frame">
+        <div className="wv-frame-inner">
+          {whyVideos.map((step, i) => (
+            <MediaLayer key={step.num} media={step.media} caption={step.caption} stepIndex={i} />
+          ))}
+        </div>
       </div>
     </div>
   );
 }
 
-/* ---------- panel (one step) — same structure/mechanic at every breakpoint,
-   CSS alone reorders the pieces into a single column under 1024px ---------- */
-
-const StepPanel = React.forwardRef(function StepPanel({ step, index, reduced }, ref) {
+/* One text panel per step: number/title, "usual", "with us", question.
+   No frame here — the frame lives once, outside, in FrameChrome. */
+const StepPanel = React.forwardRef(function StepPanel({ step, index }, ref) {
   return (
-    <div
-      ref={ref}
-      className="wv-panel"
-      data-index={index}
-      aria-hidden={reduced ? 'false' : (index === 0 ? 'false' : 'true')}
-    >
+    <div ref={ref} className="wv-panel" data-index={index} aria-hidden={index === 0 ? 'false' : 'true'}>
       <div className="wv-piece wv-piece-numtitle">
         <div className="wv-num">{step.num}</div>
         <h3 className="wv-step-title">{step.title}</h3>
       </div>
-
       <div className="wv-piece wv-piece-usual wv-card wv-card-usual">
         <span className="wv-card-label">D'habitude</span>
         <p>{step.usual}</p>
       </div>
-
-      <div className="wv-piece wv-piece-frame">
-        <MediaFrame media={step.media} caption={step.caption} stepIndex={index} label={step.label} />
-      </div>
-
       <div className="wv-piece wv-piece-withus wv-card wv-card-us">
         <span className="wv-card-label">Avec AuchuMedia</span>
         <p>{step.withUs}</p>
       </div>
-
       <div className="wv-piece wv-piece-question wv-question">
         <span className="wv-card-label">La question qu'on se pose</span>
         <p>« {step.question} »</p>
@@ -173,8 +172,6 @@ const StepPanel = React.forwardRef(function StepPanel({ step, index, reduced }, 
     </div>
   );
 });
-
-/* ---------- header (title + subtitle) ---------- */
 
 function WvHeader() {
   return (
@@ -190,101 +187,70 @@ function WvHeader() {
   );
 }
 
-/* ---------- main component ---------- */
+/* ---------- the normal, scroll-jacked scene ---------- */
 
-export default function WhyVideos() {
-  const sectionRef = useRef(null);
+function StickyScene() {
   const pisteRef = useRef(null);
   const stageRef = useRef(null);
   const panelRefs = useRef([]);
-  const segFillRefs = useRef([]);
-  const lastEtapeRef = useRef(-1);
-  const [reduced, setReduced] = useState(false);
+  const sentinelRefs = useRef([]);
+  const lastEtapeRef = useRef(0);
 
   useEffect(() => {
-    setReduced(window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-  }, []);
+    const piste = pisteRef.current;
+    const stage = stageRef.current;
+    if (!piste || !stage) return undefined;
 
-  useEffect(() => {
-    if (reduced) return undefined;
-
-    const markTransitioning = (i) => {
-      const el = panelRefs.current[i];
-      if (!el) return;
-      el.classList.add('wv-will-change');
-      clearTimeout(el.__wcTimer);
-      el.__wcTimer = setTimeout(() => el.classList.remove('wv-will-change'), 450);
+    const positionSentinels = () => {
+      const scrollable = Math.max(0, piste.offsetHeight - stage.offsetHeight);
+      const v = stage.offsetHeight;
+      const step = scrollable / STEPS;
+      // Each sentinel spans its whole step's scroll range (not a 1px line):
+      // a 1px target crossing a 0-height rootMargin line is only "intersecting"
+      // for ~1px of scroll, which a normal-sized scroll jump (mouse wheel,
+      // fling, even a slow drag) steps straight over — confirmed by direct
+      // testing, that is why steps were never advancing. A target spanning
+      // the full quarter can't be skipped by any realistic scroll delta.
+      // The small gap between spans is the dead-zone.
+      const gap = step * 0.05;
+      sentinelRefs.current.forEach((el, i) => {
+        if (!el) return;
+        el.style.top = `${Math.max(0, v / 2 + i * step)}px`;
+        el.style.height = `${Math.max(1, step - gap)}px`;
+      });
     };
 
-    let scrollStopTimer = null;
-    const markScrolling = () => {
-      const section = sectionRef.current;
-      if (!section) return;
-      section.classList.add('wv-scrolling');
-      clearTimeout(scrollStopTimer);
-      scrollStopTimer = setTimeout(() => section.classList.remove('wv-scrolling'), 180);
+    positionSentinels();
+    window.addEventListener('resize', positionSentinels);
+
+    const setEtape = (idx) => {
+      if (idx === lastEtapeRef.current && stage.dataset.etape !== undefined) return;
+      lastEtapeRef.current = idx;
+      stage.dataset.etape = String(idx);
+      panelRefs.current.forEach((el, i) => {
+        if (el) el.setAttribute('aria-hidden', i === idx ? 'false' : 'true');
+      });
     };
 
-    let raf = null;
-    const compute = () => {
-      raf = null;
-      const piste = pisteRef.current;
-      const stage = stageRef.current;
-      if (!piste || !stage) return;
-      // Use stage.offsetHeight (stable, tied to 100svh) rather than
-      // window.innerHeight, which iOS Safari changes mid-scroll as its
-      // address bar collapses — that mismatch was feeding a jittery p.
-      const rect = piste.getBoundingClientRect();
-      const scrollable = piste.offsetHeight - stage.offsetHeight;
-      const p = scrollable > 0 ? Math.min(1, Math.max(0, -rect.top / scrollable)) : 0;
-      const rawIdx = Math.min(STEPS - 1, Math.floor(p * STEPS));
-
-      let idx = lastEtapeRef.current;
-      if (idx < 0) {
-        idx = rawIdx;
-      } else if (rawIdx > idx) {
-        const boundary = (idx + 1) / STEPS;
-        if (rawIdx > idx + 1 || p > boundary + HYSTERESIS) idx = rawIdx;
-      } else if (rawIdx < idx) {
-        const boundary = idx / STEPS;
-        if (rawIdx < idx - 1 || p < boundary - HYSTERESIS) idx = rawIdx;
-      }
-
-      const stepP = Math.min(1, Math.max(0, p * STEPS - idx));
-      const activeFill = segFillRefs.current[idx];
-      if (activeFill) activeFill.style.transform = `scaleX(${stepP.toFixed(4)})`;
-
-      if (idx !== lastEtapeRef.current) {
-        const prevIdx = lastEtapeRef.current;
-        lastEtapeRef.current = idx;
-        stage.dataset.etape = String(idx);
-        panelRefs.current.forEach((el, i) => {
-          if (el) el.setAttribute('aria-hidden', i === idx ? 'false' : 'true');
-        });
-        // hand the previous segment's fill back to plain CSS (full/empty)
-        if (prevIdx >= 0) {
-          const prevFill = segFillRefs.current[prevIdx];
-          if (prevFill) prevFill.style.transform = '';
+    // No getBoundingClientRect, no scroll listener: a sentinel crossing the
+    // viewport's vertical centerline (rootMargin -50%/-50%) is the only
+    // signal, delivered off the scroll-handling thread by the browser.
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const idx = Number(entry.target.dataset.sentinelIndex);
+          setEtape(idx);
         }
-        if (prevIdx >= 0) markTransitioning(prevIdx);
-        markTransitioning(idx);
-      }
-    };
-    const onScroll = () => {
-      markScrolling();
-      if (raf) return;
-      raf = requestAnimationFrame(compute);
-    };
-    compute();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
+      });
+    }, { root: null, rootMargin: '-50% 0px -50% 0px', threshold: 0 });
+
+    sentinelRefs.current.forEach((el) => { if (el) observer.observe(el); });
+
     return () => {
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onScroll);
-      if (raf) cancelAnimationFrame(raf);
-      clearTimeout(scrollStopTimer);
+      window.removeEventListener('resize', positionSentinels);
+      observer.disconnect();
     };
-  }, [reduced]);
+  }, []);
 
   const goToStep = (i) => {
     const piste = pisteRef.current;
@@ -293,50 +259,116 @@ export default function WhyVideos() {
     const top = piste.getBoundingClientRect().top + window.scrollY;
     const scrollable = piste.offsetHeight - stage.offsetHeight;
     const target = top + ((i + 0.5) / STEPS) * Math.max(0, scrollable);
-    window.scrollTo({ top: target, behavior: reduced ? 'auto' : 'smooth' });
+    window.scrollTo({ top: target, behavior: 'smooth' });
   };
+
+  return (
+    <div className="wv-piste" ref={pisteRef}>
+      {whyVideos.map((_, i) => (
+        <div
+          key={i}
+          className="wv-sentinel"
+          data-sentinel-index={i}
+          aria-hidden="true"
+          ref={(el) => { sentinelRefs.current[i] = el; }}
+        />
+      ))}
+      <div className="wv-stage" ref={stageRef} data-etape="0">
+        <WvHeader />
+
+        <div className="wv-panels">
+          <FrameChrome />
+          <div className="wv-text-stack">
+            {whyVideos.map((step, i) => (
+              <StepPanel key={step.num} step={step} index={i} ref={(el) => { panelRefs.current[i] = el; }} />
+            ))}
+          </div>
+        </div>
+
+        <div className="wv-segments" role="group" aria-label="Étapes">
+          {whyVideos.map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              className="wv-seg"
+              data-index={i}
+              aria-label={`Étape ${i + 1}`}
+              onClick={() => goToStep(i)}
+            >
+              <span className="wv-seg-fill" />
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ---------- reduced-motion fallback: plain static list, no scroll-jacking ---------- */
+
+function ReducedCard({ step, index }) {
+  return (
+    <div className="wv-rcard">
+      <div className="wv-frame wv-frame-reduced">
+        <div className="wv-frame-inner">
+          <MediaLayer media={step.media} caption={step.caption} stepIndex={index} />
+        </div>
+      </div>
+      <div className="wv-piece-numtitle">
+        <div className="wv-num">{step.num}</div>
+        <h3 className="wv-step-title">{step.title}</h3>
+      </div>
+      <div className="wv-card wv-card-usual">
+        <span className="wv-card-label">D'habitude</span>
+        <p>{step.usual}</p>
+      </div>
+      <div className="wv-card wv-card-us">
+        <span className="wv-card-label">Avec AuchuMedia</span>
+        <p>{step.withUs}</p>
+      </div>
+      <div className="wv-question">
+        <span className="wv-card-label">La question qu'on se pose</span>
+        <p>« {step.question} »</p>
+      </div>
+    </div>
+  );
+}
+
+function ReducedList() {
+  return (
+    <div className="wv-reduced-list">
+      {whyVideos.map((step, i) => (
+        <ReducedCard key={step.num} step={step} index={i} />
+      ))}
+    </div>
+  );
+}
+
+/* ---------- main component ---------- */
+
+export default function WhyVideos() {
+  const [reduced, setReduced] = useState(false);
+
+  useEffect(() => {
+    setReduced(window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  }, []);
 
   return (
     <section
       id="pourquoi-videos"
-      ref={sectionRef}
       aria-labelledby="wv-title"
       className={`section-pad wv-section ${reduced ? 'wv-reduced' : ''}`}
     >
       <div className="wv-halo" aria-hidden="true" />
 
-      <div className="wv-piste" ref={pisteRef}>
-        <div className="wv-stage" ref={stageRef} data-etape="0">
+      {reduced ? (
+        <>
           <WvHeader />
-
-          <div className="wv-panels">
-            {whyVideos.map((step, i) => (
-              <StepPanel
-                key={step.num}
-                step={step}
-                index={i}
-                reduced={reduced}
-                ref={(el) => { panelRefs.current[i] = el; }}
-              />
-            ))}
-          </div>
-
-          <div className="wv-segments" role="group" aria-label="Étapes">
-            {whyVideos.map((_, i) => (
-              <button
-                key={i}
-                type="button"
-                className="wv-seg"
-                data-index={i}
-                aria-label={`Étape ${i + 1}`}
-                onClick={() => goToStep(i)}
-              >
-                <span className="wv-seg-fill" ref={(el) => { segFillRefs.current[i] = el; }} />
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
+          <ReducedList />
+        </>
+      ) : (
+        <StickyScene />
+      )}
 
       <style>{`
         .wv-section {
@@ -364,7 +396,6 @@ export default function WhyVideos() {
           0%, 100% { transform: translate(-54%, -2%) scale(1); opacity: 0.9; }
           50% { transform: translate(-46%, 4%) scale(1.08); opacity: 1; }
         }
-        .wv-scrolling .wv-halo { animation-play-state: paused; }
 
         .wv-header {
           position: relative; z-index: 2; text-align: center;
@@ -391,7 +422,6 @@ export default function WhyVideos() {
           50% { background-position: 100% 50%; }
           100% { background-position: 0% 50%; }
         }
-        .wv-scrolling .wv-gradient-line { animation-play-state: paused; }
         .wv-subtitle {
           font-family: 'DM Sans';
           font-size: 15px;
@@ -410,17 +440,26 @@ export default function WhyVideos() {
         @supports (height: 100svh) {
           .wv-piste { height: 400svh; }
         }
+        .wv-sentinel {
+          position: absolute;
+          left: 0;
+          width: 1px;
+          pointer-events: none;
+        }
         .wv-stage {
           position: sticky;
           top: 0;
           height: 100vh;
           display: grid;
-          align-content: center;
+          align-content: start;
           justify-items: center;
           gap: 28px;
           padding-top: 5rem;
           z-index: 2;
           overflow-anchor: none;
+          transform: translateZ(0);
+          -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
         }
         @supports (height: 100svh) {
           .wv-stage { height: 100svh; }
@@ -429,21 +468,34 @@ export default function WhyVideos() {
           position: relative;
           width: min(1240px, 100%);
           height: clamp(460px, 62vh, 560px);
+          display: grid;
+          grid-template-columns: ${GRID_COLS};
+          column-gap: 40px;
         }
+
+        /* the persistent frame: a real grid item, never fades */
+        .wv-media-stack { grid-column: 2; grid-row: 1; align-self: start; }
+
+        /* the 4 text panels: absolutely stacked, each its own nested grid
+           using the same column template so column 2 stays empty and the
+           shared frame shows through. will-change/translateZ/contain are
+           permanent — there are only 4 of these. */
+        .wv-text-stack { position: absolute; inset: 0; }
         .wv-panel {
           position: absolute;
           inset: 0;
           display: grid;
-          grid-template-columns: minmax(0,1fr) minmax(0,520px) minmax(0,1fr);
+          grid-template-columns: ${GRID_COLS};
           column-gap: 40px;
           row-gap: 16px;
-          transition: opacity 0.35s ease;
+          transition: opacity 0.3s ease;
+          will-change: opacity;
+          transform: translateZ(0);
+          contain: layout paint style;
         }
-        .wv-panel.wv-will-change { will-change: opacity; }
 
         .wv-piece-numtitle { grid-column: 1; grid-row: 1; align-self: start; }
         .wv-piece-usual    { grid-column: 1; grid-row: 2; align-self: start; }
-        .wv-piece-frame    { grid-column: 2; grid-row: 1 / 3; align-self: start; }
         .wv-piece-withus   { grid-column: 3; grid-row: 1; align-self: start; }
         .wv-piece-question { grid-column: 3; grid-row: 2; align-self: start; }
 
@@ -508,10 +560,9 @@ export default function WhyVideos() {
           margin: 0;
         }
 
-        /* ---- the central frame: fixed size at every step, content-independent.
-           Desktop: aspect-ratio box, max 520px wide. Mobile/iPad: fixed svh
-           height, set below. The media/placeholder inside is always
-           position:absolute; inset:0 so it can never affect this size. ---- */
+        /* ---- the frame: static chrome, never animated. Fixed size always,
+           content-independent. Desktop: aspect-ratio box, max 520px wide.
+           Mobile/iPad: fixed svh height (set below). ---- */
         .wv-frame {
           position: relative;
           width: 100%;
@@ -524,6 +575,15 @@ export default function WhyVideos() {
           height: 100%;
           border-radius: 16px;
           overflow: hidden;
+        }
+        .wv-media-layer {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          transition: opacity 0.3s ease;
+          will-change: opacity;
+          transform: translateZ(0);
         }
         .wv-frame-fill, .wv-media {
           position: absolute;
@@ -539,12 +599,6 @@ export default function WhyVideos() {
           from { transform: scale(1); }
           to { transform: scale(1.06); }
         }
-        .wv-reduced .wv-media-kenburns { animation: none !important; transform: none !important; }
-        .wv-media-fade {
-          position: absolute; left: 0; right: 0; bottom: 0; height: 45%;
-          background: linear-gradient(to top, rgba(0,0,0,0.65), transparent);
-          pointer-events: none;
-        }
         .wv-media-caption {
           position: absolute; left: 10px; bottom: 10px;
           background: rgba(10,10,10,0.7);
@@ -557,8 +611,13 @@ export default function WhyVideos() {
           padding: 6px 10px;
           border-radius: 6px;
         }
+        .wv-media-fade {
+          position: absolute; left: 0; right: 0; bottom: 0; height: 45%;
+          background: linear-gradient(to top, rgba(0,0,0,0.65), transparent);
+          pointer-events: none;
+        }
 
-        /* ---- segments: fixed width, progress via transform: scaleX() only ---- */
+        /* ---- segments: CSS transition only, no JS writes per frame ---- */
         .wv-segments { position: relative; z-index: 2; display: flex; gap: 8px; }
         .wv-seg {
           width: 56px; height: 3px;
@@ -572,29 +631,39 @@ export default function WhyVideos() {
           background: #3f78e8;
           transform-origin: left;
           transform: scaleX(0);
+          transition: transform 0.6s ease;
         }
 
         ${PANEL_CSS}
+        ${MEDIA_CSS}
         ${SEGMENT_CSS}
 
-        /* ---- <1024px: same scene, single-column reflow via CSS order.
-           Each piece gets align-self: stretch (overriding the desktop
-           grid's align-self: start) so none of them — especially the
-           frame — shrink-wraps to its own content width. ---- */
+        /* ---- <1024px: same scene. The frame stays fixed-size and first in
+           the flow; the 4 text panels reflow into a single column below it
+           via CSS order, each internally a flex column. ---- */
         @media (max-width: 1023px) {
           .wv-header { min-height: auto; }
-          .wv-panels { width: min(720px, 100%); }
+          .wv-panels {
+            display: flex;
+            flex-direction: column;
+            width: min(720px, 100%);
+            height: clamp(600px, 78svh, 740px);
+          }
+          @supports not (height: 1svh) {
+            .wv-panels { height: clamp(600px, 78vh, 740px); }
+          }
+          .wv-media-stack { order: 1; flex-shrink: 0; align-self: stretch; }
+          .wv-text-stack { order: 2; position: relative; flex: 1 1 auto; min-height: 0; }
           .wv-panel {
             display: flex;
             flex-direction: column;
             gap: 10px;
           }
           .wv-piece { align-self: stretch; }
-          .wv-piece-frame    { order: 1; }
-          .wv-piece-numtitle { order: 2; display: flex; align-items: baseline; gap: 12px; }
-          .wv-piece-usual    { order: 3; }
-          .wv-piece-withus   { order: 4; }
-          .wv-piece-question { order: 5; }
+          .wv-piece-numtitle { order: 1; display: flex; align-items: baseline; gap: 12px; margin-top: 10px; }
+          .wv-piece-usual    { order: 2; }
+          .wv-piece-withus   { order: 3; }
+          .wv-piece-question { order: 4; }
 
           .wv-num { font-size: 44px; margin-bottom: 0; }
           .wv-step-title { font-size: 19px; margin: 0; }
@@ -614,15 +683,12 @@ export default function WhyVideos() {
           .wv-frame { max-width: none; aspect-ratio: auto; }
 
           .wv-stage { padding-top: 4.5rem; gap: 14px; }
-          .wv-panels { height: clamp(600px, 78svh, 740px); }
-          @supports not (height: 1svh) {
-            .wv-panels { height: clamp(600px, 78vh, 740px); }
-          }
           .wv-seg { width: 48px; }
         }
 
-        /* iPad: 769–1023px — frame height per spec */
+        /* iPad: 769–1023px */
         @media (min-width: 769px) and (max-width: 1023px) {
+          .wv-section { padding-top: 16px; padding-bottom: 12px; }
           .wv-frame { height: clamp(260px, 36svh, 360px); }
           @supports not (height: 1svh) {
             .wv-frame { height: clamp(260px, 36vh, 360px); }
@@ -631,10 +697,10 @@ export default function WhyVideos() {
 
         @media (max-width: 768px) {
           .wv-section { padding-left: 20px; padding-right: 20px; }
-          .wv-section { padding-top: 32px; padding-bottom: 32px; }
+          .wv-section { padding-top: 8px; padding-bottom: 8px; }
           .wv-title { font-size: clamp(26px, 8vw, 40px); }
           .wv-subtitle { display: none; }
-          .wv-stage { padding-top: 3.75rem; gap: 10px; }
+          .wv-stage { padding-top: 4.3rem; gap: 10px; }
           .wv-frame { height: clamp(190px, 30svh, 280px); }
           @supports not (height: 1svh) {
             .wv-frame { height: clamp(190px, 30vh, 280px); }
@@ -647,7 +713,7 @@ export default function WhyVideos() {
         }
 
         @media (max-height: 700px) {
-          .wv-stage { align-content: start; padding-top: 4.4rem; gap: 8px; }
+          .wv-stage { padding-top: 4.4rem; gap: 8px; }
           .wv-header { min-height: auto; }
           .wv-title { margin-bottom: 4px; }
           .wv-subtitle { display: none; }
@@ -659,47 +725,30 @@ export default function WhyVideos() {
         }
 
         /* ---- reduced motion: static stacked list, no scroll-jacking ---- */
-        .wv-reduced .wv-piste { height: auto; }
-        .wv-reduced .wv-stage {
-          position: static;
-          height: auto;
-          display: block;
-          padding-top: 0;
-        }
-        .wv-reduced .wv-header { margin-bottom: 32px; }
-        .wv-reduced .wv-subtitle { display: block; }
-        .wv-reduced .wv-panels {
-          position: static;
-          height: auto;
+        .wv-reduced-list {
+          position: relative;
+          z-index: 2;
           width: min(760px, 100%);
-          margin: 0 auto;
+          margin: 32px auto 0;
           display: flex;
           flex-direction: column;
           gap: 24px;
         }
-        .wv-reduced .wv-panel {
-          position: static;
-          opacity: 1 !important;
-          pointer-events: auto !important;
-          display: flex;
-          flex-direction: column;
-          gap: 12px;
+        .wv-rcard {
           background: rgba(255,255,255,0.04);
           border: 1px solid rgba(255,255,255,0.08);
           border-radius: 20px;
           padding: 20px;
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
         }
-        .wv-reduced .wv-piece { align-self: stretch; }
-        .wv-reduced .wv-piece-frame    { order: 1; }
-        .wv-reduced .wv-piece-numtitle { order: 2; display: flex; align-items: baseline; gap: 12px; }
-        .wv-reduced .wv-piece-usual    { order: 3; }
-        .wv-reduced .wv-piece-withus   { order: 4; }
-        .wv-reduced .wv-piece-question { order: 5; display: block; }
-        .wv-reduced .wv-num { font-size: 40px; margin-bottom: 0; }
-        .wv-reduced .wv-step-title { font-size: 18px; margin: 0; }
-        .wv-reduced .wv-card-usual p { display: block; -webkit-line-clamp: unset; overflow: visible; }
-        .wv-reduced .wv-frame { aspect-ratio: 5 / 4; max-width: none; height: auto; }
-        .wv-reduced .wv-segments { display: none; }
+        .wv-rcard .wv-piece-numtitle { display: flex; align-items: baseline; gap: 12px; }
+        .wv-rcard .wv-num { font-size: 40px; margin-bottom: 0; }
+        .wv-rcard .wv-step-title { font-size: 18px; margin: 0; }
+        .wv-frame-reduced { max-width: none; aspect-ratio: 5 / 4; height: auto; }
+        .wv-frame-reduced .wv-media-layer { opacity: 1; }
+        .wv-frame-reduced .wv-media-kenburns { animation: none; }
 
         @media (prefers-reduced-motion: reduce) {
           .wv-halo, .wv-gradient-line { animation: none !important; }

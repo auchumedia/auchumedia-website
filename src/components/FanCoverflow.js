@@ -114,8 +114,12 @@ export default function FanCoverflow({ fan, sectionRef }) {
   const hideHint = () => setHintVisible(false);
 
   // --- Scroll-linked opening factor ---
+  // Only active while this section is anywhere near the viewport: once the
+  // user has scrolled well past it (e.g. into a later section), this must
+  // stay fully inert — no scroll listener work, no getBoundingClientRect.
+  const nearRef = useRef(false);
   useEffect(() => {
-    const onScroll = () => {
+    const recompute = () => {
       if (scrollRafRef.current) return;
       scrollRafRef.current = requestAnimationFrame(() => {
         scrollRafRef.current = null;
@@ -128,13 +132,31 @@ export default function FanCoverflow({ fan, sectionRef }) {
         render();
       });
     };
-    onScroll();
+
+    const onScroll = () => {
+      if (nearRef.current) recompute();
+    };
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll);
+
+    const el = sectionRef.current;
+    let io;
+    if (el) {
+      io = new IntersectionObserver(([entry]) => {
+        const wasNear = nearRef.current;
+        nearRef.current = entry.isIntersecting;
+        // becoming near (or the very first observation) needs one fresh
+        // computation — scroll position may have moved while it was inert.
+        if (entry.isIntersecting && !wasNear) recompute();
+      }, { rootMargin: '150% 0px' });
+      io.observe(el);
+    }
+
     return () => {
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', onScroll);
       if (scrollRafRef.current) cancelAnimationFrame(scrollRafRef.current);
+      if (io) io.disconnect();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
